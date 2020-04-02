@@ -5,16 +5,26 @@ using UnityEngine;
 public class Ship : MonoBehaviour
 {
     [SerializeField]
-    public Pilot pilot;
+    private Pilot pilot;
+
+    [Header("Will auto-fill from components")]
     [SerializeField]
-    public MovementStats movement;
+    private MovementStats movementStats;
+    [SerializeField]
+    private CombatStats combatStats;
+
+    private void Awake()
+    {
+        movementStats = GetComponentInChildren<MovementStats>();
+        combatStats = GetComponentInChildren<CombatStats>();
+    }
 
     public void Tick()
     {
         pilot?.MakeDecisions(this);
-        transform.Rotate(new Vector3(0, 0, movement.GetRotationValue() * Time.deltaTime));
+        transform.Rotate(new Vector3(0, 0, -movementStats.GetRotationValue() * Time.deltaTime));
         // Move in the downwards
-        transform.position -= transform.up * movement.GetVelocityValue() * Time.deltaTime;
+        transform.position += transform.up * movementStats.GetVelocityValue() * Time.deltaTime;
         /*
         Debug.Log(string.Format(
             "Movement: {0}, Rotation: {1}, Up: {2}",
@@ -27,7 +37,7 @@ public class Ship : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -35,4 +45,7 @@ public class Ship : MonoBehaviour
     {
         Tick();
     }
+
+    public MovementStats GetMovementStats() { return movementStats; }
+    public CombatStats GetCombatStats() { return combatStats; }
 }

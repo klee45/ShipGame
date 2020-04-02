@@ -12,11 +12,11 @@ public abstract class Pilot : MonoBehaviour
 
     protected virtual void Rotate(Ship ship, float val)
     {
-        ship.movement.GetRotationStatGroup().Tick(val);
+        ship.GetMovementStats().GetRotationStatGroup().Tick(val);
     }
 
     protected virtual void Move(Ship ship, float val)
     {
-        ship.movement.GetVelocityStatGroup().Tick(val);
+        ship.GetMovementStats().GetVelocityStatGroup().Tick(val);
     }
 }
