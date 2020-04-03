@@ -11,6 +11,11 @@ public class StatGroupSecondOrderMirrored : StatGroup
 
     private void Awake()
     {
+        OnValidate();
+    }
+
+    private void OnValidate()
+    {
         kernel = new StatGroupSecondOrderKernel(acceleration, -acceleration, max, -max, dampening);
     }
 

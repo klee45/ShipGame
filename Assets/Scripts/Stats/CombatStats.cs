@@ -55,7 +55,6 @@ public class CombatStats : MonoBehaviour
         armor = initialArmorMax;
         shield = initialShieldMax;
         UpdateAllGraphics();
-        TakeDamage(280);
     }
 
     public void TakeDamage(int damage)

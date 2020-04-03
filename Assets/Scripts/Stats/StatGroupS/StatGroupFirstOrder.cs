@@ -11,6 +11,11 @@ public class StatGroupFirstOrder : StatGroup
 
     private void Awake()
     {
+        OnValidate();
+    }
+
+    private void OnValidate()
+    {
         this.stat = new FloatStat(value);
     }
 

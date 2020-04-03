@@ -29,14 +29,14 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Projectile4
+  - Ship4
+  - Projectile3
+  - Ship3
+  - Projectile2
+  - Ship2
+  - Projectile1
+  - Ship1
   m_SortingLayers:
   - name: Default
     uniqueID: 0

@@ -2,48 +2,23 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Ship : MonoBehaviour
+public class Ship : Entity
 {
     [SerializeField]
-    private Pilot pilot;
-
-    [Header("Will auto-fill from components")]
+    protected CombatStats combatStats;
     [SerializeField]
-    private MovementStats movementStats;
-    [SerializeField]
-    private CombatStats combatStats;
+    protected Pilot pilot;
 
-    private void Awake()
+    protected override void Awake()
     {
-        movementStats = GetComponentInChildren<MovementStats>();
+        base.Awake();
         combatStats = GetComponentInChildren<CombatStats>();
     }
 
-    public void Tick()
+    protected override void Update()
     {
         pilot?.MakeDecisions(this);
-        transform.Rotate(new Vector3(0, 0, -movementStats.GetRotationValue() * Time.deltaTime));
-        // Move in the downwards
-        transform.position += transform.up * movementStats.GetVelocityValue() * Time.deltaTime;
-        /*
-        Debug.Log(string.Format(
-            "Movement: {0}, Rotation: {1}, Up: {2}",
-            movement.GetVelocityValue(),
-            movement.GetRotationValue(),
-            -transform.up));
-        */
-    }
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        Tick();
+        base.Update();
     }
 
     public MovementStats GetMovementStats() { return movementStats; }

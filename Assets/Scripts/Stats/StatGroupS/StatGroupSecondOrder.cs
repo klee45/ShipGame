@@ -11,6 +11,11 @@ public class StatGroupSecondOrder : StatGroup
 
     void Awake()
     {
+        OnValidate();
+    }
+
+    private void OnValidate()
+    {
         kernel = new StatGroupSecondOrderKernel(acceleration, deceleration, max, min, dampening);
     }
 
