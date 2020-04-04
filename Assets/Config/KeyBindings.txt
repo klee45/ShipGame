@@ -1,0 +1,9 @@
+attack_1: u
+attack_2: i
+attack_3: o
+attack_4: p
+attack_5: j
+attack_6: k
+attack_7: l
+attack_8: ;
+brake: space

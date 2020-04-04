@@ -11,7 +11,7 @@ public class CombatStats : MonoBehaviour
     public int initialHullMax;
 
     [Header("Will be generated")]
-    public TimerMono shieldDelay;
+    public Timer shieldDelay;
 
     [Header("Display health bars")]
     [SerializeField]
@@ -144,7 +144,7 @@ public class CombatStats : MonoBehaviour
 
     private void UpdateAllGraphics()
     {
-        Debug.Log(string.Format("H: {0} A: {1} S:{2}", hull, armor, shield));
+        //Debug.Log(string.Format("H: {0} A: {1} S:{2}", hull, armor, shield));
         UpdateShieldGraphic();
         UpdateArmorGraphic();
         UpdateHullGraphic();

@@ -13,14 +13,20 @@ public class Ship : Entity
     {
         base.Awake();
         combatStats = GetComponentInChildren<CombatStats>();
+        pilot = GetComponentInChildren<Pilot>();
     }
 
     protected override void Update()
     {
-        pilot?.MakeDecisions(this);
+        pilot.MakeActions();
         base.Update();
     }
 
     public MovementStats GetMovementStats() { return movementStats; }
     public CombatStats GetCombatStats() { return combatStats; }
+
+    public void FireWeapon(int pos)
+    {
+
+    }
 }

@@ -2,55 +2,117 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimerMono : MonoBehaviour
+
+public class Timer : MonoBehaviour
 {
     [SerializeField]
     private float maxTime;
     [SerializeField]
     private float currentTime;
     [SerializeField]
-    private bool running;
-    
-    private Timer timer;
+    private bool running = true;
+    [SerializeField]
+    private bool doesReset = true;
+    [SerializeField]
+    private bool overflows = true;
 
     public delegate void TimeEvent();
 
     public event TimeEvent OnComplete;
 
+    public void Initialize(float maxTime, float currentTime = 0)
+    {
+        this.maxTime = maxTime;
+        this.currentTime = currentTime;
+    }
+
     private void Awake()
     {
-        timer = new Timer(maxTime, currentTime);
+        SetTime(currentTime);
+        SetMaxTime(maxTime);
     }
 
     private void OnValidate()
     {
-        timer = new Timer(maxTime, currentTime);
+        Awake();
     }
 
     private void Update()
     {
         if (running)
         {
-            if (timer.Tick())
+            currentTime += Time.deltaTime;
+            if (currentTime >= maxTime)
             {
-                OnComplete.Invoke();
+                if (doesReset)
+                {
+                    if (overflows)
+                    {
+                        currentTime = currentTime - maxTime;
+                    }
+                    else
+                    {
+                        currentTime = 0;
+                    }
+                }
+                OnComplete?.Invoke();
             }
-            currentTime = timer.GetTime();
         }
     }
 
     public void TurnOff() { running = false; }
     public void TurnOn() { running = true; }
-    public void Toggle() { running = !running; }
+    public void ToggleRunning() { running = !running; }
+
+    public void EnableReset() { doesReset = true; }
+    public void DisableReset() { doesReset = false; }
+    public void ToggleReset() { doesReset = !doesReset; }
 
     public bool GetStatus() { return running; }
+    public bool GetDoesReset() { return doesReset; }
 
-    public float GetMaxTime() { return timer.GetMaxTime(); }
-    public float GetTime() { return timer.GetTime(); }
-    public float GetPercentLeft() { return timer.GetPercentLeft(); }
-    public float GetPercentPassed() { return timer.GetPercentPassed(); }
+    public void SetMaxTime(float maxTime)
+    {
+        this.maxTime = maxTime;
+    }
+
+    public void SetTime(float time)
+    {
+        ForceSetTime(time);
+        if (currentTime > maxTime)
+        {
+            Debug.LogWarning("Tried to give timer time after maximum. Use ForceSetTime instead");
+            currentTime = maxTime;
+        }
+    }
+
+    public void ForceSetTime(float time)
+    {
+        currentTime = time;
+    }
+
+    public float GetMaxTime()
+    {
+        return maxTime;
+    }
+
+    public float GetTime()
+    {
+        return currentTime;
+    }
+
+    public float GetPercentLeft()
+    {
+        return (maxTime - currentTime) / maxTime;
+    }
+
+    public float GetPercentPassed()
+    {
+        return currentTime / maxTime;
+    }
 }
 
+/*
 public class Timer
 {
     private float time;
@@ -103,3 +165,4 @@ public class Timer
         return time / maxTime;
     }
 }
+*/
