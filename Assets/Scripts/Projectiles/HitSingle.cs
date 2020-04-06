@@ -7,9 +7,21 @@ public class HitSingle : ProjectileOnHit
     [SerializeField]
     private int damage;
 
+    private List<Entity> alreadyHit;
+
+    private void Awake()
+    {
+        alreadyHit = new List<Entity>();
+    }
+
     public override void OnHit(Collider2D collision)
     {
-        collision.gameObject.GetComponentInChildren<CombatStats>().TakeDamage(damage);
-        Death();
+        Entity hitEntity = collision.GetComponent<Entity>();
+        // Not hit already
+        if (!alreadyHit.Contains(hitEntity))
+        {
+            DoDamage(collision, damage);
+            alreadyHit.Add(hitEntity);
+        }
     }
 }

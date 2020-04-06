@@ -25,7 +25,7 @@ public class Projectile : Entity
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Trigger enter");
+        // Debug.Log("Trigger enter");
         foreach (var e in onHit)
         {
             e.OnHit(collision);

@@ -7,7 +7,7 @@ public class WeaponOneShot : Weapon
     [SerializeField]
     private Timer cooldown;
     [SerializeField]
-    private GameObject projectile;
+    private GameObject prefab;
 
     private bool ready;
 
@@ -27,14 +27,16 @@ public class WeaponOneShot : Weapon
     {
         if (ready)
         {
-            Transform parent = transform.parent;
-            GameObject p = Instantiate(projectile);
-            p.transform.localPosition = parent.position;
-            p.transform.localRotation = parent.rotation;
-            p.layer = parent.gameObject.layer - 1;
-
+            Projectile projectile = SetupProjectile(prefab);
             cooldown.TurnOn();
             ready = false;
         }
+    }
+
+    protected virtual Projectile SetupProjectile(GameObject prefab)
+    {
+        Projectile p = base.CreateProjectile(prefab);
+        AttachToManager(p);
+        return p;
     }
 }

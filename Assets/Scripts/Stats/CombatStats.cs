@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class CombatStats : MonoBehaviour
 {
+    [SerializeField]
+    private HealthBar healthBar;
+
     [Header("Health stats")]
     public int initialShieldMax;
     public int initialArmorMax;
@@ -12,14 +14,6 @@ public class CombatStats : MonoBehaviour
 
     [Header("Will be generated")]
     public Timer shieldDelay;
-
-    [Header("Display health bars")]
-    [SerializeField]
-    private RawImage shieldGraphic;
-    [SerializeField]
-    private RawImage armorGraphic;
-    [SerializeField]
-    private RawImage hullGraphic;
 
     public bool shieldsDown;
 
@@ -54,6 +48,7 @@ public class CombatStats : MonoBehaviour
         hull = initialHullMax;
         armor = initialArmorMax;
         shield = initialShieldMax;
+
         UpdateAllGraphics();
     }
 
@@ -119,27 +114,19 @@ public class CombatStats : MonoBehaviour
         TrimShieldToMax();
     }
 
-    private static Color betweenColor = Color.black;
-    private static Color hullColor = Color.yellow;
-    private static Color armorColor = Color.magenta;
-    private static Color shieldColor = Color.cyan;
-    private static Color emptyColor = new Color(0, 0, 0, 0.5f);
-    private static int barOffset = 100;
-    private static int barThickness = 5;
-
     private void UpdateShieldGraphic()
     {
-        UpdateGraphic(shieldGraphic, maxShield.GetValue(), shield, shieldColor);
+        healthBar.UpdateShieldGraphic(maxShield.GetValue(), shield);
     }
 
     private void UpdateArmorGraphic()
     {
-        UpdateGraphic(armorGraphic, maxArmor.GetValue(), armor, armorColor);
+        healthBar.UpdateArmorGraphic(maxArmor.GetValue(), armor);
     }
 
     private void UpdateHullGraphic()
     {
-        UpdateGraphic(hullGraphic, maxHull.GetValue(), hull, hullColor);
+        healthBar.UpdateHullGraphic(maxHull.GetValue(), hull);
     }
 
     private void UpdateAllGraphics()
@@ -149,8 +136,12 @@ public class CombatStats : MonoBehaviour
         UpdateArmorGraphic();
         UpdateHullGraphic();
     }
+
+    /*
+    private static int barOffset = 100;
+    private static int barThickness = 5;
     
-    private void UpdateGraphic(RawImage image, int max, int current, Color color)
+    private void UpdateGraphic(Image image, int max, int current, Color color)
     {
         int numDiv = (int)Mathf.Ceil(max / barOffset);
         int maxEnd = max + (numDiv) * barThickness;
@@ -194,4 +185,5 @@ public class CombatStats : MonoBehaviour
         texture.Apply();
         image.texture = texture;
     }
+    */
 }
