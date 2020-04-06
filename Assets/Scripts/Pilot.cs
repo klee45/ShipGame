@@ -17,19 +17,19 @@ public abstract class Pilot : MonoBehaviour
 
     }
 
-    protected void Rotate(Ship ship, float val)
+    protected void Rotate(Entity entity, float val)
     {
-        ship.GetMovementStats().GetRotationStatGroup().Tick(val); 
+        entity.GetMovementStats().GetRotationStatGroup().Tick(val); 
     }
 
-    protected void Move(Ship ship, float val)
+    protected void Move(Entity entity, float val)
     {
-        ship.GetMovementStats().GetVelocityStatGroup().Tick(val);
+        entity.GetMovementStats().GetVelocityStatGroup().Tick(val);
     }
 
-    protected void Teleport(Ship ship, Vector2 target)
+    protected void Teleport(Entity entity, Vector2 target)
     {
-        ship.transform.localPosition += new Vector3(target.x, target.y);
+        entity.transform.localPosition += new Vector3(target.x, target.y);
     }
 
     /*

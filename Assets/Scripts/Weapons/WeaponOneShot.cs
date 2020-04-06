@@ -7,11 +7,11 @@ public class WeaponOneShot : Weapon
     [SerializeField]
     private Timer cooldown;
     [SerializeField]
-    private GameObject prefab;
+    protected GameObject prefab;
 
     private bool ready;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         cooldown = GetComponent<Timer>();
         cooldown.OnComplete += () => Reset();
@@ -27,10 +27,15 @@ public class WeaponOneShot : Weapon
     {
         if (ready)
         {
-            Projectile projectile = SetupProjectile(prefab);
+            FireHelper();
             cooldown.TurnOn();
             ready = false;
         }
+    }
+
+    protected virtual void FireHelper()
+    {
+        SetupProjectile(prefab);
     }
 
     protected virtual Projectile SetupProjectile(GameObject prefab)

@@ -6,8 +6,6 @@ public class Ship : Entity
 {
     [SerializeField]
     protected CombatStats combatStats;
-    [SerializeField]
-    protected Pilot pilot;
 
     protected override void Awake()
     {
@@ -18,15 +16,8 @@ public class Ship : Entity
 
     protected override void Update()
     {
-        pilot.MakeActions();
         base.Update();
     }
 
-    public MovementStats GetMovementStats() { return movementStats; }
     public CombatStats GetCombatStats() { return combatStats; }
-
-    public void FireWeapon(int pos)
-    {
-
-    }
 }
