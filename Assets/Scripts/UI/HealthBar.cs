@@ -21,9 +21,18 @@ public class HealthBar : MonoBehaviour
     [SerializeField]
     private Image shieldGraphic;
     [SerializeField]
+    private Text shieldText;
+
+    [SerializeField]
     private Image armorGraphic;
     [SerializeField]
+    private Text armorText;
+
+    [SerializeField]
     private Image hullGraphic;
+    [SerializeField]
+    private Text hullText;
+
     [SerializeField]
     private Image backingGraphic;
 
@@ -37,21 +46,22 @@ public class HealthBar : MonoBehaviour
 
     public void UpdateShieldGraphic(int max, int current)
     {
-        UpdateGraphic(shieldGraphic, max, current);
+        UpdateStat(shieldGraphic, shieldText, max, current);
     }
 
     public void UpdateArmorGraphic(int max, int current)
     {
-        UpdateGraphic(armorGraphic, max, current);
+        UpdateStat(armorGraphic, armorText, max, current);
     }
 
     public void UpdateHullGraphic(int max, int current)
     {
-        UpdateGraphic(hullGraphic, max, current);
+        UpdateStat(hullGraphic, hullText, max, current);
     }
 
-    private void UpdateGraphic(Image image, int max, int current)
+    private void UpdateStat(Image image, Text text, int max, int current)
     {
         image.fillAmount = 0.33f + (((float)current / max) / 3);
+        text.text = string.Format("{0} / {1}", current, max);
     }
 }

@@ -27,8 +27,6 @@ TagManager:
   - 
   - 
   - 
-  - 
-  - 
   - Projectile4
   - Ship4
   - Projectile3
@@ -37,6 +35,8 @@ TagManager:
   - Ship2
   - Projectile1
   - Ship1
+  - ProjectileNeutral
+  - ShipNeutral
   m_SortingLayers:
   - name: Default
     uniqueID: 0

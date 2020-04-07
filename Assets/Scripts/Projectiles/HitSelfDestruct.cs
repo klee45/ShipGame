@@ -2,14 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitSingleUse : ProjectileOnHit
+public class HitSelfDestruct : ProjectileOnHit
 {
-    [SerializeField]
-    private int damage;
+    private void Awake()
+    {
+        priority = -1000;
+    }
 
     public override void OnHit(Collider2D collision)
     {
-        DoDamage(collision, damage);
         DestroySelf();
     }
 }

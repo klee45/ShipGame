@@ -5,8 +5,22 @@ using System.Linq;
 
 public class Projectile : Entity
 {
+    [SerializeField]
+    protected int damage;
+
     private ProjectileOnHit[] onHit;
+    private ProjectileOnStay[] onStay;
     private ProjectileOnTick[] onTick;
+
+    public int GetDamage()
+    {
+        return damage;
+    }
+
+    public void SetDamage(int damage)
+    {
+        this.damage = damage;
+    }
 
     protected override void Awake()
     {
@@ -17,10 +31,17 @@ public class Projectile : Entity
     private void OnValidate()
     {
         onHit = GetComponents<ProjectileOnHit>();
+        onStay = GetComponents<ProjectileOnStay>();
         onTick = GetComponents<ProjectileOnTick>();
 
-        onHit.OrderBy(p => p.GetPriority());
-        onTick.OrderBy(p => p.GetPriority());
+        SortOrder(onHit);
+        SortOrder(onStay);
+        SortOrder(onTick);
+    }
+
+    private void SortOrder(ProjectileEffect[] lst)
+    {
+        lst.OrderBy(p => p.GetPriority());
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -29,6 +50,14 @@ public class Projectile : Entity
         foreach (var e in onHit)
         {
             e.OnHit(collision);
+        }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        foreach (var e in onStay)
+        {
+            e.OnHitStay(collision);
         }
     }
 

@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitPerSecond : ProjectileOnHit
+public class HitPerSecond : ProjectileOnStay
 {
-    [SerializeField]
-    private int damageOnHit;
     [SerializeField]
     private float delay;
     [SerializeField]
@@ -24,9 +22,10 @@ public class HitPerSecond : ProjectileOnHit
         InvokeRepeating("RepeatingUpdate", 0.0f, delay);
     }
 
-    public override void OnHit(Collider2D collision)
+    public override void OnHitStay(Collider2D collision)
     {
-        DoDamage(collision, damageOnHit);
+        DoDamage(collision, GetDamage());
+        WakeUp(collision);
         disableOnUpdate = true;
     }
 
@@ -37,6 +36,11 @@ public class HitPerSecond : ProjectileOnHit
             Deactivate();
             disableOnUpdate = false;
         }
+    }
+
+    private void WakeUp(Collider2D collision)
+    {
+        collision.GetComponent<Rigidbody2D>().WakeUp();
     }
 
     private void RepeatingUpdate()
