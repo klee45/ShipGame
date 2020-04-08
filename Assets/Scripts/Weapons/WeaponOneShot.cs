@@ -5,35 +5,9 @@ using UnityEngine;
 public class WeaponOneShot : Weapon
 {
     [SerializeField]
-    private Timer cooldown;
-    [SerializeField]
     protected GameObject prefab;
 
-    private bool ready;
-
-    protected virtual void Awake()
-    {
-        cooldown = GetComponent<Timer>();
-        cooldown.OnComplete += () => Reset();
-    }
-
-    public void Reset()
-    {
-        cooldown.TurnOff();
-        ready = true;
-    }
-
-    public override void Fire()
-    {
-        if (ready)
-        {
-            FireHelper();
-            cooldown.TurnOn();
-            ready = false;
-        }
-    }
-
-    protected virtual void FireHelper()
+    protected override void FireHelper()
     {
         SetupProjectile(prefab);
     }

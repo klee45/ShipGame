@@ -17,4 +17,9 @@ public class Arsenal : MonoBehaviour
             weapons[pos].Fire();
         }
     }
+
+    public List<Weapon> GetWeapons()
+    {
+        return weapons;
+    }
 }

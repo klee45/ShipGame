@@ -18,6 +18,15 @@ public class PilotPlayer : Pilot
         keyActionPairs = Translate(input.LoadKeys());
     }
 
+    private void Start()
+    {
+        int i = 0;
+        foreach (Weapon weapon in GetWeapons())
+        {
+            WeaponsUI.Instance().SetIcon(i++, weapon);
+        }
+    }
+
     public override void MakeActions()
     {
         // move = new ActionMove(queuedMovement);
@@ -34,6 +43,17 @@ public class PilotPlayer : Pilot
         queuedRotation = Input.GetAxis("Horizontal");
         queuedMovement = Input.GetAxis("Vertical");
         CheckButtons();
+
+        int i = 0;
+        foreach (Weapon weapon in GetWeapons())
+        {
+            WeaponsUI.Instance().SetPercent(i++, weapon);
+        }
+    }
+
+    private List<Weapon> GetWeapons()
+    {
+        return GetComponentInParent<Ship>().GetComponentInChildren<Arsenal>().GetWeapons();
     }
 
     private void CheckButtons()
