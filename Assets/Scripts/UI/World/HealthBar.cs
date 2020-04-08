@@ -7,10 +7,15 @@ public class HealthBar : MonoBehaviour
 {
     //private static Color betweenColor = Color.black;
     private static float opacity = 0.3f;
-    private static Color hullColor = SetTransparency(Color.yellow, opacity);
-    private static Color armorColor = SetTransparency(Color.magenta, opacity);
-    private static Color shieldColor = SetTransparency(Color.cyan, opacity);
-    private static Color emptyColor = new Color(0, 0, 0, opacity);
+
+    public static readonly Color hullColorBase = Color.yellow;
+    public static readonly Color armorColorBase = Color.magenta;
+    public static readonly Color shieldColorBase = Color.cyan;
+
+    public static readonly Color hullColor = SetTransparency(hullColorBase, opacity);
+    public static readonly Color armorColor = SetTransparency(armorColorBase, opacity);
+    public static readonly Color shieldColor = SetTransparency(shieldColorBase, opacity);
+    public static readonly Color emptyColor = new Color(0, 0, 0, opacity);
 
     private static Color SetTransparency(Color c, float a)
     {

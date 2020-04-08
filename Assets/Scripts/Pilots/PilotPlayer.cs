@@ -25,6 +25,39 @@ public class PilotPlayer : Pilot
         {
             WeaponsUI.Instance().SetIcon(i++, weapon);
         }
+        SetupHealthBar();
+    }
+
+    private void SetupHealthBar()
+    {
+        CombatStats stats = GetComponentInParent<Ship>().GetComponentInChildren<CombatStats>();
+        stats.OnShieldHit += (d) => UpdateShield(stats);
+        stats.OnArmorHit += (d) => UpdateArmor(stats);
+        stats.OnHullHit += (d) => UpdateHull(stats);
+
+        UpdateAll(stats);
+    }
+
+    private void UpdateAll(CombatStats stats)
+    {
+        UpdateShield(stats);
+        UpdateArmor(stats);
+        UpdateHull(stats);  
+    }
+
+    private void UpdateShield(CombatStats stats)
+    {
+        HealthUI.Instance().UpdateShield(stats.GetShieldMax(), stats.GetShieldCurrent());
+    }
+
+    private void UpdateArmor(CombatStats stats)
+    {
+        HealthUI.Instance().UpdateArmor(stats.GetArmorMax(), stats.GetArmorCurrent());
+    }
+
+    private void UpdateHull(CombatStats stats)
+    {
+        HealthUI.Instance().UpdateHull(stats.GetHullMax(), stats.GetHullCurrent());
     }
 
     public override void MakeActions()

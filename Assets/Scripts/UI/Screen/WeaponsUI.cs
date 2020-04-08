@@ -61,12 +61,14 @@ public class WeaponsUI : MonoBehaviour
             for (int x = widthCount - 1; x >= 0; x--)
             {
                 GameObject obj = Instantiate(iconPrefab);
+                Vector3 scale = obj.transform.localScale;
                 obj.transform.SetParent(transform);
                 obj.GetComponent<RectTransform>().anchoredPosition = new Vector3(
                     -((x * widthSize) + widthOffset),
                     -((y * heightSize) + heightOffset));
                 //Debug.Log(string.Format("{0} {1}", obj.transform.localPosition.x, obj.transform.localPosition.y));
                 WeaponIcon icon = obj.GetComponent<WeaponIcon>();
+                obj.transform.localScale = scale;
                 icons[i++] = icon;
                 obj.SetActive(false);
             }

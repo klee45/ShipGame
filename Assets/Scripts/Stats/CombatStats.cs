@@ -30,7 +30,7 @@ public class CombatStats : MonoBehaviour
 
     public event DamageEvent OnShipHit;
 
-    public event DamageEvent OnShieldsHit;
+    public event DamageEvent OnShieldHit;
     public event DamageEvent OnShieldDestroy;
 
     public event DamageEvent OnArmorHit;
@@ -55,10 +55,10 @@ public class CombatStats : MonoBehaviour
     public void TakeDamage(int damage)
     {
         int currentDamage = damage;
-        OnShipHit?.Invoke(currentDamage);
+        OnShipHit?.Invoke(damage);
         if (shield > 0)
         {
-            if (DoDamage(ref shield, ref currentDamage))
+            if (DoDamage(ref shield, ref currentDamage, () => OnShieldHit?.Invoke(damage)))
             {
                 OnShieldDestroy?.Invoke(damage);
             }
@@ -66,7 +66,7 @@ public class CombatStats : MonoBehaviour
         }
         if (armor > 0)
         {
-            if (DoDamage(ref armor, ref currentDamage))
+            if (DoDamage(ref armor, ref currentDamage, () => OnArmorHit?.Invoke(damage)))
             {
                 OnArmorDestroy?.Invoke(damage);
             }
@@ -74,7 +74,7 @@ public class CombatStats : MonoBehaviour
         }
         if (hull > 0)
         {
-            if (DoDamage(ref hull, ref currentDamage))
+            if (DoDamage(ref hull, ref currentDamage, () => OnHullHit?.Invoke(damage)))
             {
                 OnDeath?.Invoke(damage);
             }
@@ -82,7 +82,9 @@ public class CombatStats : MonoBehaviour
         }
     }
 
-    private bool DoDamage(ref int val, ref int damage)
+    private delegate void OnHitCheck();
+
+    private bool DoDamage(ref int val, ref int damage, OnHitCheck check)
     {
         if (damage > 0)
         {
@@ -91,21 +93,31 @@ public class CombatStats : MonoBehaviour
             {
                 val = 0;
                 damage = -result;
+                check();
                 return true;
             }
             else
             {
                 val = result;
                 damage = 0;
+                check();
                 return false;
             }
         }
         return false;
     }
 
-    public void TrimHullToMax() { this.hull = Mathf.Min(this.hull, maxHull.GetValue()); }
-    public void TrimArmorToMax() { this.armor = Mathf.Min(this.armor, maxArmor.GetValue()); }
-    public void TrimShieldToMax() { this.shield = Mathf.Min(this.shield, maxShield.GetValue()); }
+    public int GetHullMax() { return maxHull.GetValue(); }
+    public int GetArmorMax() { return maxArmor.GetValue(); }
+    public int GetShieldMax() { return maxShield.GetValue(); }
+
+    public int GetHullCurrent() { return hull; }
+    public int GetArmorCurrent() { return armor; }
+    public int GetShieldCurrent() { return shield; }
+
+    public void TrimHullToMax() { hull = Mathf.Min(hull, maxHull.GetValue()); }
+    public void TrimArmorToMax() { armor = Mathf.Min(armor, maxArmor.GetValue()); }
+    public void TrimShieldToMax() { shield = Mathf.Min(shield, maxShield.GetValue()); }
 
     public void TrimAllToMax()
     {
