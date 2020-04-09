@@ -8,6 +8,9 @@ public class Projectile : Entity
     [SerializeField]
     protected int damage;
 
+    [SerializeField]
+    protected float lifespan;
+
     private ProjectileOnHit[] onHit;
     private ProjectileOnStay[] onStay;
     private ProjectileOnTick[] onTick;
@@ -27,6 +30,11 @@ public class Projectile : Entity
         base.Awake();
         OnValidate();
     }
+    
+    protected virtual void Start()
+    {
+        Destroy(gameObject, lifespan);
+    }
 
     private void OnValidate()
     {
@@ -37,6 +45,11 @@ public class Projectile : Entity
         SortOrder(onHit);
         SortOrder(onStay);
         SortOrder(onTick);
+    }
+
+    public void SetLifespan(float lifespan)
+    {
+        this.lifespan = lifespan;
     }
 
     private void SortOrder(ProjectileEffect[] lst)

@@ -13,30 +13,30 @@ TagManager:
   - UI
   - 
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - 
-  - Projectile4
-  - Ship4
-  - Projectile3
-  - Ship3
-  - Projectile2
-  - Ship2
-  - Projectile1
-  - Ship1
-  - ProjectileNeutral
+  - DetectionShip
+  - DetectionProjectile
   - ShipNeutral
+  - Ship1
+  - Ship2
+  - Ship3
+  - Ship4
+  - ProjectileNeutral
+  - Projectile1
+  - Projectile2
+  - Projectile3
+  - Projectile4
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
+  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0

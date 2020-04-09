@@ -180,7 +180,6 @@ GameObject:
   - component: {fileID: 3189834120618545895}
   - component: {fileID: 3189834120618545894}
   - component: {fileID: 3189834120618545889}
-  - component: {fileID: 607617561}
   - component: {fileID: 4689059332438148851}
   - component: {fileID: 7813655246927647877}
   - component: {fileID: -2031660670539423745}
@@ -240,6 +239,7 @@ MonoBehaviour:
   pilot: {fileID: 4689059332438148851}
   forces: []
   damage: 0
+  lifespan: 2
 --- !u!114 &3189834120618545889
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -253,19 +253,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
---- !u!114 &607617561
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3189834120618545893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 192dd4b5d3a30df42893f3aca56f53f2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  delay: 2
 --- !u!114 &4689059332438148851
 MonoBehaviour:
   m_ObjectHideFlags: 0

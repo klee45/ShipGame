@@ -4,14 +4,30 @@ using UnityEngine;
 
 public static class Layers
 {
-    public static readonly byte NEUTRAL_SHIPS       = 31;
-    public static readonly byte NEUTRAL_PROJECTILE  = 30;
-    public static readonly byte TEAM_1_SHIPS        = 29;
-    public static readonly byte TEAM_1_PROJECTILES  = 28;
-    public static readonly byte TEAM_2_SHIPS        = 27;
-    public static readonly byte TEAM_2_PROJECTILES  = 26;
-    public static readonly byte TEAM_3_SHIPS        = 25;
-    public static readonly byte TEAM_3_PROJECTILES  = 24;
-    public static readonly byte TEAM_4_SHIPS        = 23;
-    public static readonly byte TEAM_4_PROJECTILES  = 22;
+    private static readonly int shipProjectileOffset = 5;
+
+    public static readonly int DETECTION_SHIP = 8;
+    public static readonly int DETECTION_PROJECTILE = 9;
+
+    public static readonly int NEUTRAL_SHIPS = 10;
+    public static readonly int TEAM_1_SHIPS = 11;
+    public static readonly int TEAM_2_SHIPS = 12;
+    public static readonly int TEAM_3_SHIPS = 13;
+    public static readonly int TEAM_4_SHIPS = 14;
+
+    public static readonly int NEUTRAL_PROJECTILE = NEUTRAL_SHIPS + shipProjectileOffset;
+    public static readonly int TEAM_1_PROJECTILES = TEAM_1_SHIPS + shipProjectileOffset;
+    public static readonly int TEAM_2_PROJECTILES = TEAM_2_SHIPS + shipProjectileOffset;
+    public static readonly int TEAM_3_PROJECTILES = TEAM_3_SHIPS + shipProjectileOffset;
+    public static readonly int TEAM_4_PROJECTILES = TEAM_4_SHIPS + shipProjectileOffset;
+
+    public static int ShipFromProjectile(int layer)
+    {
+        return layer - shipProjectileOffset;
+    }
+
+    public static int ProjectileFromShip(int layer)
+    {
+        return layer + shipProjectileOffset;
+    }
 }

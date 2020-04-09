@@ -301,7 +301,7 @@ GameObject:
   m_Component:
   - component: {fileID: 211890279}
   - component: {fileID: 211890280}
-  m_Layer: 29
+  m_Layer: 11
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -365,7 +365,7 @@ GameObject:
   - component: {fileID: 323333755}
   - component: {fileID: 323333756}
   - component: {fileID: 323333757}
-  m_Layer: 27
+  m_Layer: 10
   m_Name: Dummy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -615,7 +615,7 @@ GameObject:
   m_Component:
   - component: {fileID: 425954891}
   - component: {fileID: 425954892}
-  m_Layer: 29
+  m_Layer: 11
   m_Name: Velocity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -663,7 +663,7 @@ GameObject:
   m_Component:
   - component: {fileID: 439237602}
   - component: {fileID: 439237603}
-  m_Layer: 29
+  m_Layer: 11
   m_Name: Stats
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -712,7 +712,7 @@ GameObject:
   m_Component:
   - component: {fileID: 511187259}
   - component: {fileID: 511187260}
-  m_Layer: 29
+  m_Layer: 11
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1020,7 +1020,7 @@ GameObject:
   - component: {fileID: 662202698}
   - component: {fileID: 662202700}
   - component: {fileID: 662202699}
-  m_Layer: 29
+  m_Layer: 11
   m_Name: BasicAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1053,7 +1053,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3da6fdc6aab23ea41be68b78a7846906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 0.5
+  maxTime: 0.25
   currentTime: 0
   running: 1
   doesReset: 1
@@ -1083,7 +1083,7 @@ GameObject:
   m_Component:
   - component: {fileID: 683512169}
   - component: {fileID: 683512170}
-  m_Layer: 29
+  m_Layer: 11
   m_Name: Rotation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1275,7 +1275,7 @@ GameObject:
   - component: {fileID: 817507577}
   - component: {fileID: 817507576}
   - component: {fileID: 817507575}
-  m_Layer: 29
+  m_Layer: 11
   m_Name: Wave 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1409,7 +1409,7 @@ GameObject:
   - component: {fileID: 890460780}
   - component: {fileID: 890460781}
   - component: {fileID: 890460782}
-  m_Layer: 27
+  m_Layer: 10
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1606,7 +1606,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1128645745}
   - component: {fileID: 1128645746}
-  m_Layer: 29
+  m_Layer: 11
   m_Name: Movement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1652,7 +1652,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1162874115}
-  m_Layer: 27
+  m_Layer: 10
   m_Name: Combat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1718,7 +1718,7 @@ GameObject:
   - component: {fileID: 1267374629}
   - component: {fileID: 1267374631}
   - component: {fileID: 1267374630}
-  m_Layer: 29
+  m_Layer: 11
   m_Name: Ship
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1913,7 +1913,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1285560816}
   - component: {fileID: 1285560817}
-  m_Layer: 29
+  m_Layer: 11
   m_Name: Arsenal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1964,7 +1964,7 @@ GameObject:
   - component: {fileID: 1319359268}
   - component: {fileID: 1319359269}
   - component: {fileID: 1319359270}
-  m_Layer: 29
+  m_Layer: 11
   m_Name: BeamAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2106,7 +2106,7 @@ GameObject:
   - component: {fileID: 1371118378}
   - component: {fileID: 1371118377}
   - component: {fileID: 1371118376}
-  m_Layer: 29
+  m_Layer: 11
   m_Name: Wave 2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2331,7 +2331,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1519005415}
-  m_Layer: 29
+  m_Layer: 11
   m_Name: Combat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2364,7 +2364,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1574904706}
   - component: {fileID: 1574904707}
-  m_Layer: 27
+  m_Layer: 10
   m_Name: Stats
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2571,7 +2571,7 @@ PrefabInstance:
     - target: {fileID: 4862065564205642088, guid: 21e455797b35a3f41a03fff484058e87,
         type: 3}
       propertyPath: m_Layer
-      value: 27
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4862065564205642095, guid: 21e455797b35a3f41a03fff484058e87,
         type: 3}
@@ -2696,42 +2696,42 @@ PrefabInstance:
     - target: {fileID: 4862065563072933143, guid: 21e455797b35a3f41a03fff484058e87,
         type: 3}
       propertyPath: m_Layer
-      value: 27
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4862065564346779604, guid: 21e455797b35a3f41a03fff484058e87,
         type: 3}
       propertyPath: m_Layer
-      value: 27
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4862065564934314242, guid: 21e455797b35a3f41a03fff484058e87,
         type: 3}
       propertyPath: m_Layer
-      value: 27
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4862065564959003360, guid: 21e455797b35a3f41a03fff484058e87,
         type: 3}
       propertyPath: m_Layer
-      value: 27
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4862065563089447433, guid: 21e455797b35a3f41a03fff484058e87,
         type: 3}
       propertyPath: m_Layer
-      value: 27
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4862065563175469839, guid: 21e455797b35a3f41a03fff484058e87,
         type: 3}
       propertyPath: m_Layer
-      value: 27
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4862065563901406152, guid: 21e455797b35a3f41a03fff484058e87,
         type: 3}
       propertyPath: m_Layer
-      value: 27
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4862065564825567005, guid: 21e455797b35a3f41a03fff484058e87,
         type: 3}
       propertyPath: m_Layer
-      value: 27
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8003380802705592790, guid: 21e455797b35a3f41a03fff484058e87,
         type: 3}
@@ -2760,6 +2760,14 @@ PrefabInstance:
     - target: {fileID: 1959854964, guid: 21e455797b35a3f41a03fff484058e87, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1771118816, guid: 21e455797b35a3f41a03fff484058e87, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1959854963, guid: 21e455797b35a3f41a03fff484058e87, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21e455797b35a3f41a03fff484058e87, type: 3}
@@ -2896,7 +2904,7 @@ GameObject:
   - component: {fileID: 1972350165}
   - component: {fileID: 1972350166}
   - component: {fileID: 1972350167}
-  m_Layer: 29
+  m_Layer: 11
   m_Name: Pilot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3028,7 +3036,7 @@ GameObject:
   - component: {fileID: 2082279493}
   - component: {fileID: 2082279495}
   - component: {fileID: 2082279494}
-  m_Layer: 29
+  m_Layer: 11
   m_Name: BasicMissileSwarm
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3113,6 +3121,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: HealthBarCircle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4862065564205642088, guid: 21e455797b35a3f41a03fff484058e87,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 4862065564205642095, guid: 21e455797b35a3f41a03fff484058e87,
         type: 3}
@@ -3229,6 +3242,46 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 0.2
       objectReference: {fileID: 0}
+    - target: {fileID: 4862065563072933143, guid: 21e455797b35a3f41a03fff484058e87,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4862065564346779604, guid: 21e455797b35a3f41a03fff484058e87,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4862065564934314242, guid: 21e455797b35a3f41a03fff484058e87,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4862065564959003360, guid: 21e455797b35a3f41a03fff484058e87,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4862065563089447433, guid: 21e455797b35a3f41a03fff484058e87,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4862065563175469839, guid: 21e455797b35a3f41a03fff484058e87,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4862065563901406152, guid: 21e455797b35a3f41a03fff484058e87,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 4862065564825567005, guid: 21e455797b35a3f41a03fff484058e87,
+        type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     - target: {fileID: 8003380802705592790, guid: 21e455797b35a3f41a03fff484058e87,
         type: 3}
       propertyPath: shieldText
@@ -3244,5 +3297,13 @@ PrefabInstance:
       propertyPath: hullText
       value: 
       objectReference: {fileID: 1959854965}
+    - target: {fileID: 1771118816, guid: 21e455797b35a3f41a03fff484058e87, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 1959854963, guid: 21e455797b35a3f41a03fff484058e87, type: 3}
+      propertyPath: m_Layer
+      value: 11
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21e455797b35a3f41a03fff484058e87, type: 3}

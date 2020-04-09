@@ -41,7 +41,7 @@ public abstract class Weapon : MonoBehaviour
         Transform parent = transform.parent;
         projectile.transform.localPosition = parent.position;
         projectile.transform.localRotation = parent.rotation;
-        projectile.layer = parent.gameObject.layer - 1;
+        projectile.layer = Layers.ProjectileFromShip(parent.gameObject.layer);
         return projectile.GetComponent<Projectile>();
     }
 

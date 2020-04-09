@@ -45,7 +45,7 @@ public class HitPerSecond : ProjectileOnStay
 
     private void RepeatingUpdate()
     {
-        if (times < maxTimes)
+        if (times <= maxTimes)
         {
             Activate();
             times++;
