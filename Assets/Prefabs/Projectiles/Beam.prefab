@@ -67,7 +67,7 @@ MonoBehaviour:
   pilot: {fileID: 0}
   forces: []
   damage: 10
-  lifespan: 1.1
+  lifespan: 2
 --- !u!114 &-7847552029548295572
 MonoBehaviour:
   m_ObjectHideFlags: 0

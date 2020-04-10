@@ -232,7 +232,8 @@ MonoBehaviour:
   movementStats: {fileID: 0}
   pilot: {fileID: 0}
   forces: []
-  damage: 25
+  damage: 1
+  lifespan: 0
 --- !u!114 &1813295544469514526
 MonoBehaviour:
   m_ObjectHideFlags: 0

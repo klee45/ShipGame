@@ -24,6 +24,11 @@ public class StatGroupSecondOrder : StatGroup
         return kernel.GetValue();
     }
 
+    public override float GetValue(float duration)
+    {
+        return kernel.GetValue(duration);
+    }
+
     public override void Tick(float scale)
     {
         kernel.Tick(scale);
@@ -82,6 +87,11 @@ public class StatGroupSecondOrderKernel
     public float GetValue()
     {
         return currentValue;
+    }
+
+    public float GetValue(float duration)
+    {
+        return GetValue() * duration + accelerationStat.GetValue() * duration * duration / 2.0f;
     }
 
     /*

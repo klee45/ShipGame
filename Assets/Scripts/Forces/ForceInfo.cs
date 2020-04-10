@@ -7,7 +7,7 @@ public class ForceInfo : MonoBehaviour
     [SerializeField]
     public Vector2 force;
     [SerializeField]
-    public float decayPerSec;
+    public float duration;
     [SerializeField]
     public float percent = 1.0f;
     [SerializeField]

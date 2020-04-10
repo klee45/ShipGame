@@ -9,6 +9,11 @@ public class StatGroupZeroOrder : StatGroup
         return 0;
     }
 
+    public override float GetValue(float duration)
+    {
+        return 0;
+    }
+
     public override void Tick(float scale)
     {
     }

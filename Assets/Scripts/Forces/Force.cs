@@ -7,7 +7,7 @@ public class Force : MonoBehaviour
     [SerializeField]
     private Vector2 force;
     [SerializeField]
-    private float decayPerSec;
+    private float duration;
     [SerializeField]
     private float percent = 1.0f;
     [SerializeField]
@@ -17,7 +17,7 @@ public class Force : MonoBehaviour
     {
         Force f = target.AddComponent<Force>();
         f.force = info.force;
-        f.decayPerSec = info.decayPerSec;
+        f.duration = info.duration;
         f.percent = info.percent;
         f.isRelative = info.isRelative;
         return f;
@@ -26,9 +26,15 @@ public class Force : MonoBehaviour
     private void Update()
     {
         if (percent > 0)
-        {
-            percent -= decayPerSec * Time.deltaTime;
+        {   
+            percent -= (1 / duration) * Time.deltaTime;
         }        
+    }
+
+    public float GetRange(float duration)
+    {
+        float time = Mathf.Min(this.duration, duration);
+        return force.y * (time - (time * time / 2.0f));
     }
 
     public float GetPercent()

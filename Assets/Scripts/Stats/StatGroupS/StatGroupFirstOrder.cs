@@ -27,4 +27,9 @@ public class StatGroupFirstOrder : StatGroup
     public override void Tick(float scale)
     {
     }
+
+    public override float GetValue(float duration)
+    {
+        return GetValue() * duration;
+    }
 }
