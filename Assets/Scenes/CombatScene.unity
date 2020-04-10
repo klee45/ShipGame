@@ -1309,7 +1309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: {x: 0, y: -0.1}
-  decayPerSec: 3
+  duration: 0.3
   percent: 1
   isRelative: 1
 --- !u!114 &817507576
@@ -1325,7 +1325,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0}
-  rotation: 0
+  rotation: 0.3
   delay: 0.2
   forces:
   - {fileID: 817507575}
@@ -1343,7 +1343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: {x: 0.03, y: -0.1}
-  decayPerSec: 3
+  duration: 0.3
   percent: 1
   isRelative: 1
 --- !u!114 &817507578
@@ -1377,7 +1377,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: {x: -0.03, y: -0.1}
-  decayPerSec: 3
+  duration: 0.3
   percent: 1
   isRelative: 1
 --- !u!114 &817507580
@@ -2140,7 +2140,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: {x: 0, y: -0.1}
-  decayPerSec: 3
+  duration: 0.3
   percent: 1
   isRelative: 1
 --- !u!114 &1371118377
@@ -2156,7 +2156,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   offset: {x: 0, y: 0}
-  rotation: 0
+  rotation: 0.3
   delay: 0.6
   forces:
   - {fileID: 1371118376}
@@ -2174,7 +2174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: {x: 0.03, y: -0.1}
-  decayPerSec: 3
+  duration: 0.3
   percent: 1
   isRelative: 1
 --- !u!114 &1371118379
@@ -2208,7 +2208,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   force: {x: -0.03, y: -0.1}
-  decayPerSec: 3
+  duration: 0.3
   percent: 1
   isRelative: 1
 --- !u!114 &1371118381
