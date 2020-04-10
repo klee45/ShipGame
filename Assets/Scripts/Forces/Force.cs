@@ -13,14 +13,12 @@ public class Force : MonoBehaviour
     [SerializeField]
     private bool isRelative = true;
 
-    public static Force Create(GameObject target, ForceInfo info)
+    public void Initialize(ForceInfo info)
     {
-        Force f = target.AddComponent<Force>();
-        f.force = info.force;
-        f.duration = info.duration;
-        f.percent = info.percent;
-        f.isRelative = info.isRelative;
-        return f;
+        force = info.force;
+        duration = info.duration;
+        percent = info.percent;
+        isRelative = info.isRelative;
     }
 
     private void Update()

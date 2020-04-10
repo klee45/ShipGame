@@ -22,9 +22,11 @@ public class ProjectileSpawn : MonoBehaviour
         projectile.transform.localEulerAngles += new Vector3(0, 0, rotation);
         //Debug.Log(projectile.transform.localEulerAngles);
         projectile.transform.localScale *= scale;
-        foreach (ForceInfo force in forces)
+        foreach (ForceInfo forceInfo in forces)
         {
-            projectile.AddForce(Force.Create(projectile.gameObject, force));
+            Force force = gameObject.AddComponent<Force>();
+            force.Initialize(forceInfo);
+            projectile.AddForce(force);
         }
     }
 
