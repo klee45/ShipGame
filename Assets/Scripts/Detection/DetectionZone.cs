@@ -4,8 +4,9 @@ using UnityEngine;
 
 public class DetectionZone : MonoBehaviour
 {
-    [SerializeField]
-    private float scale;
+    private static Color DEBUG_COLOR_ON = new Color(0.5f, 0.5f, 0.5f, 0.1f);
+    private static Color DEBUG_COLOR_OFF = new Color(1.0f, 1.0f, 1.0f, 0.1f);
+
     [SerializeField]
     private float timeInBetween;
     [SerializeField]
@@ -14,39 +15,25 @@ public class DetectionZone : MonoBehaviour
     private float initialRandomIncrease;
 
     private bool active = false;
-
     private Timer timer;
 
-    [SerializeField]
-    private DetectionZoneInfo info;
+    public delegate void DetectionEvent(Ship ship);
+    public DetectionEvent OnDetection;
 
-    private void Awake()
+    private void Start()
     {
-        Initialize(info);
-    }
-
-    public void Initialize(DetectionZoneInfo info)
-    {
-        scale = info.scale;
-        timeInBetween = info.timeInBetween;
-        randomIncrease = info.randomIncrease;
-        initialRandomIncrease = info.initialRandomIncrease;
         Setup();
     }
 
     private void Setup()
     {
-        transform.localScale = new Vector2(scale, scale);
         timer = gameObject.AddComponent<Timer>();
         timer.OnComplete += () =>
         {
-            GetComponent<Collider2D>().enabled = true;
-            active = true;
+            Activate();
             ResetTimer(randomIncrease);
-            GetComponent<SpriteRenderer>().color = Color.black;
         };
-
-        GetComponent<Collider2D>().enabled = false;
+        Deactivate();
         ResetTimer(initialRandomIncrease);
     }
 
@@ -56,13 +43,42 @@ public class DetectionZone : MonoBehaviour
         timer.SetMaxTime(timeInBetween + Random.Range(0, max));
     }
 
+    //private int test = 0;
+
+    private void Activate()
+    {
+        //Debug.Log("Activate " + (test++).ToString());
+        GetComponent<Rigidbody2D>().simulated = true;
+        GetComponent<SpriteRenderer>().color = DEBUG_COLOR_ON;
+        active = true;
+    }
+
+    private void Deactivate()
+    {
+        //Debug.Log("Deactivate " + (test++).ToString());
+        GetComponent<Rigidbody2D>().simulated = false;
+        GetComponent<SpriteRenderer>().color = DEBUG_COLOR_OFF;
+    }
+
     private void FixedUpdate()
     {
         if (active)
         {
-            GetComponent<Collider2D>().enabled = false;
-            GetComponent<SpriteRenderer>().color = Color.white;
-            active = false;
+            //Debug.Log("Fixed Update " + (test++).ToString());
+            StartCoroutine(DelayedDisable());
         }
+    }
+
+    private IEnumerator DelayedDisable()
+    {
+        yield return new WaitForFixedUpdate();
+        active = false;
+        yield return null;
+        Deactivate();
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        OnDetection?.Invoke(collision.gameObject.GetComponent<Ship>());
     }
 }
