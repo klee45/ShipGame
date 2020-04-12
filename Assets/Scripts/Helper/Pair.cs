@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Pair<A, B>
 {
-    public A a;
-    public B b;
+    protected A a;
+    protected B b;
 
     public Pair(A a, B b)
     {
