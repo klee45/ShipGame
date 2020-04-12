@@ -10,6 +10,8 @@ public abstract class Entity : MonoBehaviour
     protected MovementStats movementStats;
     [SerializeField]
     protected Pilot pilot;
+    [SerializeField]
+    private SpriteRenderer[] teamColorSprites;
 
     [SerializeField]
     private List<Force> forces;
@@ -17,6 +19,14 @@ public abstract class Entity : MonoBehaviour
     protected virtual void Awake()
     {
         movementStats = GetComponentInChildren<MovementStats>();
+    }
+    
+    protected virtual void Start()
+    {
+        foreach(SpriteRenderer s in teamColorSprites)
+        {
+            s.color = Layers.GetColorFromLayer(gameObject.layer);
+        }
     }
 
     protected virtual void Update()

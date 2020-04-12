@@ -232,6 +232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementStats: {fileID: 0}
   pilot: {fileID: 0}
+  sprite: {fileID: 3189834118831772201}
   forces: []
   damage: 10
   lifespan: 3
