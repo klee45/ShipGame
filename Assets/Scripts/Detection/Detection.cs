@@ -6,8 +6,6 @@ using UnityEngine;
 public class Detection : MonoBehaviour
 {
     [SerializeField]
-    private DetectionZone zone;
-    [SerializeField]
     private float memoryDuration;
     [SerializeField]
     private int memoryCount;
@@ -17,10 +15,13 @@ public class Detection : MonoBehaviour
     private void Awake()
     {
         dict = gameObject.AddComponent<MemoryDictionary>();
+
     }
 
     private void Start()
     {
+        DetectionZone zone = GetComponentInChildren<DetectionZone>();
+        Debug.Log(zone);
         dict.Initialize(memoryDuration);
         zone.OnDetection += (s) =>
         {
@@ -55,7 +56,7 @@ public class Detection : MonoBehaviour
             Debug.Log("Printing");
             var lst = dict.ToList();
             if (lst.Count > 0)
-                Debug.Log(string.Format("{0} {1}", lst[0].Value.a, lst[0].Value.b));
+                Debug.Log(string.Format("{0} {1}", lst[0].Value.GetTimer().GetTime(), lst[0].Value.GetCount()));
         }
 
         public void Initialize(float duration)
