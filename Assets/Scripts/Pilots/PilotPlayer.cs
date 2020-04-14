@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PilotPlayer : Pilot
 {
+    private Ship ship;
+
     [SerializeField]
     private InputManager input;
 
@@ -13,9 +15,15 @@ public class PilotPlayer : Pilot
     private float queuedMovement = 0;
     private float queuedRotation = 0;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         keyActionPairs = Translate(input.LoadKeys());
+    }
+
+    protected override void GetComponentEntity()
+    {
+        ship = GetComponentInParent<Ship>();
     }
 
     private void Start()
@@ -30,7 +38,7 @@ public class PilotPlayer : Pilot
 
     private void SetupHealthBar()
     {
-        CombatStats stats = GetComponentInParent<Ship>().GetComponentInChildren<CombatStats>();
+        CombatStats stats = ship.GetComponentInChildren<CombatStats>();
         stats.OnShieldHit += (d) => UpdateShield(stats);
         stats.OnArmorHit += (d) => UpdateArmor(stats);
         stats.OnHullHit += (d) => UpdateHull(stats);
@@ -65,7 +73,6 @@ public class PilotPlayer : Pilot
         // move = new ActionMove(queuedMovement);
         // rotate = new ActionRotate(queuedRotation);
 
-        Ship ship = GetComponentInParent<Ship>();
         Rotate(ship, queuedRotation);
         Move(ship, queuedMovement);
     }
@@ -84,9 +91,9 @@ public class PilotPlayer : Pilot
         }
     }
 
-    private List<Weapon> GetWeapons()
+    private Weapon[] GetWeapons()
     {
-        return GetComponentInParent<Ship>().GetComponentInChildren<Arsenal>().GetWeapons();
+        return ship.GetComponentInChildren<Arsenal>().GetWeapons();
     }
 
     private void CheckButtons()
@@ -96,7 +103,7 @@ public class PilotPlayer : Pilot
             if (Input.GetKey(pair.Key))
             {
                 //Debug.Log(string.Format("{0} pressed", pair.Key));
-                pair.Value(GetComponentInParent<Ship>());
+                pair.Value(ship);
                 break;
             }
         }
@@ -107,7 +114,6 @@ public class PilotPlayer : Pilot
     private Dictionary<string, Action> Translate(Dictionary<string, string> dict)
     {
         Dictionary<string, Action> temp = new Dictionary<string, Action>();
-        Ship ship = GetComponentInParent<Ship>();
         foreach (KeyValuePair<string, string> pair in dict)
         {
             temp[pair.Value] = translation[pair.Key];

@@ -4,8 +4,14 @@ using UnityEngine;
 
 public abstract class Pilot : MonoBehaviour
 {
+    protected abstract void GetComponentEntity();
     public abstract void MakeActions();
 
+
+    protected virtual void Awake()
+    {
+        GetComponentEntity();
+    }
 
     protected static void FireWeapon(Ship ship, int num)
     {

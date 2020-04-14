@@ -4,10 +4,16 @@ using UnityEngine;
 
 public class PilotDummy : Pilot
 {
+    private Entity entity;
+
     public override void MakeActions()
     {
-        Entity entity = GetComponentInParent<Entity>();
         Rotate(entity, 1);
         Move(entity, 1);
+    }
+
+    protected override void GetComponentEntity()
+    {
+        entity = GetComponentInParent<Entity>();
     }
 }
