@@ -49,6 +49,8 @@ public class CombatStats : MonoBehaviour
         armor = initialArmorMax;
         shield = initialShieldMax;
 
+        healthBar = transform.parent.GetComponentInChildren<HealthBar>();
+
         UpdateAllGraphics();
     }
 
@@ -128,17 +130,17 @@ public class CombatStats : MonoBehaviour
 
     private void UpdateShieldGraphic()
     {
-        healthBar.UpdateShieldGraphic(maxShield.GetValue(), shield);
+        healthBar?.UpdateShieldGraphic(maxShield.GetValue(), shield);
     }
 
     private void UpdateArmorGraphic()
     {
-        healthBar.UpdateArmorGraphic(maxArmor.GetValue(), armor);
+        healthBar?.UpdateArmorGraphic(maxArmor.GetValue(), armor);
     }
 
     private void UpdateHullGraphic()
     {
-        healthBar.UpdateHullGraphic(maxHull.GetValue(), hull);
+        healthBar?.UpdateHullGraphic(maxHull.GetValue(), hull);
     }
 
     private void UpdateAllGraphics()
