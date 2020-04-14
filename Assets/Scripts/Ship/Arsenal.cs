@@ -4,21 +4,25 @@ using UnityEngine;
 
 public class Arsenal : MonoBehaviour
 {
-    [SerializeField]
-    private List<Weapon> weapons;
+    private Weapon[] weapons;
+
+    private void Awake()
+    {
+        weapons = GetComponents<Weapon>();
+    }
 
     public void Fire(int weapon)
     {
         int pos = weapon - 1;
         //Debug.Log("Fire " + pos.ToString());
-        if (pos >= 0 && pos < weapons.Count)
+        if (pos >= 0 && pos < weapons.Length)
         {
             //Debug.Log("Actually firing");
             weapons[pos].Fire();
         }
     }
 
-    public List<Weapon> GetWeapons()
+    public Weapon[] GetWeapons()
     {
         return weapons;
     }
