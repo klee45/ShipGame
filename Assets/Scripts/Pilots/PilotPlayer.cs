@@ -123,14 +123,14 @@ public class PilotPlayer : Pilot
     
     private static Dictionary<string, Action> translation = new Dictionary<string, Action>()
     {
-        { "attack_1", (s) => FireWeapon(s, 1) },
-        { "attack_2", (s) => FireWeapon(s, 2) },
-        { "attack_3", (s) => FireWeapon(s, 3) },
-        { "attack_4", (s) => FireWeapon(s, 4) },
-        { "attack_5", (s) => FireWeapon(s, 5) },
-        { "attack_6", (s) => FireWeapon(s, 6) },
-        { "attack_7", (s) => FireWeapon(s, 7) },
-        { "attack_8", (s) => FireWeapon(s, 8) },
+        { "attack_1", (s) => FireWeapon(s, 0) },
+        { "attack_2", (s) => FireWeapon(s, 1) },
+        { "attack_3", (s) => FireWeapon(s, 2) },
+        { "attack_4", (s) => FireWeapon(s, 3) },
+        { "attack_5", (s) => FireWeapon(s, 4) },
+        { "attack_6", (s) => FireWeapon(s, 5) },
+        { "attack_7", (s) => FireWeapon(s, 6) },
+        { "attack_8", (s) => FireWeapon(s, 7) },
         { "brake",    (s) => Brake(s) }
     };
 

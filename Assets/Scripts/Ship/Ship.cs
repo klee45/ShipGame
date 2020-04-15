@@ -7,11 +7,14 @@ public class Ship : Entity
     [SerializeField]
     protected CombatStats combatStats;
 
+    private Arsenal arsenal;
+
     protected override void Awake()
     {
         base.Awake();
         combatStats = GetComponentInChildren<CombatStats>();
         pilot = GetComponentInChildren<Pilot>();
+        arsenal = GetComponentInChildren<Arsenal>();
     }
 
     protected override void Update()
@@ -20,4 +23,5 @@ public class Ship : Entity
     }
 
     public CombatStats GetCombatStats() { return combatStats; }
+    public Arsenal GetArsenal() { return arsenal; }
 }

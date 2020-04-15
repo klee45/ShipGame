@@ -8,17 +8,16 @@ public class Arsenal : MonoBehaviour
 
     private void Awake()
     {
-        weapons = GetComponents<Weapon>();
+        weapons = GetComponentsInChildren<Weapon>();
     }
 
     public void Fire(int weapon)
     {
-        int pos = weapon - 1;
         //Debug.Log("Fire " + pos.ToString());
-        if (pos >= 0 && pos < weapons.Length)
+        if (weapon >= 0 && weapon < weapons.Length)
         {
             //Debug.Log("Actually firing");
-            weapons[pos].Fire();
+            weapons[weapon].Fire();
         }
     }
 

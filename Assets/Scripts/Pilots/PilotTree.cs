@@ -5,15 +5,26 @@ using UnityEngine;
 public class PilotTree : Pilot
 {
     [SerializeField]
-    private DecisionNode decisionTree;
-    private DecisionState decisionState;
+    private BehaviorNode behaviorTree;
+    private BehaviorState behaviorState;
 
     private Ship ship;
 
     protected override void Awake()
     {
         base.Awake();
-        decisionState = gameObject.AddComponent<DecisionState>();
+        behaviorState = gameObject.AddComponent<BehaviorState>();
+    }
+
+    private void Start()
+    {
+        int[] counts = behaviorTree.TraverseCount();
+        PrintTreeSize(counts);
+    }
+
+    private void PrintTreeSize(int[] counts)
+    {
+        Debug.Log(string.Format("[{0}]", string.Join(" ", counts)));
     }
 
     protected override void GetComponentEntity()
@@ -23,12 +34,22 @@ public class PilotTree : Pilot
 
     public override void MakeActions()
     {
-        decisionTree.UpdateState(decisionState);
-        Rotate(ship, decisionState.queuedVelocity);
-        Move(ship, decisionState.queuedRotation);
-        if (decisionState.fireWeapon)
+        BehaviorNode.NodeState rootState =  behaviorTree.UpdateState(behaviorState);
+        //Debug.Log(behaviorState.fireWeapon);
+        //Debug.Log(behaviorState.weaponChoice);
+        Rotate(ship, behaviorState.queuedVelocity);
+        Move(ship, behaviorState.queuedRotation);
+        if (behaviorState.fireWeapon)
         {
-            FireWeapon(ship, decisionState.weaponChoice);
+            FireWeapon(ship, behaviorState.weaponChoice);
+            behaviorState.fireWeapon = false;
+        }
+        switch(rootState)
+        {
+            case BehaviorNode.NodeState.SUCCESS:
+            case BehaviorNode.NodeState.FAILURE:
+                behaviorTree.Reset();
+                break;
         }
     }
 }

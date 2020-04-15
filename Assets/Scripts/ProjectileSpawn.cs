@@ -5,11 +5,11 @@ using UnityEngine;
 public class ProjectileSpawn : MonoBehaviour
 {
     [SerializeField]
-    private Vector2 offset;
+    private Vector2 offset = Vector2.zero;
     [SerializeField]
-    private float rotation;
+    private float rotation = 0;
     [SerializeField]
-    private float delay;
+    private float delay = 0;
     [SerializeField]
     private ForceInfo[] forces;
     [SerializeField]

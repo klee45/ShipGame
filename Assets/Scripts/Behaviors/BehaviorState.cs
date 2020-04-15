@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DecisionState : MonoBehaviour
+public class BehaviorState : MonoBehaviour
 {
     public Vector2 target;
     public float queuedVelocity = 0;

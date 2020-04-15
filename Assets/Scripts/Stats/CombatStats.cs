@@ -49,8 +49,6 @@ public class CombatStats : MonoBehaviour
         armor = initialArmorMax;
         shield = initialShieldMax;
 
-        healthBar = transform.parent.GetComponentInChildren<HealthBar>();
-
         UpdateAllGraphics();
     }
 

@@ -5,7 +5,15 @@ using UnityEngine;
 public class StatGroupSecondOrder : StatGroup
 {
     [SerializeField]
-    private float acceleration, deceleration, max, min, dampening;
+    private float acceleration = 1;
+    [SerializeField]
+    private float deceleration = 1;
+    [SerializeField]
+    private float max = 1;
+    [SerializeField]
+    private float min = -1;
+    [SerializeField]
+    private float dampening = 1;
 
     private StatGroupSecondOrderKernel kernel;
 

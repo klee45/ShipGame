@@ -21,7 +21,6 @@ public class Detection : MonoBehaviour
     private void Start()
     {
         DetectionZone zone = GetComponentInChildren<DetectionZone>();
-        Debug.Log(zone);
         dict.Initialize(memoryDuration);
         zone.OnDetection += (s) =>
         {

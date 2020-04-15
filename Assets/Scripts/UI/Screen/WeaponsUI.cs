@@ -6,17 +6,17 @@ using UnityEngine.UI;
 public class WeaponsUI : MonoBehaviour
 {
     [SerializeField]
-    private int widthCount;
+    private int widthCount = 1;
     [SerializeField]
-    private int heightCount;
+    private int heightCount = 1;
     [SerializeField]
-    private int widthOffset;
+    private int widthOffset = 0;
     [SerializeField]
-    private int heightOffset;
+    private int heightOffset = 0;
     [SerializeField]
-    private int widthSize;
+    private int widthSize = 0;
     [SerializeField]
-    private int heightSize;
+    private int heightSize = 0;
 
     [SerializeField]
     private GameObject iconPrefab;

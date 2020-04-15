@@ -39,8 +39,9 @@ public class Projectile : Entity
         rangeEstimator = gameObject.AddComponent<RangeEstimator>();
     }
     
-    protected virtual void Start()
+    protected override void Start()
     {
+        base.Start();
         Destroy(gameObject, lifespan);
         rangeEstimator.Estimate(movementStats.GetVelocityStatGroup(), GetComponents<Force>(), lifespan);
     }

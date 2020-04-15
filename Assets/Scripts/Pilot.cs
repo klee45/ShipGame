@@ -15,7 +15,7 @@ public abstract class Pilot : MonoBehaviour
 
     protected static void FireWeapon(Ship ship, int num)
     {
-        ship.GetComponentInChildren<Arsenal>()?.Fire(num);
+        ship.GetArsenal()?.Fire(num);
     }
 
     protected static void Brake(Ship ship)
