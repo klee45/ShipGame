@@ -104,7 +104,6 @@ public class PilotPlayer : Pilot
             {
                 //Debug.Log(string.Format("{0} pressed", pair.Key));
                 pair.Value(ship);
-                break;
             }
         }
     }

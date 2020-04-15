@@ -11,7 +11,7 @@ public class CanFireWeapon : BehaviorConditional
 
     protected override NodeState UpdateStateHelper(BehaviorState state)
     {
-        if (arsenal.GetWeapons()[state.weaponChoice].IsReady())
+        if (arsenal.CanFire(state.weaponChoice))
         {
             return child.UpdateState(state);
         }

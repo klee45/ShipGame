@@ -2555,6 +2555,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 12
       objectReference: {fileID: 0}
+    - target: {fileID: 5009467703329828157, guid: b57ddcf052c3d574ea37b1a31d22220a,
+        type: 3}
+      propertyPath: weapons.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5009467703382945519, guid: b57ddcf052c3d574ea37b1a31d22220a,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2654,11 +2659,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 12
-      objectReference: {fileID: 0}
-    - target: {fileID: 5009467703329828157, guid: b57ddcf052c3d574ea37b1a31d22220a,
-        type: 3}
-      propertyPath: weapons.Array.size
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5009467704403625130, guid: b57ddcf052c3d574ea37b1a31d22220a,
         type: 3}
@@ -2942,6 +2942,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1285560816}
   - component: {fileID: 1285560817}
+  - component: {fileID: 1285560818}
   m_Layer: 11
   m_Name: Arsenal
   m_TagString: Untagged
@@ -2978,6 +2979,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15cd1c4a2136ab4e8ab24b7332cf392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1285560818
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1285560815}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3da6fdc6aab23ea41be68b78a7846906, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxTime: 0.05
+  currentTime: 0
+  running: 1
+  doesReset: 1
+  overflows: 1
 --- !u!1 &1295790329
 GameObject:
   m_ObjectHideFlags: 0

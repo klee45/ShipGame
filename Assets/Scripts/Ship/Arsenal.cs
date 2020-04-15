@@ -11,6 +11,11 @@ public class Arsenal : MonoBehaviour
         weapons = GetComponentsInChildren<Weapon>();
     }
 
+    public bool CanFire(int weapon)
+    {
+        return weapons[weapon].IsReady();
+    }
+
     public void Fire(int weapon)
     {
         //Debug.Log("Fire " + pos.ToString());
