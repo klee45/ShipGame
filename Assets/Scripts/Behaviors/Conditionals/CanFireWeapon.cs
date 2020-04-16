@@ -9,11 +9,11 @@ public class CanFireWeapon : BehaviorConditional
     [SerializeField]
     private NodeState failState = NodeState.RUNNING;
 
-    protected override NodeState UpdateStateHelper(BehaviorState state)
+    protected override NodeState UpdateStateHelper(BehaviorState state, Ship ship)
     {
         if (arsenal.CanFire(state.weaponChoice))
         {
-            return child.UpdateState(state);
+            return child.UpdateState(state, ship);
         }
         else
         {

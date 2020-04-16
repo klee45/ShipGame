@@ -12,9 +12,9 @@ public class Sequential : BehaviorBranch
         len = children.Length;
     }
 
-    protected override NodeState UpdateStateHelper(BehaviorState state)
+    protected override NodeState UpdateStateHelper(BehaviorState state, Ship ship)
     {
-        NodeState childResult = children[pos].UpdateState(state);
+        NodeState childResult = children[pos].UpdateState(state, ship);
         switch (type)
         {
             case BranchType.AND:

@@ -12,9 +12,9 @@ public class RandomNode : BehaviorBranch
         SelectNewNode();
     }
 
-    protected override NodeState UpdateStateHelper(BehaviorState state)
+    protected override NodeState UpdateStateHelper(BehaviorState state, Ship ship)
     {
-        return children[pos].UpdateState(state);
+        return children[pos].UpdateState(state, ship);
     }
 
     public override void Reset()
@@ -30,6 +30,6 @@ public class RandomNode : BehaviorBranch
 
     protected override string GetName()
     {
-        return "Random";
+        return string.Format("Random\n{0}", pos);
     }
 }
