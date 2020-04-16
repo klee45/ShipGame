@@ -10,15 +10,15 @@ public abstract class BehaviorNode : MonoBehaviour
     public delegate void BehaviorUpdateEvent();
     public event BehaviorUpdateEvent OnUpdate;
 
-    public NodeState UpdateState(BehaviorState state)
+    public NodeState UpdateState(BehaviorState state, Ship ship)
     {
-        NodeState result = UpdateStateHelper(state);
+        NodeState result = UpdateStateHelper(state, ship);
         lastState = result;
         OnUpdate?.Invoke();
         return result;
     }
 
-    protected abstract NodeState UpdateStateHelper(BehaviorState state);
+    protected abstract NodeState UpdateStateHelper(BehaviorState state, Ship ship);
     protected abstract string GetName();
     public virtual void Reset()
     {

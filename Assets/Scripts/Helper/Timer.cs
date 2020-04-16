@@ -71,6 +71,17 @@ public class Timer : MonoBehaviour
     public bool GetStatus() { return running; }
     public bool GetDoesReset() { return doesReset; }
 
+    public void Restart()
+    {
+        this.currentTime = 0;
+    }
+
+    public void RestartAndHalt()
+    {
+        Restart();
+        TurnOff();
+    }
+
     public void SetMaxTime(float maxTime)
     {
         this.maxTime = maxTime;

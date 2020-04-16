@@ -15,19 +15,14 @@ public class PilotPlayer : Pilot
     private float queuedMovement = 0;
     private float queuedRotation = 0;
 
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
         keyActionPairs = Translate(input.LoadKeys());
-    }
-
-    protected override void GetComponentEntity()
-    {
-        ship = GetComponentInParent<Ship>();
     }
 
     private void Start()
     {
+        ship = GetComponentInParent<Ship>();
         int i = 0;
         foreach (Weapon weapon in GetWeapons())
         {

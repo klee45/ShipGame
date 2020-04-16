@@ -10,14 +10,14 @@ public class PilotTree : Pilot
 
     private Ship ship;
 
-    protected override void Awake()
+    protected void Awake()
     {
-        base.Awake();
         behaviorState = gameObject.AddComponent<BehaviorState>();
     }
 
     private void Start()
     {
+        ship = GetComponentInParent<Ship>();
         int[] counts = behaviorTree.TraverseCount();
         PrintTreeSize(counts);
     }
@@ -27,18 +27,18 @@ public class PilotTree : Pilot
         Debug.Log(string.Format("[{0}]", string.Join(" ", counts)));
     }
 
-    protected override void GetComponentEntity()
+    public Vector2 GetTargetPos()
     {
-        ship = GetComponentInParent<Ship>();
+        return behaviorState.target;
     }
 
     public override void MakeActions()
     {
-        BehaviorNode.NodeState rootState =  behaviorTree.UpdateState(behaviorState);
+        BehaviorNode.NodeState rootState =  behaviorTree.UpdateState(behaviorState, ship);
         //Debug.Log(behaviorState.fireWeapon);
         //Debug.Log(behaviorState.weaponChoice);
-        Rotate(ship, behaviorState.queuedVelocity);
-        Move(ship, behaviorState.queuedRotation);
+        Rotate(ship, behaviorState.queuedRotation);
+        Move(ship, behaviorState.queuedVelocity);
         if (behaviorState.fireWeapon)
         {
             FireWeapon(ship, behaviorState.weaponChoice);
