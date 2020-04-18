@@ -15,22 +15,13 @@ public class ProjectileTemplate : MonoBehaviour
     [SerializeField]
     private GameObject prefab;
 
-    private float boundsY;
+    [SerializeField]
+    private float colliderLength;
 
     public StatGroupTemplate GetVelocityTemplate() { return velocityTemplate; }
     public StatGroupTemplate GetRotationTemplate() { return rotationTemplate; }
     public int GetDamage() { return damage; }
     public float GetLifespan() { return lifespan; }
-
-    private void Awake()
-    {
-        // Seems like bad code! Initialize prefab just to get bounds?!
-        GameObject temp = Instantiate(prefab);
-        Collider2D collider = temp.GetComponent<Collider2D>();
-        Bounds bounds = collider.bounds;
-        Destroy(temp);
-        boundsY = bounds.size.y;
-    }
 
     public Projectile CreateProjectile()
     {
@@ -39,8 +30,8 @@ public class ProjectileTemplate : MonoBehaviour
         return projectile;
     }
 
-    public float GetBoundsY()
+    public float GetColliderLength()
     {
-        return boundsY;
+        return colliderLength;
     }
 }

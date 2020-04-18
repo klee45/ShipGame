@@ -5,6 +5,8 @@ using UnityEngine;
 public class TemplateSecondOrder : StatGroupTemplate
 {
     [SerializeField]
+    private float initialValue;
+    [SerializeField]
     private float acceleration;
     [SerializeField]
     private float deceleration;
@@ -18,12 +20,19 @@ public class TemplateSecondOrder : StatGroupTemplate
     public override StatGroup CreateGroup(GameObject attachee)
     {
         var group = attachee.AddComponent<StatGroupSecondOrder>();
-        group.Setup(acceleration, deceleration, max, min, dampening);
+        group.Setup(initialValue, acceleration, deceleration, max, min, dampening);
         return group;
     }
 
     public override float GetValue(float duration)
     {
-        return max * duration * acceleration * duration * duration / 2.0f;
+        float maxSpeedTime = (max - initialValue) / acceleration;
+        float halfAccelerating = initialValue * maxSpeedTime + acceleration * maxSpeedTime * maxSpeedTime / 2f;
+        if (maxSpeedTime < duration)
+        {
+            float halfMaxSpeed = max * (duration - maxSpeedTime);
+            return halfAccelerating + halfMaxSpeed;
+        }
+        return halfAccelerating;
     }
 }

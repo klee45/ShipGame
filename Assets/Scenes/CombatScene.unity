@@ -483,6 +483,7 @@ MonoBehaviour:
   damage: 10
   lifespan: 4
   prefab: {fileID: 3189834120618545893, guid: fc10a8cf17a78f14795e2a62e54a7f05, type: 3}
+  colliderLength: 0
 --- !u!1 &154026791
 GameObject:
   m_ObjectHideFlags: 0
@@ -695,6 +696,7 @@ MonoBehaviour:
   damage: 10
   lifespan: 2
   prefab: {fileID: 8560041827947365916, guid: e47d17f99ec2a90479ffd2bfc59b7905, type: 3}
+  colliderLength: 1.5
 --- !u!114 &160213272 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 5009467703329828157, guid: b57ddcf052c3d574ea37b1a31d22220a,
@@ -1053,6 +1055,7 @@ MonoBehaviour:
   damage: 0
   lifespan: 2
   prefab: {fileID: 3189834120618545893, guid: 8612488ca57c52b48a485dc0276b0d8e, type: 3}
+  colliderLength: 0
 --- !u!114 &308566211
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2439,6 +2442,7 @@ MonoBehaviour:
   damage: 10
   lifespan: 4
   prefab: {fileID: 3189834120618545893, guid: fc10a8cf17a78f14795e2a62e54a7f05, type: 3}
+  colliderLength: 0
 --- !u!114 &642296989
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5104,6 +5108,7 @@ MonoBehaviour:
   damage: 10
   lifespan: 2
   prefab: {fileID: 8560041827947365916, guid: e47d17f99ec2a90479ffd2bfc59b7905, type: 3}
+  colliderLength: 0
 --- !u!114 &2098100843
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5407,6 +5412,7 @@ MonoBehaviour:
   damage: 0
   lifespan: 2
   prefab: {fileID: 3189834120618545893, guid: 8612488ca57c52b48a485dc0276b0d8e, type: 3}
+  colliderLength: 0
 --- !u!1001 &4019360920445799669
 PrefabInstance:
   m_ObjectHideFlags: 0

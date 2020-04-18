@@ -5,6 +5,8 @@ using UnityEngine;
 public class StatGroupSecondOrder : StatGroup
 {
     [SerializeField]
+    private float initialValue = 0;
+    [SerializeField]
     private float acceleration = 1;
     [SerializeField]
     private float deceleration = 1;
@@ -19,11 +21,12 @@ public class StatGroupSecondOrder : StatGroup
 
     void Start()
     {
-        kernel = new StatGroupSecondOrderKernel(acceleration, deceleration, max, min, dampening);
+        kernel = new StatGroupSecondOrderKernel(initialValue, acceleration, deceleration, max, min, dampening);
     }
 
-    public void Setup(float acceleration, float deceleration, float max, float min, float dampening)
+    public void Setup(float initialValue, float acceleration, float deceleration, float max, float min, float dampening)
     {
+        this.initialValue = initialValue;
         this.acceleration = acceleration;
         this.deceleration = deceleration;
         this.max = max;
@@ -49,14 +52,14 @@ public class StatGroupSecondOrderKernel
     private float dampening;
     private float currentValue;
 
-    public StatGroupSecondOrderKernel(float acceleration, float deceleration, float max, float min, float dampening)
+    public StatGroupSecondOrderKernel(float initial, float acceleration, float deceleration, float max, float min, float dampening)
     {
         this.maxStat = new FloatStat(max);
         this.accelerationStat = new FloatStat(acceleration);
         this.minStat = new FloatStat(min);
         this.decelerationStat = new FloatStat(deceleration);
         this.dampening = dampening;
-        currentValue = 0;
+        currentValue = initial;
     }
 
     public void Tick(float scale)

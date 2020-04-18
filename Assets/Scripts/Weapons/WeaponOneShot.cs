@@ -14,7 +14,7 @@ public class WeaponOneShot : Weapon
     {
         rangeEstimator.Estimate(
             projectileTemplate.GetVelocityTemplate(),
-            projectileTemplate.GetBoundsY(),
+            projectileTemplate.GetColliderLength(),
             projectileTemplate.GetLifespan());
     }
 }

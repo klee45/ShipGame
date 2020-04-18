@@ -5,13 +5,13 @@ using UnityEngine;
 public class StatGroupSecondOrderMirrored : StatGroup
 {
     [SerializeField]
-    private float acceleration, max, dampening;
+    private float initialValue, acceleration, max, dampening;
 
     private StatGroupSecondOrderKernel kernel;
 
     void Start()
     {
-        kernel = new StatGroupSecondOrderKernel(acceleration, -acceleration, max, -max, dampening);
+        kernel = new StatGroupSecondOrderKernel(initialValue, acceleration, -acceleration, max, -max, dampening);
     }
 
     public void Setup(float acceleration, float max, float dampening)

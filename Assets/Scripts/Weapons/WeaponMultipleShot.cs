@@ -17,7 +17,7 @@ public class WeaponMultipleShot : WeaponOneShot
     {
         rangeEstimator.Estimate(
             projectileTemplate.GetVelocityTemplate(),
-            projectileTemplate.GetBoundsY(),
+            projectileTemplate.GetColliderLength(),
             projectileTemplate.GetLifespan(),
             spawns[0].GetForces());
     }
