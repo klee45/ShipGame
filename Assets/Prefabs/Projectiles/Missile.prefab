@@ -237,7 +237,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementStats: {fileID: 0}
   pilot: {fileID: 4689059332438148851}
-  sprite: {fileID: 3189834118831772201}
+  teamColorSprites: []
   forces: []
   damage: 0
   lifespan: 2

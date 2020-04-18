@@ -15,15 +15,14 @@ public class TravelToPointBreaking : Travel
         return text;
     }
 
-    protected override NodeState UpdateStateHelper(BehaviorState state, Ship ship)
+    protected override NodeState UpdateStateHelper(BehaviorState state)
     {
-        GetAngleAndDist(state.target, ship.transform.position, out float angle, out float sqrDist);
-        RotateTowards(angle, ship.transform.rotation.eulerAngles.z, state);
+        RotateTowardsTargetAngleDiff(state);
 
-        float sqrDiff = sqrDist - successDistance * successDistance;
+        float sqrDiff = state.target.sqrDistDiff - successDistance * successDistance;
         if (sqrDiff > 0)
         {
-            if (Mathf.Abs(state.queuedRotation) > slowAngle)
+            if (Mathf.Abs(state.target.angleDiff) > slowAngle)
             {
                 state.queuedVelocity = -1.0f;
             }

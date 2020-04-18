@@ -12,13 +12,18 @@ public class RangeEstimator : MonoBehaviour
         return range;
     }
 
-    public void Estimate(StatGroup velocity, Force[] forces, float duration)
+    public void Estimate(StatGroupTemplate velocity, float boundsLength, float duration)
     {
-        range = GetComponent<Collider2D>().bounds.size.y + velocity.GetValue(duration);
-        foreach (Force f in forces)
+        range = velocity.GetValue(duration);
+        range += boundsLength;
+    }
+
+    public void Estimate(StatGroupTemplate velocity, float boundsLength, float duration, ForceInfo[] forces)
+    {
+        Estimate(velocity, boundsLength, duration);
+        foreach (ForceInfo f in forces)
         {
             range += f.GetRange(duration);
-            Debug.Log(f.GetRange(duration));
         }
     }
 }

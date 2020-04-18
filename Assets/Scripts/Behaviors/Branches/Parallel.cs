@@ -4,24 +4,24 @@ using UnityEngine;
 
 public class Parallel : BehaviorBranch
 {
-    protected override NodeState UpdateStateHelper(BehaviorState state, Ship ship)
+    protected override NodeState UpdateStateHelper(BehaviorState state)
     {
         switch (type)
         {
             case BranchType.AND:
-                return BranchAnd(state, ship);
+                return BranchAnd(state);
             case BranchType.OR:
-                return BranchOr(state, ship);
+                return BranchOr(state);
         }
         return NodeState.ERROR;
     }
 
-    private NodeState BranchAnd(BehaviorState state, Ship ship)
+    private NodeState BranchAnd(BehaviorState state)
     {
         bool someRunning = false;
         foreach (BehaviorNode child in children)
         {
-            NodeState result = child.UpdateState(state, ship);
+            NodeState result = child.UpdateState(state);
             switch (result)
             {
                 case NodeState.SUCCESS:
@@ -43,12 +43,12 @@ public class Parallel : BehaviorBranch
         }
     }
 
-    private NodeState BranchOr(BehaviorState state, Ship ship)
+    private NodeState BranchOr(BehaviorState state)
     {
         bool someRunning = false;
         foreach (BehaviorNode child in children)
         {
-            NodeState result = child.UpdateState(state, ship);
+            NodeState result = child.UpdateState(state);
             switch (result)
             {
                 case NodeState.SUCCESS:

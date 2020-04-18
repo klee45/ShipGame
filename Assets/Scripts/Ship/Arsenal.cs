@@ -30,4 +30,9 @@ public class Arsenal : MonoBehaviour
     {
         return weapons;
     }
+
+    public Weapon GetWeapon(int weaponPos)
+    {
+        return weapons[weaponPos];
+    }
 }

@@ -6,7 +6,7 @@ public class FireWeapon : BehaviorLeaf
 {
     private static string text = "Fire weapon";
 
-    protected override NodeState UpdateStateHelper(BehaviorState state, Ship ship)
+    protected override NodeState UpdateStateHelper(BehaviorState state)
     {
         //Debug.Log("Touch fireweapon");
         state.fireWeapon = true;

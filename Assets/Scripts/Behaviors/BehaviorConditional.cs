@@ -7,11 +7,27 @@ public abstract class BehaviorConditional : BehaviorNode
 {
     [SerializeField]
     protected BehaviorNode child;
+    [SerializeField]
+    protected NodeState failState = NodeState.RUNNING;
 
-    public override void Reset()
+    protected override NodeState UpdateStateHelper(BehaviorState state)
     {
-        base.Reset();
-        child.Reset();
+        if (Conditional(state))
+        {
+            return child.UpdateState(state);
+        }
+        else
+        {
+            return failState;
+        }
+    }
+
+    protected abstract bool Conditional(BehaviorState state);
+
+    public override void ResetNode()
+    {
+        base.ResetNode();
+        child.ResetNode();
     }
 
     public override int[] TraverseCount()

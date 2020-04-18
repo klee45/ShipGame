@@ -2,18 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CanFireWeapon : BehaviorConditional
+public class InWeaponRange : BehaviorConditional
 {
-    [SerializeField]
-    private Arsenal arsenal = null;
-
     protected override string GetName()
     {
-        return "Can fire weapon";
+        throw new System.NotImplementedException();
     }
 
     protected override bool Conditional(BehaviorState state)
     {
-        return arsenal.CanFire(state.weaponChoice);
+        throw new System.NotImplementedException();
+        // return state.ship.GetWeapon(state.weaponChoice)
     }
 }

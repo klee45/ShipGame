@@ -5,18 +5,17 @@ using UnityEngine;
 public class StatGroupFirstOrder : StatGroup
 {
     [SerializeField]
-    private float value;
-
+    private float multiplier;
     private FloatStat stat;
 
-    private void Awake()
+    private void Start()
     {
-        OnValidate();
+        this.stat = new FloatStat(multiplier);
     }
 
-    private void OnValidate()
+    public void Setup(float multiplier)
     {
-        this.stat = new FloatStat(value);
+        this.multiplier = multiplier;
     }
 
     public override float GetValue()
@@ -26,10 +25,5 @@ public class StatGroupFirstOrder : StatGroup
 
     public override void Tick(float scale)
     {
-    }
-
-    public override float GetValue(float duration)
-    {
-        return GetValue() * duration;
     }
 }

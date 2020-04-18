@@ -12,4 +12,10 @@ public class MovementStats : MonoBehaviour
 
     public float GetRotationValue() { return rotation.GetValue() * Mathf.Rad2Deg; }
     public float GetVelocityValue() { return velocity.GetValue(); }
+
+    public void Setup(StatGroupTemplate velocityGroup, StatGroupTemplate rotationTemplate)
+    {
+        velocity = velocityGroup.CreateGroup(gameObject);
+        rotation = rotationTemplate.CreateGroup(gameObject);
+    }
 }

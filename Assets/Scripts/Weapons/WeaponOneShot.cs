@@ -4,18 +4,17 @@ using UnityEngine;
 
 public class WeaponOneShot : Weapon
 {
-    [SerializeField]
-    protected GameObject prefab;
-
     protected override void FireHelper()
     {
-        SetupProjectile(prefab);
+        Projectile p = CreateProjectile();
+        AttachToManager(p);
     }
 
-    protected virtual Projectile SetupProjectile(GameObject prefab)
+    protected override void InitializeRangeEstimator()
     {
-        Projectile p = base.CreateProjectile(prefab);
-        AttachToManager(p);
-        return p;
+        rangeEstimator.Estimate(
+            projectileTemplate.GetVelocityTemplate(),
+            projectileTemplate.GetBoundsY(),
+            projectileTemplate.GetLifespan());
     }
 }

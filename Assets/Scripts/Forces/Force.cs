@@ -29,12 +29,6 @@ public class Force : MonoBehaviour
         }        
     }
 
-    public float GetRange(float duration)
-    {
-        float time = Mathf.Min(this.duration, duration);
-        return force.y * (time - (time * time / 2.0f));
-    }
-
     public float GetPercent()
     {
         return percent;

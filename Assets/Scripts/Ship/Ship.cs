@@ -24,4 +24,8 @@ public class Ship : Entity
 
     public CombatStats GetCombatStats() { return combatStats; }
     public Arsenal GetArsenal() { return arsenal; }
+    public Weapon GetWeapon(int weaponPos)
+    {
+        return arsenal.GetWeapon(weaponPos);
+    }
 }

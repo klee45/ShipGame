@@ -16,12 +16,12 @@ public abstract class BehaviorBranch : BehaviorNode
         OR
     }
 
-    public override void Reset()
+    public override void ResetNode()
     {
-        base.Reset();
+        base.ResetNode();
         foreach(BehaviorNode child in children)
         {
-            child.Reset();
+            child.ResetNode();
         }
     }
 

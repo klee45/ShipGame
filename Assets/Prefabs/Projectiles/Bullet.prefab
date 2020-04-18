@@ -165,7 +165,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7617b11ab811b24585204c6d4c54aa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 3
+  multiplier: 1
 --- !u!1 &3189834120618545893
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,7 +232,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementStats: {fileID: 0}
   pilot: {fileID: 0}
-  sprite: {fileID: 3189834118831772201}
+  teamColorSprites: []
   forces: []
   damage: 10
   lifespan: 3

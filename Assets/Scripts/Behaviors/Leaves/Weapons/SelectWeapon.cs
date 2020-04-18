@@ -7,7 +7,7 @@ public class SelectWeapon : BehaviorLeaf
     [SerializeField]
     private int choice;
 
-    protected override NodeState UpdateStateHelper(BehaviorState state, Ship ship)
+    protected override NodeState UpdateStateHelper(BehaviorState state)
     {
         //Debug.Log("Touch selectweapon");
         state.weaponChoice = choice;

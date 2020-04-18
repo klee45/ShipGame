@@ -5,7 +5,7 @@ using UnityEngine;
 public class BehaviorState : MonoBehaviour
 {
     public Ship ship;
-    public Vector2 target;
+    public TargetInfo target;
 
     public float queuedVelocity = 0;
     public float queuedRotation = 0;
@@ -13,6 +13,11 @@ public class BehaviorState : MonoBehaviour
 
     public bool fireWeapon = false;
     public int weaponChoice = 0;
+
+    private void Start()
+    {
+        target = new TargetInfo();
+    }
 
     public void ResetMovement()
     {
@@ -25,5 +30,12 @@ public class BehaviorState : MonoBehaviour
     {
         fireWeapon = false;
         weaponChoice = 0;
+    }
+
+    public class TargetInfo
+    {
+        public Vector2 position;
+        public float angleDiff;
+        public float sqrDistDiff;
     }
 }

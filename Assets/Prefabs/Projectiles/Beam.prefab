@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8560041827947365917}
-  - component: {fileID: 8560041827947365918}
+  - component: {fileID: 8949895335235873807}
   - component: {fileID: 8560041827947365919}
   - component: {fileID: -7847552029548295572}
   m_Layer: 30
@@ -28,15 +28,15 @@ Transform:
   m_GameObject: {fileID: 8560041827947365916}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.5, y: 2, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
   m_Children:
   - {fileID: 8560041828173101538}
   - {fileID: 8560041830002575063}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!70 &8560041827947365918
-CapsuleCollider2D:
+--- !u!61 &8949895335235873807
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -48,9 +48,19 @@ CapsuleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 1.5}
-  m_Size: {x: 0.3, y: 3.3}
-  m_Direction: 0
+  m_Offset: {x: 0, y: 1.5207686}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0, y: 0}
+    oldSize: {x: 0, y: 0}
+    newSize: {x: 0, y: 0}
+    adaptiveTilingThreshold: 0
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.3, y: 3.162397}
+  m_EdgeRadius: 0
 --- !u!114 &8560041827947365919
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -65,7 +75,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementStats: {fileID: 0}
   pilot: {fileID: 0}
-  sprite: {fileID: 8560041830002575056}
+  teamColorSprites: []
   forces: []
   damage: 10
   lifespan: 2

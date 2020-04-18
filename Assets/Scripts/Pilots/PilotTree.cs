@@ -8,8 +8,6 @@ public class PilotTree : Pilot
     private BehaviorNode behaviorTree;
     private BehaviorState behaviorState;
 
-    private Ship ship;
-
     protected void Awake()
     {
         behaviorState = gameObject.AddComponent<BehaviorState>();
@@ -17,7 +15,7 @@ public class PilotTree : Pilot
 
     private void Start()
     {
-        ship = GetComponentInParent<Ship>();
+        behaviorState.ship = GetComponentInParent<Ship>();
         int[] counts = behaviorTree.TraverseCount();
         PrintTreeSize(counts);
     }
@@ -29,14 +27,15 @@ public class PilotTree : Pilot
 
     public Vector2 GetTargetPos()
     {
-        return behaviorState.target;
+        return behaviorState.target.position;
     }
 
     public override void MakeActions()
     {
-        BehaviorNode.NodeState rootState =  behaviorTree.UpdateState(behaviorState, ship);
+        BehaviorNode.NodeState rootState =  behaviorTree.UpdateState(behaviorState);
         //Debug.Log(behaviorState.fireWeapon);
         //Debug.Log(behaviorState.weaponChoice);
+        Ship ship = behaviorState.ship;
         Rotate(ship, behaviorState.queuedRotation);
         Move(ship, behaviorState.queuedVelocity);
         if (behaviorState.fireWeapon)
@@ -48,7 +47,7 @@ public class PilotTree : Pilot
         {
             case BehaviorNode.NodeState.SUCCESS:
             case BehaviorNode.NodeState.FAILURE:
-                behaviorTree.Reset();
+                behaviorTree.ResetNode();
                 break;
         }
     }

@@ -17,24 +17,23 @@ public class StatGroupSecondOrder : StatGroup
 
     private StatGroupSecondOrderKernel kernel;
 
-    void Awake()
-    {
-        OnValidate();
-    }
-
-    private void OnValidate()
+    void Start()
     {
         kernel = new StatGroupSecondOrderKernel(acceleration, deceleration, max, min, dampening);
+    }
+
+    public void Setup(float acceleration, float deceleration, float max, float min, float dampening)
+    {
+        this.acceleration = acceleration;
+        this.deceleration = deceleration;
+        this.max = max;
+        this.min = min;
+        this.dampening = dampening;
     }
 
     public override float GetValue()
     {
         return kernel.GetValue();
-    }
-
-    public override float GetValue(float duration)
-    {
-        return kernel.GetValue(duration);
     }
 
     public override void Tick(float scale)
@@ -95,11 +94,6 @@ public class StatGroupSecondOrderKernel
     public float GetValue()
     {
         return currentValue;
-    }
-
-    public float GetValue(float duration)
-    {
-        return GetValue() * duration + accelerationStat.GetValue() * duration * duration / 2.0f;
     }
 
     /*
