@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pair<A, B>
+public abstract class Pair<A, B>
 {
     protected A a;
     protected B b;

@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class FireWeapon : BehaviorLeaf
 {
-    private static string text = "Fire weapon";
-
     protected override NodeState UpdateStateHelper(BehaviorState state)
     {
         //Debug.Log("Touch fireweapon");
@@ -15,6 +13,6 @@ public class FireWeapon : BehaviorLeaf
 
     protected override string GetName()
     {
-        return text;
+        return "Fire weapon";
     }
 }

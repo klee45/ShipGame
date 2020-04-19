@@ -15,7 +15,6 @@ public class PilotTree : Pilot
 
     private void Start()
     {
-        behaviorState.ship = GetComponentInParent<Ship>();
         int[] counts = behaviorTree.TraverseCount();
         PrintTreeSize(counts);
     }

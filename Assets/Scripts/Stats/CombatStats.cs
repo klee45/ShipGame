@@ -52,6 +52,16 @@ public class CombatStats : MonoBehaviour
         UpdateAllGraphics();
     }
 
+    public float GetTotalHP()
+    {
+        return hull + armor + shield;
+    }
+
+    public float GetOverallPercent()
+    {
+        return GetTotalHP() / (maxHull.GetValue() + maxArmor.GetValue() + maxShield.GetValue());
+    }
+
     public void TakeDamage(int damage)
     {
         int currentDamage = damage;

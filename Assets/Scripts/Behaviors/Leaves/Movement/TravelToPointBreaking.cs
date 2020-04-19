@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TravelToPointBreaking : Travel
 {
-    private static string text = "Travel to target point by reversing";
     [SerializeField]
     private float successDistance;
     [SerializeField]
@@ -12,7 +11,7 @@ public class TravelToPointBreaking : Travel
 
     protected override string GetName()
     {
-        return text;
+        return "Travel to target point by reversing";
     }
 
     protected override NodeState UpdateStateHelper(BehaviorState state)

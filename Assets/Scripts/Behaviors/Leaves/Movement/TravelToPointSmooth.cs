@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TravelToPointSmooth : Travel
 {
-    private static string text = "Travel to target point smoothly";
     [SerializeField]
     private float successDistance;
     [SerializeField]
@@ -14,7 +13,7 @@ public class TravelToPointSmooth : Travel
 
     protected override string GetName()
     {
-        return text;
+        return "Travel to target point smoothly";
     }
 
     protected override NodeState UpdateStateHelper(BehaviorState state)

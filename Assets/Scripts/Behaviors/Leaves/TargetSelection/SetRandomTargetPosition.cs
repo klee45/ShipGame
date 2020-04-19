@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SetRandomTarget : BehaviorLeaf
+public class SetRandomTargetPosition : BehaviorLeaf
 {
     [SerializeField]
     private float width;

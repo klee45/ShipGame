@@ -11,8 +11,10 @@ GameObject:
   - component: {fileID: 4197435062033394144}
   - component: {fileID: 4197435062033394145}
   - component: {fileID: 4197435062033394146}
+  - component: {fileID: 156013058}
+  - component: {fileID: 156013059}
   m_Layer: 11
-  m_Name: BeamAttack
+  m_Name: Basic BeamAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,7 +48,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: fa8039e5884791641b07a9135a5bd9e4, type: 3}
   cooldown: {fileID: 4197435062033394146}
-  prefab: {fileID: 8560041827947365916, guid: e47d17f99ec2a90479ffd2bfc59b7905, type: 3}
+  projectileTemplate: {fileID: 156013059}
 --- !u!114 &4197435062033394146
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -64,3 +66,33 @@ MonoBehaviour:
   running: 1
   doesReset: 1
   overflows: 1
+--- !u!114 &156013058
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4197435062033394151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1212bcf96526ec64e9ec2391c3c2e31d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &156013059
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4197435062033394151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0860eac323aab644ca0e56680eaecf86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTemplate: {fileID: 156013058}
+  rotationTemplate: {fileID: 156013058}
+  damage: 10
+  lifespan: 2
+  prefab: {fileID: 8560041827947365916, guid: e47d17f99ec2a90479ffd2bfc59b7905, type: 3}
+  colliderLength: 1.5
