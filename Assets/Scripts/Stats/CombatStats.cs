@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -39,7 +40,6 @@ public class CombatStats : MonoBehaviour
     public event DamageEvent OnHullHit;
     public event DamageEvent OnDeath;
 
-
     private void Awake()
     {
         this.maxHull = new IntStat(initialHullMax);
@@ -50,6 +50,11 @@ public class CombatStats : MonoBehaviour
         shield = initialShieldMax;
 
         UpdateAllGraphics();
+    }
+
+    public bool IsAlive()
+    {
+        return hull > 0;
     }
 
     public float GetTotalHP()
@@ -99,7 +104,7 @@ public class CombatStats : MonoBehaviour
         if (damage > 0)
         {
             int result = val - damage;
-            if (result < 0)
+            if (result <= 0)
             {
                 val = 0;
                 damage = -result;

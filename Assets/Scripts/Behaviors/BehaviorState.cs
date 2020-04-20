@@ -18,7 +18,7 @@ public class BehaviorState : MonoBehaviour
     private void Start()
     {
         ship = GetComponentInParent<Ship>();
-        detections = GetComponentInParent<Detection>();
+        detections = ship.GetComponentInChildren<Detection>();
         target = new TargetInfo();
     }
 

@@ -18,7 +18,7 @@ public class InWeaponRange : BehaviorConditional
 
     protected override string GetName()
     {
-        return string.Format("In weapon range\n{0:00}%", percent);
+        return string.Format("In weapon range\n{0}%", percent * 100);
     }
 
     protected override bool Conditional(BehaviorState state)

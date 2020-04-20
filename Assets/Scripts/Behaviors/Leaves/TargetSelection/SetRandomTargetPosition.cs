@@ -8,6 +8,8 @@ public class SetRandomTargetPosition : BehaviorLeaf
     private float width;
     [SerializeField]
     private float height;
+    [SerializeField]
+    private bool relative;
 
     private Vector2 last;
 
@@ -20,6 +22,13 @@ public class SetRandomTargetPosition : BehaviorLeaf
         float widthMod = Random.Range(-halfWidth, halfWidth);
         float heightMod = Random.Range(-halfHeight, halfHeight);
 
+        float x = widthMod;
+        float y = heightMod;
+        if (relative)
+        {
+            x += pos.x;
+            y += pos.y;
+        }
         state.target.position = new Vector2(pos.x + widthMod, pos.y + heightMod);
         last = state.target.position;
         return NodeState.SUCCESS;

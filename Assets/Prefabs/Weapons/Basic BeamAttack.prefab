@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 4197435062033394151}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 2, z: 1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
@@ -61,8 +61,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3da6fdc6aab23ea41be68b78a7846906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 5
-  currentTime: 5
+  maxTime: 3
+  currentTime: 3
   running: 1
   doesReset: 1
   overflows: 1
@@ -92,7 +92,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTemplate: {fileID: 156013058}
   rotationTemplate: {fileID: 156013058}
-  damage: 10
-  lifespan: 2
+  damage: 50
+  lifespan: 3
   prefab: {fileID: 8560041827947365916, guid: e47d17f99ec2a90479ffd2bfc59b7905, type: 3}
-  colliderLength: 1.5
+  colliderLength: 6

@@ -17,6 +17,16 @@ public class Ship : Entity
         arsenal = GetComponentInChildren<Arsenal>();
     }
 
+    protected override void Start()
+    {
+        base.Start();
+        combatStats.OnDeath += (d) =>
+        {
+            Debug.Log(string.Format("Destroy {0}", gameObject.name));
+            Destroy(gameObject);
+        };
+    }
+
     protected override void Update()
     {
         base.Update();

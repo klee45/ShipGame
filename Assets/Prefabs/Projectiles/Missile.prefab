@@ -206,7 +206,7 @@ MonoBehaviour:
   explosion: {fileID: 3189834120618545893, guid: 008875dd4df87a64183de713007c40ae,
     type: 3}
   spawn: {fileID: 924558363899344691}
-  explosionDamage: 10
+  explosionDamage: 25
   explosionDuration: 0.5
 --- !u!114 &924558363899344691
 MonoBehaviour:

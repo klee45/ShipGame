@@ -16,8 +16,11 @@ public class FollowGameObject : MonoBehaviour
 
     private void Update()
     {
-        Vector3 tp = target.transform.position;
-        transform.position = new Vector3(tp.x, tp.y, transform.position.z);
-        //transform.rotation = target.transform.rotation;
+        if (target != null)
+        {
+            Vector3 tp = target.transform.position;
+            transform.position = new Vector3(tp.x, tp.y, transform.position.z);
+            //transform.rotation = target.transform.rotation;
+        }
     }
 }

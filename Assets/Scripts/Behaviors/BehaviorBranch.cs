@@ -7,8 +7,6 @@ public abstract class BehaviorBranch : BehaviorNode
 {
     [SerializeField]
     protected BehaviorNode[] children;
-    [SerializeField]
-    protected BranchType type;
 
     public enum BranchType
     {
@@ -64,7 +62,7 @@ public abstract class BehaviorBranch : BehaviorNode
         foreach (BehaviorNode child in children)
         {
             GameObject obj2 = child.CreateVisual(visualizer, counts, x + pos, y + 1);
-            pos += Mathf.Max(1, child.TraverseCount().Sum() - 1);
+            pos += Mathf.Max(1, child.TraverseCount().Sum() - 2);
             visualizer.CreateLine(obj1, obj2);
         }
         obj1.name = string.Format("{0} {1}", x, y);

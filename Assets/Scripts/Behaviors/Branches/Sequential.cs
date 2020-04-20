@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Sequential : BehaviorBranch
 {
+    [SerializeField]
+    protected BranchType type;
+
     private int pos = 0;
     private int len;
 

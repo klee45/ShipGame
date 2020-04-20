@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Parallel : BehaviorBranch
 {
+    [SerializeField]
+    protected BranchType type;
+
     protected override NodeState UpdateStateHelper(BehaviorState state)
     {
         switch (type)

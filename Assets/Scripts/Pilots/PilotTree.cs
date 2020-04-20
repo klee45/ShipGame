@@ -16,7 +16,7 @@ public class PilotTree : Pilot
     private void Start()
     {
         int[] counts = behaviorTree.TraverseCount();
-        PrintTreeSize(counts);
+        //PrintTreeSize(counts);
     }
 
     private void PrintTreeSize(int[] counts)
