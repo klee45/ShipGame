@@ -18,6 +18,14 @@ public class MemoryDictionary : MonoBehaviour
         this.dict = new Dictionary<Ship, TimerPair>();
     }
 
+    private void OnDestroy()
+    {
+        foreach (Ship ship in dict.Keys)
+        {
+            ship.GetComponent<Ship>().GetCombatStats().OnDeath -= (d) => RemoveShip(ship);
+        }
+    }
+
     private void PrintDict()
     {
         Debug.Log("Printing");
@@ -31,14 +39,44 @@ public class MemoryDictionary : MonoBehaviour
         this.duration = duration;
     }
 
-    public bool GetRandom(ref Ship ship)
+    public bool GetRandomFromAll(ref Ship ship)
     {
-        if (dict.Any())
+        return GetRandomHelper(ref ship, null, (a, b) => true);
+    }
+
+    public bool GetRandomWhitelist(ref Ship ship, params int[] whitelist)
+    {
+        return GetRandomHelper(ref ship, whitelist, (a, b) => a.Contains(b.Key.gameObject.layer));
+    }
+
+    public bool GetRandomBlacklist(ref Ship ship, params int[] blacklist)
+    {
+        return GetRandomHelper(ref ship, blacklist, (a, b) => !a.Contains(b.Key.gameObject.layer));
+    }
+
+    private delegate bool condition(int[] teams, KeyValuePair<Ship, TimerPair> pair);
+    private bool GetRandomHelper(ref Ship ship, int[] teams, condition func)
+    {
+        var valid = new List<KeyValuePair<Ship, TimerPair>>();
+        foreach (KeyValuePair<Ship, TimerPair> pair in dict)
         {
-            ship = dict.ElementAt(Random.Range(0, dict.Count)).Key;
+            Ship pairShip = pair.Key;
+            if (func(teams, pair))
+            {
+                valid.Add(pair);
+            }
+        }
+
+        if (valid.Any())
+        {
+            ship = valid[Random.Range(0, valid.Count)].Key;
             return true;
         }
-        return false;
+        else
+        {
+            ship = null;
+            return false;
+        }
     }
 
     public bool GetHealthiest(out Ship ship)
@@ -135,15 +173,23 @@ public class MemoryDictionary : MonoBehaviour
             timer.SetMaxTime(duration);
             timer.OnComplete += () =>
             {
-                var pair = dict[obj];
-                dict.Remove(obj);
-                Destroy(pair.GetTimer());
+                Debug.Log("Complete");
+                Destroy(timer);
+                //Destroy(dict[obj].GetTimer());
+                Debug.Log(dict.Remove(obj));
                 //PrintDict();
                 OnMemoryLoss?.Invoke(obj);
+                obj.GetComponent<Ship>().GetCombatStats().OnDeath -= (d) => RemoveShip(obj);
             };
             dict.Add(obj, new TimerPair(timer, 1));
             OnMemoryGain?.Invoke(obj);
+            obj.GetComponent<Ship>().GetCombatStats().OnDeath += (d) => RemoveShip(obj);
         }
+    }
+
+    private void RemoveShip(Ship ship)
+    {
+        dict.Remove(ship);
     }
 
     private class TimerPair : Pair<Timer, int>

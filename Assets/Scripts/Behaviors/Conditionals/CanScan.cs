@@ -6,7 +6,7 @@ public class CanScan : BehaviorConditional
 {
     protected override bool Conditional(BehaviorState state)
     {
-        return state.GetDetections().CanScan();
+        return state.GetShipDetections().CanScan();
     }
 
     protected override string GetName()

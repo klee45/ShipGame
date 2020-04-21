@@ -11,7 +11,7 @@ public class SetUnhealthyTarget : BehaviorLeaf
 
     protected override NodeState UpdateStateHelper(BehaviorState state)
     {
-        if (state.GetDetections().GetMemoryDict().GetLeastHealthy(out Ship ship))
+        if (state.GetShipDetections().GetLeastHealthy(out Ship ship))
         {
             state.ship = ship;
             return NodeState.SUCCESS;

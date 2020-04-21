@@ -5,7 +5,7 @@ using UnityEngine;
 public class BehaviorState : MonoBehaviour
 {
     public Ship ship;
-    private Detection detections;
+    private DetectionShip shipDetections;
     public TargetInfo target;
 
     public float queuedVelocity = 0;
@@ -18,13 +18,13 @@ public class BehaviorState : MonoBehaviour
     private void Start()
     {
         ship = GetComponentInParent<Ship>();
-        detections = ship.GetComponentInChildren<Detection>();
+        shipDetections = ship.GetComponentInChildren<DetectionShip>();
         target = new TargetInfo();
     }
 
-    public Detection GetDetections()
+    public DetectionShip GetShipDetections()
     {
-        return detections;
+        return shipDetections;
     }
 
     public void ResetMovement()

@@ -9,7 +9,7 @@ public class SetRandomTarget : BehaviorLeaf
 
     private enum SelectType
     {
-        ALLY,
+        SAME_TEAM,
         ENEMY
     }
 
@@ -20,16 +20,17 @@ public class SetRandomTarget : BehaviorLeaf
 
     protected override NodeState UpdateStateHelper(BehaviorState state)
     {
-        Detection detections = state.GetDetections();
+        DetectionShip detections = state.GetShipDetections();
+        //Debug.Log(string.Format("Num detections: {0}", detections.Count()));
         bool result = false;
         int shipLayer = state.ship.gameObject.layer;
         switch (type)
         {
             case SelectType.ENEMY:
-                result = detections.GetMemoryDict().GetRandomBlacklist(ref state.target.ship, shipLayer);
+                result = detections.GetRandomBlacklist(ref state.target.ship, shipLayer);
                 break;
-            case SelectType.ALLY:
-                result = detections.GetMemoryDict().GetRandomWhitelist(ref state.target.ship, shipLayer);
+            case SelectType.SAME_TEAM:
+                result = detections.GetRandomWhitelist(ref state.target.ship, shipLayer);
                 break;
         }
         if (result)

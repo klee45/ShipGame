@@ -9,6 +9,8 @@ public class Ship : Entity
 
     private Arsenal arsenal;
 
+    private bool markedForDelete = false;
+
     protected override void Awake()
     {
         base.Awake();
@@ -22,9 +24,17 @@ public class Ship : Entity
         base.Start();
         combatStats.OnDeath += (d) =>
         {
-            Debug.Log(string.Format("Destroy {0}", gameObject.name));
-            Destroy(gameObject);
+            //Debug.Log(string.Format("Destroy {0}", gameObject.name));
+            markedForDelete = true;
         };
+    }
+
+    private void FixedUpdate()
+    {
+        if(markedForDelete)
+        {
+            Destroy(gameObject);
+        }
     }
 
     protected override void Update()

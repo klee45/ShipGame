@@ -11,7 +11,7 @@ public class ScanForTargets : BehaviorLeaf
 
     protected override NodeState UpdateStateHelper(BehaviorState state)
     {
-        if (state.GetDetections().Scan())
+        if (state.GetShipDetections().Scan())
         {
             return NodeState.SUCCESS;
         }
