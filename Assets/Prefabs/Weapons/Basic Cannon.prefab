@@ -91,7 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d8480686453462543bf34767f2861e94, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multiplier: 5
+  multiplier: 10
 --- !u!114 &112704672
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -106,7 +106,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTemplate: {fileID: 112704671}
   rotationTemplate: {fileID: 112704670}
-  damage: 10
-  lifespan: 4
+  damage: 20
+  lifespan: 1
   prefab: {fileID: 3189834120618545893, guid: fc10a8cf17a78f14795e2a62e54a7f05, type: 3}
   colliderLength: 0
