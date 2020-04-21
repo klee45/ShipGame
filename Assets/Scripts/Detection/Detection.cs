@@ -86,6 +86,11 @@ public abstract class Detection<T> : MonoBehaviour where T : Entity
         return zone.CanScan();
     }
 
+    public bool IsScanning()
+    {
+        return zone.IsScanning();
+    }
+
     public int Count()
     {
         return detected.Count;

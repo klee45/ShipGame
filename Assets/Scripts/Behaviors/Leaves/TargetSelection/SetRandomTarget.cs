@@ -21,25 +21,33 @@ public class SetRandomTarget : BehaviorLeaf
     protected override NodeState UpdateStateHelper(BehaviorState state)
     {
         DetectionShip detections = state.GetShipDetections();
-        //Debug.Log(string.Format("Num detections: {0}", detections.Count()));
-        bool result = false;
-        int shipLayer = state.ship.gameObject.layer;
-        switch (type)
+        if (detections.IsScanning())
         {
-            case SelectType.ENEMY:
-                result = detections.GetRandomBlacklist(ref state.target.ship, shipLayer);
-                break;
-            case SelectType.SAME_TEAM:
-                result = detections.GetRandomWhitelist(ref state.target.ship, shipLayer);
-                break;
-        }
-        if (result)
-        {
-            return NodeState.SUCCESS;
+            Debug.Log("Waiting");
+            return NodeState.RUNNING;
         }
         else
         {
-            return NodeState.FAILURE;
+            //Debug.Log(string.Format("Num detections: {0}", detections.Count()));
+            bool result = false;
+            int shipLayer = state.ship.gameObject.layer;
+            switch (type)
+            {
+                case SelectType.ENEMY:
+                    result = detections.GetRandomBlacklist(ref state.target.ship, shipLayer);
+                    break;
+                case SelectType.SAME_TEAM:
+                    result = detections.GetRandomWhitelist(ref state.target.ship, shipLayer);
+                    break;
+            }
+            if (result)
+            {
+                return NodeState.SUCCESS;
+            }
+            else
+            {
+                return NodeState.FAILURE;
+            }
         }
     }
 }

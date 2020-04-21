@@ -15,7 +15,7 @@ public abstract class DetectionZone<T> : MonoBehaviour where T : Entity
     private float initialRandomIncrease;
 
     private bool canScan = true;
-    private bool coolingDown = false;
+    private bool scanning = false;
     private Timer timer;
 
     public delegate void DetectionEvent(T entity);
@@ -45,7 +45,9 @@ public abstract class DetectionZone<T> : MonoBehaviour where T : Entity
             ResetTimer(randomIncrease);
         };
         canScan = true;
+        scanning = false;
         ResetTimer(initialRandomIncrease);
+        Deactivate();
     }
 
     public bool Scan()
@@ -72,7 +74,10 @@ public abstract class DetectionZone<T> : MonoBehaviour where T : Entity
         timer.SetMaxTime(timeInBetween + Random.Range(0, max));
     }
 
-    //private int test = 0;
+    public bool IsScanning()
+    {
+        return scanning;
+    }
 
     private void Activate()
     {
@@ -81,7 +86,7 @@ public abstract class DetectionZone<T> : MonoBehaviour where T : Entity
         rigidBody.simulated = true;
         //rigidBody.WakeUp();
         GetComponent<SpriteRenderer>().color = DEBUG_COLOR_ON;
-        coolingDown = true;
+        scanning = true;
     }
 
     private void Deactivate()
@@ -89,11 +94,12 @@ public abstract class DetectionZone<T> : MonoBehaviour where T : Entity
         //Debug.Log("Deactivate " + (test++).ToString());
         GetComponent<Rigidbody2D>().simulated = false;
         GetComponent<SpriteRenderer>().color = DEBUG_COLOR_OFF;
+        scanning = false;
     }
 
     private void FixedUpdate()
     {
-        if (coolingDown)
+        if (scanning)
         {
             //Debug.Log("Fixed Update " + (test++).ToString());
             StartCoroutine(DelayedDisable());
@@ -103,9 +109,9 @@ public abstract class DetectionZone<T> : MonoBehaviour where T : Entity
     private IEnumerator DelayedDisable()
     {
         yield return new WaitForFixedUpdate();
-        coolingDown = false;
         yield return new WaitForFixedUpdate();
         Deactivate();
+        scanning = false;
     }
 
     private void OnTriggerStay2D(Collider2D collision)
