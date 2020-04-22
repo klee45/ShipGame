@@ -23,7 +23,7 @@ public class SetRandomTarget : BehaviorLeaf
         DetectionShip detections = state.GetShipDetections();
         if (detections.IsScanning())
         {
-            Debug.Log("Waiting");
+            //Debug.Log("Waiting");
             return NodeState.RUNNING;
         }
         else

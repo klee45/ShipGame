@@ -16,8 +16,10 @@ public abstract class Detection<T> : MonoBehaviour where T : Entity
     [SerializeField]
     private GameObject zoneObject;
 
+    /*
     [SerializeField]
     private bool log = false;
+    */
 
     private DetectionZone<T> zone;
     protected List<T> detected;
@@ -25,6 +27,8 @@ public abstract class Detection<T> : MonoBehaviour where T : Entity
     private void Awake()
     {
         detected = new List<T>();
+        zone = InitializeZone(zoneObject);
+        zone.Initialize(zoneScale, timeInBetween, randomIncrease, initialRandomIncrease);
     }
 
     private void PruneDestoyed()
@@ -40,17 +44,17 @@ public abstract class Detection<T> : MonoBehaviour where T : Entity
 
     private void Start()
     {
-        zone = InitializeZone(zoneObject);
-        zone.Initialize(zoneScale, timeInBetween, randomIncrease, initialRandomIncrease);
         Physics2D.IgnoreCollision(
             zoneObject.GetComponent<Collider2D>(),
             GetComponentInParent<Collider2D>());
         zone.OnDetection += (s) =>
         {
+            /*
             if (log)
             {
                 Debug.Log(string.Format("Detected: {0}", s));
             }
+            */
             detected.Add(s);
         };
     }
@@ -59,11 +63,12 @@ public abstract class Detection<T> : MonoBehaviour where T : Entity
 
     public bool Scan()
     {
+        /*
         if (log)
         {
             int count = 0;
             int dead = 0;
-            foreach(Entity e in detected)
+            foreach(Entity e in detected.Distinct())
             {
                 if (e == null)
                     dead++;
@@ -77,6 +82,7 @@ public abstract class Detection<T> : MonoBehaviour where T : Entity
                 count,
                 dead));
         }
+        */
         detected.Clear();
         return zone.Scan();
     }
@@ -114,10 +120,12 @@ public abstract class Detection<T> : MonoBehaviour where T : Entity
     private delegate bool condition(int[] teams, T entity);
     private bool GetRandomHelper(ref T entity, int[] teams, condition func)
     {
+        /*
         if (log)
         {
             Debug.Log(string.Format("Num detected for get random: {0}", detected.Count));
         }
+        */
         PruneDestoyed();
         var valid = new List<T>();
         foreach (T entityDetected in detected)

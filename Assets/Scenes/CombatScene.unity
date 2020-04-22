@@ -281,6 +281,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 8652126053621081859}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &151380914 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5594129301494206994, guid: 588f8cf223989474792125b9a0f4ea41,
+    type: 3}
+  m_PrefabInstance: {fileID: 8652126053621081859}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 151380910}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dcd72f3f8c11eda46aa6ff83243fccfa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &154026791
 GameObject:
   m_ObjectHideFlags: 0
@@ -1389,7 +1401,7 @@ MonoBehaviour:
   randomOffset: {x: 10, y: 5}
   prefabs:
   - {fileID: 5594129301494206997, guid: 588f8cf223989474792125b9a0f4ea41, type: 3}
-  counts: 14000000
+  counts: 32000000
 --- !u!1 &683512168
 GameObject:
   m_ObjectHideFlags: 0
@@ -1809,6 +1821,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1263442073}
+  - component: {fileID: 1263442074}
   m_Layer: 0
   m_Name: UI
   m_TagString: Untagged
@@ -1832,6 +1845,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1263442074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1263442072}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19cd2c7327fda5849a617a0251d99e41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthUI: {fileID: 154026793}
+  weaponsUI: {fileID: 633299205}
+  ship: {fileID: 151380914}
 --- !u!1 &1267374626
 GameObject:
   m_ObjectHideFlags: 0
@@ -2526,7 +2554,7 @@ MonoBehaviour:
   randomOffset: {x: 5, y: 10}
   prefabs:
   - {fileID: 5594129301494206997, guid: 588f8cf223989474792125b9a0f4ea41, type: 3}
-  counts: 14000000
+  counts: 32000000
 --- !u!1 &1519005414
 GameObject:
   m_ObjectHideFlags: 0
@@ -3019,7 +3047,7 @@ MonoBehaviour:
   randomOffset: {x: 10, y: 5}
   prefabs:
   - {fileID: 5594129301494206997, guid: 588f8cf223989474792125b9a0f4ea41, type: 3}
-  counts: 14000000
+  counts: 32000000
 --- !u!114 &1959854965
 MonoBehaviour:
   m_ObjectHideFlags: 0

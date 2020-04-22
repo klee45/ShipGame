@@ -21,7 +21,7 @@ public class TeamManager : MonoBehaviour
             {
                 GameObject child = Instantiate(prefabs[i]);
                 child.transform.SetParent(transform);
-                child.gameObject.layer = gameObject.layer;
+                SetLayer(child.gameObject);
                 //SetupChild(child.transform);
             }
         }
@@ -30,12 +30,18 @@ public class TeamManager : MonoBehaviour
         {
             Transform child = transform.GetChild(i);
             SetupChild(child);
+            SetLayer(child.gameObject);
         }
+    }
+
+    private void SetLayer(GameObject child)
+    {
+        child.layer = gameObject.layer;
+        child.GetComponentInChildren<Arsenal>().gameObject.layer = gameObject.layer;
     }
 
     private void SetupChild(Transform child)
     {
-        child.gameObject.layer = gameObject.layer;
         child.position = transform.position + new Vector3(
             Random.Range(-randomOffset[0] / 2, randomOffset[0] / 2),
             Random.Range(-randomOffset[1] / 2, randomOffset[1] / 2));

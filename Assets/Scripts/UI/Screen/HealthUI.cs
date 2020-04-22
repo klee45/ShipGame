@@ -11,21 +11,8 @@ public class HealthUI : MonoBehaviour
     [SerializeField]
     private HealthBarUI hullBar;
 
-    private static HealthUI instance;
-
-    public static HealthUI Instance()
-    {
-        return instance;
-    }
-
     private void Awake()
     {
-        if (instance != null)
-        {
-            Debug.LogWarning("Weapons ui is singleton");
-            Destroy(instance);
-        }
-        instance = this;
         Setup();
     }
 

@@ -17,6 +17,7 @@ public class Ship : Entity
         combatStats = GetComponentInChildren<CombatStats>();
         pilot = GetComponentInChildren<Pilot>();
         arsenal = GetComponentInChildren<Arsenal>();
+        arsenal.gameObject.layer = gameObject.layer;
     }
 
     protected override void Start()

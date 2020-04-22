@@ -27,6 +27,7 @@ public abstract class DetectionZone<T> : MonoBehaviour where T : Entity
         this.timeInBetween = timeInBetween;
         this.randomIncrease = randomIncrease;
         this.initialRandomIncrease = initialRandomIncrease;
+        timer = gameObject.AddComponent<Timer>();
     }
 
     protected abstract int InitializeLayer();
@@ -38,7 +39,6 @@ public abstract class DetectionZone<T> : MonoBehaviour where T : Entity
 
     private void Setup()
     {
-        timer = gameObject.AddComponent<Timer>();
         timer.OnComplete += () =>
         {
             canScan = true;
