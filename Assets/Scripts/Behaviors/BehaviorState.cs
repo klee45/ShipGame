@@ -5,7 +5,8 @@ using UnityEngine;
 public class BehaviorState : MonoBehaviour
 {
     public Ship ship;
-    public Vector2 target;
+    private DetectionShip shipDetections;
+    public TargetInfo target;
 
     public float queuedVelocity = 0;
     public float queuedRotation = 0;
@@ -13,6 +14,18 @@ public class BehaviorState : MonoBehaviour
 
     public bool fireWeapon = false;
     public int weaponChoice = 0;
+
+    private void Start()
+    {
+        ship = GetComponentInParent<Ship>();
+        shipDetections = ship.GetComponentInChildren<DetectionShip>();
+        target = new TargetInfo();
+    }
+
+    public DetectionShip GetShipDetections()
+    {
+        return shipDetections;
+    }
 
     public void ResetMovement()
     {
@@ -25,5 +38,13 @@ public class BehaviorState : MonoBehaviour
     {
         fireWeapon = false;
         weaponChoice = 0;
+    }
+
+    public class TargetInfo
+    {
+        public Ship ship;
+        public Vector2 position;
+        public float angleDiff;
+        public float sqrDistDiff;
     }
 }

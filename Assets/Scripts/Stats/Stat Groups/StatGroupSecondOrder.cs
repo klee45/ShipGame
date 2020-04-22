@@ -5,6 +5,8 @@ using UnityEngine;
 public class StatGroupSecondOrder : StatGroup
 {
     [SerializeField]
+    private float initialValue = 0;
+    [SerializeField]
     private float acceleration = 1;
     [SerializeField]
     private float deceleration = 1;
@@ -17,24 +19,24 @@ public class StatGroupSecondOrder : StatGroup
 
     private StatGroupSecondOrderKernel kernel;
 
-    void Awake()
+    void Start()
     {
-        OnValidate();
+        kernel = new StatGroupSecondOrderKernel(initialValue, acceleration, deceleration, max, min, dampening);
     }
 
-    private void OnValidate()
+    public void Setup(float initialValue, float acceleration, float deceleration, float max, float min, float dampening)
     {
-        kernel = new StatGroupSecondOrderKernel(acceleration, deceleration, max, min, dampening);
+        this.initialValue = initialValue;
+        this.acceleration = acceleration;
+        this.deceleration = deceleration;
+        this.max = max;
+        this.min = min;
+        this.dampening = dampening;
     }
 
     public override float GetValue()
     {
         return kernel.GetValue();
-    }
-
-    public override float GetValue(float duration)
-    {
-        return kernel.GetValue(duration);
     }
 
     public override void Tick(float scale)
@@ -50,14 +52,14 @@ public class StatGroupSecondOrderKernel
     private float dampening;
     private float currentValue;
 
-    public StatGroupSecondOrderKernel(float acceleration, float deceleration, float max, float min, float dampening)
+    public StatGroupSecondOrderKernel(float initial, float acceleration, float deceleration, float max, float min, float dampening)
     {
         this.maxStat = new FloatStat(max);
         this.accelerationStat = new FloatStat(acceleration);
         this.minStat = new FloatStat(min);
         this.decelerationStat = new FloatStat(deceleration);
         this.dampening = dampening;
-        currentValue = 0;
+        currentValue = initial;
     }
 
     public void Tick(float scale)
@@ -95,11 +97,6 @@ public class StatGroupSecondOrderKernel
     public float GetValue()
     {
         return currentValue;
-    }
-
-    public float GetValue(float duration)
-    {
-        return GetValue() * duration + accelerationStat.GetValue() * duration * duration / 2.0f;
     }
 
     /*

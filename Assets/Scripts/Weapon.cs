@@ -8,13 +8,18 @@ public abstract class Weapon : MonoBehaviour
     private Sprite icon;
     [SerializeField]
     private Timer cooldown;
+    [SerializeField]
+    protected ProjectileTemplate projectileTemplate;
 
+    protected RangeEstimator rangeEstimator;
     private bool ready;
 
     protected abstract void FireHelper();
 
     protected virtual void Awake()
     {
+        rangeEstimator = gameObject.AddComponent<RangeEstimator>();
+        InitializeRangeEstimator();
         cooldown = GetComponent<Timer>();
         cooldown.OnComplete += () => Reset();
     }
@@ -35,14 +40,21 @@ public abstract class Weapon : MonoBehaviour
         }
     }
 
-    protected virtual Projectile CreateProjectile(GameObject prefab)
+    public float GetRange()
     {
-        GameObject projectile = Instantiate(prefab);
+        return rangeEstimator.GetRange();
+    }
+
+    protected abstract void InitializeRangeEstimator();
+
+    protected virtual Projectile CreateProjectile()
+    {
+        Projectile projectile = projectileTemplate.CreateProjectile();
         Transform parent = transform.parent;
-        projectile.transform.localPosition = parent.position;
-        projectile.transform.localRotation = parent.rotation;
-        projectile.layer = Layers.ProjectileFromShip(parent.gameObject.layer);
-        return projectile.GetComponent<Projectile>();
+        projectile.gameObject.transform.localPosition = parent.position;
+        projectile.gameObject.transform.localRotation = parent.rotation;
+        projectile.gameObject.layer = Layers.ProjectileFromShip(parent.gameObject.layer);
+        return projectile;
     }
 
     protected void AttachToManager(Projectile obj)

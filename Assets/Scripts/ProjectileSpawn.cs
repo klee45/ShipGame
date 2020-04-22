@@ -30,6 +30,11 @@ public class ProjectileSpawn : MonoBehaviour
         }
     }
 
+    public ForceInfo[] GetForces()
+    {
+        return forces;
+    }
+
     public float GetDelay()
     {
         return delay;

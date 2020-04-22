@@ -11,15 +11,16 @@ public class Projectile : Entity
     [SerializeField]
     protected float lifespan;
 
-    private RangeEstimator rangeEstimator;
-
     private ProjectileOnHit[] onHit;
     private ProjectileOnStay[] onStay;
     private ProjectileOnTick[] onTick;
 
-    public float GetRange()
+    public void Setup(StatGroupTemplate velocityTemplate, StatGroupTemplate rotationTemplate, int damage, float lifespan)
     {
-        return rangeEstimator.GetRange();
+        this.damage = damage;
+        this.lifespan = lifespan;
+        MovementStats movementStats = GetComponentInChildren<MovementStats>();
+        movementStats.Setup(velocityTemplate, rotationTemplate);
     }
 
     public int GetDamage()
@@ -36,14 +37,12 @@ public class Projectile : Entity
     {
         base.Awake();
         OnValidate();
-        rangeEstimator = gameObject.AddComponent<RangeEstimator>();
     }
     
     protected override void Start()
     {
         base.Start();
         Destroy(gameObject, lifespan);
-        rangeEstimator.Estimate(movementStats.GetVelocityStatGroup(), GetComponents<Force>(), lifespan);
     }
 
     private void OnValidate()

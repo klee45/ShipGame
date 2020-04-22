@@ -39,6 +39,8 @@ public class BehaviorVisualizer : MonoBehaviour
     public GameObject GenerateObj(BehaviorNode node)
     {
         GameObject obj = Instantiate(prefab);
+        var canvas = obj.GetComponent<Canvas>();
+        canvas.worldCamera = Camera.main;
         var renderer = obj.GetComponent<SpriteRenderer>();
         renderer.sprite = GetSprite(node);
 

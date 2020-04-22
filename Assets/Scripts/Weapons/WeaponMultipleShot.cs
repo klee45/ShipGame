@@ -13,6 +13,15 @@ public class WeaponMultipleShot : WeaponOneShot
         spawns = GetComponentsInChildren<ProjectileSpawn>();
     }
 
+    protected override void InitializeRangeEstimator()
+    {
+        rangeEstimator.Estimate(
+            projectileTemplate.GetVelocityTemplate(),
+            projectileTemplate.GetColliderLength(),
+            projectileTemplate.GetLifespan(),
+            spawns[0].GetForces());
+    }
+
     protected override void FireHelper()
     {
         foreach (ProjectileSpawn spawn in spawns)
@@ -24,7 +33,7 @@ public class WeaponMultipleShot : WeaponOneShot
     private IEnumerator CreateProjectileCoroutine(ProjectileSpawn spawn)
     {
         yield return new WaitForSeconds(spawn.GetDelay());
-        Projectile p = CreateProjectile(prefab);
+        Projectile p = CreateProjectile();
         spawn.Apply(p);
         p.transform.parent = ProjectileManager.Instance().gameObject.transform;
     }

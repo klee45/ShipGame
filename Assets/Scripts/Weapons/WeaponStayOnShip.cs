@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class WeaponStayOnShip : WeaponOneShot
 {
-    protected override Projectile SetupProjectile(GameObject prefab)
+    protected override void FireHelper()
     {
-        Projectile p = CreateProjectile(prefab);
+        Projectile p = CreateProjectile();
         p.transform.parent = gameObject.transform;
         LinkToManager(p);
-        return p;
     }
 }

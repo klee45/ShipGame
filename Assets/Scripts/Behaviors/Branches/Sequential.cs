@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Sequential : BehaviorBranch
 {
+    [SerializeField]
+    protected BranchType type;
+
     private int pos = 0;
     private int len;
 
@@ -12,9 +15,9 @@ public class Sequential : BehaviorBranch
         len = children.Length;
     }
 
-    protected override NodeState UpdateStateHelper(BehaviorState state, Ship ship)
+    protected override NodeState UpdateStateHelper(BehaviorState state)
     {
-        NodeState childResult = children[pos].UpdateState(state, ship);
+        NodeState childResult = children[pos].UpdateState(state);
         switch (type)
         {
             case BranchType.AND:
@@ -78,10 +81,10 @@ public class Sequential : BehaviorBranch
         pos = 0;
     }
 
-    public override void Reset()
+    public override void ResetNode()
     {
         ResetSelf();
-        base.Reset();
+        base.ResetNode();
     }
 
     protected override string GetName()

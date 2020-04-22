@@ -24,21 +24,8 @@ public class WeaponsUI : MonoBehaviour
     [SerializeField]
     private WeaponIcon[] icons;
 
-    private static WeaponsUI instance;
-
-    public static WeaponsUI Instance()
-    {
-        return instance;
-    }
-
     private void Awake()
     {
-        if (instance != null)
-        {
-            Debug.LogWarning("Weapons ui is singleton");
-            Destroy(instance);
-        }
-        instance = this;
         Setup(widthCount, heightCount);
     }
 

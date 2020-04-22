@@ -12,7 +12,7 @@ public class Repeat : BehaviorLeaf
         return string.Format("Repeat {0}", repeatState);
     }
 
-    protected override NodeState UpdateStateHelper(BehaviorState state, Ship ship)
+    protected override NodeState UpdateStateHelper(BehaviorState state)
     {
         return repeatState;
     }

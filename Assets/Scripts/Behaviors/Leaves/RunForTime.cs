@@ -26,7 +26,7 @@ public class RunForTime : BehaviorLeaf
         return string.Format("Run for {0}\n{1}", timer.GetMaxTime(), timer.GetTime());
     }
 
-    protected override NodeState UpdateStateHelper(BehaviorState state, Ship ship)
+    protected override NodeState UpdateStateHelper(BehaviorState state)
     {
         if (ready)
         {

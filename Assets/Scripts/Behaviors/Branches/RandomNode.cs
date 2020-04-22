@@ -12,15 +12,15 @@ public class RandomNode : BehaviorBranch
         SelectNewNode();
     }
 
-    protected override NodeState UpdateStateHelper(BehaviorState state, Ship ship)
+    protected override NodeState UpdateStateHelper(BehaviorState state)
     {
-        return children[pos].UpdateState(state, ship);
+        return children[pos].UpdateState(state);
     }
 
-    public override void Reset()
+    public override void ResetNode()
     {
         SelectNewNode();
-        base.Reset();
+        base.ResetNode();
     }
 
     private void SelectNewNode()

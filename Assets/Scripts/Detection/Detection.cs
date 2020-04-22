@@ -3,6 +3,181 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
+public abstract class Detection<T> : MonoBehaviour where T : Entity
+{
+    [SerializeField]
+    private float timeInBetween;
+    [SerializeField]
+    private float randomIncrease;
+    [SerializeField]
+    private float initialRandomIncrease;
+    [SerializeField]
+    private float zoneScale;
+    [SerializeField]
+    private GameObject zoneObject;
+
+    /*
+    [SerializeField]
+    private bool log = false;
+    */
+
+    private DetectionZone<T> zone;
+    protected List<T> detected;
+
+    private void Awake()
+    {
+        detected = new List<T>();
+        zone = InitializeZone(zoneObject);
+        zone.Initialize(zoneScale, timeInBetween, randomIncrease, initialRandomIncrease);
+    }
+
+    private void PruneDestoyed()
+    {
+        for (int i = detected.Count - 1; i >= 0; i--)
+        {
+            if(detected[i] == null)
+            {
+                detected.RemoveAt(i);
+            }
+        }
+    }
+
+    private void Start()
+    {
+        Physics2D.IgnoreCollision(
+            zoneObject.GetComponent<Collider2D>(),
+            GetComponentInParent<Collider2D>());
+        zone.OnDetection += (s) =>
+        {
+            /*
+            if (log)
+            {
+                Debug.Log(string.Format("Detected: {0}", s));
+            }
+            */
+            detected.Add(s);
+        };
+    }
+
+    protected abstract DetectionZone<T> InitializeZone(GameObject zoneObject);
+
+    public bool Scan()
+    {
+        /*
+        if (log)
+        {
+            int count = 0;
+            int dead = 0;
+            foreach(Entity e in detected.Distinct())
+            {
+                if (e == null)
+                    dead++;
+                else if (e.gameObject.layer != gameObject.layer)
+                    count++;
+            }
+            Debug.Log(string.Format(
+                "Num before scan {0}\nUnique {1}\nOtherteam {2}\nDead {3}", 
+                detected.Count, 
+                detected.Distinct().Count(),
+                count,
+                dead));
+        }
+        */
+        detected.Clear();
+        return zone.Scan();
+    }
+
+    public bool CanScan()
+    {
+        return zone.CanScan();
+    }
+
+    public bool IsScanning()
+    {
+        return zone.IsScanning();
+    }
+
+    public int Count()
+    {
+        return detected.Count;
+    }
+
+    public bool GetRandomFromAll(ref T entity)
+    {
+        return GetRandomHelper(ref entity, null, (a, b) => true);
+    }
+
+    public bool GetRandomWhitelist(ref T entity, params int[] whitelist)
+    {
+        return GetRandomHelper(ref entity, whitelist, (a, b) => a.Contains(b.gameObject.layer));
+    }
+
+    public bool GetRandomBlacklist(ref T entity, params int[] blacklist)
+    {
+        return GetRandomHelper(ref entity, blacklist, (a, b) => !a.Contains(b.gameObject.layer));
+    }
+
+    private delegate bool condition(int[] teams, T entity);
+    private bool GetRandomHelper(ref T entity, int[] teams, condition func)
+    {
+        /*
+        if (log)
+        {
+            Debug.Log(string.Format("Num detected for get random: {0}", detected.Count));
+        }
+        */
+        PruneDestoyed();
+        var valid = new List<T>();
+        foreach (T entityDetected in detected)
+        {
+            if (func(teams, entityDetected))
+            {
+                valid.Add(entityDetected);
+            }
+        }
+
+        if (valid.Any())
+        {
+            entity = valid[Random.Range(0, valid.Count)];
+            return true;
+        }
+        else
+        {
+            entity = null;
+            return false;
+        }
+    }
+
+    protected delegate bool Comp(float a, float b);
+    protected delegate void Setter(T entity, ref T result, Comp comparer);
+    protected bool GetHelper(out T result, Setter setter, Comp comparer)
+    {
+        PruneDestoyed();
+        int len = detected.Count;
+        if (len >= 2)
+        {
+            result = detected.First();
+            for (int i = 1; i < detected.Count; i++)
+            {
+                T detectedEntity = detected[i];
+                setter(detectedEntity, ref result, comparer);
+            }
+            return true;
+        }
+        else if (len == 1)
+        {
+            result = detected.First();
+            return true;
+        }
+        else
+        {
+            result = null;
+            return false;
+        }
+    }
+}
+
+/*
 public class Detection : MonoBehaviour
 {
     [SerializeField]
@@ -10,17 +185,20 @@ public class Detection : MonoBehaviour
     [SerializeField]
     private int memoryCount;
 
+    private DetectionZone zone;
     private MemoryDictionary dict;
 
     private void Awake()
     {
         dict = gameObject.AddComponent<MemoryDictionary>();
-
     }
 
     private void Start()
     {
-        DetectionZone zone = GetComponentInChildren<DetectionZone>();
+        zone = GetComponentInChildren<DetectionZone>();
+        Physics2D.IgnoreCollision(
+            zone.GetComponent<Collider2D>(),
+            GetComponentInParent<Collider2D>());
         dict.Initialize(memoryDuration);
         zone.OnDetection += (s) =>
         {
@@ -29,108 +207,19 @@ public class Detection : MonoBehaviour
         };
     }
 
+    public bool Scan()
+    {
+        return zone.Scan();
+    }
+
+    public bool CanScan()
+    {
+        return zone.CanScan();
+    }
+
     public MemoryDictionary GetMemoryDict()
     {
         return dict;
     }
-
-
-    public class MemoryDictionary : MonoBehaviour
-    {
-        private Dictionary<Ship, TimerPair> dict;
-        private float duration;
-
-        public delegate void MemoryEvent(Ship ship);
-
-        public event MemoryEvent OnMemoryGain;
-        public event MemoryEvent OnMemoryLoss;
-
-        private void Awake()
-        {
-            this.dict = new Dictionary<Ship, TimerPair>();
-        }
-
-        private void PrintDict()
-        {
-            Debug.Log("Printing");
-            var lst = dict.ToList();
-            if (lst.Count > 0)
-                Debug.Log(string.Format("{0} {1}", lst[0].Value.GetTimer().GetTime(), lst[0].Value.GetCount()));
-        }
-
-        public void Initialize(float duration)
-        {
-            this.duration = duration;
-        }
-
-        public Ship GetRandom()
-        {
-            if (dict.Any())
-            {
-                return dict.ElementAt(Random.Range(0, dict.Count)).Key;
-            }
-            else
-            {
-                return null;
-            }
-        }
-
-        public Ship GetMostSeen()
-        {
-            Ship ship = null;
-            int maxCount = 0;
-            foreach(KeyValuePair<Ship, TimerPair> pair in dict)
-            {
-                TimerPair timerPair = pair.Value;
-                int count = timerPair.GetCount();
-                if (count > maxCount)
-                {
-                    ship = pair.Key;
-                    maxCount = count;
-                }
-            }
-            return ship;
-        }
-
-        public void Add(Ship obj)
-        {
-            //Debug.Log(dict.Count());
-            if (dict.ContainsKey(obj))
-            {
-                var pair = dict[obj];
-                pair.SetCount(pair.GetCount() + 1);
-                // Between x1 and x3
-                float mod = 1 + Mathf.Min(pair.GetCount() + 1, 50) / 25.0f;
-                pair.GetTimer().SetMaxTime(duration * mod);
-                pair.GetTimer().SetTime(0);
-                //PrintDict();
-            }
-            else
-            {
-                var timer = gameObject.AddComponent<Timer>();
-                timer.SetMaxTime(duration);
-                timer.OnComplete += () =>
-                {
-                    var pair = dict[obj];
-                    dict.Remove(obj);
-                    Destroy(pair.GetTimer());
-                    //PrintDict();
-                    OnMemoryLoss?.Invoke(obj);
-                };
-                dict.Add(obj, new TimerPair(timer, 1));
-                OnMemoryGain?.Invoke(obj);
-            }
-        }
-
-        private class TimerPair : Pair<Timer, int>
-        {
-            public TimerPair(Timer timer, int count) : base(timer, count)
-            {
-            }
-            public Timer GetTimer() { return a; }
-            public int GetCount() { return b; }
-            public void SetCount(int count) { b = count; }
-        }
-    }
-
 }
+*/

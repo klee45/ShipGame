@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class StatGroup : MonoBehaviour
+public abstract class StatGroupTemplate : MonoBehaviour
 {
-    public abstract void Tick(float scale);
-    public abstract float GetValue();
+    public abstract StatGroup CreateGroup(GameObject attachee);
     public abstract float GetValue(float duration);
 }

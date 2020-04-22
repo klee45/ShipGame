@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class TravelToPointSmooth : Travel
 {
-    private static string text = "Travel to target point smoothly";
     [SerializeField]
     private float successDistance;
     [SerializeField]
@@ -14,20 +13,19 @@ public class TravelToPointSmooth : Travel
 
     protected override string GetName()
     {
-        return text;
+        return "Travel to target point smoothly";
     }
 
-    protected override NodeState UpdateStateHelper(BehaviorState state, Ship ship)
+    protected override NodeState UpdateStateHelper(BehaviorState state)
     {
-        GetAngleAndDist(state.target, ship.transform.position, out float angle, out float sqrDist);
-        RotateTowards(angle, ship.transform.rotation.eulerAngles.z, state);
+        RotateTowardsTargetAngleDiff(state);
 
-        float sqrDiff = sqrDist - successDistance * successDistance;
+        float sqrDiff = state.target.sqrDistDiff - successDistance * successDistance;
         if (sqrDiff > 0)
         {
             float sqrSlow = slowDist * slowDist;
             float divMod = sqrSlow * (1 + speedMod * Mathf.Abs(state.queuedRotation));
-            state.queuedVelocity = Mathf.Min(sqrDist / divMod, 1);
+            state.queuedVelocity = Mathf.Min(state.target.sqrDistDiff / divMod, 1);
             return NodeState.RUNNING;
         }
         else
