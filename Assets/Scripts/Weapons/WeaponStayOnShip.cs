@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WeaponStayOnShip : WeaponOneShot
+public class WeaponStayOnShip : Weapon
 {
-    protected override void FireHelper()
+    protected override void LinkProjectile(Projectile projectile)
     {
-        Projectile p = CreateProjectile();
-        p.transform.parent = gameObject.transform;
-        LinkToManager(p);
+        projectile.transform.parent = gameObject.transform;
+        ProjectileManager.Instance().AddToLinked(projectile);
     }
 }

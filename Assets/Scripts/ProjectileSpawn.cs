@@ -17,16 +17,14 @@ public class ProjectileSpawn : MonoBehaviour
 
     public void Apply(Projectile projectile)
     {
-        projectile.transform.localPosition += new Vector3(offset.x, offset.y);
+        projectile.transform.localPosition += transform.rotation * new Vector3(offset.x, offset.y);
         //Debug.Log(projectile.transform.localEulerAngles);
         projectile.transform.localEulerAngles += new Vector3(0, 0, rotation);
         //Debug.Log(projectile.transform.localEulerAngles);
         projectile.transform.localScale *= scale;
         foreach (ForceInfo forceInfo in forces)
         {
-            Force force = gameObject.AddComponent<Force>();
-            force.Initialize(forceInfo);
-            projectile.AddForce(force);
+            projectile.AddForce(forceInfo);
         }
     }
 

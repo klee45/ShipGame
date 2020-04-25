@@ -39,8 +39,10 @@ public abstract class Entity : MonoBehaviour
 
     public MovementStats GetMovementStats() { return movementStats; }
 
-    public void AddForce(Force force)
+    public void AddForce(ForceInfo forceInfo)
     {
+        Force force = gameObject.AddComponent<Force>();
+        force.Initialize(forceInfo);
         forces.Add(force);
     }
 

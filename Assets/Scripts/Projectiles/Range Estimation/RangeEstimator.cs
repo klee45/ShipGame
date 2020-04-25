@@ -12,6 +12,23 @@ public class RangeEstimator : MonoBehaviour
         return range;
     }
 
+    public void Estimate(ProjectileTemplate[] templates)
+    {
+        float estimate = 0;
+        foreach (ProjectileTemplate template in templates)
+        {
+            float duration = template.GetLifespan();
+            estimate += template.GetVelocityTemplate().GetValue(duration);
+            foreach (ForceInfo force in template.GetSpawn().GetForces())
+            {
+                estimate += force.GetRange(duration);
+            }
+            estimate += template.GetColliderLength();
+        }
+        range = estimate;
+    }
+
+    /*
     public void Estimate(StatGroupTemplate velocity, float boundsLength, float duration)
     {
         range = velocity.GetValue(duration);
@@ -26,4 +43,5 @@ public class RangeEstimator : MonoBehaviour
             range += f.GetRange(duration);
         }
     }
+    */
 }

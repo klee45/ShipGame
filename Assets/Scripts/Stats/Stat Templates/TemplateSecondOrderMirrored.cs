@@ -5,6 +5,8 @@ using UnityEngine;
 public class TemplateSecondOrderMirrored : StatGroupTemplate
 {
     [SerializeField]
+    private float initial;
+    [SerializeField]
     private float acceleration;
     [SerializeField]
     private float max;
@@ -14,7 +16,7 @@ public class TemplateSecondOrderMirrored : StatGroupTemplate
     public override StatGroup CreateGroup(GameObject attachee)
     {
         var group = attachee.AddComponent<StatGroupSecondOrderMirrored>();
-        group.Setup(acceleration, max, dampening);
+        group.Setup(initial, acceleration, max, dampening);
         return group;
     }
 
