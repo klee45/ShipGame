@@ -1445,7 +1445,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9123a259b0c1dd648b826337194d1076, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialValue: 0
+  initial: 0
   acceleration: 10
   max: 2
   dampening: 5
