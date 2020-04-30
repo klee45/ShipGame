@@ -1,25 +1,25 @@
 fileFormatVersion: 2
-guid: 02225ff669ec0d44b90622fb24440cbc
+guid: 61bfeafe1bd69174fbfd52d0b5dbced5
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -4478703775913692564
-    second: Missile_0
+      213: 817950118734991249
+    second: Missile_color_0
   - first:
-      213: 8720476698924307339
-    second: Missile_1
+      213: -4866503068291977770
+    second: Missile_color_1
   - first:
-      213: -7138927104686850032
-    second: Missile_2
+      213: 1318631016910764235
+    second: Missile_color_2
   - first:
-      213: -3328100895685206998
-    second: Missile_3
+      213: 4470522669382524835
+    second: Missile_color_3
   - first:
-      213: -2589697144319284199
-    second: Missile_4
+      213: 5592488689363110351
+    second: Missile_color_4
   - first:
-      213: 3644710553524705936
-    second: Missile_5
+      213: -2845517851004076931
+    second: Missile_color_5
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -61,7 +61,7 @@ TextureImporter:
   spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
-  alignment: 9
+  alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
   spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
@@ -102,7 +102,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Missile_0
+      name: Missile_color_0
       rect:
         serializedVersion: 2
         x: 0
@@ -116,14 +116,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e1ab21895f9d09144b9ac622c61e9550
-      internalID: -4478703775913692564
+      spriteID: 615b533f929ab244f90789ef5a953c25
+      internalID: 817950118734991249
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Missile_1
+      name: Missile_color_1
       rect:
         serializedVersion: 2
         x: 32
@@ -137,14 +137,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5630ade132fb0404d950bfe4852ab1f7
-      internalID: 8720476698924307339
+      spriteID: def7afa6e6916814db3c031bf33236e9
+      internalID: -4866503068291977770
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Missile_2
+      name: Missile_color_2
       rect:
         serializedVersion: 2
         x: 64
@@ -158,14 +158,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed72bfc0a0565f64c9108136e2338a28
-      internalID: -7138927104686850032
+      spriteID: 64edb58d67be5a045ac6878ab721ac4c
+      internalID: 1318631016910764235
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Missile_3
+      name: Missile_color_3
       rect:
         serializedVersion: 2
         x: 96
@@ -179,14 +179,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 03aa0f72dec7e5b48aee66dc5f4db9d8
-      internalID: -3328100895685206998
+      spriteID: dbf8e8d250a417c4baa9f317c3f5cf35
+      internalID: 4470522669382524835
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Missile_4
+      name: Missile_color_4
       rect:
         serializedVersion: 2
         x: 128
@@ -200,14 +200,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 52d68c291732e3f4da34cf6f86449f84
-      internalID: -2589697144319284199
+      spriteID: 51163c1a4e15133429510bb53874ef42
+      internalID: 5592488689363110351
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Missile_5
+      name: Missile_color_5
       rect:
         serializedVersion: 2
         x: 160
@@ -221,8 +221,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7678832768f7ebb4aa9f8068c300e70b
-      internalID: 3644710553524705936
+      spriteID: 56f89283a09929f4b9a5ca0e4aa425ae
+      internalID: -2845517851004076931
       vertices: []
       indices: 
       edges: []
@@ -230,7 +230,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: e527758900b4c3b4994cc979bfd395d7
+    spriteID: 2ed99c2868f7f0a49a9a219895b2ca09
     internalID: 0
     vertices: []
     indices: 
