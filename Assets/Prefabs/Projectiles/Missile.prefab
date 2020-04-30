@@ -148,8 +148,6 @@ GameObject:
   - component: {fileID: 3189834120618545889}
   - component: {fileID: 4689059332438148851}
   - component: {fileID: 7813655246927647877}
-  - component: {fileID: -2031660670539423745}
-  - component: {fileID: 924558363899344691}
   m_Layer: 30
   m_Name: Missile
   m_TagString: Untagged
@@ -245,41 +243,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
---- !u!114 &-2031660670539423745
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3189834120618545893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8ac5670c4a7016b4e845774c77b4d8ac, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  priority: 0
-  explosion: {fileID: 3189834120618545893, guid: 008875dd4df87a64183de713007c40ae,
-    type: 3}
-  spawn: {fileID: 924558363899344691}
-  explosionDamage: 25
-  explosionDuration: 0.5
---- !u!114 &924558363899344691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3189834120618545893}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: bc901708ceccb684490ab6c5f7290a33, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  offset: {x: 0, y: 0}
-  rotation: 0
-  delay: 0
-  forces: []
-  scale: 0.2
 --- !u!1 &3189834120755965208
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,9 +14,10 @@ public class RangeEstimator : MonoBehaviour
 
     public void Estimate(ProjectileTemplate[] templates)
     {
-        float estimate = 0;
+        float best = 0;
         foreach (ProjectileTemplate template in templates)
         {
+            float estimate = 0;
             float duration = template.GetLifespan();
             estimate += template.GetVelocityTemplate().GetValue(duration);
             foreach (ForceInfo force in template.GetSpawn().GetForces())
@@ -24,8 +25,12 @@ public class RangeEstimator : MonoBehaviour
                 estimate += force.GetRange(duration);
             }
             estimate += template.GetColliderLength();
+            if (estimate > best)
+            {
+                best = estimate;
+            }
         }
-        range = estimate;
+        range = best;
     }
 
     /*

@@ -18,6 +18,8 @@ public class ProjectileTemplate : MonoBehaviour
     private float colliderLength;
     [SerializeField]
     private ProjectileSpawn spawn;
+    [SerializeField]
+    private ProjectileEffect[] effects;
 
     public StatGroupTemplate GetVelocityTemplate() { return velocityTemplate; }
     public StatGroupTemplate GetRotationTemplate() { return rotationTemplate; }
@@ -30,7 +32,12 @@ public class ProjectileTemplate : MonoBehaviour
     {
         Projectile projectile = Instantiate(prefab).GetComponent<Projectile>();
         projectile.Setup(velocityTemplate, rotationTemplate, damage, lifespan);
-        spawn?.Apply(projectile);
+        foreach (ProjectileEffect effect in effects)
+        {
+            ProjectileEffect clone = Instantiate(effect);
+            clone.transform.SetParent(projectile.transform);
+        }
+        // spawn?.Apply(projectile);
         return projectile;
     }
 }

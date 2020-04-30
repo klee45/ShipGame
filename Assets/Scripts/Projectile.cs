@@ -36,20 +36,16 @@ public class Projectile : Entity
     protected override void Awake()
     {
         base.Awake();
-        OnValidate();
     }
     
     protected override void Start()
     {
         base.Start();
         Destroy(gameObject, lifespan);
-    }
 
-    private void OnValidate()
-    {
-        onHit = GetComponents<ProjectileOnHit>();
-        onStay = GetComponents<ProjectileOnStay>();
-        onTick = GetComponents<ProjectileOnTick>();
+        onHit = GetComponentsInChildren<ProjectileOnHit>();
+        onStay = GetComponentsInChildren<ProjectileOnStay>();
+        onTick = GetComponentsInChildren<ProjectileOnTick>();
 
         SortOrder(onHit);
         SortOrder(onStay);

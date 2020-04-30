@@ -40,7 +40,7 @@ public class HitCreateExplosion : ProjectileOnHit
     {
         GameObject obj = Instantiate(explosion);
         obj.transform.parent = ProjectileManager.Instance().transform;
-        obj.transform.localPosition = transform.localPosition;
+        obj.transform.position = transform.position;
         obj.GetComponent<Explosion>().Setup(explosionDuration, explosionDamage);
         obj.layer = Layers.NEUTRAL_PROJECTILE;
         return obj;

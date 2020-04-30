@@ -1,0 +1,133 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3831635938519971613
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3831635938519971614}
+  - component: {fileID: 905473625443223468}
+  - component: {fileID: 3831635938519971615}
+  - component: {fileID: 4738949594642902917}
+  - component: {fileID: 4738949594642902971}
+  - component: {fileID: 4738949594642902970}
+  - component: {fileID: 2068102770854850281}
+  m_Layer: 11
+  m_Name: Advanced Cannon
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3831635938519971614
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3831635938519971613}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &905473625443223468
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3831635938519971613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 47da4681b059b574e8cc77237916b35b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  icon: {fileID: 21300000, guid: 4a0b391ce3b855e45855bf44d97f902d, type: 3}
+  cooldown: {fileID: 3831635938519971615}
+  projectileTemplates:
+  - {fileID: 4738949594642902917}
+--- !u!114 &3831635938519971615
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3831635938519971613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3da6fdc6aab23ea41be68b78a7846906, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxTime: 0.25
+  currentTime: 0
+  running: 1
+  doesReset: 1
+  overflows: 1
+--- !u!114 &4738949594642902917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3831635938519971613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0860eac323aab644ca0e56680eaecf86, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  velocityTemplate: {fileID: 4738949594642902970}
+  rotationTemplate: {fileID: 4738949594642902971}
+  damage: 20
+  lifespan: 1
+  prefab: {fileID: 2986235711605884397, guid: c0b5673b5aee5474d9fea6a42148ba63, type: 3}
+  colliderLength: 0
+  spawn: {fileID: 2068102770854850281}
+  effects: []
+--- !u!114 &4738949594642902971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3831635938519971613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1212bcf96526ec64e9ec2391c3c2e31d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &4738949594642902970
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3831635938519971613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d8480686453462543bf34767f2861e94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  multiplier: 10
+--- !u!114 &2068102770854850281
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3831635938519971613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc901708ceccb684490ab6c5f7290a33, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  offset: {x: 0, y: 0}
+  rotation: 0
+  delay: 0
+  forces: []
+  scale: 1

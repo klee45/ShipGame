@@ -67,7 +67,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxTime: 1
   currentTime: 0.009899855
-  running: 0
+  running: 1
   doesReset: 1
   overflows: 1
 --- !u!114 &1822509845277183045
@@ -149,6 +149,7 @@ MonoBehaviour:
   prefab: {fileID: 3189834120618545893, guid: a92651507b9518f409b3fd8bf69ce81a, type: 3}
   colliderLength: 0.5
   spawn: {fileID: 5010704874612590602}
+  effects: []
 --- !u!114 &988515436133318112
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,6 +248,7 @@ MonoBehaviour:
   prefab: {fileID: 3189834120618545893, guid: a92651507b9518f409b3fd8bf69ce81a, type: 3}
   colliderLength: 0.5
   spawn: {fileID: 7739044270255088881}
+  effects: []
 --- !u!114 &277275137178514130
 MonoBehaviour:
   m_ObjectHideFlags: 0
