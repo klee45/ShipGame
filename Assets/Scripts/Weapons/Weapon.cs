@@ -65,6 +65,10 @@ public class Weapon : MonoBehaviour
         projectile.gameObject.transform.localPosition = parent.position;
         projectile.gameObject.transform.localRotation = parent.rotation;
         projectile.gameObject.layer = Layers.ProjectileFromShip(parent.gameObject.layer);
+        foreach (CanColorize canColorize in projectile.GetComponentsInChildren<CanColorize>())
+        {
+            canColorize.GetComponent<SpriteRenderer>().color = Layers.GetColorFromLayer(projectile.gameObject.layer);
+        }
         LinkProjectile(projectile);
         return projectile;
     }
