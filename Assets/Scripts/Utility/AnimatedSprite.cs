@@ -11,6 +11,8 @@ public class AnimatedSprite : MonoBehaviour
     private int pos;
     [SerializeField]
     private SpriteManager.SpriteSpeed speed;
+    [SerializeField]
+    private AnimationType type = AnimationType.REPEAT;
     
     // Start is called before the first frame update
     void Start()
@@ -55,7 +57,32 @@ public class AnimatedSprite : MonoBehaviour
 
     private void Tick(int count)
     {
-        pos = (pos + count) % sprites.Length;
-        GetComponent<SpriteRenderer>().sprite = sprites[pos];
+        Sprite sprite = null;
+        switch(type)
+        {
+            case AnimationType.END:
+                pos = pos + count;
+                if (pos < sprites.Length)
+                {
+                    sprite = sprites[pos];
+                }
+                break;
+            case AnimationType.HOLD:
+                pos = Mathf.Min((pos + count), sprites.Length - 1);
+                sprite = sprites[pos];
+                break;
+            case AnimationType.REPEAT:
+                pos = (pos + count) % sprites.Length;
+                sprite = sprites[pos];
+                break;
+        }
+        GetComponent<SpriteRenderer>().sprite = sprite;
+    }
+
+    public enum AnimationType
+    {
+        REPEAT,
+        HOLD,
+        END
     }
 }

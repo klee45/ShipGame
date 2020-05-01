@@ -1,5 +1,49 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6130208410505932559
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4393657164997796625}
+  - component: {fileID: 427558472091374535}
+  m_Layer: 11
+  m_Name: Scaling
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4393657164997796625
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6130208410505932559}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 7989565786007360782}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &427558472091374535
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6130208410505932559}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54766dbfec82aa478cbb348e26719bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scale: 1.2
 --- !u!1 &7989565784648736828
 GameObject:
   m_ObjectHideFlags: 0
@@ -71,7 +115,7 @@ MonoBehaviour:
   delay: 0.1
   forces:
   - {fileID: 7989565784648736826}
-  scale: 1
+  scale: {fileID: 427558472091374535}
 --- !u!114 &7989565784648736826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -159,7 +203,7 @@ MonoBehaviour:
   delay: 0.6
   forces:
   - {fileID: 7989565784696787332}
-  scale: 1
+  scale: {fileID: 427558472091374535}
 --- !u!114 &7989565784696787332
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,7 +291,7 @@ MonoBehaviour:
   delay: 0.2
   forces:
   - {fileID: 7989565784832773234}
-  scale: 1
+  scale: {fileID: 427558472091374535}
 --- !u!114 &7989565784832773234
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,7 +379,7 @@ MonoBehaviour:
   delay: 0.5
   forces:
   - {fileID: 7989565785005340802}
-  scale: 1
+  scale: {fileID: 427558472091374535}
 --- !u!114 &7989565785005340802
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -423,7 +467,7 @@ MonoBehaviour:
   delay: 0.4
   forces:
   - {fileID: 7989565785132091822}
-  scale: 1
+  scale: {fileID: 427558472091374535}
 --- !u!114 &7989565785132091822
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -544,7 +588,7 @@ MonoBehaviour:
   delay: 0
   forces:
   - {fileID: 7989565785509919987}
-  scale: 1
+  scale: {fileID: 427558472091374535}
 --- !u!114 &7989565785509919987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -628,6 +672,7 @@ Transform:
   - {fileID: 7989565785606350229}
   - {fileID: 7989565785308980456}
   - {fileID: 7989565786040817993}
+  - {fileID: 4393657164997796625}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -710,6 +755,7 @@ GameObject:
   - component: {fileID: 7989565786040817993}
   - component: {fileID: 7989565786040818039}
   - component: {fileID: 7989565786040818038}
+  - component: {fileID: 1146416583544460248}
   m_Layer: 11
   m_Name: Missile Effect
   m_TagString: Untagged
@@ -765,4 +811,17 @@ MonoBehaviour:
   rotation: 0
   delay: 0
   forces: []
-  scale: 0.25
+  scale: {fileID: 1146416583544460248}
+--- !u!114 &1146416583544460248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7989565786040817992}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54766dbfec82aa478cbb348e26719bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scale: 0.5

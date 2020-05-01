@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 156013059}
   - component: {fileID: 156013058}
   - component: {fileID: 5807559548928448376}
+  - component: {fileID: 7329191912501452733}
   m_Layer: 11
   m_Name: Basic BeamAttack
   m_TagString: Untagged
@@ -63,8 +64,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3da6fdc6aab23ea41be68b78a7846906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 3
-  currentTime: 3
+  maxTime: 4
+  currentTime: 4
   running: 1
   doesReset: 1
   overflows: 1
@@ -82,11 +83,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   velocityTemplate: {fileID: 156013058}
   rotationTemplate: {fileID: 156013058}
-  damage: 50
-  lifespan: 3
+  damage: 10
+  lifespan: 1.1
   prefab: {fileID: 8560041827947365916, guid: e47d17f99ec2a90479ffd2bfc59b7905, type: 3}
   colliderLength: 6
   spawn: {fileID: 5807559548928448376}
+  effects: []
 --- !u!114 &156013058
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -115,4 +117,17 @@ MonoBehaviour:
   rotation: 0
   delay: 0
   forces: []
-  scale: 1
+  scale: {fileID: 7329191912501452733}
+--- !u!114 &7329191912501452733
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4197435062033394151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8ff12bb57b1da2743b3b626b7c5dccc8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scale: {x: 1, y: 4}

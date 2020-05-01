@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 4738949594642902971}
   - component: {fileID: 4738949594642902970}
   - component: {fileID: 2068102770854850281}
+  - component: {fileID: 5254401004372695445}
   m_Layer: 11
   m_Name: Advanced Cannon
   m_TagString: Untagged
@@ -130,4 +131,17 @@ MonoBehaviour:
   rotation: 0
   delay: 0
   forces: []
+  scale: {fileID: 5254401004372695445}
+--- !u!114 &5254401004372695445
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3831635938519971613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54766dbfec82aa478cbb348e26719bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   scale: 1

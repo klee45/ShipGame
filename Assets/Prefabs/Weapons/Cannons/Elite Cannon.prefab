@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8973252855120620369}
   - component: {fileID: 6635389984699468118}
   - component: {fileID: 2762887082881500185}
+  - component: {fileID: 7491220051179471165}
   m_Layer: 11
   m_Name: Elite Cannon
   m_TagString: Untagged
@@ -130,4 +131,17 @@ MonoBehaviour:
   rotation: 0
   delay: 0
   forces: []
+  scale: {fileID: 7491220051179471165}
+--- !u!114 &7491220051179471165
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8876690697836975953}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54766dbfec82aa478cbb348e26719bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   scale: 1

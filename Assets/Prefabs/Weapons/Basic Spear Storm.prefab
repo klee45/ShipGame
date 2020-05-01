@@ -82,7 +82,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5554f21c485a73241a2200c18aac944c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 1
+  range: 2
 --- !u!114 &1822509845277183044
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,6 +109,7 @@ GameObject:
   - component: {fileID: 988515436133318112}
   - component: {fileID: 2867129146017027339}
   - component: {fileID: 5010704874612590602}
+  - component: {fileID: 5394569900080263797}
   m_Layer: 11
   m_Name: Spin
   m_TagString: Untagged
@@ -194,7 +195,20 @@ MonoBehaviour:
   rotation: 0
   delay: 0
   forces: []
-  scale: 2
+  scale: {fileID: 5394569900080263797}
+--- !u!114 &5394569900080263797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9019521567208032533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54766dbfec82aa478cbb348e26719bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scale: 1
 --- !u!1 &9089986261275649025
 GameObject:
   m_ObjectHideFlags: 0
@@ -208,6 +222,7 @@ GameObject:
   - component: {fileID: 277275137178514130}
   - component: {fileID: 7739044270255088881}
   - component: {fileID: 1822509844493860342}
+  - component: {fileID: 7429867590386790862}
   m_Layer: 11
   m_Name: Stab
   m_TagString: Untagged
@@ -278,7 +293,7 @@ MonoBehaviour:
   delay: 0.3
   forces:
   - {fileID: 1822509844493860342}
-  scale: 2
+  scale: {fileID: 7429867590386790862}
 --- !u!114 &1822509844493860342
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,3 +310,16 @@ MonoBehaviour:
   duration: 0.01
   percent: 1
   isRelative: 1
+--- !u!114 &7429867590386790862
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9089986261275649025}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e54766dbfec82aa478cbb348e26719bd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scale: 1.5

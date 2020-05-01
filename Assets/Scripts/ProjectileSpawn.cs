@@ -13,7 +13,7 @@ public class ProjectileSpawn : MonoBehaviour
     [SerializeField]
     private ForceInfo[] forces;
     [SerializeField]
-    private float scale = 1.0f;
+    private ScaleInfo scale;
 
     public void Apply(Projectile projectile)
     {
@@ -21,7 +21,7 @@ public class ProjectileSpawn : MonoBehaviour
         //Debug.Log(projectile.transform.localEulerAngles);
         projectile.transform.localEulerAngles += new Vector3(0, 0, rotation);
         //Debug.Log(projectile.transform.localEulerAngles);
-        projectile.transform.localScale *= scale;
+        projectile.transform.localScale = scale.Scale(projectile.transform.localScale);
         foreach (ForceInfo forceInfo in forces)
         {
             projectile.AddForce(forceInfo);

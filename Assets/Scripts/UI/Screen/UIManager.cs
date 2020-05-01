@@ -31,7 +31,7 @@ public class UIManager : MonoBehaviour
     void Update()
     {
         int i = 0;
-        foreach (Weapon weapon in ship.GetComponentInChildren<Arsenal>().GetWeapons())
+        foreach (Weapon weapon in ship?.GetComponentInChildren<Arsenal>().GetWeapons())
         {
             weaponsUI.SetPercent(i++, weapon);
         }

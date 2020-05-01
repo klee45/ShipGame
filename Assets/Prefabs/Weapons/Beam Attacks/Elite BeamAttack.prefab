@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &561405949421747276
+--- !u!1 &2360169368262136656
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,28 +8,27 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 5359818290951816432}
-  - component: {fileID: 6870137558672529039}
-  - component: {fileID: 263684159556856665}
-  - component: {fileID: 8462521040399650947}
-  - component: {fileID: 35379508873642060}
-  - component: {fileID: 2373239349194449483}
-  - component: {fileID: 6533997097739251460}
-  - component: {fileID: 8099657622118923615}
+  - component: {fileID: 2360169368262136663}
+  - component: {fileID: 2360169368262136662}
+  - component: {fileID: 2360169368262136661}
+  - component: {fileID: 1909888505787214004}
+  - component: {fileID: 1909888505787214005}
+  - component: {fileID: 5339529566393085391}
+  - component: {fileID: 9167020195037865226}
   m_Layer: 11
-  m_Name: Basic Cannon
+  m_Name: Elite BeamAttack
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &5359818290951816432
+--- !u!4 &2360169368262136663
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 561405949421747276}
+  m_GameObject: {fileID: 2360169368262136656}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -37,91 +36,78 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6870137558672529039
+--- !u!114 &2360169368262136662
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 561405949421747276}
+  m_GameObject: {fileID: 2360169368262136656}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 47da4681b059b574e8cc77237916b35b, type: 3}
+  m_Script: {fileID: 11500000, guid: cf65567f400e6a4418203723911de959, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 4a0b391ce3b855e45855bf44d97f902d, type: 3}
-  cooldown: {fileID: 263684159556856665}
+  icon: {fileID: 21300000, guid: fa8039e5884791641b07a9135a5bd9e4, type: 3}
+  cooldown: {fileID: 2360169368262136661}
   projectileTemplates:
-  - {fileID: 8462521040399650947}
---- !u!114 &263684159556856665
+  - {fileID: 1909888505787214004}
+--- !u!114 &2360169368262136661
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 561405949421747276}
+  m_GameObject: {fileID: 2360169368262136656}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3da6fdc6aab23ea41be68b78a7846906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 0.5
-  currentTime: 0
+  maxTime: 8
+  currentTime: 8
   running: 1
   doesReset: 1
   overflows: 1
---- !u!114 &8462521040399650947
+--- !u!114 &1909888505787214004
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 561405949421747276}
+  m_GameObject: {fileID: 2360169368262136656}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0860eac323aab644ca0e56680eaecf86, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  velocityTemplate: {fileID: 2373239349194449483}
-  rotationTemplate: {fileID: 35379508873642060}
-  damage: 10
-  lifespan: 1
-  prefab: {fileID: 3189834120618545893, guid: fc10a8cf17a78f14795e2a62e54a7f05, type: 3}
-  colliderLength: 0
-  spawn: {fileID: 6533997097739251460}
+  velocityTemplate: {fileID: 1909888505787214005}
+  rotationTemplate: {fileID: 1909888505787214005}
+  damage: 40
+  lifespan: 1.1
+  prefab: {fileID: 8560041827947365916, guid: e47d17f99ec2a90479ffd2bfc59b7905, type: 3}
+  colliderLength: 12
+  spawn: {fileID: 5339529566393085391}
   effects: []
---- !u!114 &35379508873642060
+--- !u!114 &1909888505787214005
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 561405949421747276}
+  m_GameObject: {fileID: 2360169368262136656}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1212bcf96526ec64e9ec2391c3c2e31d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &2373239349194449483
+--- !u!114 &5339529566393085391
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 561405949421747276}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d8480686453462543bf34767f2861e94, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  multiplier: 8
---- !u!114 &6533997097739251460
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 561405949421747276}
+  m_GameObject: {fileID: 2360169368262136656}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bc901708ceccb684490ab6c5f7290a33, type: 3}
@@ -131,17 +117,17 @@ MonoBehaviour:
   rotation: 0
   delay: 0
   forces: []
-  scale: {fileID: 8099657622118923615}
---- !u!114 &8099657622118923615
+  scale: {fileID: 9167020195037865226}
+--- !u!114 &9167020195037865226
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 561405949421747276}
+  m_GameObject: {fileID: 2360169368262136656}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e54766dbfec82aa478cbb348e26719bd, type: 3}
+  m_Script: {fileID: 11500000, guid: 8ff12bb57b1da2743b3b626b7c5dccc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: 1
+  scale: {x: 3, y: 8}
