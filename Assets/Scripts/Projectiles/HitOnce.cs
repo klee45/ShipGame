@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitOncePer : ProjectileMod, ProjectileEffect.IOnHitEffect
+public class HitOnce : ProjectileMod, ProjectileEffect.IOnHitEffect
 {
     public override void AddTo(EffectDictProjectile dict)
     {
@@ -11,9 +11,8 @@ public class HitOncePer : ProjectileMod, ProjectileEffect.IOnHitEffect
 
     public void OnHit(Collider2D collision)
     {
-        Entity hitEntity = collision.GetComponent<Entity>();
-        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), hitEntity.GetComponent<Collider2D>());
         DoDamage(collision, GetDamage());
+        Destroy(gameObject);
     }
 
     public void Tick() { }

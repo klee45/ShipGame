@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileTemplate : MonoBehaviour
+public class ProjectileTemplate2 : MonoBehaviour
 {
     [SerializeField]
     private StatGroupTemplate velocityTemplate;
@@ -19,7 +19,7 @@ public class ProjectileTemplate : MonoBehaviour
     [SerializeField]
     private ProjectileSpawn spawn;
     [SerializeField]
-    private ProjectileEffect[] effects;
+    private ProjectileMod[] effects;
 
     public StatGroupTemplate GetVelocityTemplate() { return velocityTemplate; }
     public StatGroupTemplate GetRotationTemplate() { return rotationTemplate; }
@@ -32,9 +32,9 @@ public class ProjectileTemplate : MonoBehaviour
     {
         Projectile projectile = Instantiate(prefab).GetComponent<Projectile>();
         projectile.Setup(velocityTemplate, rotationTemplate, damage, lifespan);
-        foreach (ProjectileEffect effect in effects)
+        foreach (ProjectileMod effect in effects)
         {
-            ProjectileEffect clone = Instantiate(effect);
+            ProjectileMod clone = Instantiate(effect);
             clone.transform.SetParent(projectile.transform);
         }
         // spawn?.Apply(projectile);

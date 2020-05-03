@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitPerSecond : ProjectileOnStay
+public class HitPerSecond : ProjectileMod, ProjectileEffect.IOnHitStayEffect
 {
     [SerializeField]
     private float delay;
@@ -22,11 +22,21 @@ public class HitPerSecond : ProjectileOnStay
         InvokeRepeating("RepeatingUpdate", 0.0f, delay);
     }
 
-    public override void OnHitStay(Collider2D collision)
+    public void Tick()
+    {
+        throw new System.NotImplementedException();
+    }
+
+    public void OnHitStay(Collider2D collision)
     {
         DoDamage(collision, GetDamage());
         WakeUp(collision);
         disableOnUpdate = true;
+    }
+
+    public override void AddTo(EffectDictProjectile dict)
+    {
+        dict.onStays.Add(this);
     }
 
     private void FixedUpdate()

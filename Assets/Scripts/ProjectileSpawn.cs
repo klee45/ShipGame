@@ -11,26 +11,26 @@ public class ProjectileSpawn : MonoBehaviour
     [SerializeField]
     private float delay = 0;
     [SerializeField]
-    private ForceInfo[] forces;
+    private EffectTemplate[] effects;
     [SerializeField]
     private ScaleInfo scale;
 
-    public void Apply(Projectile projectile)
+    public void Apply(ProjectileTemplate projectile)
     {
         projectile.transform.localPosition += transform.rotation * new Vector3(offset.x, offset.y);
         //Debug.Log(projectile.transform.localEulerAngles);
         projectile.transform.localEulerAngles += new Vector3(0, 0, rotation);
         //Debug.Log(projectile.transform.localEulerAngles);
         projectile.transform.localScale = scale.Scale(projectile.transform.localScale);
-        foreach (ForceInfo forceInfo in forces)
+        foreach (EffectTemplate effect in effects)
         {
-            projectile.AddForce(forceInfo);
+            effect.Create(projectile.gameObject);
         }
     }
 
-    public ForceInfo[] GetForces()
+    public EffectTemplate[] GetEffects()
     {
-        return forces;
+        return effects;
     }
 
     public float GetDelay()

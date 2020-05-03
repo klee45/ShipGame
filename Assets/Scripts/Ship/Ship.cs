@@ -2,35 +2,64 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public class ShipTemplate : EntityTemplate<Ship>
+{
+    [SerializeField]
+    private CombatStatsTemplate combatStatsTemplate;
+
+    public override Ship Create(GameObject obj)
+    {
+        Ship ship = base.Create(obj);
+        combatStatsTemplate.Create(ship);
+        return ship;
+    }
+}
+
 public class Ship : Entity
 {
     [SerializeField]
+    private HealthBar healthBar;
+
     protected CombatStats combatStats;
+    private EffectDictShip shipEffects;
 
     private Arsenal arsenal;
 
     private bool markedForDelete = false;
 
-    protected override void Awake()
+    public void Setup(CombatStats stats)
     {
-        base.Awake();
-        combatStats = GetComponentInChildren<CombatStats>();
-        pilot = GetComponentInChildren<Pilot>();
-        arsenal = GetComponentInChildren<Arsenal>();
-        if (arsenal != null)
-        {
-            arsenal.gameObject.layer = gameObject.layer;
-        }
+        combatStats = stats;
     }
 
     protected override void Start()
     {
         base.Start();
+
+        pilot = GetComponentInChildren<Pilot>();
+        shipEffects = new EffectDictShip();
+
+        arsenal = GetComponentInChildren<Arsenal>();
+        if (arsenal != null)
+        {
+            arsenal.gameObject.layer = gameObject.layer;
+        }
+
+        combatStats = GetComponentInChildren<CombatStats>();
         combatStats.OnDeath += (d) =>
         {
             //Debug.Log(string.Format("Destroy {0}", gameObject.name));
             markedForDelete = true;
         };
+
+        foreach (GeneralEffect e in GetComponents<GeneralEffect>())
+        {
+            e.AddTo(shipEffects);
+        }
+        foreach (ShipEffect s in GetComponents<ShipEffect>())
+        {
+            s.AddTo(shipEffects);
+        }
     }
 
     private void FixedUpdate()
@@ -44,6 +73,23 @@ public class Ship : Entity
     protected override void Update()
     {
         base.Update();
+    }
+
+    public HealthBar GetHealthBar()
+    {
+        return healthBar;
+    }
+
+    public override EffectDict GetEffectsDict()
+    {
+        return shipEffects;
+    }
+
+    protected override void ApplyEffects()
+    {
+        shipEffects.Tick();
+        DoGenericEffects(shipEffects);
+        DoMovementEffects(shipEffects);
     }
 
     public CombatStats GetCombatStats() { return combatStats; }

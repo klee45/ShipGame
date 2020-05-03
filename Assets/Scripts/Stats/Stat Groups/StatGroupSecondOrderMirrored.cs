@@ -2,9 +2,32 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatGroupSecondOrderMirrored : StatGroup
+public class TemplateSecondOrderMirrored : StatGroupTemplate
 {
     [SerializeField]
+    private float initial;
+    [SerializeField]
+    private float acceleration;
+    [SerializeField]
+    private float max;
+    [SerializeField]
+    private float dampening;
+
+    public override StatGroup Create(GameObject obj)
+    {
+        var group = obj.AddComponent<StatGroupSecondOrderMirrored>();
+        group.Setup(initial, acceleration, max, dampening);
+        return group;
+    }
+
+    public override float GetValue(float duration)
+    {
+        return max * duration * acceleration * duration * duration / 2.0f;
+    }
+}
+
+public class StatGroupSecondOrderMirrored : StatGroup
+{
     private float initial, acceleration, max, dampening;
 
     private StatGroupSecondOrderKernel kernel;

@@ -3,22 +3,43 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class Projectile : Entity
+public class ProjectileTemplate : EntityTemplate<Projectile>
 {
     [SerializeField]
-    protected int damage;
-
+    private EffectTemplate[] effects;
     [SerializeField]
-    protected float lifespan;
+    private float delay = 0;
 
-    private ProjectileOnHit[] onHit;
-    private ProjectileOnStay[] onStay;
-    private ProjectileOnTick[] onTick;
-
-    public void Setup(StatGroupTemplate velocityTemplate, StatGroupTemplate rotationTemplate, int damage, float lifespan)
+    public EffectTemplate[] GetEffects()
     {
-        this.damage = damage;
-        this.lifespan = lifespan;
+        return effects;
+    }
+
+    public float GetDelay()
+    {
+        return delay;
+    }
+
+    public override Projectile Create(GameObject obj)
+    {
+        Projectile projectile = obj.AddComponent<Projectile>();
+        GameObject effectsObj = new GameObject();
+        foreach (EffectTemplate effect in effects)
+        {
+            Effect e = effect.Create(effectsObj);
+            e.AddTo(projectile.GetEffectsDict());
+        }
+        projectile.SetParent(obj);
+        return projectile;
+    }
+}
+
+public class Projectile : Entity
+{
+    private EffectDictProjectile projectileEffects;
+
+    public void Setup(StatGroup velocityTemplate, StatGroup rotationTemplate, int damage, float lifespan)
+    {
         MovementStats movementStats = GetComponentInChildren<MovementStats>();
         movementStats.Setup(velocityTemplate, rotationTemplate);
     }
@@ -33,23 +54,22 @@ public class Projectile : Entity
         this.damage = damage;
     }
 
-    protected override void Awake()
-    {
-        base.Awake();
-    }
-    
     protected override void Start()
     {
         base.Start();
         Destroy(gameObject, lifespan);
+    }
 
-        onHit = GetComponentsInChildren<ProjectileOnHit>();
-        onStay = GetComponentsInChildren<ProjectileOnStay>();
-        onTick = GetComponentsInChildren<ProjectileOnTick>();
+    public override EffectDict GetEffectsDict()
+    {
+        return projectileEffects;
+    }
 
-        SortOrder(onHit);
-        SortOrder(onStay);
-        SortOrder(onTick);
+    protected override void ApplyEffects()
+    {
+        projectileEffects.Tick();
+        DoGenericEffects(projectileEffects);
+        DoMovementEffects(projectileEffects);
     }
 
     public void SetLifespan(float lifespan)
@@ -57,15 +77,14 @@ public class Projectile : Entity
         this.lifespan = lifespan;
     }
 
-    private void SortOrder(ProjectileEffect[] lst)
+    private static void SortOrder(ProjectileMod[] lst)
     {
         lst.OrderBy(p => p.GetPriority());
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Debug.Log("Trigger enter");
-        foreach (var e in onHit)
+        foreach (var e in projectileEffects.onHits.GetAll())
         {
             e.OnHit(collision);
         }
@@ -73,19 +92,9 @@ public class Projectile : Entity
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        foreach (var e in onStay)
+        foreach (var e in projectileEffects.onStays.GetAll())
         {
             e.OnHitStay(collision);
-        }
-    }
-
-    // Update is called once per frame
-    protected override void Update()
-    {
-        base.Update();
-        foreach (var e in onTick)
-        {
-            e.OnTick();
         }
     }
 }

@@ -2,19 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatGroupSecondOrder : StatGroup
+public class TemplateSecondOrder : StatGroupTemplate
 {
     [SerializeField]
+    private float initialValue;
+    [SerializeField]
+    private float acceleration;
+    [SerializeField]
+    private float deceleration;
+    [SerializeField]
+    private float max;
+    [SerializeField]
+    private float min;
+    [SerializeField]
+    private float dampening;
+
+    public override StatGroup Create(GameObject obj)
+    {
+        var group = obj.AddComponent<StatGroupSecondOrder>();
+        group.Setup(initialValue, acceleration, deceleration, max, min, dampening);
+        return group;
+    }
+
+    public override float GetValue(float duration)
+    {
+        float maxSpeedTime = (max - initialValue) / acceleration;
+        float halfAccelerating = initialValue * maxSpeedTime + acceleration * maxSpeedTime * maxSpeedTime / 2f;
+        if (maxSpeedTime < duration)
+        {
+            float halfMaxSpeed = max * (duration - maxSpeedTime);
+            return halfAccelerating + halfMaxSpeed;
+        }
+        return halfAccelerating;
+    }
+}
+
+public class StatGroupSecondOrder : StatGroup
+{
     private float initialValue = 0;
-    [SerializeField]
     private float acceleration = 1;
-    [SerializeField]
     private float deceleration = 1;
-    [SerializeField]
     private float max = 1;
-    [SerializeField]
     private float min = -1;
-    [SerializeField]
     private float dampening = 1;
 
     private StatGroupSecondOrderKernel kernel;

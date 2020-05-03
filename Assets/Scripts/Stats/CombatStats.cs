@@ -3,9 +3,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CombatStats : MonoBehaviour
+public class CombatStatsTemplate : Template<CombatStats, Ship>
 {
     [SerializeField]
+    public int initialShieldMax;
+    [SerializeField]
+    public int initialArmorMax;
+    [SerializeField]
+    public int initialHullMax;
+
+    public override CombatStats Create(Ship ship)
+    {
+        HealthBar healthBar = ship.GetHealthBar();
+        CombatStats stats = new GameObject().AddComponent<CombatStats>();
+        stats.Setup(healthBar, initialHullMax, initialArmorMax, initialShieldMax);
+        return stats;
+    }
+}
+
+public class CombatStats : MonoBehaviour
+{
     private HealthBar healthBar;
 
     [Header("Health stats")]
@@ -40,8 +57,9 @@ public class CombatStats : MonoBehaviour
     public event DamageEvent OnHullHit;
     public event DamageEvent OnDeath;
 
-    private void Awake()
+    public void Setup(HealthBar healthBar, int maxHull, int maxArmor, int maxShield)
     {
+        this.healthBar = healthBar;
         this.maxHull = new IntStat(initialHullMax);
         this.maxArmor = new IntStat(initialArmorMax);
         this.maxShield = new IntStat(initialShieldMax);

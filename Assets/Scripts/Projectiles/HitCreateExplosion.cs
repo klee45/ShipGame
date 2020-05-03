@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitCreateExplosion : ProjectileOnHit
+public class HitCreateExplosion : ProjectileMod, ProjectileEffect.IOnHitEffect
 {
     [SerializeField]
     private GameObject explosion;
@@ -13,7 +13,9 @@ public class HitCreateExplosion : ProjectileOnHit
     [SerializeField]
     private float explosionDuration = 0.2f;
 
-    public override void OnHit(Collider2D collision)
+    public void Tick() { }
+
+    public void OnHit(Collider2D collision)
     {
         if (spawn == null)
         {
@@ -24,7 +26,11 @@ public class HitCreateExplosion : ProjectileOnHit
             StartCoroutine(SpawnAfterDelay(spawn.GetDelay()));
         }
     }
-        
+
+    public override void AddTo(EffectDictProjectile dict)
+    {
+        dict.onHits.Add(this);
+    }
 
     private IEnumerator SpawnAfterDelay(float delay)
     {
@@ -33,7 +39,7 @@ public class HitCreateExplosion : ProjectileOnHit
             yield return new WaitForSeconds(delay);
         }
         GameObject obj = CreateExplosion();
-        spawn.Apply(obj.GetComponent<Projectile>());
+        spawn.Apply(obj.GetComponent<ProjectileTemplate>());
     }
 
     private GameObject CreateExplosion()
