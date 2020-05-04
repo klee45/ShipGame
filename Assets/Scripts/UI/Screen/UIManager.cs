@@ -30,10 +30,13 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        int i = 0;
-        foreach (Weapon weapon in ship?.GetComponentInChildren<Arsenal>().GetWeapons())
+        if (ship != null)
         {
-            weaponsUI.SetPercent(i++, weapon);
+            int i = 0;
+            foreach (Weapon weapon in ship.GetComponentInChildren<Arsenal>().GetWeapons())
+            {
+                weaponsUI.SetPercent(i++, weapon);
+            }
         }
     }
 

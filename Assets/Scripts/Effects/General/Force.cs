@@ -9,15 +9,13 @@ public class Force : GeneralEffect, GeneralEffect.IMovementEffect, GeneralEffect
     [SerializeField]
     private float duration;
     [SerializeField]
-    private float percent = 1.0f;
-    [SerializeField]
     private bool isRelative = true;
+    private float percent = 1.0f;
 
-    public void Setup(Vector2 force, float duration, float percent, bool isRelative)
+    public void Setup(Vector2 force, float duration, bool isRelative)
     {
         this.force = force;
         this.duration = duration;
-        this.percent = percent;
         this.isRelative = isRelative;
     }
 
@@ -45,17 +43,17 @@ public class Force : GeneralEffect, GeneralEffect.IMovementEffect, GeneralEffect
         dict.tickEffects.Remove(this);
     }
 
-    public Vector3 GetMovement()
+    public Vector3 GetMovement(float timeDelta)
     {
         if (isRelative)
         {
             //Debug.Log(transform.localEulerAngles);
-            Vector3 result = transform.localRotation * force;
+            Vector3 result = transform.localRotation * force * timeDelta;
             return result;
         }
         else
         {
-            return new Vector3(force.x, force.y, 0);
+            return new Vector3(force.x * timeDelta, force.y * timeDelta, 0);
         }
     }
 }

@@ -59,18 +59,21 @@ public class StatGroupSecondOrderTemplate : StatGroupTemplate
         float maxSpeedRange = GetRangeBeforeMax(maxSpeedTime, initialValue, acceleration);
         if (range > maxSpeedRange)
         {
-            return maxSpeedTime + (range - maxSpeedRange) * (1 / max);
+            return maxSpeedTime + (range - maxSpeedRange) / max;
         }
         else
         {
-            return GetDurationBeforeMax(range, initialValue, acceleration);
+            float time = GetDurationBeforeMax(range, initialValue, acceleration);
+            return time;
         }
     }
 
     private static float GetDurationBeforeMax(float range, float initialValue, float acceleration)
     {
+        // I Have absolutely no idea why range needs to be 2x here, but it works
+        float fixedRange = range * 2;
         float bsqr = initialValue * initialValue;
-        float ac = 4 * acceleration * range;
+        float ac = 4 * acceleration * fixedRange;
         return (Mathf.Sqrt(bsqr + ac) - initialValue) / (2 * acceleration);
     }
 }

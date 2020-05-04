@@ -17,40 +17,35 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
     [SerializeField]
     private bool makeNeutral = false;
 
-    private float totalRange;
+    private float remainingRange;
 
     public float GetDelay()
     {
         return delay;
     }
 
-    private void Start()
+    private void Awake()
     {
         CalculateTotalRange();
     }
 
-    public void CalculateTotalRange()
+    private void CalculateTotalRange()
     {
-        totalRange = range;
+        remainingRange = range;
         foreach (ProjectileEffectTemplate effect in projectileEffects)
         {
-            totalRange += effect.GetRangeMod();
+            remainingRange -= effect.GetRangeMod();
         }
         foreach (GeneralEffectTemplate effect in generalEffects)
         {
-            totalRange += effect.GetRangeMod();
+            remainingRange -= effect.GetRangeMod();
         }
-        totalRange += colliderLength * scale.Scale(Vector3.one).y;
+        remainingRange -= colliderLength * scale.Scale(Vector3.one).y;
     }
 
     public float GetTotalRange()
     {
-        return totalRange;
-    }
-
-    public float GetColliderLength()
-    {
-        return colliderLength;
+        return range + colliderLength;
     }
 
     public override Projectile Create(GameObject obj)
@@ -67,14 +62,10 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
             e.AddTo(projectile.GetEffectsDict());
         }
         projectile.GetEffectsDict().SortAll();
-        float duration = movementStats.GetVelocity().GetDuration(totalRange);
-        projectile.Setup(totalRange, duration);
+        float duration = movementStats.GetVelocity().GetDuration(remainingRange);
+        projectile.Setup(remainingRange, duration);
         projectile.SetParent(obj);
         projectile.gameObject.layer = makeNeutral ? Layers.NEUTRAL_PROJECTILE : Layers.ProjecileFromEntity(obj.layer);
-        foreach (CanColorize canColorize in projectile.GetComponentsInChildren<CanColorize>())
-        {
-            canColorize.GetComponent<SpriteRenderer>().color = Layers.GetColorFromLayer(projectile.gameObject.layer);
-        }
         return projectile;
     }
 }

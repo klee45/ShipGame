@@ -23,8 +23,9 @@ public class Projectile : Entity
         this.duration = duration;
     }
 
-    public void Start()
+    public override void Start()
     {
+        base.Start();
         if (duration > 0)
             Destroy(gameObject, duration);
     }

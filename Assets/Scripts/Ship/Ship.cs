@@ -32,8 +32,9 @@ public class Ship : Entity
         combatStats = stats;
     }
 
-    protected void Start()
+    public override void Start()
     {
+        base.Start();
         shipEffects = gameObject.AddComponent<EffectDictShip>();
 
         arsenal = GetComponentInChildren<Arsenal>();

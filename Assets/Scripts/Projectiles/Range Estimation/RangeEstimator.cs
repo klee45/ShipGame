@@ -17,11 +17,10 @@ public class RangeEstimator : MonoBehaviour
         float best = 0;
         foreach (ProjectileTemplate template in templates)
         {
-            float estimate = 0;
             float range = template.GetTotalRange();
-            if (estimate > best)
+            if (range > best)
             {
-                best = estimate;
+                best = range;
             }
         }
         range = best;

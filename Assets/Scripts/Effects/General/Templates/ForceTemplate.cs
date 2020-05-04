@@ -9,20 +9,18 @@ public class ForceTemplate : GeneralEffectTemplate
     [SerializeField]
     private float duration;
     [SerializeField]
-    private float percent = 1.0f;
-    [SerializeField]
     private bool isRelative = true;
 
     protected override GeneralEffect CreateEffect(GameObject obj)
     {
         Force f = obj.AddComponent<Force>();
-        f.Setup(force, duration, percent, isRelative);
+        f.Setup(force, duration, isRelative);
         return f;
     }
 
     public override float GetRangeMod()
     {
-        return force.y * (duration + (duration * duration / 2.0f));
+        return force.y * duration;
     }
 }
 

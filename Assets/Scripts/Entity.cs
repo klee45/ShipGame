@@ -44,6 +44,14 @@ public abstract class Entity : MonoBehaviour
     [SerializeField]
     protected Pilot pilot;
 
+    public virtual void Start()
+    {
+        foreach (CanColorize canColorize in GetComponentsInChildren<CanColorize>())
+        {
+            canColorize.GetComponent<SpriteRenderer>().color = Layers.GetColorFromLayer(gameObject.layer);
+        }
+    }
+
     public void Setup(MovementStats movementStats, Pilot pilot)
     {
         this.movementStats = movementStats;
@@ -73,7 +81,7 @@ public abstract class Entity : MonoBehaviour
         Vector3 move = Vector3.zero;
         foreach (IMovementEffect effect in dict.movementEffects.GetAll())
         {
-            move += effect.GetMovement();
+            move += effect.GetMovement(Time.deltaTime);
         }
         transform.localPosition += move;
     }

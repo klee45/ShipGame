@@ -17,8 +17,12 @@ public class Weapon : MonoBehaviour
     protected virtual void Awake()
     {
         rangeEstimator = gameObject.AddComponent<RangeEstimator>();
-        InitializeRangeEstimator();
         cooldown = GetComponent<Timer>();
+    }
+
+    public void Start()
+    {
+        InitializeRangeEstimator();
         cooldown.OnComplete += () => Reset();
     }
 

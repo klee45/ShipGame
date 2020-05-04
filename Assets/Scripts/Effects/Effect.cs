@@ -76,7 +76,7 @@ public abstract class GeneralEffect : Effect
 
     public interface IMovementEffect : IEffect
     {
-        Vector3 GetMovement();
+        Vector3 GetMovement(float deltaTime);
     }
 }
 
