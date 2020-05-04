@@ -73,7 +73,7 @@ public abstract class Entity : MonoBehaviour
         Vector3 move = Vector3.zero;
         foreach (IMovementEffect effect in dict.movementEffects.GetAll())
         {
-            move += effect.GetMovement();
+            move += effect.GetMovement(Time.deltaTime);
         }
         transform.localPosition += move;
     }
