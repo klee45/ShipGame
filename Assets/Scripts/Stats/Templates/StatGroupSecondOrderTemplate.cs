@@ -57,7 +57,6 @@ public class StatGroupSecondOrderTemplate : StatGroupTemplate
     {
         float maxSpeedTime = (max - initialValue) / acceleration;
         float maxSpeedRange = GetRangeBeforeMax(maxSpeedTime, initialValue, acceleration);
-        Debug.Log(range);
         if (range > maxSpeedRange)
         {
             return maxSpeedTime + (range - maxSpeedRange) / max;
@@ -65,7 +64,6 @@ public class StatGroupSecondOrderTemplate : StatGroupTemplate
         else
         {
             float time = GetDurationBeforeMax(range, initialValue, acceleration);
-            Debug.Log(GetRangeBeforeMax(time, initialValue, acceleration));
             return time;
         }
     }

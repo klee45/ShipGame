@@ -1884,6 +1884,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5594129300213731596}
   - component: {fileID: 5594129300213731595}
+  - component: {fileID: 5687923141850089580}
   m_Layer: 11
   m_Name: Sprite
   m_TagString: Untagged
@@ -1953,6 +1954,18 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5687923141850089580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5594129300213731597}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 591fd9b8bb98e7249bd470450270af76, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5594129300434532433
 GameObject:
   m_ObjectHideFlags: 0
@@ -2094,9 +2107,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcd72f3f8c11eda46aa6ff83243fccfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  movementStats: {fileID: 0}
-  pilot: {fileID: 0}
-  combatStats: {fileID: 0}
+  movementStats: {fileID: 5594129301640694853}
+  pilot: {fileID: 2123517705}
+  combatStats: {fileID: 5594129300141781972}
 --- !u!50 &5594129301494206992
 Rigidbody2D:
   serializedVersion: 4
@@ -2531,15 +2544,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0d56ef17247ab14488c20e99b4351896, type: 3}
---- !u!1 &7288617043590309145 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3228176874060793903, guid: 0d56ef17247ab14488c20e99b4351896,
-    type: 3}
-  m_PrefabInstance: {fileID: 5326235908994280758}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7288617043590309158 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3228176874060793872, guid: 0d56ef17247ab14488c20e99b4351896,
+    type: 3}
+  m_PrefabInstance: {fileID: 5326235908994280758}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7288617043590309145 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3228176874060793903, guid: 0d56ef17247ab14488c20e99b4351896,
     type: 3}
   m_PrefabInstance: {fileID: 5326235908994280758}
   m_PrefabAsset: {fileID: 0}

@@ -66,10 +66,6 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
         projectile.Setup(remainingRange, duration);
         projectile.SetParent(obj);
         projectile.gameObject.layer = makeNeutral ? Layers.NEUTRAL_PROJECTILE : Layers.ProjecileFromEntity(obj.layer);
-        foreach (CanColorize canColorize in projectile.GetComponentsInChildren<CanColorize>())
-        {
-            canColorize.GetComponent<SpriteRenderer>().color = Layers.GetColorFromLayer(projectile.gameObject.layer);
-        }
         return projectile;
     }
 }
