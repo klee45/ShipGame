@@ -8,17 +8,21 @@ public abstract class EffectDict : MonoBehaviour
 {
     public EffectContainer<IGeneralEffect> generalEffects;
     public EffectContainer<IMovementEffect> movementEffects;
+    public EffectContainer<ITickEffect> tickEffects;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         generalEffects = new EffectContainer<IGeneralEffect>();
         movementEffects = new EffectContainer<IMovementEffect>();
+        tickEffects = new EffectContainer<ITickEffect>();
     }
 
-    public virtual void Tick()
+    public void Tick()
     {
-        generalEffects.Tick();
-        movementEffects.Tick();
+        foreach (ITickEffect effect in tickEffects.GetAll())
+        {
+            effect.Tick();
+        }
     }
 
     public abstract void SortAll();
@@ -29,14 +33,6 @@ public abstract class EffectDict : MonoBehaviour
         public EffectContainer()
         {
             effects = new List<U>();
-        }
-
-        public void Tick()
-        {
-            foreach (U effect in effects)
-            {
-                effect.Tick();
-            }
         }
 
         public void Sort()

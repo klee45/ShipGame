@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitCreateExplosion : ProjectileMod, ProjectileEffect.IOnHitEffect
+public class HitCreateExplosion : ProjectileEffect, ProjectileEffect.IOnHitEffect
 {
     [SerializeField]
     private GameObject explosion;
@@ -12,8 +12,6 @@ public class HitCreateExplosion : ProjectileMod, ProjectileEffect.IOnHitEffect
     private int explosionDamage = 10;
     [SerializeField]
     private float explosionDuration = 0.2f;
-
-    public void Tick() { }
 
     public void OnHit(Collider2D collision)
     {

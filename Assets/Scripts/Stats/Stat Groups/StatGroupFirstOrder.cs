@@ -2,26 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TemplateFirstOrder : StatGroupTemplate
-{
-    [SerializeField]
-    private float multiplier;
-
-    public override StatGroup Create(GameObject obj)
-    {
-        var group = obj.AddComponent<StatGroupFirstOrder>();
-        group.Setup(multiplier);
-        return group;
-    }
-
-    public override float GetValue(float duration)
-    {
-        return multiplier * duration;
-    }
-}
-
 public class StatGroupFirstOrder : StatGroup
 {
+    [SerializeField]
     private float multiplier;
     private FloatStat stat;
 

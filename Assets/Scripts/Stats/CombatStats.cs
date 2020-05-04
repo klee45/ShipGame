@@ -14,15 +14,15 @@ public class CombatStatsTemplate : Template<CombatStats, Ship>
 
     public override CombatStats Create(Ship ship)
     {
-        HealthBar healthBar = ship.GetHealthBar();
         CombatStats stats = new GameObject().AddComponent<CombatStats>();
-        stats.Setup(healthBar, initialHullMax, initialArmorMax, initialShieldMax);
+        stats.Setup(initialHullMax, initialArmorMax, initialShieldMax);
         return stats;
     }
 }
 
 public class CombatStats : MonoBehaviour
 {
+    [SerializeField]
     private HealthBar healthBar;
 
     [Header("Health stats")]
@@ -57,9 +57,8 @@ public class CombatStats : MonoBehaviour
     public event DamageEvent OnHullHit;
     public event DamageEvent OnDeath;
 
-    public void Setup(HealthBar healthBar, int maxHull, int maxArmor, int maxShield)
+    void Start()
     {
-        this.healthBar = healthBar;
         this.maxHull = new IntStat(initialHullMax);
         this.maxArmor = new IntStat(initialArmorMax);
         this.maxShield = new IntStat(initialShieldMax);
@@ -68,6 +67,13 @@ public class CombatStats : MonoBehaviour
         shield = initialShieldMax;
 
         UpdateAllGraphics();
+    }
+
+    public void Setup(int initialHullMax, int initialArmorMax, int initialShieldMax)
+    {
+        this.initialHullMax = initialHullMax;
+        this.initialArmorMax = initialArmorMax;
+        this.initialShieldMax = initialShieldMax;
     }
 
     public bool IsAlive()

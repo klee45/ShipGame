@@ -2,28 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MovementStatsTemplate : Template<MovementStats, GameObject>
-{
-    [SerializeField]
-    private StatGroupTemplate rotation, velocity;
-
-    public override MovementStats Create(GameObject obj)
-    {
-        GameObject movementStatsObj = new GameObject();
-
-        StatGroup rotation = this.rotation.Create(movementStatsObj);
-        StatGroup velocity = this.velocity.Create(movementStatsObj);
-
-        MovementStats movementStats = movementStatsObj.AddComponent<MovementStats>();
-        movementStats.Setup(velocity, rotation);
-        movementStats.SetParent(obj);
-
-        return movementStats;
-    }
-}
-
 public class MovementStats : MonoBehaviour
 {
+    [SerializeField]
     private StatGroup rotation, velocity;
 
     public StatGroup GetRotationStatGroup() { return rotation; }

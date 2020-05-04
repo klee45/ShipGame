@@ -16,9 +16,9 @@ public abstract class EntityTemplate<OUT> : Template<OUT, GameObject> where OUT 
     [SerializeField]
     private ScaleInfo scale;
     [SerializeField]
-    private MovementStatsTemplate movementStats;
+    protected MovementStatsTemplate movementStats;
     [SerializeField]
-    private Pilot pilot;
+    private PilotTemplate pilot;
 
     public override OUT Create(GameObject obj)
     {
@@ -27,7 +27,10 @@ public abstract class EntityTemplate<OUT> : Template<OUT, GameObject> where OUT 
         entity.transform.localEulerAngles = new Vector3(0, 0, rotation);
         entity.transform.localScale = scale.Scale(obj.transform.localScale);
 
-        MovementStats stats = movementStats.Create(entity.gameObject);
+        MovementStats s = movementStats.Create(entity.gameObject);
+        Pilot p = pilot.Create(entity.gameObject);
+
+        entity.Setup(s, p);
 
         entity.SetParent(obj);
 
@@ -37,12 +40,15 @@ public abstract class EntityTemplate<OUT> : Template<OUT, GameObject> where OUT 
 
 public abstract class Entity : MonoBehaviour
 {
+    [SerializeField]
     protected MovementStats movementStats;
+    [SerializeField]
     protected Pilot pilot;
 
-    protected virtual void Start()
+    public void Setup(MovementStats movementStats, Pilot pilot)
     {
-        movementStats = GetComponentInChildren<MovementStats>();
+        this.movementStats = movementStats;
+        this.pilot = pilot;
     }
 
     protected virtual void Update()
@@ -52,8 +58,6 @@ public abstract class Entity : MonoBehaviour
         transform.position += transform.up * movementStats.GetVelocityValue() * Time.deltaTime;
         ApplyEffects();
     }
-
-    public abstract EffectDict GetEffectsDict();
 
     protected void DoGenericEffects(EffectDict dict)
     {

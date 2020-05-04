@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitPerSecond : ProjectileMod, ProjectileEffect.IOnHitStayEffect
+public class HitPerSecond : ProjectileEffect, ProjectileEffect.IOnHitStayEffect
 {
     [SerializeField]
-    private float delay;
+    private int damage;
+    [SerializeField]
+    private float rate;
     [SerializeField]
     private int maxTimes;
     [SerializeField]
@@ -19,17 +21,20 @@ public class HitPerSecond : ProjectileMod, ProjectileEffect.IOnHitStayEffect
     {
         times = 0;
         disableOnUpdate = true;
-        InvokeRepeating("RepeatingUpdate", 0.0f, delay);
+        InvokeRepeating("RepeatingUpdate", 0.0f, rate);
     }
 
-    public void Tick()
+    public void Setup(int damage, float rate, int maxTimes, bool destroyOnEnd)
     {
-        throw new System.NotImplementedException();
+        this.damage = damage;
+        this.rate = rate;
+        this.maxTimes = maxTimes;
+        this.destroyOnEnd = destroyOnEnd;
     }
 
     public void OnHitStay(Collider2D collision)
     {
-        DoDamage(collision, GetDamage());
+        DoDamage(collision, damage);
         WakeUp(collision);
         disableOnUpdate = true;
     }

@@ -18,9 +18,8 @@ public class ShipTemplate : EntityTemplate<Ship>
 public class Ship : Entity
 {
     [SerializeField]
-    private HealthBar healthBar;
+    private CombatStats combatStats;
 
-    protected CombatStats combatStats;
     private EffectDictShip shipEffects;
 
     private Arsenal arsenal;
@@ -32,12 +31,9 @@ public class Ship : Entity
         combatStats = stats;
     }
 
-    protected override void Start()
+    protected void Start()
     {
-        base.Start();
-
-        pilot = GetComponentInChildren<Pilot>();
-        shipEffects = new EffectDictShip();
+        shipEffects = gameObject.AddComponent<EffectDictShip>();
 
         arsenal = GetComponentInChildren<Arsenal>();
         if (arsenal != null)
@@ -75,12 +71,7 @@ public class Ship : Entity
         base.Update();
     }
 
-    public HealthBar GetHealthBar()
-    {
-        return healthBar;
-    }
-
-    public override EffectDict GetEffectsDict()
+    public EffectDictShip GetEffectsDict()
     {
         return shipEffects;
     }

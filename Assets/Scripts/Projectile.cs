@@ -3,64 +3,33 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class ProjectileTemplate : EntityTemplate<Projectile>
-{
-    [SerializeField]
-    private EffectTemplate[] effects;
-    [SerializeField]
-    private float delay = 0;
-
-    public EffectTemplate[] GetEffects()
-    {
-        return effects;
-    }
-
-    public float GetDelay()
-    {
-        return delay;
-    }
-
-    public override Projectile Create(GameObject obj)
-    {
-        Projectile projectile = obj.AddComponent<Projectile>();
-        GameObject effectsObj = new GameObject();
-        foreach (EffectTemplate effect in effects)
-        {
-            Effect e = effect.Create(effectsObj);
-            e.AddTo(projectile.GetEffectsDict());
-        }
-        projectile.SetParent(obj);
-        return projectile;
-    }
-}
-
 public class Projectile : Entity
 {
+    [SerializeField]
+    private float range;
+    [SerializeField]
+    private float duration;
+
     private EffectDictProjectile projectileEffects;
 
-    public void Setup(StatGroup velocityTemplate, StatGroup rotationTemplate, int damage, float lifespan)
+    public void Awake()
     {
-        MovementStats movementStats = GetComponentInChildren<MovementStats>();
-        movementStats.Setup(velocityTemplate, rotationTemplate);
+        projectileEffects = gameObject.AddComponent<EffectDictProjectile>();
     }
 
-    public int GetDamage()
+    public void Setup(float range, float duration)
     {
-        return damage;
+        this.range = range;
+        this.duration = duration;
     }
 
-    public void SetDamage(int damage)
+    public void Start()
     {
-        this.damage = damage;
+        if (duration > 0)
+            Destroy(gameObject, duration);
     }
 
-    protected override void Start()
-    {
-        base.Start();
-        Destroy(gameObject, lifespan);
-    }
-
-    public override EffectDict GetEffectsDict()
+    public EffectDictProjectile GetEffectsDict()
     {
         return projectileEffects;
     }
@@ -72,12 +41,7 @@ public class Projectile : Entity
         DoMovementEffects(projectileEffects);
     }
 
-    public void SetLifespan(float lifespan)
-    {
-        this.lifespan = lifespan;
-    }
-
-    private static void SortOrder(ProjectileMod[] lst)
+    private static void SortOrder(ProjectileEffect[] lst)
     {
         lst.OrderBy(p => p.GetPriority());
     }

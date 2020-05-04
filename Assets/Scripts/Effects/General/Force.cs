@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ForceTemplate : EffectTemplate
+public class ForceTemplate : GeneralEffectTemplate
 {
     [SerializeField]
     private Vector2 force;
@@ -13,20 +13,20 @@ public class ForceTemplate : EffectTemplate
     [SerializeField]
     private bool isRelative = true;
 
-    protected override Effect CreateEffect(GameObject obj)
+    protected override GeneralEffect CreateEffect(GameObject obj)
     {
         Force f = gameObject.AddComponent<Force>();
         f.Setup(force, duration, percent, isRelative);
         return f;
     }
 
-    public override float GetRangeMod(float duration)
+    public override float GetRangeMod()
     {
-        return Force.GetMovementHelper(duration, this.duration, force);
+        return Force.GetMovementHelper(duration, force);
     }
 }
 
-public class Force : GeneralEffect, GeneralEffect.IMovementEffect
+public class Force : GeneralEffect, GeneralEffect.IMovementEffect, GeneralEffect.ITickEffect
 {
     private Vector2 force;
     private float duration;
@@ -55,13 +55,12 @@ public class Force : GeneralEffect, GeneralEffect.IMovementEffect
 
     public float GetMovement(float duration)
     {
-        return GetMovementHelper(duration, this.duration, force);
+        return GetMovementHelper(duration, force);
     }
 
-    public static float GetMovementHelper(float duration, float maxDuration, Vector2 force)
+    public static float GetMovementHelper(float duration, Vector2 force)
     {
-        float time = Mathf.Min(maxDuration, duration);
-        return force.y * (time - (time * time / 2.0f));
+        return force.y * (duration - (duration * duration / 2.0f));
     }
 
     public override void AddTo(EffectDict e)

@@ -49,6 +49,11 @@ public class HealthBar : MonoBehaviour
         backingGraphic.color = emptyColor;
     }
 
+    private void Start()
+    {
+        GetComponentInParent<Canvas>().worldCamera = Camera.main;
+    }
+
     public void UpdateShieldGraphic(int max, int current)
     {
         UpdateStat(shieldGraphic, shieldText, max, current);

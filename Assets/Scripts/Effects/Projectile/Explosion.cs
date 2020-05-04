@@ -11,8 +11,6 @@ public class Explosion : HitOncePer
         this.timer = gameObject.AddComponent<Timer>();
         this.timer.SetMaxTime(lifespan);
         Projectile projectile = GetComponent<Projectile>();
-        projectile.SetDamage(damage);
-        projectile.SetLifespan(lifespan);
     }
 
     private void Update()

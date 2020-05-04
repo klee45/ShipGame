@@ -3,21 +3,24 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public abstract class EffectTemplate : Template<Effect, GameObject>
+public abstract class EffectTemplate<T> : Template<T, GameObject> where T : Effect
 {
     [SerializeField]
     protected int priority = 0;
 
-    public override sealed Effect Create(GameObject obj)
+    public override sealed T Create(GameObject obj)
     {
-        Effect effect = CreateEffect(obj);
-        effect.Setup(priority);
+        T effect = CreateEffect(obj);
+        effect.SetPriority(priority);
         return effect;
     }
 
-    protected abstract Effect CreateEffect(GameObject obj);
+    protected abstract T CreateEffect(GameObject obj);
 
-    public abstract float GetRangeMod(float duration);
+    public virtual float GetRangeMod()
+    {
+        return 0;
+    }
 }
 
 public abstract class Effect : MonoBehaviour
@@ -26,15 +29,12 @@ public abstract class Effect : MonoBehaviour
 
     public void OnDestroy() { }
 
-    public virtual void Setup(int priority)
+    public void SetPriority(int priority)
     {
         this.priority = priority;
     }
 
-    public interface IEffect
-    {
-        void Tick();
-    }
+    public interface IEffect { }
 
     public int GetPriority() { return priority; }
 
@@ -45,9 +45,19 @@ public abstract class Effect : MonoBehaviour
 
 }
 
+public abstract class GeneralEffectTemplate : EffectTemplate<GeneralEffect>
+{
+
+}
+
 public abstract class GeneralEffect : Effect
 {
     public abstract void AddTo(EffectDict e);
+
+    public interface ITickEffect : IEffect
+    {
+        void Tick();
+    }
 
     public interface IGeneralEffect : IEffect
     {

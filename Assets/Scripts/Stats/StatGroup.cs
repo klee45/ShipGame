@@ -4,7 +4,8 @@ using UnityEngine;
 
 public abstract class StatGroupTemplate : Template<StatGroup, GameObject>
 {
-    public abstract float GetValue(float duration);
+    public abstract float GetRange(float duration);
+    public abstract float GetDuration(float range);
 }
 
 public abstract class StatGroup : MonoBehaviour

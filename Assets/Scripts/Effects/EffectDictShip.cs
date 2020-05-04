@@ -8,9 +8,4 @@ public class EffectDictShip : EffectDict
     {
         throw new System.NotImplementedException();
     }
-
-    public override void Tick()
-    {
-        base.Tick();
-    }
 }
