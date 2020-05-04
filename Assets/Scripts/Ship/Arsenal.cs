@@ -9,6 +9,10 @@ public class Arsenal : MonoBehaviour
     private void Awake()
     {
         weapons = GetComponentsInChildren<Weapon>();
+        foreach (Weapon weapon in weapons)
+        {
+            weapon.gameObject.layer = GetComponentInParent<Ship>().gameObject.layer;
+        }
     }
 
     public bool CanFire(int weapon)

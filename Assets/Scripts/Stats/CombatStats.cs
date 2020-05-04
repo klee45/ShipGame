@@ -3,6 +3,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class CombatStatsTemplate : Template<CombatStats, Ship>
+{
+    [SerializeField]
+    public int initialShieldMax;
+    [SerializeField]
+    public int initialArmorMax;
+    [SerializeField]
+    public int initialHullMax;
+
+    public override CombatStats Create(Ship ship)
+    {
+        CombatStats stats = new GameObject().AddComponent<CombatStats>();
+        stats.Setup(initialHullMax, initialArmorMax, initialShieldMax);
+        return stats;
+    }
+}
+
 public class CombatStats : MonoBehaviour
 {
     [SerializeField]
@@ -40,7 +57,7 @@ public class CombatStats : MonoBehaviour
     public event DamageEvent OnHullHit;
     public event DamageEvent OnDeath;
 
-    private void Awake()
+    void Start()
     {
         this.maxHull = new IntStat(initialHullMax);
         this.maxArmor = new IntStat(initialArmorMax);
@@ -50,6 +67,13 @@ public class CombatStats : MonoBehaviour
         shield = initialShieldMax;
 
         UpdateAllGraphics();
+    }
+
+    public void Setup(int initialHullMax, int initialArmorMax, int initialShieldMax)
+    {
+        this.initialHullMax = initialHullMax;
+        this.initialArmorMax = initialArmorMax;
+        this.initialShieldMax = initialShieldMax;
     }
 
     public bool IsAlive()

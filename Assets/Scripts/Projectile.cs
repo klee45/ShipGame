@@ -6,66 +6,49 @@ using System.Linq;
 public class Projectile : Entity
 {
     [SerializeField]
-    protected int damage;
-
+    private float range;
     [SerializeField]
-    protected float lifespan;
+    private float duration;
 
-    private ProjectileOnHit[] onHit;
-    private ProjectileOnStay[] onStay;
-    private ProjectileOnTick[] onTick;
+    private EffectDictProjectile projectileEffects;
 
-    public void Setup(StatGroupTemplate velocityTemplate, StatGroupTemplate rotationTemplate, int damage, float lifespan)
+    public void Awake()
     {
-        this.damage = damage;
-        this.lifespan = lifespan;
-        MovementStats movementStats = GetComponentInChildren<MovementStats>();
-        movementStats.Setup(velocityTemplate, rotationTemplate);
+        projectileEffects = gameObject.AddComponent<EffectDictProjectile>();
     }
 
-    public int GetDamage()
+    public void Setup(float range, float duration)
     {
-        return damage;
+        this.range = range;
+        this.duration = duration;
     }
 
-    public void SetDamage(int damage)
+    public void Start()
     {
-        this.damage = damage;
+        if (duration > 0)
+            Destroy(gameObject, duration);
     }
 
-    protected override void Awake()
+    public EffectDictProjectile GetEffectsDict()
     {
-        base.Awake();
-    }
-    
-    protected override void Start()
-    {
-        base.Start();
-        Destroy(gameObject, lifespan);
-
-        onHit = GetComponentsInChildren<ProjectileOnHit>();
-        onStay = GetComponentsInChildren<ProjectileOnStay>();
-        onTick = GetComponentsInChildren<ProjectileOnTick>();
-
-        SortOrder(onHit);
-        SortOrder(onStay);
-        SortOrder(onTick);
+        return projectileEffects;
     }
 
-    public void SetLifespan(float lifespan)
+    protected override void ApplyEffects()
     {
-        this.lifespan = lifespan;
+        DoTickEffects(projectileEffects);
+        DoGenericEffects(projectileEffects);
+        DoMovementEffects(projectileEffects);
     }
 
-    private void SortOrder(ProjectileEffect[] lst)
+    private static void SortOrder(ProjectileEffect[] lst)
     {
         lst.OrderBy(p => p.GetPriority());
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Debug.Log("Trigger enter");
-        foreach (var e in onHit)
+        foreach (var e in projectileEffects.onHits.GetAll())
         {
             e.OnHit(collision);
         }
@@ -73,19 +56,9 @@ public class Projectile : Entity
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        foreach (var e in onStay)
+        foreach (var e in projectileEffects.onStays.GetAll())
         {
             e.OnHitStay(collision);
-        }
-    }
-
-    // Update is called once per frame
-    protected override void Update()
-    {
-        base.Update();
-        foreach (var e in onTick)
-        {
-            e.OnTick();
         }
     }
 }

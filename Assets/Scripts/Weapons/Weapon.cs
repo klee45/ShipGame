@@ -35,9 +35,8 @@ public class Weapon : MonoBehaviour
 
     private IEnumerator CreateProjectileCoroutine(ProjectileTemplate template)
     {
-        yield return new WaitForSeconds(template.GetSpawn().GetDelay());
+        yield return new WaitForSeconds(template.GetDelay());
         Projectile p = CreateProjectile(template);
-        template.GetSpawn().Apply(p);
     }
 
     public void Fire()
@@ -60,15 +59,7 @@ public class Weapon : MonoBehaviour
 
     protected Projectile CreateProjectile(ProjectileTemplate template)
     {
-        Projectile projectile = template.CreateProjectile();
-        Transform parent = transform.parent;
-        projectile.gameObject.transform.localPosition = parent.position;
-        projectile.gameObject.transform.localRotation = parent.rotation;
-        projectile.gameObject.layer = Layers.ProjectileFromShip(parent.gameObject.layer);
-        foreach (CanColorize canColorize in projectile.GetComponentsInChildren<CanColorize>())
-        {
-            canColorize.GetComponent<SpriteRenderer>().color = Layers.GetColorFromLayer(projectile.gameObject.layer);
-        }
+        Projectile projectile = template.Create(gameObject);
         LinkProjectile(projectile);
         return projectile;
     }

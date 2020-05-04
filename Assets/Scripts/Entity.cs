@@ -2,31 +2,52 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static Effect;
+using static GeneralEffect;
+
+public abstract class EntityTemplate<OUT> : Template<OUT, GameObject> where OUT : Entity
+{
+    [SerializeField]
+    private OUT prefab;
+    [SerializeField]
+    private Vector2 position = Vector2.zero;
+    [SerializeField]
+    private float rotation = 0;
+    [SerializeField]
+    protected ScaleInfo scale;
+    [SerializeField]
+    protected MovementStatsTemplate movementStats;
+    [SerializeField]
+    private PilotTemplate pilot;
+
+    public override OUT Create(GameObject obj)
+    {
+        OUT entity = Instantiate(prefab);
+        entity.SetParent(obj);
+        entity.transform.localPosition = position;
+        entity.transform.localEulerAngles = new Vector3(0, 0, rotation);
+        entity.transform.localScale = scale.Scale(entity.transform.localScale);
+
+        MovementStats s = movementStats.Create(entity.gameObject);
+        Pilot p = pilot.Create(entity.gameObject);
+
+        entity.Setup(s, p);
+
+        return entity;
+    }
+}
 
 public abstract class Entity : MonoBehaviour
 {
-    [Header("Will auto-fill from components")]
     [SerializeField]
     protected MovementStats movementStats;
     [SerializeField]
     protected Pilot pilot;
-    [SerializeField]
-    private SpriteRenderer[] teamColorSprites;
 
-    [SerializeField]
-    private List<Force> forces;
-
-    protected virtual void Awake()
+    public void Setup(MovementStats movementStats, Pilot pilot)
     {
-        movementStats = GetComponentInChildren<MovementStats>();
-    }
-    
-    protected virtual void Start()
-    {
-        foreach(SpriteRenderer s in teamColorSprites)
-        {
-            s.color = Layers.GetColorFromLayer(gameObject.layer);
-        }
+        this.movementStats = movementStats;
+        this.pilot = pilot;
     }
 
     protected virtual void Update()
@@ -34,52 +55,36 @@ public abstract class Entity : MonoBehaviour
         pilot?.MakeActions();
         transform.Rotate(new Vector3(0, 0, -movementStats.GetRotationValue() * Time.deltaTime));
         transform.position += transform.up * movementStats.GetVelocityValue() * Time.deltaTime;
-        ApplyForces();
+        ApplyEffects();
+    }
+
+    protected abstract void ApplyEffects();
+
+    protected void DoGenericEffects(EffectDict dict)
+    {
+        foreach (IGeneralEffect effect in dict.generalEffects.GetAll())
+        {
+            effect.Apply(this);
+        }
+    }
+
+    protected void DoMovementEffects(EffectDict dict)
+    {
+        Vector3 move = Vector3.zero;
+        foreach (IMovementEffect effect in dict.movementEffects.GetAll())
+        {
+            move += effect.GetMovement();
+        }
+        transform.localPosition += move;
+    }
+
+    protected void DoTickEffects(EffectDict dict)
+    {
+        foreach (ITickEffect effects in dict.tickEffects.GetAll())
+        {
+            effects.Tick();
+        }
     }
 
     public MovementStats GetMovementStats() { return movementStats; }
-
-    public void AddForce(ForceInfo forceInfo)
-    {
-        Force force = gameObject.AddComponent<Force>();
-        force.Initialize(forceInfo);
-        forces.Add(force);
-    }
-
-    private void ApplyForces()
-    {
-        if (forces.Any())
-        {
-            //Debug.Log("Has forces");
-            
-            float x = 0;
-            float y = 0;
-            for (int i = forces.Count - 1; i >= 0 ; i--)
-            {
-                Force force = forces[i];
-                if (force.HasForce())
-                {
-                    Vector2 vect = force.GetVector();
-                    if (force.IsRelative())
-                    {
-                        //Debug.Log(transform.localEulerAngles);
-                        Vector3 result = transform.localRotation * new Vector3(vect.x, vect.y);
-                        x += result.x;
-                        y += result.y;
-                    }
-                    else
-                    {
-                        x += vect.x;
-                        y += vect.y; 
-                    }
-                }
-                else
-                {
-                    forces.RemoveAt(i);
-                }
-            }
-            transform.localPosition += new Vector3(x, y, 0);
-            //Debug.Log(string.Format("Final values {0} {1}", x, y));
-        }
-    }
 }

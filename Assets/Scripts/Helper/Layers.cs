@@ -31,6 +31,30 @@ public static class Layers
         return layer + shipProjectileOffset;
     }
 
+    public static int ProjecileFromEntity(int layer)
+    {
+        if (layer >= NEUTRAL_PROJECTILE)
+        {
+            return layer;
+        }
+        else
+        {
+            return layer + shipProjectileOffset;
+        }
+    }
+
+    public static int ShipFromEntity(int layer)
+    {
+        if (layer >= NEUTRAL_PROJECTILE)
+        {
+            return layer - shipProjectileOffset;
+        }
+        else
+        {
+            return layer;
+        }
+    }
+
 
 
     private static Color FromList(int[] list)

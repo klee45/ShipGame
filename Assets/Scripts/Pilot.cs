@@ -2,6 +2,18 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public abstract class PilotTemplate : Template<Pilot, GameObject>
+{
+    public override Pilot Create(GameObject obj)
+    {
+        GameObject pilotObj = new GameObject("Pilot");
+        pilotObj.transform.SetParent(obj.transform);
+        return CreateHelper(pilotObj);
+    }
+
+    protected abstract Pilot CreateHelper(GameObject obj);
+}
+
 public abstract class Pilot : MonoBehaviour
 {
     public abstract void MakeActions();

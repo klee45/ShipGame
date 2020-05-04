@@ -9,7 +9,7 @@ public class StatGroupSecondOrder : StatGroup
     [SerializeField]
     private float acceleration = 1;
     [SerializeField]
-    private float deceleration = 1;
+    private float deceleration = -1;
     [SerializeField]
     private float max = 1;
     [SerializeField]

@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PilotDummy : Pilot
 {
+    [SerializeField]
     private Entity entity;
 
     private void Start()
