@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using static Effect;
 using static GeneralEffect;
@@ -17,15 +18,12 @@ public abstract class EffectDict : MonoBehaviour
         tickEffects = new EffectContainer<ITickEffect>();
     }
 
-    public void Tick()
+    public virtual void SortAll()
     {
-        foreach (ITickEffect effect in tickEffects.GetAll())
-        {
-            effect.Tick();
-        }
+        generalEffects.Sort();
+        movementEffects.Sort();
+        tickEffects.Sort();
     }
-
-    public abstract void SortAll();
 
     public class EffectContainer<U> where U : IEffect
     {
@@ -37,12 +35,17 @@ public abstract class EffectDict : MonoBehaviour
 
         public void Sort()
         {
-            throw new System.NotImplementedException();
+            effects.OrderBy(p => -p.GetPriority());
         }
 
         public void Add(U effect)
         {
             effects.Add(effect);
+        }
+
+        public void Remove(U effect)
+        {
+            effects.Remove(effect);
         }
 
         public List<U> GetAll()

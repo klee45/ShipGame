@@ -12,9 +12,14 @@ public class HitOnce : ProjectileEffect, ProjectileEffect.IOnHitEffect
         this.damage = damage;
     }
 
-    public override void AddTo(EffectDictProjectile dict)
+    protected override void AddToHelper(EffectDictProjectile dict)
     {
         dict.onHits.Add(this);
+    }
+
+    protected override void RemoveFromHelper(EffectDictProjectile dict)
+    {
+        dict.onHits.Remove(this);
     }
 
     public void OnHit(Collider2D collision)

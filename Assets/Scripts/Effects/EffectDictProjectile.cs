@@ -17,6 +17,7 @@ public class EffectDictProjectile : EffectDict
 
     public override void SortAll()
     {
+        base.SortAll();
         onHits.Sort();
         onStays.Sort();
     }

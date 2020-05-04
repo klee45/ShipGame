@@ -8,17 +8,14 @@ public abstract class ProjectileEffectTemplate : EffectTemplate<ProjectileEffect
 
 public abstract class ProjectileEffect : Effect
 {
-    protected void DestroySelf()
+    public void AddTo(EffectDictProjectile dict)
     {
-        Destroy(GetComponent<Projectile>().gameObject);
+        AddToHelper(dict);
+        OnDestroyEvent += () => RemoveFromHelper(dict);
     }
 
-    protected void DoDamage(Collider2D collision, int damage)
-    {
-        collision.gameObject.GetComponentInChildren<CombatStats>().TakeDamage(damage);
-    }
-
-    public abstract void AddTo(EffectDictProjectile dict);
+    protected abstract void AddToHelper(EffectDictProjectile dict);
+    protected abstract void RemoveFromHelper(EffectDictProjectile dict);
 
     public interface IOnHitEffect : IEffect
     {
@@ -28,5 +25,15 @@ public abstract class ProjectileEffect : Effect
     public interface IOnHitStayEffect : IEffect
     {
         void OnHitStay(Collider2D collision);
+    }
+
+    protected void DestroySelf()
+    {
+        Destroy(GetComponent<Projectile>().gameObject);
+    }
+
+    protected void DoDamage(Collider2D collision, int damage)
+    {
+        collision.gameObject.GetComponentInChildren<CombatStats>().TakeDamage(damage);
     }
 }

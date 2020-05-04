@@ -39,9 +39,14 @@ public class HitPerSecond : ProjectileEffect, ProjectileEffect.IOnHitStayEffect
         disableOnUpdate = true;
     }
 
-    public override void AddTo(EffectDictProjectile dict)
+    protected override void AddToHelper(EffectDictProjectile dict)
     {
         dict.onStays.Add(this);
+    }
+
+    protected override void RemoveFromHelper(EffectDictProjectile dict)
+    {
+        dict.onStays.Remove(this);
     }
 
     private void FixedUpdate()

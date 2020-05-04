@@ -36,7 +36,7 @@ public class Projectile : Entity
 
     protected override void ApplyEffects()
     {
-        projectileEffects.Tick();
+        DoTickEffects(projectileEffects);
         DoGenericEffects(projectileEffects);
         DoMovementEffects(projectileEffects);
     }

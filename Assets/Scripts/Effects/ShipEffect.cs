@@ -2,7 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class ShipEffect : MonoBehaviour
+public abstract class ShipEffect : Effect
 {
-    public abstract void AddTo(EffectDictShip dict);
+    public void AddTo(EffectDictShip dict)
+    {
+        AddToHelper(dict);
+        OnDestroyEvent += () => RemoveFromHelper(dict);
+    }
+
+    protected abstract void AddToHelper(EffectDictShip dict);
+    protected abstract void RemoveFromHelper(EffectDictShip dict);
 }

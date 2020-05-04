@@ -29,6 +29,11 @@ public class ProjectileManager : MonoBehaviour
         linked.Add(obj);
     }
 
+    public void AddTo(Projectile obj)
+    {
+        obj.SetParent(gameObject);
+    }
+
     public Projectile[] GetAll()
     {
         Projectile[] attached = GetComponentsInChildren<Projectile>();

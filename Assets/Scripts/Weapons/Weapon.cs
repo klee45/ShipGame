@@ -60,14 +60,6 @@ public class Weapon : MonoBehaviour
     protected Projectile CreateProjectile(ProjectileTemplate template)
     {
         Projectile projectile = template.Create(gameObject);
-        Transform parent = transform.parent;
-        projectile.gameObject.transform.localPosition = parent.localPosition;
-        projectile.gameObject.transform.localRotation = parent.localRotation;
-        projectile.gameObject.layer = Layers.ProjectileFromShip(parent.gameObject.layer);
-        foreach (CanColorize canColorize in projectile.GetComponentsInChildren<CanColorize>())
-        {
-            canColorize.GetComponent<SpriteRenderer>().color = Layers.GetColorFromLayer(projectile.gameObject.layer);
-        }
         LinkProjectile(projectile);
         return projectile;
     }

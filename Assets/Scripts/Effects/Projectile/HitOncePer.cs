@@ -2,19 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitOncePerTemplate : ProjectileEffectTemplate
-{
-    [SerializeField]
-    private int damage;
-
-    protected override ProjectileEffect CreateEffect(GameObject obj)
-    {
-        HitOncePer hop = obj.AddComponent<HitOncePer>();
-        hop.Setup(damage);
-        return hop;
-    }
-}
-
 public class HitOncePer : ProjectileEffect, ProjectileEffect.IOnHitEffect
 {
     [SerializeField]
@@ -25,9 +12,14 @@ public class HitOncePer : ProjectileEffect, ProjectileEffect.IOnHitEffect
         this.damage = damage;
     }
 
-    public override void AddTo(EffectDictProjectile dict)
+    protected override void AddToHelper(EffectDictProjectile dict)
     {
         dict.onHits.Add(this);
+    }
+
+    protected override void RemoveFromHelper(EffectDictProjectile dict)
+    {
+        dict.onHits.Remove(this);
     }
 
     public void OnHit(Collider2D collision)

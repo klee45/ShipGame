@@ -2,20 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitSelfDestructTemplate : ProjectileEffectTemplate
-{
-    private void Awake()
-    {
-        priority = -1000;
-    }
-
-    protected override ProjectileEffect CreateEffect(GameObject obj)
-    {
-        HitSelfDestruct hitSelfDestruct = obj.AddComponent<HitSelfDestruct>();
-        return hitSelfDestruct;
-    }
-}
-
 public class HitSelfDestruct : ProjectileEffect, ProjectileEffect.IOnHitEffect
 {
     public void OnHit(Collider2D collision)
@@ -23,8 +9,13 @@ public class HitSelfDestruct : ProjectileEffect, ProjectileEffect.IOnHitEffect
         DestroySelf();
     }
 
-    public override void AddTo(EffectDictProjectile dict)
+    protected override void AddToHelper(EffectDictProjectile dict)
     {
         dict.onHits.Add(this);
+    }
+
+    protected override void RemoveFromHelper(EffectDictProjectile dict)
+    {
+        dict.onHits.Remove(this);
     }
 }

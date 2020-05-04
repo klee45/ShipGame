@@ -73,6 +73,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   movementStats: {fileID: 0}
   pilot: {fileID: 0}
+  range: 0
+  duration: 0
 --- !u!1 &8560041830002575062
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,8 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
     private float delay = 0;
     [SerializeField]
     private float range;
+    [SerializeField]
+    private bool makeNeutral = false;
 
     private float totalRange;
 
@@ -38,7 +40,7 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
         {
             totalRange += effect.GetRangeMod();
         }
-        totalRange += colliderLength;
+        totalRange += colliderLength * scale.Scale(Vector3.one).y;
     }
 
     public float GetTotalRange()
@@ -64,9 +66,15 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
             GeneralEffect e = effect.Create(projectile.gameObject);
             e.AddTo(projectile.GetEffectsDict());
         }
+        projectile.GetEffectsDict().SortAll();
         float duration = movementStats.GetVelocity().GetDuration(totalRange);
         projectile.Setup(totalRange, duration);
         projectile.SetParent(obj);
+        projectile.gameObject.layer = makeNeutral ? Layers.NEUTRAL_PROJECTILE : Layers.ProjecileFromEntity(obj.layer);
+        foreach (CanColorize canColorize in projectile.GetComponentsInChildren<CanColorize>())
+        {
+            canColorize.GetComponent<SpriteRenderer>().color = Layers.GetColorFromLayer(projectile.gameObject.layer);
+        }
         return projectile;
     }
 }

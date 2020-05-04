@@ -14,7 +14,7 @@ public abstract class EntityTemplate<OUT> : Template<OUT, GameObject> where OUT 
     [SerializeField]
     private float rotation = 0;
     [SerializeField]
-    private ScaleInfo scale;
+    protected ScaleInfo scale;
     [SerializeField]
     protected MovementStatsTemplate movementStats;
     [SerializeField]
@@ -23,16 +23,15 @@ public abstract class EntityTemplate<OUT> : Template<OUT, GameObject> where OUT 
     public override OUT Create(GameObject obj)
     {
         OUT entity = Instantiate(prefab);
+        entity.SetParent(obj);
         entity.transform.localPosition = position;
         entity.transform.localEulerAngles = new Vector3(0, 0, rotation);
-        entity.transform.localScale = scale.Scale(obj.transform.localScale);
+        entity.transform.localScale = scale.Scale(entity.transform.localScale);
 
         MovementStats s = movementStats.Create(entity.gameObject);
         Pilot p = pilot.Create(entity.gameObject);
 
         entity.Setup(s, p);
-
-        entity.SetParent(obj);
 
         return entity;
     }
@@ -59,6 +58,8 @@ public abstract class Entity : MonoBehaviour
         ApplyEffects();
     }
 
+    protected abstract void ApplyEffects();
+
     protected void DoGenericEffects(EffectDict dict)
     {
         foreach (IGeneralEffect effect in dict.generalEffects.GetAll())
@@ -77,7 +78,13 @@ public abstract class Entity : MonoBehaviour
         transform.localPosition += move;
     }
 
-    protected abstract void ApplyEffects();
+    protected void DoTickEffects(EffectDict dict)
+    {
+        foreach (ITickEffect effects in dict.tickEffects.GetAll())
+        {
+            effects.Tick();
+        }
+    }
 
     public MovementStats GetMovementStats() { return movementStats; }
 }

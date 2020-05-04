@@ -2,35 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ForceTemplate : GeneralEffectTemplate
-{
-    [SerializeField]
-    private Vector2 force;
-    [SerializeField]
-    private float duration;
-    [SerializeField]
-    private float percent = 1.0f;
-    [SerializeField]
-    private bool isRelative = true;
-
-    protected override GeneralEffect CreateEffect(GameObject obj)
-    {
-        Force f = gameObject.AddComponent<Force>();
-        f.Setup(force, duration, percent, isRelative);
-        return f;
-    }
-
-    public override float GetRangeMod()
-    {
-        return Force.GetMovementHelper(duration, force);
-    }
-}
-
 public class Force : GeneralEffect, GeneralEffect.IMovementEffect, GeneralEffect.ITickEffect
 {
+    [SerializeField]
     private Vector2 force;
+    [SerializeField]
     private float duration;
+    [SerializeField]
     private float percent = 1.0f;
+    [SerializeField]
     private bool isRelative = true;
 
     public void Setup(Vector2 force, float duration, float percent, bool isRelative)
@@ -53,19 +33,16 @@ public class Force : GeneralEffect, GeneralEffect.IMovementEffect, GeneralEffect
         }
     }
 
-    public float GetMovement(float duration)
+    protected override void AddToHelper(EffectDict dict)
     {
-        return GetMovementHelper(duration, force);
+        dict.movementEffects.Add(this);
+        dict.tickEffects.Add(this);
     }
 
-    public static float GetMovementHelper(float duration, Vector2 force)
+    protected override void RemoveFromHelper(EffectDict dict)
     {
-        return force.y * (duration - (duration * duration / 2.0f));
-    }
-
-    public override void AddTo(EffectDict e)
-    {
-        e.movementEffects.Add(this);
+        dict.movementEffects.Remove(this);
+        dict.tickEffects.Remove(this);
     }
 
     public Vector3 GetMovement()
