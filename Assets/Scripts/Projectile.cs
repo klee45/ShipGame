@@ -30,6 +30,11 @@ public class Projectile : Entity
             Destroy(gameObject, duration);
     }
 
+    protected override Transform GetTransform()
+    {
+        return transform;
+    }
+
     public EffectDictProjectile GetEffectsDict()
     {
         return projectileEffects;

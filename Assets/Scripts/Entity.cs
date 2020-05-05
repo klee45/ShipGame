@@ -61,10 +61,13 @@ public abstract class Entity : MonoBehaviour
     protected virtual void Update()
     {
         pilot?.MakeActions();
-        transform.Rotate(new Vector3(0, 0, -movementStats.GetRotationValue() * Time.deltaTime));
-        transform.position += transform.up * movementStats.GetVelocityValue() * Time.deltaTime;
+        Transform t = GetTransform();
+        t.Rotate(new Vector3(0, 0, -movementStats.GetRotationValue() * Time.deltaTime));
+        t.position += transform.up * movementStats.GetVelocityValue() * Time.deltaTime;
         ApplyEffects();
     }
+
+    protected abstract Transform GetTransform();
 
     protected abstract void ApplyEffects();
 

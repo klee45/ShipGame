@@ -73,6 +73,11 @@ public class Ship : Entity
         base.Update();
     }
 
+    protected override Transform GetTransform()
+    {
+        return GetComponent<Rigidbody2D>().transform;
+    }
+
     public EffectDictShip GetEffectsDict()
     {
         return shipEffects;
