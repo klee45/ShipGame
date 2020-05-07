@@ -105,9 +105,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
-  force: {x: 0, y: -0.15}
-  duration: 0.1
-  percent: 1
+  force: {x: 0, y: -5}
+  duration: 0.35
   isRelative: 1
 --- !u!1 &6117243713321307882
 GameObject:
@@ -323,9 +322,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
-  force: {x: 0.15, y: -0.1}
-  duration: 0.1
-  percent: 1
+  force: {x: 3, y: -6}
+  duration: 0.35
   isRelative: 1
 --- !u!1 &6117243713474744624
 GameObject:
@@ -382,6 +380,7 @@ GameObject:
   - component: {fileID: 6117243713533803762}
   - component: {fileID: 6117243713533803756}
   - component: {fileID: 6117243713533803757}
+  - component: {fileID: 2126467145724181709}
   m_Layer: 11
   m_Name: Elite Missile Swarm
   m_TagString: Untagged
@@ -396,7 +395,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6117243713533803763}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -446,6 +445,19 @@ MonoBehaviour:
   running: 1
   doesReset: 1
   overflows: 1
+--- !u!114 &2126467145724181709
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6117243713533803763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aab9450968f5a65428f0e929530170e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 20
 --- !u!1 &6117243713619489660
 GameObject:
   m_ObjectHideFlags: 0
@@ -518,9 +530,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
-  force: {x: 0, y: -0.15}
-  duration: 0.1
-  percent: 1
+  force: {x: 0, y: -5}
+  duration: 0.45
   isRelative: 1
 --- !u!1 &6117243713710247633
 GameObject:
@@ -594,9 +605,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
-  force: {x: -0.05, y: -0.1}
-  duration: 0.1
-  percent: 1
+  force: {x: -2, y: -3}
+  duration: 0.35
   isRelative: 1
 --- !u!1 &6117243714079776256
 GameObject:
@@ -670,9 +680,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
-  force: {x: -0.15, y: -0.1}
-  duration: 0.1
-  percent: 1
+  force: {x: -3, y: -6}
+  duration: 0.35
   isRelative: 1
 --- !u!1 &6117243714095891446
 GameObject:
@@ -793,9 +802,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
-  force: {x: 0.05, y: -0.1}
-  duration: 0.1
-  percent: 1
+  force: {x: 2, y: -3}
+  duration: 0.35
   isRelative: 1
 --- !u!1 &6117243714163075297
 GameObject:
@@ -931,4 +939,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4f2a31393f89ea649b81aedd87409a2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  priority: 0
+  priority: -1000

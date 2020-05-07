@@ -214,9 +214,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
-  force: {x: 0.05, y: -0.1}
-  duration: 0.1
-  percent: 1
+  force: {x: 7, y: -5}
+  duration: 0.3
   isRelative: 1
 --- !u!1 &4967667839493134333
 GameObject:
@@ -264,7 +263,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 3189834120618545894, guid: 8612488ca57c52b48a485dc0276b0d8e, type: 3}
   position: {x: 0, y: 0}
-  rotation: -10
+  rotation: -15
   scale: {fileID: 1550935922616889584}
   movementStats: {fileID: 4967667839993575278}
   pilot: {fileID: 4967667839993575267}
@@ -290,9 +289,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
-  force: {x: 0.15, y: -0.1}
-  duration: 0.1
-  percent: 1
+  force: {x: 3, y: -4}
+  duration: 0.3
   isRelative: 1
 --- !u!1 &4967667839993575264
 GameObject:
@@ -442,7 +440,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   prefab: {fileID: 3189834120618545894, guid: 8612488ca57c52b48a485dc0276b0d8e, type: 3}
   position: {x: 0, y: 0}
-  rotation: 10
+  rotation: 15
   scale: {fileID: 1550935922616889584}
   movementStats: {fileID: 4967667839993575278}
   pilot: {fileID: 4967667839993575267}
@@ -468,9 +466,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
-  force: {x: -0.15, y: -0.1}
-  duration: 0.1
-  percent: 1
+  force: {x: -3, y: -4}
+  duration: 0.3
   isRelative: 1
 --- !u!1 &4967667840133750185
 GameObject:
@@ -577,9 +574,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
-  force: {x: -0.05, y: -0.1}
-  duration: 0.1
-  percent: 1
+  force: {x: -7, y: -5}
+  duration: 0.3
   isRelative: 1
 --- !u!1 &4967667840262195193
 GameObject:
@@ -653,9 +649,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
-  force: {x: 0, y: -0.15}
-  duration: 0.1
-  percent: 1
+  force: {x: 0, y: -8}
+  duration: 0.2
   isRelative: 1
 --- !u!1 &4967667840472135421
 GameObject:
@@ -729,9 +724,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
-  force: {x: 0, y: -0.15}
-  duration: 0.1
-  percent: 1
+  force: {x: 0, y: -8}
+  duration: 0.2
   isRelative: 1
 --- !u!1 &4967667841109747083
 GameObject:

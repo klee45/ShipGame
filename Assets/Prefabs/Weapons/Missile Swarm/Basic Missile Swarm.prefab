@@ -72,9 +72,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
-  force: {x: -0.05, y: -0.05}
-  duration: 0.1
-  percent: 1
+  force: {x: -4, y: -4}
+  duration: 0.2
   isRelative: 1
 --- !u!1 &6764177119622651026
 GameObject:
@@ -489,9 +488,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
-  force: {x: -0.05, y: -0.05}
-  duration: 0.1
-  percent: 1
+  force: {x: -4, y: -4}
+  duration: 0.2
   isRelative: 1
 --- !u!1 &6764177119904182813
 GameObject:
@@ -565,9 +563,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
-  force: {x: 0, y: -0.05}
-  duration: 0.1
-  percent: 1
+  force: {x: 0, y: -8}
+  duration: 0.2
   isRelative: 1
 --- !u!1 &6764177119986833993
 GameObject:
@@ -641,9 +638,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
-  force: {x: 0, y: -0.05}
-  duration: 0.1
-  percent: 1
+  force: {x: 0, y: -8}
+  duration: 0.2
   isRelative: 1
 --- !u!1 &6764177120331181482
 GameObject:
@@ -717,9 +713,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
-  force: {x: 0.05, y: -0.05}
-  duration: 0.1
-  percent: 1
+  force: {x: 4, y: -4}
+  duration: 0.2
   isRelative: 1
 --- !u!1 &6764177120382606463
 GameObject:
@@ -826,9 +821,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
-  force: {x: 0.05, y: -0.05}
-  duration: 0.1
-  percent: 1
+  force: {x: 4, y: -4}
+  duration: 0.2
   isRelative: 1
 --- !u!1 &6764177121063050356
 GameObject:
