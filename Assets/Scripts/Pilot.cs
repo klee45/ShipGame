@@ -30,12 +30,12 @@ public abstract class Pilot : MonoBehaviour
 
     protected void Rotate(Entity entity, float val)
     {
-        entity.GetMovementStats().GetRotationStatGroup().Tick(val); 
+        entity.RotateTick(val);
     }
 
     protected void Move(Entity entity, float val)
     {
-        entity.GetMovementStats().GetVelocityStatGroup().Tick(val);
+        entity.MoveTick(val);
     }
 
     protected void Teleport(Entity entity, Vector2 target)

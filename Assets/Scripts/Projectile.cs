@@ -30,9 +30,10 @@ public class Projectile : Entity
             Destroy(gameObject, duration);
     }
 
-    protected override Transform GetTransform()
+    protected override void Move(float rotation, float velocity)
     {
-        return transform;
+        transform.Rotate(new Vector3(0, 0, -rotation * Time.deltaTime));
+        transform.position += transform.up * velocity * Time.deltaTime;
     }
 
     public EffectDictProjectile GetEffectsDict()

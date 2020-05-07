@@ -40,7 +40,7 @@ public abstract class EntityTemplate<OUT> : Template<OUT, GameObject> where OUT 
 public abstract class Entity : MonoBehaviour
 {
     [SerializeField]
-    protected MovementStats movementStats;
+    private MovementStats movementStats;
     [SerializeField]
     protected Pilot pilot;
 
@@ -61,15 +61,23 @@ public abstract class Entity : MonoBehaviour
     protected virtual void Update()
     {
         pilot?.MakeActions();
-        Transform t = GetTransform();
-        t.Rotate(new Vector3(0, 0, -movementStats.GetRotationValue() * Time.deltaTime));
-        t.position += transform.up * movementStats.GetVelocityValue() * Time.deltaTime;
+        Move(movementStats.GetRotationValue(), movementStats.GetVelocityValue());
         ApplyEffects();
     }
 
-    protected abstract Transform GetTransform();
+    protected abstract void Move(float rotation, float velocity);
 
     protected abstract void ApplyEffects();
+
+    public void RotateTick(float val)
+    {
+        movementStats.GetRotationStatGroup().Tick(val);
+    }
+
+    public void MoveTick(float val)
+    {
+        movementStats.GetVelocityStatGroup().Tick(val);
+    }
 
     protected void DoGenericEffects(EffectDict dict)
     {
@@ -96,6 +104,4 @@ public abstract class Entity : MonoBehaviour
             effects.Tick();
         }
     }
-
-    public MovementStats GetMovementStats() { return movementStats; }
 }

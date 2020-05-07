@@ -73,9 +73,18 @@ public class Ship : Entity
         base.Update();
     }
 
-    protected override Transform GetTransform()
+    protected override void Move(float rotation, float velocity)
     {
-        return GetComponent<Rigidbody2D>().transform;
+        /*
+        Transform t = GetTransform();
+        t.Rotate(new Vector3(0, 0, -movementStats.GetRotationValue() * Time.deltaTime));
+        t.position += transform.up * movementStats.GetVelocityValue() * Time.deltaTime;
+        */
+        Vector3 translate = transform.position + transform.up * velocity * Time.deltaTime;
+        float rotate = transform.eulerAngles.z - (rotation * Time.deltaTime);
+        Rigidbody2D body = GetComponent<Rigidbody2D>();
+        body.MovePosition(translate);
+        body.MoveRotation(rotate);
     }
 
     public EffectDictShip GetEffectsDict()
