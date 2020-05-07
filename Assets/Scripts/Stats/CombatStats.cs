@@ -57,7 +57,7 @@ public class CombatStats : MonoBehaviour
     public event DamageEvent OnHullHit;
     public event DamageEvent OnDeath;
 
-    void Start()
+    void Awake()
     {
         this.maxHull = new IntStat(initialHullMax);
         this.maxArmor = new IntStat(initialArmorMax);
@@ -65,7 +65,10 @@ public class CombatStats : MonoBehaviour
         hull = initialHullMax;
         armor = initialArmorMax;
         shield = initialShieldMax;
+    }
 
+    private void Start()
+    {
         UpdateAllGraphics();
     }
 
