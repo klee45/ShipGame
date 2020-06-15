@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitPerSecond : ProjectileEffect, ProjectileEffect.IOnHitStayEffect
+public class HitPerSecond : ProjectileEffect, ProjectileEffect.IOnHitStayEffect, EffectDict.IEffectAdds
 {
     [SerializeField]
     private int damage;
@@ -24,6 +24,11 @@ public class HitPerSecond : ProjectileEffect, ProjectileEffect.IOnHitStayEffect
         InvokeRepeating("RepeatingUpdate", 0.0f, rate);
     }
 
+    public override void AddTo(EffectDictProjectile dict)
+    {
+        dict.onStays.Add(this);
+    }
+
     public void Setup(int damage, float rate, int maxTimes, bool destroyOnEnd)
     {
         this.damage = damage;
@@ -37,16 +42,6 @@ public class HitPerSecond : ProjectileEffect, ProjectileEffect.IOnHitStayEffect
         DoDamage(collision, damage);
         WakeUp(collision);
         disableOnUpdate = true;
-    }
-
-    protected override void AddToHelper(EffectDictProjectile dict)
-    {
-        dict.onStays.Add(this);
-    }
-
-    protected override void RemoveFromHelper(EffectDictProjectile dict)
-    {
-        dict.onStays.Remove(this);
     }
 
     private void FixedUpdate()

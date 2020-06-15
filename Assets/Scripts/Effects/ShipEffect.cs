@@ -4,12 +4,5 @@ using UnityEngine;
 
 public abstract class ShipEffect : Effect
 {
-    public void AddTo(EffectDictShip dict)
-    {
-        AddToHelper(dict);
-        OnDestroyEvent += () => RemoveFromHelper(dict);
-    }
-
-    protected abstract void AddToHelper(EffectDictShip dict);
-    protected abstract void RemoveFromHelper(EffectDictShip dict);
+    public abstract void AddTo(EffectDictShip dict);
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Force : GeneralEffect, GeneralEffect.IMovementEffect, GeneralEffect.ITickEffect
+public class Force : GeneralEffect, GeneralEffect.IMovementEffect, GeneralEffect.ITickEffect, EffectDict.IEffectAdds
 {
     [SerializeField]
     private Vector2 force;
@@ -31,18 +31,6 @@ public class Force : GeneralEffect, GeneralEffect.IMovementEffect, GeneralEffect
         }
     }
 
-    protected override void AddToHelper(EffectDict dict)
-    {
-        dict.movementEffects.Add(this);
-        dict.tickEffects.Add(this);
-    }
-
-    protected override void RemoveFromHelper(EffectDict dict)
-    {
-        dict.movementEffects.Remove(this);
-        dict.tickEffects.Remove(this);
-    }
-
     public Vector3 GetMovement(float timeDelta)
     {
         if (isRelative)
@@ -55,5 +43,11 @@ public class Force : GeneralEffect, GeneralEffect.IMovementEffect, GeneralEffect
         {
             return new Vector3(force.x * timeDelta, force.y * timeDelta, 0);
         }
+    }
+
+    public override void AddTo(EffectDict dict)
+    {
+        dict.movementEffects.Add(this);
+        dict.tickEffects.Add(this);
     }
 }

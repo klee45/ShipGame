@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FixedLifespan : GeneralEffect, GeneralEffect.IGeneralEffect
+public class FixedLifespan : GeneralEffect, GeneralEffect.IGeneralEffect, EffectDict.IEffectUpdates
 {
+    private static string FIXED_NAME = "__Fixed Lifespan";
+
     [SerializeField]
     private float duration;
 
@@ -17,13 +19,18 @@ public class FixedLifespan : GeneralEffect, GeneralEffect.IGeneralEffect
         Destroy(e.gameObject, duration);
     }
 
-    protected override void AddToHelper(EffectDict dict)
+    public override void AddTo(EffectDict dict)
     {
-        dict.generalEffects.Add(this);
+        dict.generalEffects.AddUpdate(this);
     }
 
-    protected override void RemoveFromHelper(EffectDict dict)
+    public IEffect UpdateEffect(IEffect effect, out bool didReplace)
     {
-        dict.generalEffects.Remove(this);
+        if (effect is FixedLifespan e)
+        {
+            e.duration = this.duration;
+        }
+        didReplace = false;
+        return effect;
     }
 }

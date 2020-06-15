@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitOnce : ProjectileEffect, ProjectileEffect.IOnHitEffect
+public class HitOnce : ProjectileEffect, ProjectileEffect.IOnHitEffect, EffectDict.IEffectUpdates
 {
     [SerializeField]
     private int damage;
@@ -12,19 +12,24 @@ public class HitOnce : ProjectileEffect, ProjectileEffect.IOnHitEffect
         this.damage = damage;
     }
 
-    protected override void AddToHelper(EffectDictProjectile dict)
-    {
-        dict.onHits.Add(this);
-    }
-
-    protected override void RemoveFromHelper(EffectDictProjectile dict)
-    {
-        dict.onHits.Remove(this);
-    }
-
     public void OnHit(Collider2D collision)
     {
         DoDamage(collision, damage);
         DestroySelf();
+    }
+
+    public override void AddTo(EffectDictProjectile dict)
+    {
+        dict.onHits.AddUpdate(this);
+    }
+
+    public IEffect UpdateEffect(IEffect effect, out bool didReplace)
+    {
+        if (effect is HitOnce e)
+        {
+            e.damage += this.damage;
+        }
+        didReplace = false;
+        return effect;
     }
 }

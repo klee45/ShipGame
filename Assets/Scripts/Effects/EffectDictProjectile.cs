@@ -5,20 +5,13 @@ using static ProjectileEffect;
 
 public class EffectDictProjectile : EffectDict
 {
-    public EffectContainer<IOnHitEffect> onHits;
-    public EffectContainer<IOnHitStayEffect> onStays;
+    public SortedEffectDict<IOnHitEffect> onHits;
+    public SortedEffectDict<IOnHitStayEffect> onStays;
 
     protected override void Awake()
     {
         base.Awake();
-        onHits = new EffectContainer<IOnHitEffect>();
-        onStays = new EffectContainer<IOnHitStayEffect>();
-    }
-
-    public override void SortAll()
-    {
-        base.SortAll();
-        onHits.Sort();
-        onStays.Sort();
+        onHits = new SortedEffectDict<IOnHitEffect>();
+        onStays = new SortedEffectDict<IOnHitStayEffect>();
     }
 }

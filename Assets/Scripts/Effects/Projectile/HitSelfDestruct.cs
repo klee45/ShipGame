@@ -2,20 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitSelfDestruct : ProjectileEffect, ProjectileEffect.IOnHitEffect
+public class HitSelfDestruct : ProjectileEffect, ProjectileEffect.IOnHitEffect, EffectDict.IEffectUpdates
 {
     public void OnHit(Collider2D collision)
     {
         DestroySelf();
     }
 
-    protected override void AddToHelper(EffectDictProjectile dict)
+    public override void AddTo(EffectDictProjectile dict)
     {
-        dict.onHits.Add(this);
+        dict.onHits.AddUpdate(this);
     }
 
-    protected override void RemoveFromHelper(EffectDictProjectile dict)
+    public IEffect UpdateEffect(IEffect effect, out bool didReplace)
     {
-        dict.onHits.Remove(this);
+        didReplace = false;
+        return effect;
     }
 }

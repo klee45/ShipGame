@@ -11,7 +11,7 @@ public abstract class EffectTemplate<T> : Template<T, GameObject> where T : Effe
     public override sealed T Create(GameObject obj)
     {
         T effect = CreateEffect(obj);
-        effect.SetPriority(priority);
+        effect.ForceSetPriority(priority);
         return effect;
     }
 
@@ -27,21 +27,22 @@ public abstract class Effect : MonoBehaviour, Effect.IEffect
 {
     protected int priority = 0;
 
-    protected delegate void DestroyEvent();
-    protected event DestroyEvent OnDestroyEvent;
+    public delegate void DestroyEvent(IEffect e);
+    public event DestroyEvent OnDestroyEvent;
 
     private void OnDestroy()
     {
-        OnDestroyEvent?.Invoke();
+        OnDestroyEvent?.Invoke(this);
     }
 
-    public void SetPriority(int priority)
+    public void ForceSetPriority(int priority)
     {
         this.priority = priority;
     }
 
     public interface IEffect
     {
+        event DestroyEvent OnDestroyEvent;
         int GetPriority();
     }
 
@@ -55,14 +56,7 @@ public abstract class GeneralEffectTemplate : EffectTemplate<GeneralEffect>
 
 public abstract class GeneralEffect : Effect
 {
-    public void AddTo(EffectDict dict)
-    {
-        AddToHelper(dict);
-        OnDestroyEvent += () => RemoveFromHelper(dict);
-    }
-
-    protected abstract void AddToHelper(EffectDict dict);
-    protected abstract void RemoveFromHelper(EffectDict dict);
+    public abstract void AddTo(EffectDict dict);
 
     public interface ITickEffect : IEffect
     {

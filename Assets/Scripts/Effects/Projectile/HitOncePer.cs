@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitOncePer : ProjectileEffect, ProjectileEffect.IOnHitEffect
+public class HitOncePer : ProjectileEffect, ProjectileEffect.IOnHitEffect, EffectDict.IEffectAdds
 {
     [SerializeField]
     private int damage;
@@ -12,14 +12,9 @@ public class HitOncePer : ProjectileEffect, ProjectileEffect.IOnHitEffect
         this.damage = damage;
     }
 
-    protected override void AddToHelper(EffectDictProjectile dict)
+    public override void AddTo(EffectDictProjectile dict)
     {
         dict.onHits.Add(this);
-    }
-
-    protected override void RemoveFromHelper(EffectDictProjectile dict)
-    {
-        dict.onHits.Remove(this);
     }
 
     public void OnHit(Collider2D collision)

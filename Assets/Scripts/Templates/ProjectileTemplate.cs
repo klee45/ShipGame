@@ -61,7 +61,6 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
             GeneralEffect e = effect.Create(projectile.gameObject);
             e.AddTo(projectile.GetEffectsDict());
         }
-        projectile.GetEffectsDict().SortAll();
         float duration = movementStats.GetVelocity().GetDuration(remainingRange);
         projectile.Setup(remainingRange, duration);
         projectile.SetParent(obj);

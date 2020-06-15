@@ -8,14 +8,7 @@ public abstract class ProjectileEffectTemplate : EffectTemplate<ProjectileEffect
 
 public abstract class ProjectileEffect : Effect
 {
-    public void AddTo(EffectDictProjectile dict)
-    {
-        AddToHelper(dict);
-        OnDestroyEvent += () => RemoveFromHelper(dict);
-    }
-
-    protected abstract void AddToHelper(EffectDictProjectile dict);
-    protected abstract void RemoveFromHelper(EffectDictProjectile dict);
+    public abstract void AddTo(EffectDictProjectile dict);
 
     public interface IOnHitEffect : IEffect
     {

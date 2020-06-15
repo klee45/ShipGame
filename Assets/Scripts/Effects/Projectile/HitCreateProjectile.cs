@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitCreateProjectile : ProjectileEffect, ProjectileEffect.IOnHitEffect
+public class HitCreateProjectile : ProjectileEffect, ProjectileEffect.IOnHitEffect, EffectDict.IEffectAdds
 {
     [SerializeField]
     private ProjectileTemplate template;
@@ -17,14 +17,9 @@ public class HitCreateProjectile : ProjectileEffect, ProjectileEffect.IOnHitEffe
         StartCoroutine(SpawnAfterDelay(template.GetDelay()));
     }
 
-    protected override void AddToHelper(EffectDictProjectile dict)
+    public override void AddTo(EffectDictProjectile dict)
     {
         dict.onHits.Add(this);
-    }
-
-    protected override void RemoveFromHelper(EffectDictProjectile dict)
-    {
-        dict.onHits.Remove(this);
     }
 
     private IEnumerator SpawnAfterDelay(float delay)

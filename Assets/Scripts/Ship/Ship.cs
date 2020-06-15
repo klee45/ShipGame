@@ -11,7 +11,6 @@ public class ShipTemplate : EntityTemplate<Ship>
     {
         Ship ship = base.Create(obj);
         combatStatsTemplate.Create(ship);
-        ship.GetEffectsDict().SortAll();
         return ship;
     }
 }
