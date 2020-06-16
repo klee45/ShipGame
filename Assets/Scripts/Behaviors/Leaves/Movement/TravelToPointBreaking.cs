@@ -5,6 +5,9 @@ using UnityEngine;
 public class TravelToPointBreaking : Travel
 {
     [SerializeField]
+    private bool debug = false;
+
+    [SerializeField]
     private float successDistance;
     [SerializeField]
     private float slowAngle;
@@ -17,7 +20,6 @@ public class TravelToPointBreaking : Travel
     protected override NodeState UpdateStateHelper(BehaviorState state)
     {
         RotateTowardsTargetAngleDiff(state);
-
         float sqrDiff = state.target.sqrDistDiff - successDistance * successDistance;
         if (sqrDiff > 0)
         {

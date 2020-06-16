@@ -47,7 +47,7 @@ public class StatGroupSecondOrder : StatGroup
 
 public class StatGroupSecondOrderKernel
 {
-    private static float INPUT_LIMIT = 0.25f;
+    private static float INPUT_LIMIT = 0.1f;
     private FloatStat accelerationStat, decelerationStat, maxStat, minStat;
     private float dampening;
     private float currentValue;
@@ -79,7 +79,7 @@ public class StatGroupSecondOrderKernel
         else
         {
             float mod = (1 - Mathf.Abs(scale)) * dampening * Time.deltaTime;
-            if (this.currentValue > mod)
+            if (this.currentValue >= mod)
             {
                 this.currentValue -= mod;
             }

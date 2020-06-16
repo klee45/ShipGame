@@ -17,7 +17,7 @@ public class TravelStayWeaponDist : Travel
     {
         nodeName = string.Format("Travel within {0} - {1}% of weapon range", minPercent, maxPercent);
     }
-
+    
     protected override string GetName()
     {
         return nodeName;

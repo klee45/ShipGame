@@ -7,6 +7,7 @@ public class StatGroupFirstOrder : StatGroup
     [SerializeField]
     private float multiplier;
     private FloatStat stat;
+    private float currentValue;
 
     private void Start()
     {
@@ -20,10 +21,11 @@ public class StatGroupFirstOrder : StatGroup
 
     public override float GetValue()
     {
-        return stat.GetValue();
+        return currentValue;
     }
 
     public override void Tick(float scale)
     {
+        currentValue = stat.GetValue() * scale;
     }
 }
