@@ -66,6 +66,7 @@ public abstract class Entity : MonoBehaviour
     }
 
     protected abstract void Move(float rotation, float velocity);
+    protected abstract void Translate(Vector2 translation);
 
     protected abstract void ApplyEffects();
 
@@ -89,12 +90,17 @@ public abstract class Entity : MonoBehaviour
 
     protected void DoMovementEffects(EffectDict dict)
     {
-        Vector3 move = Vector3.zero;
+        bool atLeastOne = false;
+        Vector3 translation = Vector3.zero;
         foreach (IMovementEffect effect in dict.movementEffects.GetAll())
         {
-            move += effect.GetMovement(Time.deltaTime);
+            translation += effect.GetMovement(Time.deltaTime);
+            atLeastOne = true;
         }
-        transform.localPosition += move;
+        if (atLeastOne)
+        {
+            Translate(translation);
+        }
     }
 
     protected void DoTickEffects(EffectDict dict)

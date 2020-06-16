@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class SetRandomTargetPosition : BehaviorLeaf
 {
+    private static float BOUNDRY_PADDING = 3;
+
     [SerializeField]
     private float width;
     [SerializeField]
@@ -29,9 +31,31 @@ public class SetRandomTargetPosition : BehaviorLeaf
             x += pos.x;
             y += pos.y;
         }
-        state.target.position = new Vector2(pos.x + widthMod, pos.y + heightMod);
-        last = state.target.position;
-        return NodeState.SUCCESS;
+        
+        Vector3 newPos = new Vector2(pos.x + widthMod, pos.y + heightMod);
+        if (SetNewPos(state, newPos))
+        {
+            return NodeState.SUCCESS;
+        }
+        //Debug.Log("Initial position was out of bounds");
+        newPos = new Vector2(pos.x - widthMod, pos.y - heightMod);
+        if (SetNewPos(state, newPos))
+        {
+            return NodeState.SUCCESS;
+        }
+        //Debug.Log("Secondary opposite position was also out of bounds");
+        return NodeState.FAILURE;
+    }
+
+    private bool SetNewPos(BehaviorState state, Vector3 pos)
+    {
+        if (Boundry.instance.Inside(pos, BOUNDRY_PADDING))
+        {
+            state.target.position = pos;
+            last = state.target.position;
+            return true;
+        }
+        return false;
     }
 
     protected override string GetName()

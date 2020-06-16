@@ -26,6 +26,10 @@ public class Ship : Entity
 
     private bool markedForDelete = false;
 
+    private Rigidbody2D body;
+    private Vector3 desiredPosition;
+    private float desiredRotation;
+
     public void Setup(CombatStats stats)
     {
         combatStats = stats;
@@ -34,6 +38,11 @@ public class Ship : Entity
     public override void Start()
     {
         base.Start();
+
+        body = GetComponent<Rigidbody2D>();
+        desiredPosition = transform.position;
+        desiredRotation = transform.eulerAngles.z;
+
         shipEffects = gameObject.AddComponent<EffectDictShip>();
 
         arsenal = GetComponentInChildren<Arsenal>();
@@ -70,6 +79,8 @@ public class Ship : Entity
     protected override void Update()
     {
         base.Update();
+        body.MovePosition(desiredPosition);
+        body.MoveRotation(desiredRotation);
     }
 
     protected override void Move(float rotation, float velocity)
@@ -79,11 +90,15 @@ public class Ship : Entity
         t.Rotate(new Vector3(0, 0, -movementStats.GetRotationValue() * Time.deltaTime));
         t.position += transform.up * movementStats.GetVelocityValue() * Time.deltaTime;
         */
-        Vector3 translate = transform.position + transform.up * velocity * Time.deltaTime;
-        float rotate = transform.eulerAngles.z - (rotation * Time.deltaTime);
-        Rigidbody2D body = GetComponent<Rigidbody2D>();
-        body.MovePosition(translate);
-        body.MoveRotation(rotate);
+        Vector3 translate = transform.up * velocity * Time.deltaTime;
+        float rotate = -(rotation * Time.deltaTime);
+        desiredPosition += translate;
+        desiredRotation += rotate;
+    }
+
+    protected override void Translate(Vector2 translation)
+    {
+        desiredPosition += translation.ToVector3();
     }
 
     public EffectDictShip GetEffectsDict()

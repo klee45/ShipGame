@@ -36,6 +36,11 @@ public class Projectile : Entity
         transform.position += transform.up * velocity * Time.deltaTime;
     }
 
+    protected override void Translate(Vector2 translation)
+    {
+        transform.position += translation.ToVector3();
+    }
+
     public EffectDictProjectile GetEffectsDict()
     {
         return projectileEffects;
