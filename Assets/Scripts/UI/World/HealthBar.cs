@@ -114,7 +114,7 @@ public class HealthBar : MonoBehaviour
         image.fillAmount = currPercent;
         text.text = string.Format("{0} / {1}", current, max);
         image.rectTransform.localEulerAngles = new Vector3(0, 0, prevPercent);
-        Debug.Log(middPercent);
+        //Debug.Log(middPercent);
         Quaternion middAngle = Quaternion.Euler(0, 0, middPercent);
         text.rectTransform.localPosition = middAngle * new Vector3(0, 0.55f);
         text.rectTransform.localRotation = middAngle;

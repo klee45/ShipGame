@@ -40,6 +40,12 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    public void SetShip(Ship ship)
+    {
+        this.ship = ship;
+        Start();
+    }
+
     private void SetupHealthBar()
     {
         CombatStats stats = ship.GetComponentInChildren<CombatStats>();
