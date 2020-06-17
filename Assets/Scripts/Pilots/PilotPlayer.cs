@@ -20,7 +20,17 @@ public class PilotPlayer : Pilot
         keyActionPairs = Translate(input.LoadKeys());
     }
 
+    private void OnEnable()
+    {
+        Initialize();
+    }
+
     private void Start()
+    {
+        Initialize();
+    }
+
+    private void Initialize()
     {
         ship = GetComponentInParent<Ship>();
     }

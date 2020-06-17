@@ -14,7 +14,7 @@ public class PilotDummy : Pilot
 
     public override void MakeActions()
     {
-        Rotate(entity, 1);
-        Move(entity, 1);
+        //Rotate(entity, 1);
+        //Move(entity, 1);
     }
 }

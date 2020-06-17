@@ -44,6 +44,11 @@ public abstract class Entity : MonoBehaviour
     [SerializeField]
     protected Pilot pilot;
 
+    private void Awake()
+    {
+        pilot = GetComponentInChildren<Pilot>();
+    }
+
     public virtual void Start()
     {
         foreach (CanColorize canColorize in GetComponentsInChildren<CanColorize>())

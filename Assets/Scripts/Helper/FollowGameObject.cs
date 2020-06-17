@@ -15,6 +15,22 @@ public class FollowGameObject : MonoBehaviour
         transform.parent = target.transform;
     }
     **/
+    private void Start()
+    {
+        ChangeSize();
+    }
+
+    private void ChangeSize()
+    {
+        float scale = target.GetComponentInChildren<Canvas>().transform.localScale.x;
+        GetComponent<Camera>().orthographicSize = CameraScale * Mathf.Sqrt(scale);
+    }
+
+    public void SetTarget(GameObject obj)
+    {
+        target = obj;
+        ChangeSize();
+    }
 
     private void LateUpdate()
     {
@@ -23,8 +39,6 @@ public class FollowGameObject : MonoBehaviour
             Vector3 tp = target.transform.position;
             transform.position = new Vector3(tp.x, tp.y, transform.position.z);
             //transform.rotation = target.transform.rotation;
-
-            GetComponent<Camera>().orthographicSize = CameraScale * transform.localScale.x;
         }
     }
 }

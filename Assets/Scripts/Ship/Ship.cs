@@ -113,6 +113,11 @@ public class Ship : Entity
         DoMovementEffects(shipEffects);
     }
 
+    public void SetPilot(Pilot pilot)
+    {
+        this.pilot = pilot;
+    }
+
     public CombatStats GetCombatStats() { return combatStats; }
     public Arsenal GetArsenal() { return arsenal; }
     public Weapon GetWeapon(int weaponPos)
