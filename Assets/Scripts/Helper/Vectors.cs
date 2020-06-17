@@ -18,4 +18,19 @@ public static class Vectors
     {
         return new Vector3(v.x, v.y);
     }
+
+    public static Vector3 NewX(this Vector3 v, float x)
+    {
+        return new Vector3(x, v.y, v.z);
+    }
+
+    public static Vector3 NewY(this Vector3 v, float y)
+    {
+        return new Vector3(v.x, y, v.z);
+    }
+
+    public static Vector3 NewZ(this Vector3 v, float z)
+    {
+        return new Vector3(v.x, v.y, z);
+    }
 }

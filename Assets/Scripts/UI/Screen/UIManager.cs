@@ -30,7 +30,7 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ship != null)
+        if (ship != null && ship.gameObject.activeInHierarchy)
         {
             int i = 0;
             foreach (Weapon weapon in ship.GetComponentInChildren<Arsenal>().GetWeapons())

@@ -65,6 +65,8 @@ public class CombatStats : MonoBehaviour
         hull = initialHullMax;
         armor = initialArmorMax;
         shield = initialShieldMax;
+
+        healthBar = GetComponentInParent<Ship>().GetComponentInChildren<HealthBar>();
     }
 
     private void Start()
@@ -87,6 +89,11 @@ public class CombatStats : MonoBehaviour
     public float GetTotalHP()
     {
         return hull + armor + shield;
+    }
+
+    public int GetTotalMaxHP()
+    {
+        return maxHull.GetValue() + maxArmor.GetValue() + maxShield.GetValue();
     }
 
     public float GetOverallPercent()
@@ -170,17 +177,17 @@ public class CombatStats : MonoBehaviour
 
     private void UpdateShieldGraphic()
     {
-        healthBar?.UpdateShieldGraphic(maxShield.GetValue(), shield);
+        healthBar?.UpdateShieldGraphic(shield, maxShield.GetValue(), maxArmor.GetValue(), maxHull.GetValue());
     }
 
     private void UpdateArmorGraphic()
     {
-        healthBar?.UpdateArmorGraphic(maxArmor.GetValue(), armor);
+        healthBar?.UpdateArmorGraphic(armor, maxShield.GetValue(), maxArmor.GetValue(), maxHull.GetValue());
     }
 
     private void UpdateHullGraphic()
     {
-        healthBar?.UpdateHullGraphic(maxHull.GetValue(), hull);
+        healthBar?.UpdateHullGraphic(hull, maxShield.GetValue(), maxArmor.GetValue(), maxHull.GetValue());
     }
 
     private void UpdateAllGraphics()
