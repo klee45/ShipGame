@@ -80,11 +80,6 @@ public class Ship : Entity
     {
         desiredPosition = transform.position;
         base.Update();
-        Vector3 diff = desiredPosition - transform.position;
-        if (diff.magnitude > 0)
-        {
-            Debug.Log(diff);
-        }
         body.MovePosition(desiredPosition);
         body.MoveRotation(desiredRotation);
     }

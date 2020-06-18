@@ -1,0 +1,19 @@
+Empire
+	Heavy weapons specialists
+		Kinetic and explosive weapons
+	Heavy armor
+
+Hivemind
+	Balanced weapon set
+	Weak ships, large numbers
+
+Union
+	Strong shields
+	Energy weapons
+	
+	Centered around power collection from stars
+
+
+
+Empires are difficult to control as they grow in size
+Different regions in an empire can have completely different feel

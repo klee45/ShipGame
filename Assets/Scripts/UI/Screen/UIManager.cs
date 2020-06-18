@@ -18,12 +18,15 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetupHealthBar();
-        int i = 0;
-        foreach (Weapon weapon in ship.GetComponentInChildren<Arsenal>().GetWeapons())
+        if (ship != null && ship.gameObject.activeInHierarchy)
         {
-            weaponsUI.SetIcon(i, weapon);
-            weaponsUI.SetPercent(i++, weapon);
+            SetupHealthBar();
+            int i = 0;
+            foreach (Weapon weapon in ship.GetComponentInChildren<Arsenal>().GetWeapons())
+            {
+                weaponsUI.SetIcon(i, weapon);
+                weaponsUI.SetPercent(i++, weapon);
+            }
         }
     }
 
