@@ -11,7 +11,7 @@ public class EffectDictProjectile : EffectDict
     protected override void Awake()
     {
         base.Awake();
-        onHits = new SortedEffectDict<IOnHitEffect>();
-        onStays = new SortedEffectDict<IOnHitStayEffect>();
+        onHits = Link(new SortedEffectDict<IOnHitEffect>());
+        onStays = Link(new SortedEffectDict<IOnHitStayEffect>());
     }
 }

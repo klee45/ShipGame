@@ -30,6 +30,14 @@ public class Ship : Entity
     private Vector3 desiredPosition;
     private float desiredRotation;
 
+    public delegate void DestroyEvent(Ship s);
+    public event DestroyEvent OnShipDestroy;
+
+    private void OnDestroy()
+    {
+        OnShipDestroy?.Invoke(this);
+    }
+
     public void Setup(CombatStats stats)
     {
         combatStats = stats;
@@ -70,7 +78,7 @@ public class Ship : Entity
 
     private void FixedUpdate()
     {
-        if(markedForDelete)
+        if (markedForDelete)
         {
             Destroy(gameObject);
         }
@@ -82,6 +90,20 @@ public class Ship : Entity
         base.Update();
         body.MovePosition(desiredPosition);
         body.MoveRotation(desiredRotation);
+    }
+
+    public T AddGeneralEffect<T>() where T : GeneralEffect
+    {
+        T e = gameObject.AddComponent<T>();
+        e.AddTo(GetEffectsDict());
+        return e;
+    }
+
+    public T AddShipEffect<T>() where T : ShipEffect
+    {
+        T e = gameObject.AddComponent<T>();
+        e.AddTo(GetEffectsDict());
+        return e;
     }
 
     protected override void Move(float rotation, float velocity)

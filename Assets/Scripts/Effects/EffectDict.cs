@@ -12,11 +12,43 @@ public abstract class EffectDict : MonoBehaviour
     public SortedEffectDict<IMovementEffect> movementEffects;
     public SortedEffectDict<ITickEffect> tickEffects;
 
+    public delegate void DictChange();
+    public event DictChange OnChange;
+
     protected virtual void Awake()
     {
-        generalEffects = new SortedEffectDict<IGeneralEffect>();
-        movementEffects = new SortedEffectDict<IMovementEffect>();
-        tickEffects = new SortedEffectDict<ITickEffect>();
+        generalEffects = Link(new SortedEffectDict<IGeneralEffect>());
+        movementEffects = Link(new SortedEffectDict<IMovementEffect>());
+        tickEffects = Link(new SortedEffectDict<ITickEffect>());
+    }
+
+    private void InvokeChange()
+    {
+        OnChange?.Invoke();
+    }
+
+    protected SortedEffectDict<T> Link<T>(SortedEffectDict<T> dict) where T : IEffect
+    {
+        dict.OnChange += InvokeChange;
+        return dict;
+    }
+
+    public virtual List<List<IEffect>> GetAddEffects()
+    {
+        List<List<IEffect>> lst = new List<List<IEffect>>();
+        lst.AddRange(generalEffects.GetAdds());
+        lst.AddRange(movementEffects.GetAdds());
+        lst.AddRange(tickEffects.GetAdds());
+        return lst;
+    }
+
+    public virtual List<IEffect> GetUpdateEffects()
+    {
+        List<IEffect> lst = new List<IEffect>();
+        lst.AddRange(generalEffects.GetUniques());
+        lst.AddRange(movementEffects.GetUniques());
+        lst.AddRange(tickEffects.GetUniques());
+        return lst;
     }
 
     public interface IEffectAdds { }
@@ -27,6 +59,8 @@ public abstract class EffectDict : MonoBehaviour
 
     public class SortedEffectDict<U> where U : IEffect
     {
+        public event DictChange OnChange;
+
         private Dictionary<System.Type, IEffect> updateDict;
         private Dictionary<System.Type, List<IEffect>> addDict;
         private List<U> lst;
@@ -36,6 +70,16 @@ public abstract class EffectDict : MonoBehaviour
             updateDict = new Dictionary<System.Type, IEffect>();
             addDict = new Dictionary<System.Type, List<IEffect>>();
             lst = new List<U>();
+        }
+
+        public List<List<IEffect>> GetAdds()
+        {
+            return addDict.Values.ToList();
+        }
+
+        public List<IEffect> GetUniques()
+        {
+            return updateDict.Values.ToList();
         }
 
         public List<U> GetAll()
@@ -78,6 +122,7 @@ public abstract class EffectDict : MonoBehaviour
                 ListInsert(effect);
                 effect.OnDestroyEvent += RemoveUpdateHelper;
             }
+            OnChange?.Invoke();
         }
 
         public void RemoveUpdate<T>(T effect) where T : U, IEffectUpdates
@@ -90,6 +135,7 @@ public abstract class EffectDict : MonoBehaviour
             RemoveAsGeneric(effect);
             updateDict.Remove(effect.GetType());
             effect.OnDestroyEvent -= RemoveUpdateHelper;
+            OnChange?.Invoke();
         }
 
         public void Add<T>(T effect) where T : U, IEffectAdds
@@ -107,6 +153,7 @@ public abstract class EffectDict : MonoBehaviour
             }
             ListInsert(effect);
             effect.OnDestroyEvent += RemoveAddHelper;
+            OnChange?.Invoke();
         }
 
         public void RemoveAdd<T>(T effect) where T : U, IEffectAdds
@@ -137,6 +184,7 @@ public abstract class EffectDict : MonoBehaviour
                     effect.OnDestroyEvent -= RemoveAddHelper;
                 }
             }
+            OnChange?.Invoke();
         }
 
         private void RemoveAsGeneric(IEffect effect)
