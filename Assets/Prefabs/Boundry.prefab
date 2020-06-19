@@ -88,8 +88,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3177318063380748415}
-  - component: {fileID: 3177318063380748412}
   - component: {fileID: 3177318063380748413}
+  - component: {fileID: 3177318063380748412}
   m_Layer: 20
   m_Name: Boundry
   m_TagString: Untagged
@@ -112,18 +112,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3177318063380748412
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3177318063380748410}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c5edc2112b9aaec46912a523746e5128, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!58 &3177318063380748413
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -140,3 +128,15 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1
+--- !u!114 &3177318063380748412
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3177318063380748410}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c5edc2112b9aaec46912a523746e5128, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

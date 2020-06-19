@@ -55,9 +55,8 @@ public class Boundry : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         Ship ship = collision.gameObject.GetComponent<Ship>();
-        BoundryForce force = ship.gameObject.AddComponent<BoundryForce>();
-
-        force.AddTo(ship.GetEffectsDict());
+        BoundryForce force = ship.AddGeneralEffect<BoundryForce>();
+        ship.OnShipDestroy += Remove;
         outOfBounds.Add(ship, force);
 
         //Debug.Log("Exit T");
@@ -68,13 +67,19 @@ public class Boundry : MonoBehaviour
         Ship ship = collision.gameObject.GetComponent<Ship>();
         if (outOfBounds.TryGetValue(ship, out BoundryForce force))
         {
+            ship.OnShipDestroy -= Remove;
             Destroy(force);
             outOfBounds.Remove(ship);
         }
         //Debug.Log("Enter");
     }
 
-    public class BoundryForce : ForceEndless, GeneralEffect.ITickEffect
+    private void Remove(Ship s)
+    {
+        outOfBounds.Remove(s);
+    }
+
+    public class BoundryForce : AForce, GeneralEffect.ITickEffect, EffectDict.IEffectUpdates
     {
         private static float scale = 3f;
 
@@ -97,8 +102,13 @@ public class Boundry : MonoBehaviour
 
         public override void AddTo(EffectDict dict)
         {
-            base.AddTo(dict);
-            dict.tickEffects.Add(this);
+            dict.tickEffects.AddUpdate(this);
+        }
+
+        public IEffect UpdateEffect(IEffect effect, out bool didReplace)
+        {
+            didReplace = false;
+            return effect;
         }
     }
 }

@@ -4,21 +4,23 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField]
     private HealthUI healthUI;
-    [SerializeField]
     private WeaponsUI weaponsUI;
+    private EffectsUI effectsUI;
     [SerializeField]
     private Ship ship;
 
     private void Awake()
     {
+        healthUI = GetComponentInChildren<HealthUI>();
+        weaponsUI = GetComponentInChildren<WeaponsUI>();
+        effectsUI = GetComponentInChildren<EffectsUI>();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        if (ship != null && ship.gameObject.activeInHierarchy)
+        if (ActiveShip())
         {
             SetupHealthBar();
             int i = 0;
@@ -27,13 +29,14 @@ public class UIManager : MonoBehaviour
                 weaponsUI.SetIcon(i, weapon);
                 weaponsUI.SetPercent(i++, weapon);
             }
+            ship.GetEffectsDict().OnChange += UpdateEffects;
         }
     }
-
+    
     // Update is called once per frame
     void Update()
     {
-        if (ship != null && ship.gameObject.activeInHierarchy)
+        if (ActiveShip())
         {
             int i = 0;
             foreach (Weapon weapon in ship.GetComponentInChildren<Arsenal>().GetWeapons())
@@ -43,8 +46,28 @@ public class UIManager : MonoBehaviour
         }
     }
 
+    private bool ActiveShip()
+    {
+        return ship != null && ship.gameObject.activeInHierarchy;
+    }
+
+    public void RemoveShip()
+    {
+        if (ship != null)
+        {
+            ship.GetEffectsDict().OnChange -= UpdateEffects;
+            ship = null;
+        }
+    }
+
+    public void UpdateEffects()
+    {
+        effectsUI.DisplayEffects(ship.GetEffectsDict());
+    }
+
     public void SetShip(Ship ship)
     {
+        RemoveShip();
         this.ship = ship;
         Start();
     }
