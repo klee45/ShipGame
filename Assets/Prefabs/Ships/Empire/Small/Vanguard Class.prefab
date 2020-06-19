@@ -182,7 +182,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7617b11ab811b24585204c6d4c54aa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multiplier: 3
+  multiplier: 2
 --- !u!1 &1689643122333375711
 GameObject:
   m_ObjectHideFlags: 0
@@ -372,7 +372,7 @@ MonoBehaviour:
   deceleration: -4
   max: 6
   min: -4
-  dampening: 10
+  dampening: 3
 --- !u!1 &1689643123031496073
 GameObject:
   m_ObjectHideFlags: 0

@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7617b11ab811b24585204c6d4c54aa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multiplier: 1.5
+  multiplier: 1.25
 --- !u!1 &7660130810974952815
 GameObject:
   m_ObjectHideFlags: 0
@@ -90,9 +90,9 @@ MonoBehaviour:
   initialValue: 0
   acceleration: 10
   deceleration: -4
-  max: 10
+  max: 11
   min: -5
-  dampening: 6
+  dampening: 2
 --- !u!1 &7660130810978570105
 GameObject:
   m_ObjectHideFlags: 0

@@ -620,7 +620,7 @@ MonoBehaviour:
   deceleration: -8
   max: 10
   min: -6
-  dampening: 12
+  dampening: 4
 --- !u!1 &3157410935962506373
 GameObject:
   m_ObjectHideFlags: 0
@@ -664,7 +664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7617b11ab811b24585204c6d4c54aa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multiplier: 5
+  multiplier: 2
 --- !u!1001 &3157410935299898018
 PrefabInstance:
   m_ObjectHideFlags: 0

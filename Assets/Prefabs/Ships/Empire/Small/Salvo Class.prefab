@@ -45,7 +45,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initial: 0
   acceleration: 1
-  max: 2
+  max: 1.5
   dampening: 12
 --- !u!1 &3198002382139206892
 GameObject:
@@ -463,10 +463,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   initialValue: 0
   acceleration: 3
-  deceleration: -1
+  deceleration: -2
   max: 6
   min: -2
-  dampening: 8
+  dampening: 1
 --- !u!1 &3198002383171816902
 GameObject:
   m_ObjectHideFlags: 0
