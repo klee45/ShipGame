@@ -23,6 +23,14 @@ public abstract class BehaviorBranch : BehaviorNode
         }
     }
 
+    public override void Tick(float deltaTime)
+    {
+        foreach (BehaviorNode child in children)
+        {
+            child.Tick(deltaTime);
+        }
+    }
+
     public override int[] TraverseCount()
     {
         int[] result = children[0].TraverseCount();

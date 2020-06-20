@@ -10,6 +10,6 @@ public abstract class StatGroupTemplate : Template<StatGroup, GameObject>
 
 public abstract class StatGroup : MonoBehaviour
 {
-    public abstract void Tick(float scale);
+    public abstract void Tick(float scale, float deltaTime);
     public abstract float GetValue();
 }

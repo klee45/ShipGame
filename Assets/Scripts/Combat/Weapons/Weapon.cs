@@ -61,6 +61,11 @@ public class Weapon : MonoBehaviour
         }
     }
 
+    public void Tick(float deltaTime)
+    {
+        cooldown.Tick(deltaTime);
+    }
+
     protected Projectile CreateProjectile(ProjectileTemplate template)
     {
         Projectile projectile = template.Create(gameObject);

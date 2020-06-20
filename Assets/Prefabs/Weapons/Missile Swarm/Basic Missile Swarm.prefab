@@ -189,6 +189,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fea66732d1372f46ae2fb489c3d3879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotation: 0
+  translation: 0
 --- !u!114 &6764177119622650991
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -913,6 +915,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fea66732d1372f46ae2fb489c3d3879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotation: 0
+  translation: 1
 --- !u!114 &6764177121063050358
 MonoBehaviour:
   m_ObjectHideFlags: 0

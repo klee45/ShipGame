@@ -16,7 +16,7 @@ public abstract class DetectionZone<T> : MonoBehaviour where T : Entity
 
     private bool canScan = true;
     private bool scanning = false;
-    private Timer timer;
+    private TimerStatic timer;
 
     public delegate void DetectionEvent(T entity);
     public DetectionEvent OnDetection;
@@ -27,7 +27,7 @@ public abstract class DetectionZone<T> : MonoBehaviour where T : Entity
         this.timeInBetween = timeInBetween;
         this.randomIncrease = randomIncrease;
         this.initialRandomIncrease = initialRandomIncrease;
-        timer = gameObject.AddComponent<Timer>();
+        timer = gameObject.AddComponent<TimerStatic>();
     }
 
     protected abstract int InitializeLayer();

@@ -26,6 +26,8 @@ public abstract class BehaviorNode : MonoBehaviour
         OnUpdate?.Invoke();
     }
 
+    public virtual void Tick(float deltaTime) {}
+
     public abstract int[] TraverseCount();
     public abstract GameObject CreateVisual(BehaviorVisualizer visualizer, int[] counts, float x, int y);
     public abstract Sprite GetSprite(BehaviorVisualizer visualizer);

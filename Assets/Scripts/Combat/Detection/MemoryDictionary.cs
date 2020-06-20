@@ -169,7 +169,7 @@ public class MemoryDictionary : MonoBehaviour
         }
         else
         {
-            var timer = gameObject.AddComponent<Timer>();
+            var timer = gameObject.AddComponent<TimerStatic>();
             timer.SetMaxTime(duration);
             timer.OnComplete += () =>
             {
@@ -192,12 +192,12 @@ public class MemoryDictionary : MonoBehaviour
         dict.Remove(ship);
     }
 
-    private class TimerPair : Pair<Timer, int>
+    private class TimerPair : Pair<TimerStatic, int>
     {
-        public TimerPair(Timer timer, int count) : base(timer, count)
+        public TimerPair(TimerStatic timer, int count) : base(timer, count)
         {
         }
-        public Timer GetTimer() { return a; }
+        public TimerStatic GetTimer() { return a; }
         public int GetCount() { return b; }
         public void SetCount(int count) { b = count; }
     }

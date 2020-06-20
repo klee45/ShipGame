@@ -24,6 +24,11 @@ public abstract class BehaviorConditional : BehaviorNode
 
     protected abstract bool Conditional(BehaviorState state);
 
+    public override void Tick(float deltaTime)
+    {
+        child.Tick(deltaTime);
+    }
+
     public override void ResetNode()
     {
         base.ResetNode();

@@ -94,6 +94,17 @@ public class Ship : Entity
         base.Update();
         body.MovePosition(desiredPosition);
         body.MoveRotation(desiredRotation);
+        float deltaTime = TimeController.DeltaTime(timeScale);
+        combatStats.Tick(deltaTime);
+        TickWeapons(deltaTime);
+    }
+
+    private void TickWeapons(float deltaTime)
+    {
+        foreach(Weapon weapon in arsenal.GetWeapons())
+        {
+            weapon.Tick(deltaTime);
+        }
     }
 
     public T AddGeneralEffect<T>() where T : GeneralEffect
@@ -118,6 +129,7 @@ public class Ship : Entity
         t.position += transform.up * movementStats.GetVelocityValue() * TimeController.deltaTime;
         */
         float time = TimeController.DeltaTime(timeScale);
+        //Debug.Log(time);
         Vector3 translate = transform.up * velocity * time;
         float rotate = -(rotation * time);
         desiredPosition += translate;

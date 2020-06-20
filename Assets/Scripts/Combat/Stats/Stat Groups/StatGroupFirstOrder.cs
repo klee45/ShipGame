@@ -24,7 +24,7 @@ public class StatGroupFirstOrder : StatGroup
         return currentValue;
     }
 
-    public override void Tick(float scale)
+    public override void Tick(float scale, float deltaTime)
     {
         currentValue = stat.GetValue() * scale;
     }

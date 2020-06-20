@@ -17,6 +17,7 @@ public abstract class PilotTemplate : Template<Pilot, GameObject>
 public abstract class Pilot : MonoBehaviour
 {
     public abstract void MakeActions();
+    public virtual void Tick(float deltaTime) { }
 
     protected static void FireWeapon(Ship ship, int num)
     {

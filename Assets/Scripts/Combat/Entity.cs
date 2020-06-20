@@ -73,6 +73,7 @@ public abstract class Entity : MonoBehaviour
 
     protected virtual void Update()
     {
+        pilot.Tick(TimeController.DeltaTime(timeScale));
         pilot?.MakeActions();
         ApplyEffects();
         Move(movementStats.GetRotationValue(), movementStats.GetVelocityValue());
@@ -85,12 +86,12 @@ public abstract class Entity : MonoBehaviour
 
     public void RotateTick(float val)
     {
-        movementStats.GetRotationStatGroup().Tick(val);
+        movementStats.GetRotationStatGroup().Tick(val, TimeController.DeltaTime(timeScale));
     }
 
     public void MoveTick(float val)
     {
-        movementStats.GetVelocityStatGroup().Tick(val);
+        movementStats.GetVelocityStatGroup().Tick(val, TimeController.DeltaTime(timeScale));
     }
 
     protected void DoGenericEffects(EffectDict dict)

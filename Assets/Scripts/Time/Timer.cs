@@ -27,7 +27,7 @@ public class Timer : MonoBehaviour
     }
 
     private void Awake()
-    {
+    {   
         SetTime(currentTime);
         SetMaxTime(maxTime);
     }
@@ -37,11 +37,16 @@ public class Timer : MonoBehaviour
         Awake();
     }
 
-    private void Update()
+    public virtual void Tick(float deltaTime)
+    {
+        TickHelper(deltaTime);
+    }
+
+    protected void TickHelper(float deltaTime)
     {
         if (running)
         {
-            currentTime += Time.deltaTime;
+            currentTime += deltaTime;
             if (currentTime >= maxTime)
             {
                 if (doesReset)
@@ -137,7 +142,7 @@ public class Timer
     
     public bool Tick()
     {
-        time += Time.deltaTime;
+        time += TimeController.deltaTime;
         if (time >= maxTime)
         {
             time = time - maxTime;

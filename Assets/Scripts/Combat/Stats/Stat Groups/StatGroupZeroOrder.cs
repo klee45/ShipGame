@@ -9,7 +9,7 @@ public class StatGroupZeroOrder : StatGroup
         return 0;
     }
 
-    public override void Tick(float scale)
+    public override void Tick(float scale, float deltaTime)
     {
     }
 }

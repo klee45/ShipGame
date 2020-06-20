@@ -27,8 +27,8 @@ public class StatGroupSecondOrderMirrored : StatGroup
         return kernel.GetValue();
     }
 
-    public override void Tick(float scale)
+    public override void Tick(float scale, float deltaTime)
     {
-        kernel.Tick(scale);
+        kernel.Tick(scale, deltaTime);
     }
 }

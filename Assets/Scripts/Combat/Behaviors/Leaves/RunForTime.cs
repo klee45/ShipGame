@@ -21,6 +21,11 @@ public class RunForTime : BehaviorLeaf
         };
     }
 
+    public override void Tick(float deltaTime)
+    {
+        timer.Tick(deltaTime);
+    }
+
     protected override string GetName()
     {
         return string.Format("Run for {0}\n{1}", timer.GetMaxTime(), timer.GetTime());

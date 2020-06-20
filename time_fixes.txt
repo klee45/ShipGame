@@ -1,0 +1,3 @@
+sprite management isn't tied to time controller!
+
+coroutine delay doesn't work with time controller!

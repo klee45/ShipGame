@@ -24,6 +24,11 @@ public class PilotTree : Pilot
         Debug.Log(string.Format("[{0}]", string.Join(" ", counts)));
     }
 
+    public override void Tick(float deltaTime)
+    {
+        behaviorTree.Tick(deltaTime);
+    }
+
     public Vector2 GetTargetPos()
     {
         return behaviorState.target.position;

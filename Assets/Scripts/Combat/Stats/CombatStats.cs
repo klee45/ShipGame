@@ -74,6 +74,11 @@ public class CombatStats : MonoBehaviour
         UpdateAllGraphics();
     }
 
+    public void Tick(float deltaTime)
+    {
+        //shieldDelay.Tick(deltaTime);
+    }
+
     public void Setup(int initialHullMax, int initialArmorMax, int initialShieldMax)
     {
         this.initialHullMax = initialHullMax;

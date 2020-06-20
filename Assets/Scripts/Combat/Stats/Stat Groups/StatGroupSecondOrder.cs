@@ -39,9 +39,9 @@ public class StatGroupSecondOrder : StatGroup
         return kernel.GetValue();
     }
 
-    public override void Tick(float scale)
+    public override void Tick(float scale, float deltaTime)
     {
-        kernel.Tick(scale);
+        kernel.Tick(scale, deltaTime);
     }
 }
 
@@ -62,23 +62,23 @@ public class StatGroupSecondOrderKernel
         currentValue = initial;
     }
 
-    public void Tick(float scale)
+    public void Tick(float scale, float deltaTime)
     {
         // Forwards
         if (scale > INPUT_LIMIT)
         {
-            this.currentValue += accelerationStat.GetValue() * scale * TimeController.deltaTime;
+            this.currentValue += accelerationStat.GetValue() * scale * deltaTime;
             this.currentValue = Mathf.Min(this.currentValue, maxStat.GetValue());
         }
         // Backwards
         else if (scale < -INPUT_LIMIT)
         {
-            this.currentValue += decelerationStat.GetValue() * -scale * TimeController.deltaTime;
+            this.currentValue += decelerationStat.GetValue() * -scale * deltaTime;
             this.currentValue = Mathf.Max(this.currentValue, minStat.GetValue());
         }
         else
         {
-            float mod = (1 - Mathf.Abs(scale)) * dampening * TimeController.deltaTime;
+            float mod = (1 - Mathf.Abs(scale)) * dampening * deltaTime;
             if (this.currentValue >= mod)
             {
                 this.currentValue -= mod;

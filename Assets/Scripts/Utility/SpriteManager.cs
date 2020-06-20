@@ -29,7 +29,7 @@ public class SpriteManager : Singleton<SpriteManager>
     // Update is called once per frame
     void Update()
     {
-        float passed = (leftover + TimeController.deltaTime) * 60;
+        float passed = (leftover + TimeController.FixedDeltaTime()) * 60;
         int passedTicks = (int)System.Math.Truncate(passed);
         leftover = (passed - passedTicks) / 60;
         //Debug.Log(string.Format("{0}\n{1}\n{2}",passed, passedTicks, leftover));
