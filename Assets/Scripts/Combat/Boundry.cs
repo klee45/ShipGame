@@ -2,21 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Boundry : MonoBehaviour
+public class Boundry : Singleton<Boundry>
 {
-    public static Boundry instance;
-
     private Dictionary<Ship, BoundryForce> outOfBounds;
     private float radius;
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (instance != null)
-        {
-            Debug.LogWarning("Boundry is a singleton!");
-            Destroy(instance);
-        }
-        instance = this;
+        base.Awake();
         CalculateRadius();
         outOfBounds = new Dictionary<Ship, BoundryForce>();
     }
@@ -87,10 +80,10 @@ public class Boundry : MonoBehaviour
         {
             this.isRelative = false;
             this.force = new Vector2();
-            Tick();
+            Tick(1);
         }
 
-        public void Tick()
+        public void Tick(float timeScale)
         {
             Vector3 diff = Boundry.instance.GetPosition() - transform.position;
             float diffVal = Mathf.Sqrt(diff.x * diff.x + diff.y * diff.y) - Boundry.instance.GetRadius();
@@ -100,9 +93,15 @@ public class Boundry : MonoBehaviour
             force = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * diffVal / scale;
         }
 
+        public override string GetName()
+        {
+            return "Boundry Force";
+        }
+
         public override void AddTo(EffectDict dict)
         {
             dict.tickEffects.AddUpdate(this);
+            dict.movementEffects.AddUpdate(this);
         }
 
         public IEffect UpdateEffect(IEffect effect, out bool didReplace)

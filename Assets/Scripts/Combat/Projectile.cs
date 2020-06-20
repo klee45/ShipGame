@@ -12,8 +12,9 @@ public class Projectile : Entity
 
     private EffectDictProjectile projectileEffects;
 
-    public void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         projectileEffects = gameObject.AddComponent<EffectDictProjectile>();
     }
 
@@ -23,7 +24,7 @@ public class Projectile : Entity
         this.duration = duration;
     }
 
-    public override void Start()
+    protected override void Start()
     {
         base.Start();
         if (duration > 0)
@@ -32,8 +33,9 @@ public class Projectile : Entity
 
     protected override void Move(float rotation, float velocity)
     {
-        transform.Rotate(new Vector3(0, 0, -rotation * Time.deltaTime));
-        transform.position += transform.up * velocity * Time.deltaTime;
+        float time = TimeController.DeltaTime(timeScale);
+        transform.Rotate(new Vector3(0, 0, -rotation * time));
+        transform.position += transform.up * velocity * time;
     }
 
     protected override void Translate(Vector2 translation)

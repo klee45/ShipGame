@@ -44,9 +44,12 @@ public abstract class Effect : MonoBehaviour, Effect.IEffect
     {
         event DestroyEvent OnDestroyEvent;
         int GetPriority();
+        string GetName();
     }
 
     public int GetPriority() { return priority; }
+
+    public abstract string GetName();
 }
 
 public abstract class GeneralEffectTemplate : EffectTemplate<GeneralEffect>
@@ -60,7 +63,7 @@ public abstract class GeneralEffect : Effect
 
     public interface ITickEffect : IEffect
     {
-        void Tick();
+        void Tick(float timeScale);
     }
 
     public interface IGeneralEffect : IEffect

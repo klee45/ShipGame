@@ -2,19 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitOnce : ProjectileEffect, ProjectileEffect.IOnHitEffect, EffectDict.IEffectUpdates
+public class HitSelfDestruct : ProjectileEffect, ProjectileEffect.IOnHitEffect, EffectDict.IEffectUpdates
 {
-    [SerializeField]
-    private int damage;
-
-    public void Setup(int damage)
-    {
-        this.damage = damage;
-    }
-
     public void OnHit(Collider2D collision)
     {
-        DoDamage(collision, damage);
         DestroySelf();
     }
 
@@ -25,11 +16,12 @@ public class HitOnce : ProjectileEffect, ProjectileEffect.IOnHitEffect, EffectDi
 
     public IEffect UpdateEffect(IEffect effect, out bool didReplace)
     {
-        if (effect is HitOnce e)
-        {
-            e.damage += this.damage;
-        }
         didReplace = false;
         return effect;
+    }
+
+    public override string GetName()
+    {
+        return "Self destruct on hit";
     }
 }

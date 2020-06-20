@@ -29,6 +29,11 @@ public class HitCreateProjectile : ProjectileEffect, ProjectileEffect.IOnHitEffe
             yield return new WaitForSeconds(delay);
         }
         Projectile projectile = template.Create(gameObject);
-        ProjectileManager.Instance().AddTo(projectile);
+        ProjectileManager.instance.AddTo(projectile);
+    }
+
+    public override string GetName()
+    {
+        return string.Format("Create projectile on hit");
     }
 }

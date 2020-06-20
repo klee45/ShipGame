@@ -15,9 +15,9 @@ public class Force : AForce , EffectDict.IEffectAdds, GeneralEffect.ITickEffect
         this.isRelative = isRelative;
     }
 
-    public void Tick()
+    public void Tick(float timeScale)
     {
-        duration += Time.deltaTime;
+        duration += TimeController.DeltaTime(timeScale);
         if (duration >= maxDuration)
         {
             Destroy(this);
@@ -28,5 +28,10 @@ public class Force : AForce , EffectDict.IEffectAdds, GeneralEffect.ITickEffect
     {
         dict.movementEffects.Add(this);
         dict.tickEffects.Add(this);
+    }
+
+    public override string GetName()
+    {
+        return "Force";
     }
 }

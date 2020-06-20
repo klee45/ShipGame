@@ -44,17 +44,25 @@ public abstract class Entity : MonoBehaviour
     [SerializeField]
     protected Pilot pilot;
 
-    private void Awake()
+    protected TimeScale timeScale;
+
+    protected virtual void Awake()
     {
         pilot = GetComponentInChildren<Pilot>();
+        timeScale = new TimeScale();
     }
 
-    public virtual void Start()
+    protected virtual void Start()
     {
         foreach (CanColorize canColorize in GetComponentsInChildren<CanColorize>())
         {
             canColorize.GetComponent<SpriteRenderer>().color = Layers.GetColorFromLayer(gameObject.layer);
         }
+    }
+
+    public TimeScale GetTimeScale()
+    {
+        return timeScale;
     }
 
     public void Setup(MovementStats movementStats, Pilot pilot)
@@ -66,8 +74,8 @@ public abstract class Entity : MonoBehaviour
     protected virtual void Update()
     {
         pilot?.MakeActions();
-        Move(movementStats.GetRotationValue(), movementStats.GetVelocityValue());
         ApplyEffects();
+        Move(movementStats.GetRotationValue(), movementStats.GetVelocityValue());
     }
 
     protected abstract void Move(float rotation, float velocity);
@@ -97,9 +105,10 @@ public abstract class Entity : MonoBehaviour
     {
         bool atLeastOne = false;
         Vector3 translation = Vector3.zero;
+        float time = TimeController.DeltaTime(timeScale);
         foreach (IMovementEffect effect in dict.movementEffects.GetAll())
         {
-            translation += effect.GetMovement(Time.deltaTime);
+            translation += effect.GetMovement(time);
             atLeastOne = true;
         }
         if (atLeastOne)
@@ -112,7 +121,7 @@ public abstract class Entity : MonoBehaviour
     {
         foreach (ITickEffect effects in dict.tickEffects.GetAll())
         {
-            effects.Tick();
+            effects.Tick(timeScale.GetScale());
         }
     }
 }

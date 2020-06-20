@@ -7,6 +7,6 @@ public class WeaponStayOnShip : Weapon
     protected override void LinkProjectile(Projectile projectile)
     {
         projectile.transform.parent = gameObject.transform;
-        ProjectileManager.Instance().AddToLinked(projectile);
+        ProjectileManager.instance.AddToLinked(projectile);
     }
 }

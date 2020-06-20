@@ -43,15 +43,19 @@ public class Ship : Entity
         combatStats = stats;
     }
 
-    public override void Start()
+    protected override void Awake()
+    {
+        base.Awake();
+        shipEffects = gameObject.AddComponent<EffectDictShip>();
+    }
+
+    protected override void Start()
     {
         base.Start();
 
         body = GetComponent<Rigidbody2D>();
         desiredPosition = transform.position;
         desiredRotation = transform.eulerAngles.z;
-
-        shipEffects = gameObject.AddComponent<EffectDictShip>();
 
         arsenal = GetComponentInChildren<Arsenal>();
         if (arsenal != null)
@@ -110,11 +114,12 @@ public class Ship : Entity
     {
         /*
         Transform t = GetTransform();
-        t.Rotate(new Vector3(0, 0, -movementStats.GetRotationValue() * Time.deltaTime));
-        t.position += transform.up * movementStats.GetVelocityValue() * Time.deltaTime;
+        t.Rotate(new Vector3(0, 0, -movementStats.GetRotationValue() * TimeController.deltaTime));
+        t.position += transform.up * movementStats.GetVelocityValue() * TimeController.deltaTime;
         */
-        Vector3 translate = transform.up * velocity * Time.deltaTime;
-        float rotate = -(rotation * Time.deltaTime);
+        float time = TimeController.DeltaTime(timeScale);
+        Vector3 translate = transform.up * velocity * time;
+        float rotate = -(rotation * time);
         desiredPosition += translate;
         desiredRotation += rotate;
     }

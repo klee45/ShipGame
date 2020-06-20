@@ -70,7 +70,7 @@ public class Weapon : MonoBehaviour
 
     protected virtual void LinkProjectile(Projectile projectile)
     {
-        projectile.transform.parent = ProjectileManager.Instance().gameObject.transform;
+        projectile.transform.parent = ProjectileManager.instance.gameObject.transform;
     }
 
     public bool IsReady()

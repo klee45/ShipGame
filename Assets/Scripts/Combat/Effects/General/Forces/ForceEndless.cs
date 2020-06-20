@@ -8,4 +8,9 @@ public class ForceEndless : AForce, EffectDict.IEffectAdds
     {
         dict.movementEffects.Add(this);
     }
+
+    public override string GetName()
+    {
+        return "Force";
+    }
 }

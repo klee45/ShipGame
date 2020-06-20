@@ -84,4 +84,9 @@ public class HitPerSecond : ProjectileEffect, ProjectileEffect.IOnHitStayEffect,
     {
         GetComponent<Collider2D>().enabled = false;
     }
+
+    public override string GetName()
+    {
+        return "Hit on tick";
+    }
 }

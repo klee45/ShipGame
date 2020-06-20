@@ -67,18 +67,18 @@ public class StatGroupSecondOrderKernel
         // Forwards
         if (scale > INPUT_LIMIT)
         {
-            this.currentValue += accelerationStat.GetValue() * scale * Time.deltaTime;
+            this.currentValue += accelerationStat.GetValue() * scale * TimeController.deltaTime;
             this.currentValue = Mathf.Min(this.currentValue, maxStat.GetValue());
         }
         // Backwards
         else if (scale < -INPUT_LIMIT)
         {
-            this.currentValue += decelerationStat.GetValue() * -scale * Time.deltaTime;
+            this.currentValue += decelerationStat.GetValue() * -scale * TimeController.deltaTime;
             this.currentValue = Mathf.Max(this.currentValue, minStat.GetValue());
         }
         else
         {
-            float mod = (1 - Mathf.Abs(scale)) * dampening * Time.deltaTime;
+            float mod = (1 - Mathf.Abs(scale)) * dampening * TimeController.deltaTime;
             if (this.currentValue >= mod)
             {
                 this.currentValue -= mod;

@@ -23,4 +23,9 @@ public class HitOncePer : ProjectileEffect, ProjectileEffect.IOnHitEffect, Effec
         Physics2D.IgnoreCollision(GetComponent<Collider2D>(), hitEntity.GetComponent<Collider2D>());
         DoDamage(collision, damage);
     }
+
+    public override string GetName()
+    {
+        return "Hit once per enemy";
+    }
 }
