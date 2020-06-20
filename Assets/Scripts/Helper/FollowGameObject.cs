@@ -15,6 +15,11 @@ public class FollowGameObject : MonoBehaviour
         transform.parent = target.transform;
     }
     **/
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+    }
+
     private void Start()
     {
         ChangeSize();

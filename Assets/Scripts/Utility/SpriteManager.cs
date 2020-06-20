@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpriteManager : MonoBehaviour
+public class SpriteManager : Singleton<SpriteManager>
 {
-    private static SpriteManager instance;
-
     private float leftover;
     private TickCounter sixtyTicks;
     private TickCounter thirtyTicks;
@@ -17,16 +15,6 @@ public class SpriteManager : MonoBehaviour
     public event TickEvent ThirtyTick;
     public event TickEvent TwentyTick;
     public event TickEvent TwelveTick;
-
-    private void Awake()
-    {
-        if (instance != null)
-        {
-            Debug.LogWarning("More than one sprite manager! It's a singleton");
-            Destroy(instance);
-        }
-        instance = this;
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -41,7 +29,7 @@ public class SpriteManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        float passed = (leftover + Time.deltaTime) * 60;
+        float passed = (leftover + TimeController.deltaTime) * 60;
         int passedTicks = (int)System.Math.Truncate(passed);
         leftover = (passed - passedTicks) / 60;
         //Debug.Log(string.Format("{0}\n{1}\n{2}",passed, passedTicks, leftover));
@@ -50,11 +38,6 @@ public class SpriteManager : MonoBehaviour
         thirtyTicks.Tick(passedTicks);
         twentyTicks.Tick(passedTicks);
         twelveTicks.Tick(passedTicks);
-    }
-
-    public static SpriteManager Instance()
-    {
-        return instance;
     }
 
     private class TickCounter

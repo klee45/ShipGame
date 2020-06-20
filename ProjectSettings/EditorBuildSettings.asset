@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/CombatScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Sectors/Sector 1-1.unity
+    guid: 2efd20a0e2ad5d640b17b3844d229fe5
+  - enabled: 1
+    path: Assets/Scenes/Sectors/Sector 1-2.unity
+    guid: b14219851a1aa1d468ec9a992e911f37
   m_configObjects: {}

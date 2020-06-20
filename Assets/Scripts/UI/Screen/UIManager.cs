@@ -14,23 +14,28 @@ public class UIManager : MonoBehaviour
     {
         healthUI = GetComponentInChildren<HealthUI>();
         weaponsUI = GetComponentInChildren<WeaponsUI>();
-        effectsUI = GetComponentInChildren<EffectsUI>();
+        effectsUI = GetComponentInChildren<EffectsUI>(); 
     }
 
     // Start is called before the first frame update
     void Start()
     {
+        //Debug.Log("Step 1");
         if (ActiveShip())
         {
+            //Debug.Log("Step 2");
             SetupHealthBar();
             int i = 0;
+            //Debug.Log("Step 3");
             foreach (Weapon weapon in ship.GetComponentInChildren<Arsenal>().GetWeapons())
             {
                 weaponsUI.SetIcon(i, weapon);
                 weaponsUI.SetPercent(i++, weapon);
             }
+            //Debug.Log("Step 4");
             ship.GetEffectsDict().OnChange += UpdateEffects;
         }
+        //Debug.Log("Step 5");
     }
     
     // Update is called once per frame

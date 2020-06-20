@@ -17,7 +17,7 @@ public class AnimatedSprite : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SpriteManager manager = SpriteManager.Instance();
+        SpriteManager manager = SpriteManager.instance;
         switch (speed)
         {
             case SpriteManager.SpriteSpeed.s12:
@@ -37,7 +37,7 @@ public class AnimatedSprite : MonoBehaviour
 
     private void OnDestroy()
     {
-        SpriteManager manager = SpriteManager.Instance();
+        SpriteManager manager = SpriteManager.instance;
         switch (speed)
         {
             case SpriteManager.SpriteSpeed.s12:

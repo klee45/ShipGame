@@ -2,26 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileManager : MonoBehaviour
+public class ProjectileManager : Singleton<ProjectileManager>
 {
-    private static ProjectileManager instance;
-
     [SerializeField]
     private List<Projectile> linked;
 
-    private void Awake()
+    protected override void Awake()
     {
-        if (instance != null)
-        {
-            linked = instance.linked;
-            Debug.LogWarning("Multiple projectile manager detected! It's a singleton");
-            Destroy(instance);
-        }
-        else
-        {
-            linked = new List<Projectile>();
-        }
-        instance = this;
+        base.Awake();
+        linked = new List<Projectile>();
     }
 
     public void AddToLinked(Projectile obj)
@@ -45,10 +34,5 @@ public class ProjectileManager : MonoBehaviour
         }
         linked.CopyTo(all, i);
         return all;
-    }
-
-    public static ProjectileManager Instance()
-    {
-        return instance;
     }
 }
