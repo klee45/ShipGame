@@ -12,7 +12,7 @@ public class TimeController : Singleton<TimeController>
         return deltaTime * timeScale;
     }
 
-    public static float DeltaTime(TimeScale timeScale)
+    public static float DeltaTime(ATimeScale timeScale)
     {
         return DeltaTime(timeScale.GetScale());
     }

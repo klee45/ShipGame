@@ -40,7 +40,7 @@ public abstract class EntityTemplate<OUT> : Template<OUT, GameObject> where OUT 
 public abstract class Entity : MonoBehaviour
 {
     [SerializeField]
-    protected TimeScale timeScale;
+    protected ATimeScale timeScale;
     [SerializeField]
     protected Pilot pilot;
     [SerializeField]
@@ -60,7 +60,7 @@ public abstract class Entity : MonoBehaviour
         }
     }
 
-    public TimeScale GetTimeScale()
+    public ATimeScale GetTimeScale()
     {
         return timeScale;
     }

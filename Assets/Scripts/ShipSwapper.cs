@@ -19,7 +19,7 @@ public class ShipSwapper : MonoBehaviour
     private void Awake()
     {
         pilotObj.SetActive(false);
-        pos = ships.Count - 1;
+        pos = Random.Range(0, ships.Count - 1);
     }
 
     private void Update()

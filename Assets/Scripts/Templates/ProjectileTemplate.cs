@@ -64,19 +64,20 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
             e.AddTo(projectile.GetEffectsDict());
         }
         float duration = movementStats.GetVelocity().GetDuration(remainingRange);
-        projectile.Setup(remainingRange, duration);
         projectile.SetParent(obj);
         projectile.gameObject.layer = makeNeutral ? Layers.NEUTRAL_PROJECTILE : Layers.ProjecileFromEntity(obj.layer);
-        
+
+        ATimeScale timeScale = null;
         switch (timeScaleType)
         {
             case ATimeScale.TimeScaleType.STANDARD:
-                projectile.gameObject.AddComponent<TimeScale>();
+                timeScale = projectile.gameObject.AddComponent<TimeScale>();
                 break;
             case ATimeScale.TimeScaleType.STATIC:
-                projectile.gameObject.AddComponent<TimeScaleStatic>();
+                timeScale = projectile.gameObject.AddComponent<TimeScaleStatic>();
                 break;
         }
+        projectile.Setup(remainingRange, duration, timeScale);
 
         return projectile;
     }
