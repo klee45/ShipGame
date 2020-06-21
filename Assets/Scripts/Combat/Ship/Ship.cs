@@ -109,14 +109,14 @@ public class Ship : Entity
 
     public T AddGeneralEffect<T>() where T : GeneralEffect
     {
-        T e = gameObject.AddComponent<T>();
+        T e = shipEffects.gameObject.AddComponent<T>();
         e.AddTo(GetEffectsDict());
         return e;
     }
 
     public T AddShipEffect<T>() where T : ShipEffect
     {
-        T e = gameObject.AddComponent<T>();
+        T e = shipEffects.gameObject.AddComponent<T>();
         e.AddTo(GetEffectsDict());
         return e;
     }
