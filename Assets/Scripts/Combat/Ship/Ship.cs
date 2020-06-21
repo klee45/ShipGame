@@ -46,7 +46,7 @@ public class Ship : Entity
     protected override void Awake()
     {
         base.Awake();
-        shipEffects = gameObject.AddComponent<EffectDictShip>();
+        shipEffects = GetComponentInChildren<EffectDictShip>();
     }
 
     protected override void Start()

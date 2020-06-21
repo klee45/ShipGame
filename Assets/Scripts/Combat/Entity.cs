@@ -40,16 +40,16 @@ public abstract class EntityTemplate<OUT> : Template<OUT, GameObject> where OUT 
 public abstract class Entity : MonoBehaviour
 {
     [SerializeField]
-    private MovementStats movementStats;
+    protected TimeScale timeScale;
     [SerializeField]
     protected Pilot pilot;
-
-    protected TimeScale timeScale;
+    [SerializeField]
+    private MovementStats movementStats;
 
     protected virtual void Awake()
     {
         pilot = GetComponentInChildren<Pilot>();
-        timeScale = new TimeScale();
+        timeScale = GetComponentInChildren<TimeScale>();
     }
 
     protected virtual void Start()

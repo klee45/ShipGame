@@ -16,6 +16,8 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
     private float range;
     [SerializeField]
     private bool makeNeutral = false;
+    [SerializeField]
+    private ATimeScale.TimeScaleType timeScaleType = ATimeScale.TimeScaleType.STANDARD;
 
     private float remainingRange;
 
@@ -65,6 +67,17 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
         projectile.Setup(remainingRange, duration);
         projectile.SetParent(obj);
         projectile.gameObject.layer = makeNeutral ? Layers.NEUTRAL_PROJECTILE : Layers.ProjecileFromEntity(obj.layer);
+        
+        switch (timeScaleType)
+        {
+            case ATimeScale.TimeScaleType.STANDARD:
+                projectile.gameObject.AddComponent<TimeScale>();
+                break;
+            case ATimeScale.TimeScaleType.STATIC:
+                projectile.gameObject.AddComponent<TimeScaleStatic>();
+                break;
+        }
+
         return projectile;
     }
 }

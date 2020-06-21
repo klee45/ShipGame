@@ -2,36 +2,30 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeScale
+public class TimeScale : ATimeScale
 {
     private int mult;
     private int div;
-    private float scale;
 
-    public TimeScale()
+    private void Awake()
     {
-        Reset();
+        ResetScale();
     }
 
-    public void Reset()
+    public override void ResetScale()
     {
         mult = 1;
         div = 1;
         scale = 1;
     }
 
-    public float GetScale()
-    {
-        return scale;
-    }
-
-    public void ChangeMult(int add)
+    public override void ChangeMult(int add)
     {
         mult += add;
         Calcluate();
     }
 
-    public void ChangeDiv(int add)
+    public override void ChangeDiv(int add)
     {
         div += add;
         Calcluate();

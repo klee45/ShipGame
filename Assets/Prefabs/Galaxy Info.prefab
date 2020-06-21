@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec5411023b15ad428c073303cf08807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sectorName: Sector 1-2
+  sectorName: Sector 1-4
 --- !u!212 &9170846023180321410
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -574,7 +574,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec5411023b15ad428c073303cf08807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sectorName: Sector 1-2
+  sectorName: Sector 1-5
 --- !u!212 &3301176734634198863
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -712,7 +712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec5411023b15ad428c073303cf08807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sectorName: Sector 1-2
+  sectorName: Sector 1-3
 --- !u!212 &4742675141040891935
 SpriteRenderer:
   m_ObjectHideFlags: 0
