@@ -90,7 +90,7 @@ public class Boundry : Singleton<Boundry>
             float angle = transform.position.AngleBetween(Boundry.instance.GetPosition());
             //Debug.Log(string.Format("B: {0}, S: {1}", Boundry.instance.GetPosition(), transform.position));
             //Debug.Log(string.Format("D: {0}, A: {1}", diffVal, angle));
-            force = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * diffVal / scale;
+            force = angle.AngleToVector() * diffVal / scale;
         }
 
         public override string GetName()

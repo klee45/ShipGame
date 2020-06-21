@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class UIManager : MonoBehaviour
+public class UIManager : Singleton<UIManager>
 {
     private HealthUI healthUI;
     private WeaponsUI weaponsUI;
@@ -10,8 +10,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Ship ship;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         healthUI = GetComponentInChildren<HealthUI>();
         weaponsUI = GetComponentInChildren<WeaponsUI>();
         effectsUI = GetComponentInChildren<EffectsUI>(); 

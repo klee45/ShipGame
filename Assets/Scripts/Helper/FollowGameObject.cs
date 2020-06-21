@@ -22,7 +22,11 @@ public class FollowGameObject : MonoBehaviour
 
     private void Start()
     {
-        ChangeSize();
+        if(target != null)
+        {
+            ChangeSize();
+        }
+
     }
 
     private void ChangeSize()

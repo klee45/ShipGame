@@ -8,7 +8,7 @@ public class WarpGate : MonoBehaviour
     [SerializeField]
     private float duration = 5f;
     [SerializeField]
-    private string linkedScene;
+    private GalaxyMapVertex targetSector;
 
     private Dictionary<Ship, WarpEffect> warping;
 
@@ -17,13 +17,18 @@ public class WarpGate : MonoBehaviour
         warping = new Dictionary<Ship, WarpEffect>();
     }
 
+    public void Setup(GalaxyMapVertex targetSector)
+    {
+        this.targetSector = targetSector;
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Debug.Log("Enter");
         Ship ship = collision.GetComponent<Ship>();
         ship.OnShipDestroy += Remove;
         WarpEffect effect = ship.AddShipEffect<WarpEffect>();
-        effect.Setup(linkedScene, duration);
+        effect.Setup(targetSector, duration);
         
         warping.Add(ship, effect);
     }
@@ -47,13 +52,13 @@ public class WarpGate : MonoBehaviour
 
     public class WarpEffect : ShipEffect, GeneralEffect.ITickEffect, EffectDict.IEffectUpdates
     {
-        private string linkedScene;
+        private GalaxyMapVertex targetSector;
         private float duration;
         private float time;
 
-        public void Setup(string linkedScene, float duration)
+        public void Setup(GalaxyMapVertex targetSector, float duration)
         {
-            this.linkedScene = linkedScene;
+            this.targetSector = targetSector;
             this.duration = duration;
             this.time = 0;
         }
@@ -73,7 +78,7 @@ public class WarpGate : MonoBehaviour
             time += TimeController.DeltaTime(timeScale);
             if (time >= duration)
             {
-                WarpManager.instance.StartWarp(linkedScene);
+                WarpManager.instance.StartWarp(targetSector);
                 Destroy(this);
             }
         }
