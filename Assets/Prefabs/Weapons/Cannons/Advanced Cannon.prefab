@@ -95,8 +95,9 @@ MonoBehaviour:
   generalEffects: []
   colliderLength: 0
   delay: 0
-  range: 8
+  range: 10
   makeNeutral: 0
+  timeScaleType: 0
 --- !u!114 &903129759786076610
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e54766dbfec82aa478cbb348e26719bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: 1
+  scale: 2
 --- !u!114 &6764070201386983637
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -92,6 +92,7 @@ MonoBehaviour:
   delay: 0.15
   range: 20
   makeNeutral: 0
+  timeScaleType: 0
 --- !u!114 &6117243713233334292
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -171,6 +172,7 @@ MonoBehaviour:
   delay: 0
   range: 0
   makeNeutral: 1
+  timeScaleType: 0
 --- !u!114 &6117243713321307875
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -311,6 +313,7 @@ MonoBehaviour:
   delay: 0.1
   range: 20
   makeNeutral: 0
+  timeScaleType: 0
 --- !u!114 &6117243713367094732
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -370,7 +373,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e54766dbfec82aa478cbb348e26719bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: 2.5
+  scale: 5
 --- !u!1 &6117243713533803763
 GameObject:
   m_ObjectHideFlags: 0
@@ -519,6 +522,7 @@ MonoBehaviour:
   delay: 0
   range: 20
   makeNeutral: 0
+  timeScaleType: 0
 --- !u!114 &6117243713619489662
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -594,6 +598,7 @@ MonoBehaviour:
   delay: 0.2
   range: 20
   makeNeutral: 0
+  timeScaleType: 0
 --- !u!114 &6117243713710247635
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -669,6 +674,7 @@ MonoBehaviour:
   delay: 0.05
   range: 20
   makeNeutral: 0
+  timeScaleType: 0
 --- !u!114 &6117243714079776258
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -791,6 +797,7 @@ MonoBehaviour:
   delay: 0.25
   range: 20
   makeNeutral: 0
+  timeScaleType: 0
 --- !u!114 &6117243714105148419
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -66,8 +66,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3da6fdc6aab23ea41be68b78a7846906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxTime: 8
-  currentTime: 8
+  maxTime: 12
+  currentTime: 12
   running: 1
   doesReset: 1
   overflows: 1
@@ -96,6 +96,7 @@ MonoBehaviour:
   delay: 0
   range: 0
   makeNeutral: 0
+  timeScaleType: 0
 --- !u!114 &5630226108112671693
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,7 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff12bb57b1da2743b3b626b7c5dccc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: {x: 8, y: 12}
+  scale: {x: 6, y: 18}
 --- !u!114 &5630226108112671730
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -147,6 +148,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fea66732d1372f46ae2fb489c3d3879, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  rotation: 0
+  translation: 0
 --- !u!114 &5630226108112671729
 MonoBehaviour:
   m_ObjectHideFlags: 0

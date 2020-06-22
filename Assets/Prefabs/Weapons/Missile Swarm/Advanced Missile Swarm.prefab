@@ -63,6 +63,7 @@ MonoBehaviour:
   delay: 0
   range: 0
   makeNeutral: 1
+  timeScaleType: 0
 --- !u!114 &8739931624661745682
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,6 +204,7 @@ MonoBehaviour:
   delay: 0.5
   range: 15
   makeNeutral: 0
+  timeScaleType: 0
 --- !u!114 &4967667839457484304
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,6 +280,7 @@ MonoBehaviour:
   delay: 0.2
   range: 15
   makeNeutral: 0
+  timeScaleType: 0
 --- !u!114 &4967667839493134335
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -457,6 +460,7 @@ MonoBehaviour:
   delay: 0.1
   range: 15
   makeNeutral: 0
+  timeScaleType: 0
 --- !u!114 &4967667840051252839
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -565,6 +569,7 @@ MonoBehaviour:
   delay: 0.4
   range: 15
   makeNeutral: 0
+  timeScaleType: 0
 --- !u!114 &4967667840141216365
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -640,6 +645,7 @@ MonoBehaviour:
   delay: 0
   range: 15
   makeNeutral: 0
+  timeScaleType: 0
 --- !u!114 &4967667840262195195
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -715,6 +721,7 @@ MonoBehaviour:
   delay: 0.3
   range: 15
   makeNeutral: 0
+  timeScaleType: 0
 --- !u!114 &4967667840472135423
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -929,4 +936,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e54766dbfec82aa478cbb348e26719bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: 2
+  scale: 3

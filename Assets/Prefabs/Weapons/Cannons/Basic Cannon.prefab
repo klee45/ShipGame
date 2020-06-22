@@ -97,6 +97,7 @@ MonoBehaviour:
   delay: 0
   range: 5
   makeNeutral: 0
+  timeScaleType: 0
 --- !u!114 &4417658775877997190
 MonoBehaviour:
   m_ObjectHideFlags: 0
