@@ -81,5 +81,12 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
 
         return projectile;
     }
+
+    public enum ProjectileLayerType
+    {
+        NEUTRAL,
+        PROJECTILE_AS_ENTITY,
+        PROJECTILE_AS_ALLY
+    }
 }
 

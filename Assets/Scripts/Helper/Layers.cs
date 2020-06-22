@@ -21,6 +21,11 @@ public static class Layers
     public const int TEAM_3_PROJECTILES = 18;
     public const int TEAM_4_PROJECTILES = 19;
 
+    public const int TEAM_1 = 20;
+    public const int TEAM_2 = 21;
+    public const int TEAM_3 = 22;
+    public const int TEAM_4 = 23;
+
     public static int ShipFromProjectile(int layer)
     {
         return layer - shipProjectileOffset;

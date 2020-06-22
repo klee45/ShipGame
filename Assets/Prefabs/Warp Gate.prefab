@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 138739213573551866}
   - component: {fileID: 138739213573551869}
   - component: {fileID: 138739213573551871}
-  m_Layer: 21
+  m_Layer: 8
   m_Name: Warp Gate
   m_TagString: Untagged
   m_Icon: {fileID: 0}

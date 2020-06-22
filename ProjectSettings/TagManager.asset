@@ -13,22 +13,22 @@ TagManager:
   - UI
   - 
   - 
-  - DetectionShip
-  - DetectionProjectile
-  - ShipNeutral
-  - Ship1
-  - Ship2
-  - Ship3
-  - Ship4
-  - ProjectileNeutral
-  - Projectile1
-  - Projectile2
-  - Projectile3
-  - Projectile4
-  - Boundry
-  - WarpGates
-  - 
-  - 
+  - Detection Ship
+  - Detection Projectile
+  - Ship Neutral
+  - Ship 1
+  - Ship 2
+  - Ship 3
+  - Ship 4
+  - Projectile Neutral
+  - Projectile 1
+  - Projectile 2
+  - Projectile 3
+  - Projectile 4
+  - Affects Team 1
+  - Affects Team2
+  - Affects Team3
+  - Affects Team4
   - 
   - 
   - 

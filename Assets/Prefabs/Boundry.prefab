@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3177318062368565495}
   - component: {fileID: 3177318062368565494}
-  m_Layer: 20
+  m_Layer: 8
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -90,7 +90,7 @@ GameObject:
   - component: {fileID: 3177318063380748415}
   - component: {fileID: 3177318063380748413}
   - component: {fileID: 3177318063380748412}
-  m_Layer: 20
+  m_Layer: 8
   m_Name: Boundry
   m_TagString: Untagged
   m_Icon: {fileID: 0}
