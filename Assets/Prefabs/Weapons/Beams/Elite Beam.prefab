@@ -95,8 +95,8 @@ MonoBehaviour:
   colliderLength: 15
   delay: 0
   range: 0
-  makeNeutral: 0
-  timeScaleType: 0
+  layerType: 1
+  timeScaleType: 1
 --- !u!114 &5630226108112671693
 MonoBehaviour:
   m_ObjectHideFlags: 0

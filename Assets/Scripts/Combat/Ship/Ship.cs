@@ -47,6 +47,8 @@ public class Ship : Entity
     {
         base.Awake();
         shipEffects = GetComponentInChildren<EffectDictShip>();
+        gameObject.layer = Layers.GetShipLayerFromTeam(team);
+        Debug.Log(gameObject.layer);
     }
 
     protected override void Start()

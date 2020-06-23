@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class ProjectileTemplate : EntityTemplate<Projectile>
@@ -15,11 +16,12 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
     [SerializeField]
     private float range;
     [SerializeField]
-    private bool makeNeutral = false;
+    private ProjectileLayerType layerType = ProjectileLayerType.AFFECTS_ENEMY_SHIPS;
     [SerializeField]
     private ATimeScale.TimeScaleType timeScaleType = ATimeScale.TimeScaleType.STANDARD;
 
     private float remainingRange;
+    private Team team;
 
     public float GetDelay()
     {
@@ -29,6 +31,7 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
     private void Awake()
     {
         CalculateTotalRange();
+        team = GetComponentInParent<Entity>().GetTeam();
     }
 
     private void CalculateTotalRange()
@@ -65,7 +68,8 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
         }
         float duration = movementStats.GetVelocity().GetDuration(remainingRange);
         projectile.SetParent(obj);
-        projectile.gameObject.layer = makeNeutral ? Layers.NEUTRAL_PROJECTILE : Layers.ProjecileFromEntity(obj.layer);
+
+        SetupColliders(projectile, team);
 
         ATimeScale timeScale = null;
         switch (timeScaleType)
@@ -82,11 +86,71 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
         return projectile;
     }
 
+    private void SetupColliders(Projectile projectile, Team team)
+    {
+        Collider2D collider = projectile.GetComponentInChildren<Collider2D>();
+        collider.isTrigger = true;
+        collider.gameObject.name = "Base collider";
+        collider.gameObject.layer = Layers.PROJECTILE_DETECTABLE;
+        int[] layers = GetLayers(team);
+        List<GameObject> colliders = new List<GameObject>();
+        foreach (int layer in layers)
+        {
+            GameObject colliderObj = Instantiate(collider.gameObject);
+            colliderObj.name = LayerMask.LayerToName(layer);
+            colliderObj.layer = layer;
+            colliders.Add(colliderObj);
+        }
+        foreach (GameObject colliderObj in colliders)
+        {
+            colliderObj.transform.SetParent(collider.transform);
+            colliderObj.transform.localPosition = Vector3.zero;
+            colliderObj.transform.localScale = Vector3.one;
+            colliderObj.transform.localRotation = Quaternion.identity;
+            colliderObj.GetComponent<Collider2D>().isTrigger = true;
+            colliderObj.AddComponent<ProjectileCollider>();
+        }
+        collider.gameObject.AddComponent<ProjectileCollider>();
+    }
+
+    private int[] GetLayers(Team team)
+    {
+        switch (layerType)
+        {
+            case ProjectileLayerType.AFFECTS_ENEMY_PROJECTILES:
+                return Layers.GetProjectileHitProjectileLayerFromTeam(team);
+            case ProjectileLayerType.AFFECTS_ENEMY_SHIPS:
+                return Layers.GetProjectileHitShipLayerFromTeam(team);
+            case ProjectileLayerType.AFFECTS_ENEMY_ALL:
+                int[] a = Layers.GetProjectileHitShipLayerFromTeam(team);
+                int[] b = Layers.GetProjectileHitShipLayerFromTeam(team);
+                return a.Concat(b).ToArray();
+            case ProjectileLayerType.AFFECTS_ALLIED_PROJECTILES:
+                return new int[] { Layers.ShipToProjectileHitProjectile(Layers.GetShipLayerFromTeam(team)) };
+            case ProjectileLayerType.AFFECTS_ALLIED_SHIPS:
+                return new int[] { Layers.ShipToProjectileHitShip(Layers.GetShipLayerFromTeam(team)) };
+            case ProjectileLayerType.AFFECTS_ALLIED_ALL:
+                int shipLayer = Layers.GetShipLayerFromTeam(team);
+                return new int[]
+                {
+                    Layers.ShipToProjectileHitProjectile(shipLayer),
+                    Layers.ShipToProjectileHitShip(shipLayer)
+                };
+            default:
+                Debug.LogWarning("Layer type for projectiles unknown");
+                return new int[0];
+        }
+    }
+
     public enum ProjectileLayerType
     {
         NEUTRAL,
-        PROJECTILE_AS_ENTITY,
-        PROJECTILE_AS_ALLY
+        AFFECTS_ENEMY_SHIPS,
+        AFFECTS_ENEMY_PROJECTILES,
+        AFFECTS_ENEMY_ALL,
+        AFFECTS_ALLIED_SHIPS,
+        AFFECTS_ALLIED_PROJECTILES,
+        AFFECTS_ALLIED_ALL
     }
 }
 

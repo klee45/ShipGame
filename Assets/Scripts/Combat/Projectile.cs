@@ -63,13 +63,24 @@ public class Projectile : Entity
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("Trigger enter");
+        DoTriggerEnter2D(collision);
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        DoTriggerStay2D(collision);
+    }
+
+    public void DoTriggerEnter2D(Collider2D collision)
+    {
         foreach (var e in projectileEffects.onHits.GetAll())
         {
             e.OnHit(collision);
         }
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
+    public void DoTriggerStay2D(Collider2D collision)
     {
         foreach (var e in projectileEffects.onStays.GetAll())
         {

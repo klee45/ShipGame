@@ -15,20 +15,20 @@ TagManager:
   - 
   - Detection Ship
   - Detection Projectile
-  - Ship Neutral
+  - 
+  - Projectile Detectable
   - Ship 1
   - Ship 2
   - Ship 3
   - Ship 4
-  - Projectile Neutral
-  - Projectile 1
-  - Projectile 2
-  - Projectile 3
-  - Projectile 4
-  - Affects Team 1
-  - Affects Team2
-  - Affects Team3
-  - Affects Team4
+  - Projectile Affects Ship 1
+  - Projectile Affects Ship 2
+  - Projectile Affects Ship 3
+  - Projectile Affects Ship 4
+  - Projectile Affects Projectile 1
+  - Projectile Affects Projectile 2
+  - Projectile Affects Projectile 3
+  - Projectile Affects Projectile 4
   - 
   - 
   - 

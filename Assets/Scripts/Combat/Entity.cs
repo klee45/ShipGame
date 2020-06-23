@@ -45,6 +45,8 @@ public abstract class Entity : MonoBehaviour
     protected Pilot pilot;
     [SerializeField]
     private MovementStats movementStats;
+    [SerializeField]
+    protected Team team;
 
     protected virtual void Awake()
     {
@@ -56,8 +58,13 @@ public abstract class Entity : MonoBehaviour
     {
         foreach (CanColorize canColorize in GetComponentsInChildren<CanColorize>())
         {
-            canColorize.GetComponent<SpriteRenderer>().color = Layers.GetColorFromLayer(gameObject.layer);
+            canColorize.GetComponent<SpriteRenderer>().color = Layers.GetColorFromTeam(team);
         }
+    }
+
+    public Team GetTeam()
+    {
+        return team;
     }
 
     public ATimeScale GetTimeScale()
