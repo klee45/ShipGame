@@ -140,10 +140,12 @@ public class Ship : Entity
     public void ActivateBrake()
     {
         Debug.Log("Break!");
+        movementStats.GetRotationStatGroup().MultMod(1.6f, 1f);
     }
     public void DeactivateBrake()
     {
         Debug.Log("Unnbreak.");
+        movementStats.GetRotationStatGroup().MultMod(0.625f, 1f);
     }
 
     protected override void Move(float rotation, float velocity)

@@ -6,4 +6,5 @@ attack_5: j
 attack_6: k
 attack_7: l
 attack_8: ;
-brake: space
+boost: space
+brake: left shift

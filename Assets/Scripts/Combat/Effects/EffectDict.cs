@@ -23,6 +23,10 @@ public abstract class EffectDict : MonoBehaviour
         generalEffects = new SortedEffectDict<IGeneralEffect>(this);
         movementEffects = new SortedEffectDict<IMovementEffect>(this);
         tickEffects = new SortedEffectDict<ITickEffect>(this);
+        if (immuneTags == null)
+        {
+            immuneTags = TagHelper.empty;
+        }
     }
 
     private void InvokeChange()
