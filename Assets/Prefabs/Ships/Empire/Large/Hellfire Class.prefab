@@ -139,9 +139,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcd72f3f8c11eda46aa6ff83243fccfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScale: {fileID: 0}
   pilot: {fileID: 0}
   movementStats: {fileID: 3157410933922675794}
+  team: 0
   combatStats: {fileID: 3157410934679634328}
 --- !u!50 &3157410934068815963
 Rigidbody2D:
@@ -710,7 +710,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7617b11ab811b24585204c6d4c54aa1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  multiplier: 2
+  baseValue: 2
 --- !u!1 &5167428099790937938
 GameObject:
   m_ObjectHideFlags: 0
@@ -754,6 +754,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d6e8d0b6cc128245ab11834a1955600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  immuneTags: 
 --- !u!1001 &3157410935299898018
 PrefabInstance:
   m_ObjectHideFlags: 0
