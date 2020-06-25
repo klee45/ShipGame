@@ -8,16 +8,18 @@ public class PilotPlayer : Pilot
 
     [SerializeField]
     private InputManager input;
-
-    [SerializeField]
-    private Dictionary<string, Action> keyActionPairs;
+    
+    private Dictionary<string, Action> heldKeyActionPairs;
+    private Dictionary<string, ActionPair> pressReleasedKeyActionPairs;
 
     private float queuedMovement = 0;
     private float queuedRotation = 0;
 
     protected void Awake()
     {
-        keyActionPairs = Translate(input.LoadKeys());
+        Dictionary<string, string> inputKeyTranslate = input.LoadKeys();
+        heldKeyActionPairs = Translate(inputKeyTranslate, heldKeys);
+        pressReleasedKeyActionPairs = Translate(inputKeyTranslate, pressReleaseKeys);
     }
 
     private void OnEnable()
@@ -59,29 +61,50 @@ public class PilotPlayer : Pilot
 
     private void CheckButtons()
     {
-        foreach (KeyValuePair<string, Action> pair in keyActionPairs)
+        if (Input.anyKey)
         {
-            if (Input.GetKey(pair.Key))
+            foreach (KeyValuePair<string, Action> pair in heldKeyActionPairs)
             {
-                //Debug.Log(string.Format("{0} pressed", pair.Key));
-                pair.Value(ship);
+                if (Input.GetKey(pair.Key))
+                {
+                    //Debug.Log(string.Format("{0} pressed", pair.Key));
+                    pair.Value(ship);
+                }
+            }
+        }
+
+        foreach (KeyValuePair<string, ActionPair> pair in pressReleasedKeyActionPairs)
+        {
+            if (Input.GetKeyDown(pair.Key))
+            {
+                pair.Value.Down()(ship);
+            }
+            else if (Input.GetKeyUp(pair.Key))
+            {
+                pair.Value.Up()(ship);
             }
         }
     }
 
     private delegate void Action(Ship ship);
-
-    private Dictionary<string, Action> Translate(Dictionary<string, string> dict)
+    private class ActionPair : Pair<Action, Action>
     {
-        Dictionary<string, Action> temp = new Dictionary<string, Action>();
-        foreach (KeyValuePair<string, string> pair in dict)
+        public ActionPair(Action a, Action b) : base(a, b) {}
+        public Action Down() { return a; }
+        public Action Up() { return b; }
+    }
+
+    private Dictionary<string, T> Translate<T>(Dictionary<string, string> dict, Dictionary<string, T> translation)
+    {
+        Dictionary<string, T> temp = new Dictionary<string, T>();
+        foreach (KeyValuePair<string, T> pair in translation)
         {
-            temp[pair.Value] = translation[pair.Key];
+            temp[dict[pair.Key]] = translation[pair.Key];
         }
         return temp;
     }
-    
-    private static Dictionary<string, Action> translation = new Dictionary<string, Action>()
+
+    private Dictionary<string, Action> heldKeys = new Dictionary<string, Action>()
     {
         { "attack_1", (s) => FireWeapon(s, 0) },
         { "attack_2", (s) => FireWeapon(s, 1) },
@@ -91,7 +114,11 @@ public class PilotPlayer : Pilot
         { "attack_6", (s) => FireWeapon(s, 5) },
         { "attack_7", (s) => FireWeapon(s, 6) },
         { "attack_8", (s) => FireWeapon(s, 7) },
-        { "brake",    (s) => Brake(s) }
     };
 
+    private static Dictionary<string, ActionPair> pressReleaseKeys = new Dictionary<string, ActionPair>()
+    {
+        { "boost", new ActionPair((s) => Boost(s), (s) => Unboost(s)) },
+        { "brake", new ActionPair((s) => Brake(s), (s) => Unbrake(s)) }
+    };
 }

@@ -88,5 +88,11 @@ public class WarpGate : MonoBehaviour
             didReplace = false;
             return effect;
         }
+
+        public static readonly Tag[] tags = new Tag[] { Tag.WARP };
+        public override Tag[] GetTags()
+        {
+            return tags;
+        }
     }
 }

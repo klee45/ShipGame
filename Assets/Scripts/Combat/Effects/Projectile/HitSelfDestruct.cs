@@ -24,4 +24,9 @@ public class HitSelfDestruct : ProjectileEffect, ProjectileEffect.IOnHitEffect, 
     {
         return "Self destruct on hit";
     }
+    
+    public override Tag[] GetTags()
+    {
+        return TagHelper.empty;
+    }
 }

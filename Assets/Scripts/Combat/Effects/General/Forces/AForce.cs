@@ -22,4 +22,10 @@ public abstract class AForce : GeneralEffect, GeneralEffect.IMovementEffect
             return new Vector3(force.x * timeDelta, force.y * timeDelta, 0);
         }
     }
+
+    public static readonly Tag[] tags = new Tag[] { Tag.FORCE, Tag.MOVEMENT };
+    public override Tag[] GetTags()
+    {
+        return tags;
+    }
 }

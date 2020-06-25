@@ -39,19 +39,18 @@ public abstract class EntityTemplate<OUT> : Template<OUT, GameObject> where OUT 
 
 public abstract class Entity : MonoBehaviour
 {
-    [SerializeField]
-    protected ATimeScale timeScale;
+    protected ResettingFloat timeScale;
     [SerializeField]
     protected Pilot pilot;
     [SerializeField]
-    private MovementStats movementStats;
+    protected MovementStats movementStats;
     [SerializeField]
     protected Team team;
 
     protected virtual void Awake()
     {
         pilot = GetComponentInChildren<Pilot>();
-        timeScale = GetComponentInChildren<TimeScale>();
+        timeScale = new ResettingFloat(1);
     }
 
     protected virtual void Start()
@@ -67,7 +66,7 @@ public abstract class Entity : MonoBehaviour
         return team;
     }
 
-    public ATimeScale GetTimeScale()
+    public ResettingFloat GetTimeScale()
     {
         return timeScale;
     }
@@ -129,7 +128,7 @@ public abstract class Entity : MonoBehaviour
     {
         foreach (ITickEffect effects in dict.tickEffects.GetAll())
         {
-            effects.Tick(timeScale.GetScale());
+            effects.Tick(timeScale.GetValue());
         }
     }
 }

@@ -89,4 +89,10 @@ public class HitPerSecond : ProjectileEffect, ProjectileEffect.IOnHitStayEffect,
     {
         return "Hit on tick";
     }
+
+    public static readonly Tag[] tags = new Tag[] { Tag.DAMAGE };
+    public override Tag[] GetTags()
+    {
+        return tags;
+    }
 }

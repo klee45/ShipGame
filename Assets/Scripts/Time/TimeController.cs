@@ -12,9 +12,9 @@ public class TimeController : Singleton<TimeController>
         return deltaTime * timeScale;
     }
 
-    public static float DeltaTime(ATimeScale timeScale)
+    public static float DeltaTime(ResettingFloat timeScale)
     {
-        return DeltaTime(timeScale.GetScale());
+        return DeltaTime(timeScale.GetValue());
     }
 
     public static float FixedDeltaTime()

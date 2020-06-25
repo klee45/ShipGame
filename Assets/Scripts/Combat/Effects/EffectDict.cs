@@ -8,6 +8,9 @@ using static GeneralEffect;
 
 public abstract class EffectDict : MonoBehaviour
 {
+    [SerializeField]
+    protected Tag[] immuneTags;
+
     public SortedEffectDict<IGeneralEffect> generalEffects;
     public SortedEffectDict<IMovementEffect> movementEffects;
     public SortedEffectDict<ITickEffect> tickEffects;
@@ -17,9 +20,9 @@ public abstract class EffectDict : MonoBehaviour
 
     protected virtual void Awake()
     {
-        generalEffects = Link(new SortedEffectDict<IGeneralEffect>());
-        movementEffects = Link(new SortedEffectDict<IMovementEffect>());
-        tickEffects = Link(new SortedEffectDict<ITickEffect>());
+        generalEffects = new SortedEffectDict<IGeneralEffect>(this);
+        movementEffects = new SortedEffectDict<IMovementEffect>(this);
+        tickEffects = new SortedEffectDict<ITickEffect>(this);
     }
 
     private void InvokeChange()
@@ -27,10 +30,14 @@ public abstract class EffectDict : MonoBehaviour
         OnChange?.Invoke();
     }
 
-    protected SortedEffectDict<T> Link<T>(SortedEffectDict<T> dict) where T : IEffect
+    public void SetImmuneTags(Tag[] tags)
     {
-        dict.OnChange += InvokeChange;
-        return dict;
+        this.immuneTags = tags;
+    }
+
+    public Tag[] GetTags()
+    {
+        return immuneTags;
     }
 
     public virtual List<List<IEffect>> GetAddEffects()
@@ -59,14 +66,15 @@ public abstract class EffectDict : MonoBehaviour
 
     public class SortedEffectDict<U> where U : IEffect
     {
-        public event DictChange OnChange;
+        private EffectDict parent;
 
         private Dictionary<System.Type, IEffect> updateDict;
         private Dictionary<System.Type, List<IEffect>> addDict;
         private List<U> lst;
 
-        public SortedEffectDict()
+        public SortedEffectDict(EffectDict parent)
         {
+            this.parent = parent;
             updateDict = new Dictionary<System.Type, IEffect>();
             addDict = new Dictionary<System.Type, List<IEffect>>();
             lst = new List<U>();
@@ -87,6 +95,21 @@ public abstract class EffectDict : MonoBehaviour
             return lst;
         }
 
+        private bool AllowedTags(IEffect effect)
+        {
+            foreach (Tag tag in effect.GetTags())
+            {
+                foreach (Tag immune in parent.immuneTags)
+                {
+                    if (tag == immune)
+                    {
+                        return false;
+                    }
+                }
+            }
+            return true;
+        }
+
         private void ListInsert(U effect)
         {
             int i = 0;
@@ -102,32 +125,38 @@ public abstract class EffectDict : MonoBehaviour
             }
             lst.Add(effect);
         }
-
+        
         public void AddUpdate<T>(T effect) where T : U, IEffectUpdates
         {
-            System.Type type = effect.GetType();
-            if (updateDict.TryGetValue(type, out IEffect savedEffect))
+            if (AllowedTags(effect))
             {
-                effect.UpdateEffect(savedEffect, out bool didReplace);
-                if (didReplace)
+                System.Type type = effect.GetType();
+                if (updateDict.TryGetValue(type, out IEffect savedEffect))
                 {
-                    RemoveUpdateHelper(savedEffect);
+                    effect.UpdateEffect(savedEffect, out bool didReplace);
+                    if (didReplace)
+                    {
+                        RemoveUpdateHelper(savedEffect);
+                        ListInsert(effect);
+                        effect.OnDestroyEvent += RemoveUpdateHelper;
+                    }
+                }
+                else
+                {
+                    updateDict.Add(type, effect);
                     ListInsert(effect);
                     effect.OnDestroyEvent += RemoveUpdateHelper;
                 }
+                parent.InvokeChange();
             }
-            else
-            {
-                updateDict.Add(type, effect);
-                ListInsert(effect);
-                effect.OnDestroyEvent += RemoveUpdateHelper;
-            }
-            OnChange?.Invoke();
         }
 
         public void RemoveUpdate<T>(T effect) where T : U, IEffectUpdates
         {
-            RemoveUpdateHelper(effect);
+            if (AllowedTags(effect))
+            {
+                RemoveUpdateHelper(effect);
+            }
         }
 
         private void RemoveUpdateHelper(IEffect effect)
@@ -135,30 +164,36 @@ public abstract class EffectDict : MonoBehaviour
             RemoveAsGeneric(effect);
             updateDict.Remove(effect.GetType());
             effect.OnDestroyEvent -= RemoveUpdateHelper;
-            OnChange?.Invoke();
+            parent.InvokeChange();
         }
 
         public void Add<T>(T effect) where T : U, IEffectAdds
         {
-            System.Type type = effect.GetType();
-            if (addDict.TryGetValue(type, out List<IEffect> effects))
+            if (AllowedTags(effect))
             {
-                effects.Add(effect);
+                System.Type type = effect.GetType();
+                if (addDict.TryGetValue(type, out List<IEffect> effects))
+                {
+                    effects.Add(effect);
+                }
+                else
+                {
+                    List<IEffect> lst = new List<IEffect>();
+                    lst.Add(effect);
+                    addDict.Add(type, lst);
+                }
+                ListInsert(effect);
+                effect.OnDestroyEvent += RemoveAddHelper;
+                parent.InvokeChange();
             }
-            else
-            {
-                List<IEffect> lst = new List<IEffect>();
-                lst.Add(effect);
-                addDict.Add(type, lst);
-            }
-            ListInsert(effect);
-            effect.OnDestroyEvent += RemoveAddHelper;
-            OnChange?.Invoke();
         }
 
         public void RemoveAdd<T>(T effect) where T : U, IEffectAdds
         {
-            RemoveAddHelper(effect);
+            if (AllowedTags(effect))
+            {
+                RemoveAddHelper(effect);
+            }
         }
 
         private void RemoveAddHelper(IEffect effect)
@@ -184,7 +219,7 @@ public abstract class EffectDict : MonoBehaviour
                     effect.OnDestroyEvent -= RemoveAddHelper;
                 }
             }
-            OnChange?.Invoke();
+            parent.InvokeChange();
         }
 
         private void RemoveAsGeneric(IEffect effect)

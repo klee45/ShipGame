@@ -22,13 +22,23 @@ public class StatGroupSecondOrderMirrored : StatGroup
         this.dampening = dampening;
     }
 
+    public override void Tick(float scale, float deltaTime)
+    {
+        kernel.Tick(scale, deltaTime);
+    }
+
     public override float GetValue()
     {
         return kernel.GetValue();
     }
 
-    public override void Tick(float scale, float deltaTime)
+    public override void MultMod(float inc, float dec)
     {
-        kernel.Tick(scale, deltaTime);
+        kernel.MultMod(inc, dec);
+    }
+
+    public override void MultModUndo(float inc, float dec)
+    {
+        kernel.MultModUndo(inc, dec);
     }
 }

@@ -13,4 +13,44 @@ public static class Math
     {
         return f * Mathf.PI / 180f;
     }
+    
+    public static int Sum(this IEnumerable<int> lst)
+    {
+        int result = 0;
+        foreach (int i in lst)
+        {
+            result += i;
+        }
+        return result;
+    }
+
+    public static float Sum(this IEnumerable<float> lst)
+    {
+        float result = 0;
+        foreach (float i in lst)
+        {
+            result += i;
+        }
+        return result;
+    }
+
+    public static int Product(this IEnumerable<int> lst)
+    {
+        int result = 0;
+        foreach (int i in lst)
+        {
+            result *= i;
+        }
+        return result;
+    }
+
+    public static float Product(this IEnumerable<float> lst)
+    {
+        float result = 0;
+        foreach (float i in lst)
+        {
+            result *= i;
+        }
+        return result;
+    }
 }

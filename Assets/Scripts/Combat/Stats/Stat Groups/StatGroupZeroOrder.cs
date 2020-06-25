@@ -9,6 +9,14 @@ public class StatGroupZeroOrder : StatGroup
         return 0;
     }
 
+    public override void MultMod(float inc, float dec)
+    {
+    }
+
+    public override void MultModUndo(float inc, float dec)
+    {
+    }
+
     public override void Tick(float scale, float deltaTime)
     {
     }

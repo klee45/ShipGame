@@ -12,4 +12,7 @@ public abstract class StatGroup : MonoBehaviour
 {
     public abstract void Tick(float scale, float deltaTime);
     public abstract float GetValue();
+
+    public abstract void MultMod(float inc, float dec);
+    public abstract void MultModUndo(float inc, float dec);
 }

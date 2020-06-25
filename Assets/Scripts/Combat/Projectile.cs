@@ -18,11 +18,10 @@ public class Projectile : Entity
         projectileEffects = gameObject.AddComponent<EffectDictProjectile>();
     }
 
-    public void Setup(float range, float duration, ATimeScale timeScale)
+    public void Setup(float range, float duration)
     {
         this.range = range;
         this.duration = duration;
-        this.timeScale = timeScale;
     }
 
     protected override void Start()

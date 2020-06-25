@@ -36,4 +36,9 @@ public class HitCreateProjectile : ProjectileEffect, ProjectileEffect.IOnHitEffe
     {
         return string.Format("Create projectile on hit");
     }
+
+    public override Tag[] GetTags()
+    {
+        return TagHelper.empty;
+    }
 }

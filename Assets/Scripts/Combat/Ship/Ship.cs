@@ -123,6 +123,29 @@ public class Ship : Entity
         return e;
     }
 
+    public void ActivateBoost()
+    {
+        Debug.Log("Boost!");
+        movementStats.GetRotationStatGroup().MultMod(0.5f, 1f);
+        movementStats.GetVelocityStatGroup().MultMod(1.6f, 0.8f);
+    }
+
+    public void DeactivateBoost()
+    {
+        Debug.Log("Unboost.");
+        movementStats.GetRotationStatGroup().MultModUndo(2f, 1f);
+        movementStats.GetVelocityStatGroup().MultModUndo(0.625f, 1.25f);
+    }
+
+    public void ActivateBrake()
+    {
+        Debug.Log("Break!");
+    }
+    public void DeactivateBrake()
+    {
+        Debug.Log("Unnbreak.");
+    }
+
     protected override void Move(float rotation, float velocity)
     {
         /*

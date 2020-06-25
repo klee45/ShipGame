@@ -17,8 +17,6 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
     private float range;
     [SerializeField]
     private ProjectileLayerType layerType = ProjectileLayerType.AFFECTS_ENEMY_SHIPS;
-    [SerializeField]
-    private ATimeScale.TimeScaleType timeScaleType = ATimeScale.TimeScaleType.STANDARD;
 
     private float remainingRange;
     private Team team;
@@ -71,17 +69,7 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
 
         SetupColliders(projectile, team);
 
-        ATimeScale timeScale = null;
-        switch (timeScaleType)
-        {
-            case ATimeScale.TimeScaleType.STANDARD:
-                timeScale = projectile.gameObject.AddComponent<TimeScale>();
-                break;
-            case ATimeScale.TimeScaleType.STATIC:
-                timeScale = projectile.gameObject.AddComponent<TimeScaleStatic>();
-                break;
-        }
-        projectile.Setup(remainingRange, duration, timeScale);
+        projectile.Setup(remainingRange, duration);
 
         return projectile;
     }

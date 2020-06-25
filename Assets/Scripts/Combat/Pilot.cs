@@ -24,10 +24,10 @@ public abstract class Pilot : MonoBehaviour
         ship.GetArsenal()?.Fire(num);
     }
 
-    protected static void Brake(Ship ship)
-    {
-
-    }
+    protected static void Boost(Ship ship) { ship.ActivateBoost(); }
+    protected static void Unboost(Ship ship) { ship.DeactivateBoost(); }
+    protected static void Brake(Ship ship) { ship.ActivateBrake(); }
+    protected static void Unbrake(Ship ship) { ship.DeactivateBrake(); }
 
     protected void Rotate(Entity entity, float val)
     {

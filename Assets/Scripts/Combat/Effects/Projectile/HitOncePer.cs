@@ -28,4 +28,10 @@ public class HitOncePer : ProjectileEffect, ProjectileEffect.IOnHitEffect, Effec
     {
         return "Hit once per enemy";
     }
+
+    public static readonly Tag[] tags = new Tag[] { Tag.DAMAGE };
+    public override Tag[] GetTags()
+    {
+        return tags;
+    }
 }

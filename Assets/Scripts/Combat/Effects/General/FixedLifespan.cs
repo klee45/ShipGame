@@ -38,4 +38,9 @@ public class FixedLifespan : GeneralEffect, GeneralEffect.IGeneralEffect, Effect
     {
         return string.Format("Fixed lifespan {0:0.##}", duration);
     }
+    
+    public override Tag[] GetTags()
+    {
+        return TagHelper.empty;
+    }
 }

@@ -35,13 +35,13 @@ public class CombatStats : MonoBehaviour
 
     public bool shieldsDown;
 
-    private IntStat maxHull;
+    private ResettingFloat maxHull;
     private int hull;
 
-    private IntStat maxArmor;
+    private ResettingFloat maxArmor;
     private int armor;
 
-    private IntStat maxShield;
+    private ResettingFloat maxShield;
     private int shield;
 
     public delegate void DamageEvent(int damage);
@@ -59,9 +59,9 @@ public class CombatStats : MonoBehaviour
 
     void Awake()
     {
-        this.maxHull = new IntStat(initialHullMax);
-        this.maxArmor = new IntStat(initialArmorMax);
-        this.maxShield = new IntStat(initialShieldMax);
+        this.maxHull = new ResettingFloat(initialHullMax);
+        this.maxArmor = new ResettingFloat(initialArmorMax);
+        this.maxShield = new ResettingFloat(initialShieldMax);
         hull = initialHullMax;
         armor = initialArmorMax;
         shield = initialShieldMax;
@@ -98,7 +98,7 @@ public class CombatStats : MonoBehaviour
 
     public int GetTotalMaxHP()
     {
-        return maxHull.GetValue() + maxArmor.GetValue() + maxShield.GetValue();
+        return maxHull.GetInt() + maxArmor.GetInt() + maxShield.GetInt();
     }
 
     public float GetOverallPercent()
@@ -161,17 +161,17 @@ public class CombatStats : MonoBehaviour
         return false;
     }
 
-    public int GetHullMax() { return maxHull.GetValue(); }
-    public int GetArmorMax() { return maxArmor.GetValue(); }
-    public int GetShieldMax() { return maxShield.GetValue(); }
+    public int GetHullMax() { return maxHull.GetInt(); }
+    public int GetArmorMax() { return maxArmor.GetInt(); }
+    public int GetShieldMax() { return maxShield.GetInt(); }
 
     public int GetHullCurrent() { return hull; }
     public int GetArmorCurrent() { return armor; }
     public int GetShieldCurrent() { return shield; }
 
-    public void TrimHullToMax() { hull = Mathf.Min(hull, maxHull.GetValue()); }
-    public void TrimArmorToMax() { armor = Mathf.Min(armor, maxArmor.GetValue()); }
-    public void TrimShieldToMax() { shield = Mathf.Min(shield, maxShield.GetValue()); }
+    public void TrimHullToMax() { hull = Mathf.Min(hull, maxHull.GetInt()); }
+    public void TrimArmorToMax() { armor = Mathf.Min(armor, maxArmor.GetInt()); }
+    public void TrimShieldToMax() { shield = Mathf.Min(shield, maxShield.GetInt()); }
 
     public void TrimAllToMax()
     {
@@ -182,17 +182,17 @@ public class CombatStats : MonoBehaviour
 
     private void UpdateShieldGraphic()
     {
-        healthBar?.UpdateShieldGraphic(shield, maxShield.GetValue(), maxArmor.GetValue(), maxHull.GetValue());
+        healthBar?.UpdateShieldGraphic(shield, maxShield.GetInt(), maxArmor.GetInt(), maxHull.GetInt());
     }
 
     private void UpdateArmorGraphic()
     {
-        healthBar?.UpdateArmorGraphic(armor, maxShield.GetValue(), maxArmor.GetValue(), maxHull.GetValue());
+        healthBar?.UpdateArmorGraphic(armor, maxShield.GetInt(), maxArmor.GetInt(), maxHull.GetInt());
     }
 
     private void UpdateHullGraphic()
     {
-        healthBar?.UpdateHullGraphic(hull, maxShield.GetValue(), maxArmor.GetValue(), maxHull.GetValue());
+        healthBar?.UpdateHullGraphic(hull, maxShield.GetInt(), maxArmor.GetInt(), maxHull.GetInt());
     }
 
     private void UpdateAllGraphics()

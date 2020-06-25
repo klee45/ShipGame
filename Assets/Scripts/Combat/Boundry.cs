@@ -109,5 +109,10 @@ public class Boundry : Singleton<Boundry>
             didReplace = false;
             return effect;
         }
+
+        public override Tag[] GetTags()
+        {
+            return TagHelper.empty;
+        }
     }
 }

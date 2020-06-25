@@ -34,30 +34,42 @@ public class StatGroupSecondOrder : StatGroup
         this.dampening = dampening;
     }
 
+    public override void Tick(float scale, float deltaTime)
+    {
+        kernel.Tick(scale, deltaTime);
+    }
+
     public override float GetValue()
     {
         return kernel.GetValue();
     }
 
-    public override void Tick(float scale, float deltaTime)
+    public override void MultMod(float inc, float dec)
     {
-        kernel.Tick(scale, deltaTime);
+        kernel.MultMod(inc, dec);
+    }
+
+    public override void MultModUndo(float inc, float dec)
+    {
+        kernel.MultModUndo(inc, dec);
     }
 }
 
 public class StatGroupSecondOrderKernel
 {
     private static float INPUT_LIMIT = 0.1f;
-    private FloatStat accelerationStat, decelerationStat, maxStat, minStat;
+
+    public ResettingFloat accelerationStat, decelerationStat, maxStat, minStat;
+
     private float dampening;
     private float currentValue;
 
     public StatGroupSecondOrderKernel(float initial, float acceleration, float deceleration, float max, float min, float dampening)
     {
-        this.maxStat = new FloatStat(max);
-        this.accelerationStat = new FloatStat(acceleration);
-        this.minStat = new FloatStat(min);
-        this.decelerationStat = new FloatStat(deceleration);
+        this.maxStat = new ResettingFloat(max);
+        this.accelerationStat = new ResettingFloat(acceleration);
+        this.minStat = new ResettingFloat(min);
+        this.decelerationStat = new ResettingFloat(deceleration);
         this.dampening = dampening;
         currentValue = initial;
     }
@@ -99,10 +111,19 @@ public class StatGroupSecondOrderKernel
         return currentValue;
     }
 
-    /*
-    public FloatStat GetAcceleration() { return acceleration; }
-    public FloatStat GetDeceleration() { return deceleration; }
-    public FloatStat GetMax() { return max; }
-    public FloatStat GetMin() { return min; }
-    */
+    public void MultMod(float inc, float dec)
+    {
+        accelerationStat.Mult(inc);
+        decelerationStat.Mult(dec);
+        maxStat.Mult(inc);
+        minStat.Mult(dec);
+    }
+
+    public void MultModUndo(float inc, float dec)
+    {
+        accelerationStat.MultUndo(inc);
+        decelerationStat.Mult(dec);
+        maxStat.MultUndo(inc);
+        minStat.MultUndo(dec);
+    }
 }
