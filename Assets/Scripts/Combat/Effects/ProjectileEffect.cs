@@ -20,6 +20,11 @@ public abstract class ProjectileEffect : Effect
         void OnHitStay(Collider2D collision);
     }
 
+    public interface IOnEXitEffect : IEffect
+    {
+        void OnExit(Collider2D collision);
+    }
+
     protected void DestroySelf()
     {
         Destroy(GetComponent<Projectile>().gameObject);
@@ -27,6 +32,6 @@ public abstract class ProjectileEffect : Effect
 
     protected void DoDamage(Collider2D collision, int damage)
     {
-        collision.gameObject.GetComponentInChildren<CombatStats>().TakeDamage(damage);
+        collision.gameObject.GetComponentInChildren<CombatStats>()?.TakeDamage(damage);
     }
 }

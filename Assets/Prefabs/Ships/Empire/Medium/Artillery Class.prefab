@@ -174,7 +174,6 @@ Transform:
   m_Children:
   - {fileID: 812305905146771188}
   - {fileID: 812305905909313473}
-  - {fileID: 4439098977538964455}
   m_Father: {fileID: 812305905203523644}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -227,9 +226,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcd72f3f8c11eda46aa6ff83243fccfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScale: {fileID: 0}
   pilot: {fileID: 0}
   movementStats: {fileID: 812305904357934070}
+  team: 0
   combatStats: {fileID: 812305905146771723}
 --- !u!50 &812305905203523634
 Rigidbody2D:
@@ -670,49 +669,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1 &2022989986397785697
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4439098977538964455}
-  - component: {fileID: 3152733945355131726}
-  m_Layer: 11
-  m_Name: Time Scale
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &4439098977538964455
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2022989986397785697}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -5, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 812305905162793486}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &3152733945355131726
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2022989986397785697}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1769300579f68aa4789be927d4666761, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &8598257952491328987
 GameObject:
   m_ObjectHideFlags: 0
@@ -756,6 +712,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d6e8d0b6cc128245ab11834a1955600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  immuneTags: 
 --- !u!1001 &812305904688265095
 PrefabInstance:
   m_ObjectHideFlags: 0

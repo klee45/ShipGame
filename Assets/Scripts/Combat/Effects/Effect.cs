@@ -55,12 +55,12 @@ public abstract class Effect : MonoBehaviour, Effect.IEffect
     public abstract string GetName();
 }
 
-public abstract class GeneralEffectTemplate : EffectTemplate<GeneralEffect>
+public abstract class GeneralEffectTemplate : EffectTemplate<EntityEffect>
 {
 
 }
 
-public abstract class GeneralEffect : Effect
+public abstract class EntityEffect : Effect
 {
     public abstract void AddTo(EffectDict dict);
 
@@ -72,6 +72,7 @@ public abstract class GeneralEffect : Effect
     public interface IGeneralEffect : IEffect
     {
         void Apply(Entity e);
+        void Cleanup(Entity e);
     }
 
     public interface IMovementEffect : IEffect

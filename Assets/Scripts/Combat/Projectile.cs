@@ -16,6 +16,10 @@ public class Projectile : Entity
     {
         base.Awake();
         projectileEffects = gameObject.AddComponent<EffectDictProjectile>();
+        foreach (ProjectileEffect effect in GetComponentsInChildren<ProjectileEffect>())
+        {
+            effect.AddTo(projectileEffects);
+        }
     }
 
     public void Setup(float range, float duration)
@@ -43,6 +47,14 @@ public class Projectile : Entity
         transform.position += translation.ToVector3();
     }
 
+
+    public override T AddEntityEffect<T>()
+    {
+        T e = projectileEffects.gameObject.AddComponent<T>();
+        e.AddTo(GetEffectsDict());
+        return e;
+    }
+
     public EffectDictProjectile GetEffectsDict()
     {
         return projectileEffects;
@@ -51,8 +63,8 @@ public class Projectile : Entity
     protected override void ApplyEffects()
     {
         DoTickEffects(projectileEffects);
-        DoGenericEffects(projectileEffects);
         DoMovementEffects(projectileEffects);
+        DoGeneralEffects(projectileEffects);
     }
 
     private static void SortOrder(ProjectileEffect[] lst)
@@ -60,9 +72,9 @@ public class Projectile : Entity
         lst.OrderBy(p => p.GetPriority());
     }
 
+    /*
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("Trigger enter");
         DoTriggerEnter2D(collision);
     }
 
@@ -70,6 +82,12 @@ public class Projectile : Entity
     {
         DoTriggerStay2D(collision);
     }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        DoTriggerExit2D(collision);
+    }
+    */
 
     public void DoTriggerEnter2D(Collider2D collision)
     {
@@ -84,6 +102,14 @@ public class Projectile : Entity
         foreach (var e in projectileEffects.onStays.GetAll())
         {
             e.OnHitStay(collision);
+        }
+    }
+
+    public void DoTriggerExit2D(Collider2D collision)
+    {
+        foreach (var e in projectileEffects.onExits.GetAll())
+        {
+            e.OnExit(collision);
         }
     }
 }

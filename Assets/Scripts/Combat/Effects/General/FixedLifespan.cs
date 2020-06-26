@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FixedLifespan : GeneralEffect, GeneralEffect.IGeneralEffect, EffectDict.IEffectUpdates
+public class FixedLifespan : EntityEffect, EntityEffect.IGeneralEffect, EffectDict.IEffectUpdates
 {
     private static string FIXED_NAME = "__Fixed Lifespan";
 
@@ -17,6 +17,10 @@ public class FixedLifespan : GeneralEffect, GeneralEffect.IGeneralEffect, Effect
     public void Apply(Entity e)
     {
         Destroy(e.gameObject, duration);
+    }
+
+    public void Cleanup(Entity e)
+    {
     }
 
     public override void AddTo(EffectDict dict)

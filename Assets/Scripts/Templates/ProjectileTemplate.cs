@@ -61,7 +61,7 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
         }
         foreach (GeneralEffectTemplate effect in generalEffects)
         {
-            GeneralEffect e = effect.Create(projectile.gameObject);
+            EntityEffect e = effect.Create(projectile.gameObject);
             e.AddTo(projectile.GetEffectsDict());
         }
         float duration = movementStats.GetVelocity().GetDuration(remainingRange);
@@ -79,7 +79,7 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
         Collider2D collider = projectile.GetComponentInChildren<Collider2D>();
         collider.isTrigger = true;
         collider.gameObject.name = "Base collider";
-        collider.gameObject.layer = Layers.PROJECTILE_DETECTABLE;
+        collider.gameObject.layer = Layers.GetProjectileLayerFromTeam(team);
         int[] layers = GetLayers(team);
         List<GameObject> colliders = new List<GameObject>();
         foreach (int layer in layers)
@@ -98,7 +98,7 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
             colliderObj.GetComponent<Collider2D>().isTrigger = true;
             colliderObj.AddComponent<ProjectileCollider>();
         }
-        collider.gameObject.AddComponent<ProjectileCollider>();
+        //collider.gameObject.AddComponent<ProjectileCollider>();
     }
 
     private int[] GetLayers(Team team)

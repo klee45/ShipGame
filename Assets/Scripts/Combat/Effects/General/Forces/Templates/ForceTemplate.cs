@@ -11,7 +11,7 @@ public class ForceTemplate : GeneralEffectTemplate
     [SerializeField]
     private bool isRelative = true;
 
-    protected override GeneralEffect CreateEffect(GameObject obj)
+    protected override EntityEffect CreateEffect(GameObject obj)
     {
         Force f = obj.AddComponent<Force>();
         f.Setup(force, duration, isRelative);

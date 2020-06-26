@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Boundry : Singleton<Boundry>
 {
-    private Dictionary<Ship, BoundryForce> outOfBounds;
+    private Dictionary<Entity, BoundryForce> outOfBounds;
     private float radius;
 
     protected override void Awake()
     {
         base.Awake();
         CalculateRadius();
-        outOfBounds = new Dictionary<Ship, BoundryForce>();
+        outOfBounds = new Dictionary<Entity, BoundryForce>();
     }
 
     private void Update()
@@ -48,8 +48,8 @@ public class Boundry : Singleton<Boundry>
     private void OnTriggerExit2D(Collider2D collision)
     {
         Ship ship = collision.gameObject.GetComponent<Ship>();
-        BoundryForce force = ship.AddGeneralEffect<BoundryForce>();
-        ship.OnShipDestroy += Remove;
+        BoundryForce force = ship.AddEntityEffect<BoundryForce>();
+        ship.OnEntityDestroy += Remove;
         outOfBounds.Add(ship, force);
 
         //Debug.Log("Exit T");
@@ -60,19 +60,19 @@ public class Boundry : Singleton<Boundry>
         Ship ship = collision.gameObject.GetComponent<Ship>();
         if (outOfBounds.TryGetValue(ship, out BoundryForce force))
         {
-            ship.OnShipDestroy -= Remove;
+            ship.OnEntityDestroy -= Remove;
             Destroy(force);
             outOfBounds.Remove(ship);
         }
         //Debug.Log("Enter");
     }
 
-    private void Remove(Ship s)
+    private void Remove(Entity e)
     {
-        outOfBounds.Remove(s);
+        outOfBounds.Remove(e);
     }
 
-    public class BoundryForce : AForce, GeneralEffect.ITickEffect, EffectDict.IEffectUpdates
+    public class BoundryForce : AForce, EntityEffect.ITickEffect, EffectDict.IEffectUpdates
     {
         private static float scale = 3f;
 

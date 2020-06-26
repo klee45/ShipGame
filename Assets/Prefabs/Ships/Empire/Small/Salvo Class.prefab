@@ -76,7 +76,6 @@ Transform:
   m_Children:
   - {fileID: 3198002384079074554}
   - {fileID: 3198002382412471048}
-  - {fileID: 6912606816993161818}
   m_Father: {fileID: 3198002383171816922}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -517,9 +516,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dcd72f3f8c11eda46aa6ff83243fccfa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeScale: {fileID: 0}
   pilot: {fileID: 0}
   movementStats: {fileID: 3198002382329603729}
+  team: 0
   combatStats: {fileID: 3198002384079074533}
 --- !u!50 &3198002383171816900
 Rigidbody2D:
@@ -699,49 +698,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d6e8d0b6cc128245ab11834a1955600, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &6869006399616750807
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6912606816993161818}
-  - component: {fileID: 7216271381323950216}
-  m_Layer: 11
-  m_Name: Time Scale
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &6912606816993161818
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6869006399616750807}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 3198002382139206893}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7216271381323950216
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6869006399616750807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1769300579f68aa4789be927d4666761, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  immuneTags: 
 --- !u!1001 &3198002382199971504
 PrefabInstance:
   m_ObjectHideFlags: 0

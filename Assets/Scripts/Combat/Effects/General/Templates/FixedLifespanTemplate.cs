@@ -7,7 +7,7 @@ public class FixedLifespanTemplate : GeneralEffectTemplate
     [SerializeField]
     private float duration;
 
-    protected override GeneralEffect CreateEffect(GameObject obj)
+    protected override EntityEffect CreateEffect(GameObject obj)
     {
         FixedLifespan fl = obj.AddComponent<FixedLifespan>();
         fl.Setup(duration);

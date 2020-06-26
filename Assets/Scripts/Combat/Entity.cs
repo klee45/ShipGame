@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using static Effect;
-using static GeneralEffect;
+using static EntityEffect;
 
 public abstract class EntityTemplate<OUT> : Template<OUT, GameObject> where OUT : Entity
 {
@@ -47,6 +47,14 @@ public abstract class Entity : MonoBehaviour
     [SerializeField]
     protected Team team;
 
+    public delegate void DestroyEvent(Entity e);
+    public event DestroyEvent OnEntityDestroy;
+
+    private void OnDestroy()
+    {
+        OnEntityDestroy?.Invoke(this);
+    }
+
     protected virtual void Awake()
     {
         pilot = GetComponentInChildren<Pilot>();
@@ -65,6 +73,8 @@ public abstract class Entity : MonoBehaviour
     {
         return team;
     }
+
+    public abstract T AddEntityEffect<T>() where T : EntityEffect;
 
     public ResettingFloat GetTimeScale()
     {
@@ -100,12 +110,9 @@ public abstract class Entity : MonoBehaviour
         movementStats.GetVelocityStatGroup().Tick(val, TimeController.DeltaTime(timeScale));
     }
 
-    protected void DoGenericEffects(EffectDict dict)
+    protected void DoGeneralEffects(EffectDict dict)
     {
-        foreach (IGeneralEffect effect in dict.generalEffects.GetAll())
-        {
-            effect.Apply(this);
-        }
+        dict.generalEffects.Activate(this);
     }
 
     protected void DoMovementEffects(EffectDict dict)

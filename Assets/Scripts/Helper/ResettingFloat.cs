@@ -63,7 +63,7 @@ public class ResettingFloat
                 float diff = Mathf.Abs(currentValue - baseValue);
                 if (diff > MIN_DIFF)
                 {
-                    Debug.Log(string.Format(
+                    Debug.LogWarning(string.Format(
                         "Resetting float had a different current ({0}) than base value ({1})",
                         currentValue,
                         baseValue));

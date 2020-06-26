@@ -10,11 +10,11 @@ public class WarpGate : MonoBehaviour
     [SerializeField]
     private GalaxyMapVertex targetSector;
 
-    private Dictionary<Ship, WarpEffect> warping;
+    private Dictionary<Entity, WarpEffect> warping;
 
     private void Awake()
     {
-        warping = new Dictionary<Ship, WarpEffect>();
+        warping = new Dictionary<Entity, WarpEffect>();
     }
 
     public void Setup(GalaxyMapVertex targetSector)
@@ -26,7 +26,7 @@ public class WarpGate : MonoBehaviour
     {
         //Debug.Log("Enter");
         Ship ship = collision.GetComponent<Ship>();
-        ship.OnShipDestroy += Remove;
+        ship.OnEntityDestroy += Remove;
         WarpEffect effect = ship.AddShipEffect<WarpEffect>();
         effect.Setup(targetSector, duration);
         
@@ -39,18 +39,18 @@ public class WarpGate : MonoBehaviour
         Ship ship = collision.GetComponent<Ship>();
         if (warping.TryGetValue(ship, out WarpEffect force))
         {
-            ship.OnShipDestroy -= Remove;
+            ship.OnEntityDestroy -= Remove;
             Destroy(force);
             warping.Remove(ship);
         }
     }
 
-    private void Remove(Ship s)
+    private void Remove(Entity e)
     {
-        warping.Remove(s);
+        warping.Remove(e);
     }
 
-    public class WarpEffect : ShipEffect, GeneralEffect.ITickEffect, EffectDict.IEffectUpdates
+    public class WarpEffect : ShipEffect, EntityEffect.ITickEffect, EffectDict.IEffectUpdates
     {
         private GalaxyMapVertex targetSector;
         private float duration;

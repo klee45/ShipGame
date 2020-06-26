@@ -6,24 +6,26 @@ public static class Layers
 {
     public const int DETECTION_SHIP = 8;
     public const int DETECTION_PROJECTILE = 9;
-
-    public const int SHIP_DETECTABLE = 10;
-    public const int PROJECTILE_DETECTABLE = 11;
     
-    public const int SHIP_1 = 12;
-    public const int SHIP_2 = 13;
-    public const int SHIP_3 = 14;
-    public const int SHIP_4 = 15;
-    
-    public const int PROJECTILE_SHIP_1 = 16;
-    public const int PROJECTILE_SHIP_2 = 17;
-    public const int PROJECTILE_SHIP_3 = 18;
-    public const int PROJECTILE_SHIP_4 = 19;
+    public const int SHIP_1 = 10;
+    public const int SHIP_2 = 11;
+    public const int SHIP_3 = 12;
+    public const int SHIP_4 = 13;
 
-    public const int PROJECTILE_PROJECTILE_1 = 20;
-    public const int PROJECTILE_PROJECTILE_2 = 21;
-    public const int PROJECTILE_PROJECTILE_3 = 22;
-    public const int PROJECTILE_PROJECTILE_4 = 23;
+    public const int PROJECTILE_1 = 14;
+    public const int PROJECTILE_2 = 15;
+    public const int PROJECTILE_3 = 16;
+    public const int PROJECTILE_4 = 17;
+
+    public const int PROJECTILE_SHIP_1 = 18;
+    public const int PROJECTILE_SHIP_2 = 19;
+    public const int PROJECTILE_SHIP_3 = 20;
+    public const int PROJECTILE_SHIP_4 = 21;
+
+    public const int PROJECTILE_PROJECTILE_1 = 22;
+    public const int PROJECTILE_PROJECTILE_2 = 23;
+    public const int PROJECTILE_PROJECTILE_3 = 24;
+    public const int PROJECTILE_PROJECTILE_4 = 25;
     
     public static int GetShipLayerFromTeam(Team team)
     {
@@ -38,9 +40,19 @@ public static class Layers
         }
     }
 
-    public static int ShipToProjectileHitShip(int shipLayer)
+    public static int ShipToProjectile(int shipLayer)
     {
         return shipLayer + 4;
+    }
+
+    public static int GetProjectileLayerFromTeam(Team team)
+    {
+        return ShipToProjectile(GetShipLayerFromTeam(team));
+    }
+
+    public static int ShipToProjectileHitShip(int shipLayer)
+    {
+        return shipLayer + 8;
     }
 
     public static int[] GetProjectileHitShipLayerFromTeam(Team team)
@@ -55,7 +67,7 @@ public static class Layers
     
     public static int ShipToProjectileHitProjectile(int shipLayer)
     {
-        return shipLayer + 8;
+        return shipLayer + 12;
     }
 
     public static int[] GetProjectileHitProjectileLayerFromTeam(Team team)

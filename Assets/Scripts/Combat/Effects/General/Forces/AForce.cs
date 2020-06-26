@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AForce : GeneralEffect, GeneralEffect.IMovementEffect
+public abstract class AForce : EntityEffect, EntityEffect.IMovementEffect
 {
     [SerializeField]
     protected Vector2 force;

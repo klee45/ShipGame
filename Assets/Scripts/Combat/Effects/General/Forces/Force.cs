@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Force : AForce , EffectDict.IEffectAdds, GeneralEffect.ITickEffect
+public class Force : AForce , EffectDict.IEffectAdds, EntityEffect.ITickEffect
 {
     [SerializeField]
     private float maxDuration;

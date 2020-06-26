@@ -15,12 +15,14 @@ TagManager:
   - 
   - Detection Ship
   - Detection Projectile
-  - 
-  - Projectile Detectable
   - Ship 1
   - Ship 2
   - Ship 3
   - Ship 4
+  - Projectile 1
+  - Projectile 2
+  - Projectile 3
+  - Projectile 4
   - Projectile Affects Ship 1
   - Projectile Affects Ship 2
   - Projectile Affects Ship 3
@@ -29,8 +31,6 @@ TagManager:
   - Projectile Affects Projectile 2
   - Projectile Affects Projectile 3
   - Projectile Affects Projectile 4
-  - 
-  - 
   - 
   - 
   - 

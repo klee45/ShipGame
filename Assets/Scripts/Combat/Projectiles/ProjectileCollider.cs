@@ -11,7 +11,6 @@ public class ProjectileCollider : MonoBehaviour
         parent = GetComponentInParent<Projectile>();
     }
 
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
         parent.DoTriggerEnter2D(collision);
@@ -20,5 +19,10 @@ public class ProjectileCollider : MonoBehaviour
     private void OnTriggerStay2D(Collider2D collision)
     {
         parent.DoTriggerStay2D(collision);
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        parent.DoTriggerExit2D(collision);
     }
 }

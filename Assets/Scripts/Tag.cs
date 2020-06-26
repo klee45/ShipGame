@@ -8,6 +8,7 @@ public enum Tag
     MOVEMENT,
     DAMAGE,
     FORCE,
+    TIME
 }
 
 public static class TagHelper

@@ -30,14 +30,6 @@ public class Ship : Entity
     private Vector3 desiredPosition;
     private float desiredRotation;
 
-    public delegate void DestroyEvent(Ship s);
-    public event DestroyEvent OnShipDestroy;
-
-    private void OnDestroy()
-    {
-        OnShipDestroy?.Invoke(this);
-    }
-
     public void Setup(CombatStats stats)
     {
         combatStats = stats;
@@ -72,7 +64,7 @@ public class Ship : Entity
             markedForDelete = true;
         };
 
-        foreach (GeneralEffect e in GetComponents<GeneralEffect>())
+        foreach (EntityEffect e in GetComponents<EntityEffect>())
         {
             e.AddTo(shipEffects);
         }
@@ -109,7 +101,7 @@ public class Ship : Entity
         }
     }
 
-    public T AddGeneralEffect<T>() where T : GeneralEffect
+    public override T AddEntityEffect<T>()
     {
         T e = shipEffects.gameObject.AddComponent<T>();
         e.AddTo(GetEffectsDict());
@@ -176,8 +168,8 @@ public class Ship : Entity
     protected override void ApplyEffects()
     {
         DoTickEffects(shipEffects);
-        DoGenericEffects(shipEffects);
         DoMovementEffects(shipEffects);
+        DoGeneralEffects(shipEffects);
     }
 
     public void SetPilot(Pilot pilot)

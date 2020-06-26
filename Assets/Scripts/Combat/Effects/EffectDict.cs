@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using static Effect;
-using static GeneralEffect;
+using static EntityEffect;
 
 
 public abstract class EffectDict : MonoBehaviour
@@ -11,16 +11,16 @@ public abstract class EffectDict : MonoBehaviour
     [SerializeField]
     protected Tag[] immuneTags;
 
-    public SortedEffectDict<IGeneralEffect> generalEffects;
-    public SortedEffectDict<IMovementEffect> movementEffects;
-    public SortedEffectDict<ITickEffect> tickEffects;
+    public EmptyEffectDict<IGeneralEffect> generalEffects;
+    public ASortedEffectDict<IMovementEffect> movementEffects;
+    public ASortedEffectDict<ITickEffect> tickEffects;
 
     public delegate void DictChange();
     public event DictChange OnChange;
 
     protected virtual void Awake()
     {
-        generalEffects = new SortedEffectDict<IGeneralEffect>(this);
+        generalEffects = new EmptyEffectDict<IGeneralEffect>(this);
         movementEffects = new SortedEffectDict<IMovementEffect>(this);
         tickEffects = new SortedEffectDict<ITickEffect>(this);
         if (immuneTags == null)
@@ -68,38 +68,24 @@ public abstract class EffectDict : MonoBehaviour
         IEffect UpdateEffect(IEffect effect, out bool didReplace);
     }
 
-    public class SortedEffectDict<U> where U : IEffect
+    public abstract class ASortedEffectDict<U> where U : IEffect
     {
-        private EffectDict parent;
+        protected EffectDict parent;
 
-        private Dictionary<System.Type, IEffect> updateDict;
-        private Dictionary<System.Type, List<IEffect>> addDict;
-        private List<U> lst;
-
-        public SortedEffectDict(EffectDict parent)
+        public ASortedEffectDict(EffectDict parent)
         {
             this.parent = parent;
-            updateDict = new Dictionary<System.Type, IEffect>();
-            addDict = new Dictionary<System.Type, List<IEffect>>();
-            lst = new List<U>();
         }
 
-        public List<List<IEffect>> GetAdds()
-        {
-            return addDict.Values.ToList();
-        }
-
-        public List<IEffect> GetUniques()
-        {
-            return updateDict.Values.ToList();
-        }
-
-        public List<U> GetAll()
-        {
-            return lst;
-        }
-
-        private bool AllowedTags(IEffect effect)
+        public abstract List<List<IEffect>> GetAdds();
+        public abstract List<IEffect> GetUniques();
+        public abstract List<U> GetAll();
+        public abstract void AddUpdate<T>(T effect) where T : Effect, U, IEffectUpdates;
+        public abstract void RemoveUpdate<T>(T effect) where T : Effect, U, IEffectUpdates;
+        public abstract void Add<T>(T effect) where T : Effect, U, IEffectAdds;
+        public abstract void RemoveAdd<T>(T effect) where T : Effect, U, IEffectAdds;
+        
+        protected bool AllowedTags<T>(T effect) where T : Effect, U
         {
             foreach (Tag tag in effect.GetTags())
             {
@@ -107,11 +93,138 @@ public abstract class EffectDict : MonoBehaviour
                 {
                     if (tag == immune)
                     {
+                        Destroy(effect);
                         return false;
                     }
                 }
             }
             return true;
+        }
+    }
+
+    public class EmptyEffectDict<U> : ASortedEffectDict<IGeneralEffect>
+    {
+        private static readonly List<List<IEffect>> emptyAdds = new List<List<IEffect>>();
+        private static readonly List<IEffect> emptyUpdates = new List<IEffect>();
+
+        private List<IGeneralEffect> all;
+        private List<bool> ready;
+
+        private int needsChecking;
+
+        private Entity entity;
+
+        public EmptyEffectDict(EffectDict parent) : base(parent)
+        {
+            entity = parent.GetComponentInParent<Entity>();
+            all = new List<IGeneralEffect>();
+            ready = new List<bool>();
+            needsChecking = 0;
+            Debug.Log(entity);
+        }
+
+        public override List<List<IEffect>> GetAdds() { return emptyAdds; }
+        public override List<IEffect> GetUniques() { return emptyUpdates; }
+
+        public override List<IGeneralEffect> GetAll() { return all; }
+
+        public void Activate(Entity entity)
+        {
+            if (needsChecking > 0)
+            {
+                for (int i = 0; i < ready.Count; i++)
+                {
+                    if (ready[i])
+                    {
+                        all[i].Apply(entity);
+                        ready[i] = false;
+                        needsChecking--;
+                    }
+                }
+            }
+        }
+
+        private void AddHelper<T>(T effect) where T : Effect, IGeneralEffect
+        {
+            if (AllowedTags(effect))
+            {
+                all.Add(effect);
+                ready.Add(true);
+                needsChecking++;
+                effect.OnDestroyEvent += (e) => effect.Cleanup(entity);
+            }
+        }
+
+        private void RemoveHelper<T>(T effect) where T : Effect, IGeneralEffect
+        {
+            if (AllowedTags(effect))
+            {
+                for (int i = 0; i < all.Count; i++)
+                {
+                    if (all[i] == effect)
+                    {
+                        all.RemoveAt(i);
+                        ready.RemoveAt(i);
+                        effect.Cleanup(entity);
+                        break;
+                    }
+                }
+            }
+        }
+
+        public override void Add<T>(T effect)
+        {
+            //Debug.Log("Add");
+            AddHelper(effect);
+        }
+
+        public override void RemoveAdd<T>(T effect)
+        {
+            //Debug.Log("Remove add");
+            RemoveHelper(effect);
+        }
+
+        public override void AddUpdate<T>(T effect)
+        {
+            //Debug.Log("Add update");
+            Debug.LogWarning("General effects should not be unique! They are applied once and removed once");
+            AddHelper(effect);
+        }
+
+        public override void RemoveUpdate<T>(T effect)
+        {
+            //Debug.Log("Remove update");
+            Debug.LogWarning("General effects should not be unique! They are applied once and removed once");
+            RemoveHelper(effect);
+        }
+    }
+
+    public class SortedEffectDict<U> : ASortedEffectDict<U> where U : IEffect
+    {
+        private Dictionary<System.Type, IEffect> updateDict;
+        private Dictionary<System.Type, List<IEffect>> addDict;
+        private List<U> lst;
+
+        public SortedEffectDict(EffectDict parent) : base(parent)
+        {
+            updateDict = new Dictionary<System.Type, IEffect>();
+            addDict = new Dictionary<System.Type, List<IEffect>>();
+            lst = new List<U>();
+        }
+
+        public override List<List<IEffect>> GetAdds()
+        {
+            return addDict.Values.ToList();
+        }
+
+        public override List<IEffect> GetUniques()
+        {
+            return updateDict.Values.ToList();
+        }
+
+        public override List<U> GetAll()
+        {
+            return lst;
         }
 
         private void ListInsert(U effect)
@@ -129,8 +242,8 @@ public abstract class EffectDict : MonoBehaviour
             }
             lst.Add(effect);
         }
-        
-        public void AddUpdate<T>(T effect) where T : U, IEffectUpdates
+
+        public override void AddUpdate<T>(T effect)
         {
             if (AllowedTags(effect))
             {
@@ -155,7 +268,7 @@ public abstract class EffectDict : MonoBehaviour
             }
         }
 
-        public void RemoveUpdate<T>(T effect) where T : U, IEffectUpdates
+        public override void RemoveUpdate<T>(T effect)
         {
             if (AllowedTags(effect))
             {
@@ -171,7 +284,7 @@ public abstract class EffectDict : MonoBehaviour
             parent.InvokeChange();
         }
 
-        public void Add<T>(T effect) where T : U, IEffectAdds
+        public override void Add<T>(T effect)
         {
             if (AllowedTags(effect))
             {
@@ -192,7 +305,7 @@ public abstract class EffectDict : MonoBehaviour
             }
         }
 
-        public void RemoveAdd<T>(T effect) where T : U, IEffectAdds
+        public override void RemoveAdd<T>(T effect)
         {
             if (AllowedTags(effect))
             {
