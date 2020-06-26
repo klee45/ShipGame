@@ -12,7 +12,7 @@ public class HitOnce : ProjectileEffect, ProjectileEffect.IOnHitEffect, EffectDi
         this.damage = damage;
     }
 
-    public void OnHit(Collider2D collision)
+    public void OnHit(Collider2D collision, Collider2D collidee)
     {
         DoDamage(collision, damage);
         DestroySelf();

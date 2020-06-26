@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class HitSelfDestruct : ProjectileEffect, ProjectileEffect.IOnHitEffect, EffectDict.IEffectUpdates
 {
-    public void OnHit(Collider2D collision)
+    public void OnHit(Collider2D collision, Collider2D collidee)
     {
         DestroySelf();
     }

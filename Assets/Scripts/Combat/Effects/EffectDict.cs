@@ -120,7 +120,7 @@ public abstract class EffectDict : MonoBehaviour
             all = new List<IGeneralEffect>();
             ready = new List<bool>();
             needsChecking = 0;
-            Debug.Log(entity);
+            //Debug.Log(entity);
         }
 
         public override List<List<IEffect>> GetAdds() { return emptyAdds; }

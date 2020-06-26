@@ -17,10 +17,9 @@ public class HitOncePer : ProjectileEffect, ProjectileEffect.IOnHitEffect, Effec
         dict.onHits.Add(this);
     }
 
-    public void OnHit(Collider2D collision)
+    public void OnHit(Collider2D collision, Collider2D collidee)
     {
-        Entity hitEntity = collision.GetComponent<Entity>();
-        Physics2D.IgnoreCollision(GetComponent<Collider2D>(), hitEntity.GetComponent<Collider2D>());
+        Physics2D.IgnoreCollision(collidee, collision);
         DoDamage(collision, damage);
     }
 

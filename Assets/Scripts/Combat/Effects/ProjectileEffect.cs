@@ -12,7 +12,7 @@ public abstract class ProjectileEffect : Effect
 
     public interface IOnHitEffect : IEffect
     {
-        void OnHit(Collider2D collision);
+        void OnHit(Collider2D collision, Collider2D collidee);
     }
 
     public interface IOnHitStayEffect : IEffect

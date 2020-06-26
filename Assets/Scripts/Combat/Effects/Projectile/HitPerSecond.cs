@@ -77,12 +77,12 @@ public class HitPerSecond : ProjectileEffect, ProjectileEffect.IOnHitStayEffect,
 
     private void Activate()
     {
-        GetComponent<Collider2D>().enabled = true;
+        GetComponentInChildren<Collider2D>().enabled = true;
     }
 
     private void Deactivate()
     {
-        GetComponent<Collider2D>().enabled = false;
+        GetComponentInChildren<Collider2D>().enabled = false;
     }
 
     public override string GetName()

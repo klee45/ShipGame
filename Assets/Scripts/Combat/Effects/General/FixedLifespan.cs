@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FixedLifespan : EntityEffect, EntityEffect.IGeneralEffect, EffectDict.IEffectUpdates
+public class FixedLifespan : EntityEffect, EntityEffect.IGeneralEffect, EffectDict.IEffectAdds
 {
     private static string FIXED_NAME = "__Fixed Lifespan";
 
@@ -25,7 +25,7 @@ public class FixedLifespan : EntityEffect, EntityEffect.IGeneralEffect, EffectDi
 
     public override void AddTo(EffectDict dict)
     {
-        dict.generalEffects.AddUpdate(this);
+        dict.generalEffects.Add(this);
     }
 
     public IEffect UpdateEffect(IEffect effect, out bool didReplace)

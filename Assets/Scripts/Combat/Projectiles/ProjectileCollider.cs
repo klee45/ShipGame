@@ -13,7 +13,7 @@ public class ProjectileCollider : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        parent.DoTriggerEnter2D(collision);
+        parent.DoTriggerEnter2D(collision, GetComponent<Collider2D>());
     }
 
     private void OnTriggerStay2D(Collider2D collision)
