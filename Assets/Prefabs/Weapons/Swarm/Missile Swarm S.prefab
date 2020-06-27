@@ -58,7 +58,8 @@ MonoBehaviour:
   colliderLength: 0
   delay: 0.1
   range: 10
-  makeNeutral: 0
+  layerType: 1
+  immuneTags: 
 --- !u!114 &6764177119568060429
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -137,7 +138,8 @@ MonoBehaviour:
   colliderLength: 1
   delay: 0
   range: 0
-  makeNeutral: 1
+  layerType: 1
+  immuneTags: 
 --- !u!114 &6764177119622650987
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -278,7 +280,7 @@ GameObject:
   - component: {fileID: 6764177119712478169}
   - component: {fileID: 6764177119712478174}
   m_Layer: 11
-  m_Name: Basic Missile Swarm
+  m_Name: Missile Swarm S
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -317,6 +319,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 9e9cfe77f0110064b952e397397fbc91, type: 3}
   cooldown: {fileID: 6764177119712478174}
+  attachProjectile: 0
   projectileTemplates:
   - {fileID: 6764177119904182814}
   - {fileID: 6764177119568060428}
@@ -476,7 +479,8 @@ MonoBehaviour:
   colliderLength: 0
   delay: 0.4
   range: 10
-  makeNeutral: 0
+  layerType: 1
+  immuneTags: 
 --- !u!114 &6764177119894508320
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -551,7 +555,8 @@ MonoBehaviour:
   colliderLength: 0
   delay: 0
   range: 10
-  makeNeutral: 0
+  layerType: 1
+  immuneTags: 
 --- !u!114 &6764177119904182815
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -626,7 +631,8 @@ MonoBehaviour:
   colliderLength: 0
   delay: 0.3
   range: 10
-  makeNeutral: 0
+  layerType: 1
+  immuneTags: 
 --- !u!114 &6764177119986833995
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -701,7 +707,8 @@ MonoBehaviour:
   colliderLength: 0
   delay: 0.2
   range: 10
-  makeNeutral: 0
+  layerType: 1
+  immuneTags: 
 --- !u!114 &6764177120331181476
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -809,7 +816,8 @@ MonoBehaviour:
   colliderLength: 0
   delay: 0.5
   range: 10
-  makeNeutral: 0
+  layerType: 1
+  immuneTags: 
 --- !u!114 &6764177120817701760
 MonoBehaviour:
   m_ObjectHideFlags: 0
