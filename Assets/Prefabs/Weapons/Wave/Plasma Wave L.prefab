@@ -96,7 +96,7 @@ MonoBehaviour:
   generalEffects: []
   colliderLength: 0.85
   delay: 0
-  range: 15
+  range: 20
   layerType: 1
   immuneTags: 
 --- !u!114 &1056133010872339305
