@@ -503,9 +503,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 0}
-  initialShieldMax: 25
-  initialArmorMax: 25
-  initialHullMax: 50
+  initialShieldMax: 50
+  initialArmorMax: 50
+  initialHullMax: 75
   shieldDelay: {fileID: 0}
   shieldsDown: 0
 --- !u!1 &5360453058556429060
