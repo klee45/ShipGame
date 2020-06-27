@@ -110,7 +110,6 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
 
     private int[] GetLayers(Team team, out bool needsRigidbody)
     {
-        needsRigidbody = false;
         switch (layerType)
         {
             case ProjectileLayerType.AFFECTS_ENEMY_PROJECTILES:
@@ -118,6 +117,7 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
                 return Layers.GetProjectileHitProjectileLayerFromTeam(team);
 
             case ProjectileLayerType.AFFECTS_ENEMY_SHIPS:
+                needsRigidbody = false;
                 return Layers.GetProjectileHitShipLayerFromTeam(team);
 
             case ProjectileLayerType.AFFECTS_ENEMY_ALL:
@@ -131,6 +131,7 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
                 return new int[] { Layers.ShipToProjectileHitProjectile(Layers.GetShipLayerFromTeam(team)) };
 
             case ProjectileLayerType.AFFECTS_ALLIED_SHIPS:
+                needsRigidbody = false;
                 return new int[] { Layers.ShipToProjectileHitShip(Layers.GetShipLayerFromTeam(team)) };
 
             case ProjectileLayerType.AFFECTS_ALLIED_ALL:
@@ -144,6 +145,7 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
 
             default:
                 Debug.LogWarning("Layer type for projectiles unknown");
+                needsRigidbody = false;
                 return new int[0];
         }
     }

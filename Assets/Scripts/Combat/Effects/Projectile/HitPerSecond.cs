@@ -13,8 +13,8 @@ public class HitPerSecond : ProjectileEffect, ProjectileEffect.IOnHitStayEffect,
     [SerializeField]
     private bool destroyOnEnd = true;
 
+    private Collider2D[] colliders;
     private int times;
-
     private bool disableOnUpdate;
     
     private void Start()
@@ -22,6 +22,7 @@ public class HitPerSecond : ProjectileEffect, ProjectileEffect.IOnHitStayEffect,
         times = 0;
         disableOnUpdate = true;
         InvokeRepeating("RepeatingUpdate", 0.0f, rate);
+        colliders = GetComponentsInChildren<Collider2D>();
     }
 
     public override void AddTo(EffectDictProjectile dict)
@@ -77,12 +78,18 @@ public class HitPerSecond : ProjectileEffect, ProjectileEffect.IOnHitStayEffect,
 
     private void Activate()
     {
-        GetComponentInChildren<Collider2D>().enabled = true;
+        foreach (Collider2D collider in colliders)
+        {
+            collider.enabled = true;
+        }
     }
 
     private void Deactivate()
     {
-        GetComponentInChildren<Collider2D>().enabled = false;
+        foreach (Collider2D collider in colliders)
+        {
+            collider.enabled = false;
+        }
     }
 
     public override string GetName()

@@ -9,7 +9,10 @@ public class Weapon : MonoBehaviour
     [SerializeField]
     private Timer cooldown;
     [SerializeField]
+    private bool attachProjectile = false;
+    [SerializeField]
     protected ProjectileTemplate[] projectileTemplates;
+
 
     protected RangeEstimator rangeEstimator;
     private bool ready;
@@ -69,13 +72,26 @@ public class Weapon : MonoBehaviour
     protected Projectile CreateProjectile(ProjectileTemplate template)
     {
         Projectile projectile = template.Create(gameObject);
-        LinkProjectile(projectile);
+        if (attachProjectile)
+        {
+            AttachProjectile(projectile);
+        }
+        else
+        {
+            LinkProjectile(projectile);
+        }
         return projectile;
     }
 
-    protected virtual void LinkProjectile(Projectile projectile)
+    private void LinkProjectile(Projectile projectile)
     {
         projectile.transform.parent = ProjectileManager.instance.gameObject.transform;
+    }
+
+    private void AttachProjectile(Projectile projectile)
+    {
+        projectile.transform.parent = gameObject.transform;
+        ProjectileManager.instance.AddToLinked(projectile);
     }
 
     public bool IsReady()
