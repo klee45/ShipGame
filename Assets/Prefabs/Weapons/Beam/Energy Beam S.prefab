@@ -93,7 +93,7 @@ MonoBehaviour:
   projectileEffects:
   - {fileID: 5148600555912020435}
   generalEffects: []
-  colliderLength: 7.5
+  colliderLength: 10
   delay: 0
   range: 0
   layerType: 1
@@ -110,7 +110,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff12bb57b1da2743b3b626b7c5dccc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: {x: 2, y: 6}
+  scale: {x: 3, y: 8}
 --- !u!114 &5148600555912020428
 MonoBehaviour:
   m_ObjectHideFlags: 0
