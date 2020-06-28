@@ -867,7 +867,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47da4681b059b574e8cc77237916b35b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 9e9cfe77f0110064b952e397397fbc91, type: 3}
+  icon: {fileID: 21300000, guid: 88b43c90f519fd242bd0d745f2127684, type: 3}
   cooldown: {fileID: 8078504241892350582}
   attachProjectile: 0
   projectileTemplates:
