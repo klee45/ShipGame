@@ -11,17 +11,17 @@ public abstract class EffectDict : MonoBehaviour
     [SerializeField]
     protected Tag[] immuneTags;
 
-    public EmptyEffectDict<IGeneralEffect> generalEffects;
-    public ASortedEffectDict<IMovementEffect> movementEffects;
-    public ASortedEffectDict<ITickEffect> tickEffects;
-    public ASortedEffectDict<IFixedTickEffect> fixedTickEffects;
+    public EmptyEffectDict<IGeneralEffect, Entity> generalEffects;
+    public SortedEffectDict<IMovementEffect> movementEffects;
+    public SortedEffectDict<ITickEffect> tickEffects;
+    public SortedEffectDict<IFixedTickEffect> fixedTickEffects;
 
     public delegate void DictChange();
     public event DictChange OnChange;
 
     protected virtual void Awake()
     {
-        generalEffects = new EmptyEffectDict<IGeneralEffect>(this);
+        generalEffects = new EmptyEffectDict<IGeneralEffect, Entity>(this);
         movementEffects = new SortedEffectDict<IMovementEffect>(this);
         tickEffects = new SortedEffectDict<ITickEffect>(this);
         fixedTickEffects = new SortedEffectDict<IFixedTickEffect>(this);
@@ -104,22 +104,22 @@ public abstract class EffectDict : MonoBehaviour
         }
     }
 
-    public class EmptyEffectDict<U> : ASortedEffectDict<IGeneralEffect>
+    public class EmptyEffectDict<U, V> : ASortedEffectDict<U> where U : IGeneralEffectBase<V> where V : Entity
     {
         private static readonly List<List<IEffect>> emptyAdds = new List<List<IEffect>>();
         private static readonly List<IEffect> emptyUpdates = new List<IEffect>();
 
-        private List<IGeneralEffect> all;
+        private List<U> all;
         private List<bool> ready;
 
         private int needsChecking;
 
-        private Entity entity;
+        private V entity;
 
         public EmptyEffectDict(EffectDict parent) : base(parent)
         {
-            entity = parent.GetComponentInParent<Entity>();
-            all = new List<IGeneralEffect>();
+            entity = parent.GetComponentInParent<V>();
+            all = new List<U>();
             ready = new List<bool>();
             needsChecking = 0;
             //Debug.Log(entity);
@@ -128,9 +128,9 @@ public abstract class EffectDict : MonoBehaviour
         public override List<List<IEffect>> GetAdds() { return emptyAdds; }
         public override List<IEffect> GetUniques() { return emptyUpdates; }
 
-        public override List<IGeneralEffect> GetAll() { return all; }
+        public override List<U> GetAll() { return all; }
 
-        public void Activate(Entity entity)
+        public void Activate(V entity)
         {
             if (needsChecking > 0)
             {
@@ -146,7 +146,7 @@ public abstract class EffectDict : MonoBehaviour
             }
         }
 
-        private void AddHelper<T>(T effect) where T : Effect, IGeneralEffect
+        private void AddHelper<T>(T effect) where T : Effect, U
         {
             if (AllowedTags(effect))
             {
@@ -157,13 +157,14 @@ public abstract class EffectDict : MonoBehaviour
             }
         }
 
-        private void RemoveHelper<T>(T effect) where T : Effect, IGeneralEffect
+        private void RemoveHelper<T>(T effect) where T : Effect, U
         {
             if (AllowedTags(effect))
             {
                 for (int i = 0; i < all.Count; i++)
                 {
-                    if (all[i] == effect)
+                    // Does this auto-cast?
+                    if (all[i].Equals(effect))
                     {
                         all.RemoveAt(i);
                         ready.RemoveAt(i);

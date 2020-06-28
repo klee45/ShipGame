@@ -25,6 +25,12 @@ public abstract class ProjectileEffect : Effect
         void OnExit(Collider2D collision);
     }
 
+    public interface IGeneralProjectileEffet : IGeneralEffectBase<Projectile>
+    {
+        void Apply(Projectile e);
+        void Cleanup(Projectile e);
+    }
+
     protected void DestroySelf()
     {
         Destroy(GetComponent<Projectile>().gameObject);

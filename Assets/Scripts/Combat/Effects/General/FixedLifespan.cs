@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FixedLifespan : EntityEffect, EntityEffect.IGeneralEffect, EffectDict.IEffectAdds
+public class FixedLifespan : ProjectileEffect, ProjectileEffect.IGeneralProjectileEffet, EffectDict.IEffectAdds
 {
     private static string FIXED_NAME = "__Fixed Lifespan";
 
@@ -14,28 +14,19 @@ public class FixedLifespan : EntityEffect, EntityEffect.IGeneralEffect, EffectDi
         this.duration = duration;
     }
 
-    public void Apply(Entity e)
+    public override void AddTo(EffectDictProjectile dict)
     {
-        Destroy(e.gameObject, duration);
+        dict.generalProjectileEffects.Add(this);
     }
 
-    public void Cleanup(Entity e)
+    public void Apply(Projectile e)
     {
+        Debug.Log("Apply fixed lifespan");
+        e.SetDuration(duration);
     }
 
-    public override void AddTo(EffectDict dict)
+    public void Cleanup(Projectile e)
     {
-        dict.generalEffects.Add(this);
-    }
-
-    public IEffect UpdateEffect(IEffect effect, out bool didReplace)
-    {
-        if (effect is FixedLifespan e)
-        {
-            e.duration = this.duration;
-        }
-        didReplace = false;
-        return effect;
     }
 
     public override string GetName()

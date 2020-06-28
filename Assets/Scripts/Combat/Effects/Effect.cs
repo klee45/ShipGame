@@ -50,6 +50,12 @@ public abstract class Effect : MonoBehaviour, Effect.IEffect
         Tag[] GetTags();
     }
 
+    public interface IGeneralEffectBase<U> : IEffect where U : Entity
+    {
+        void Apply(U e);
+        void Cleanup(U e);
+    }
+
     public int GetPriority() { return priority; }
 
     public abstract string GetName();
@@ -74,7 +80,7 @@ public abstract class EntityEffect : Effect
         void FixedTick(float timeScale);
     }
 
-    public interface IGeneralEffect : IEffect
+    public interface IGeneralEffect : IGeneralEffectBase<Entity>
     {
         void Apply(Entity e);
         void Cleanup(Entity e);
