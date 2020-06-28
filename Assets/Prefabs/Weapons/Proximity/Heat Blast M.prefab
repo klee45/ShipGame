@@ -181,3 +181,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   priority: 0
   duration: 0.5
+  doesFade: 1

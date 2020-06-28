@@ -10,8 +10,6 @@ public class Projectile : Entity
     [SerializeField]
     private float duration;
 
-    private Timer lifespan;
-
     private EffectDictProjectile projectileEffects;
 
     protected override void Awake()
@@ -24,34 +22,25 @@ public class Projectile : Entity
         }
     }
 
-    public void Setup(float range, float duration, Tag[] immuneTags)
-    {
-        this.range = range;
-        this.duration = duration;
-        this.projectileEffects.SetImmuneTags(immuneTags);
-    }
-
     protected override void Start()
     {
         base.Start();
         SetupLifespan();
     }
 
-    protected override void Update()
+    public void Setup(float range, float duration, Tag[] immuneTags)
     {
-        base.Update();
-        lifespan.Tick(TimeController.DeltaTime(timeScale));
+        this.range = range;
+        this.duration = duration;
+        this.projectileEffects.SetImmuneTags(immuneTags);
+        SetupLifespan();
     }
 
     private void SetupLifespan()
     {
         if (duration > 0)
         {
-            lifespan = gameObject.AddComponent<Timer>();
-            lifespan.Initialize(duration);
-            lifespan.OnComplete += () => {
-                Destroy(gameObject);
-            };
+            AddProjectilEffect<FixedLifespan>().Setup(duration);
         }
     }
 
@@ -67,17 +56,18 @@ public class Projectile : Entity
         transform.position += translation.ToVector3();
     }
 
-    public void SetDuration(float duration)
-    {
-        this.duration = duration;
-        SetupLifespan();
-    }
-
     public override T AddEntityEffect<T>()
     {
         T e = projectileEffects.gameObject.AddComponent<T>();
         e.AddTo(GetEffectsDict());
         return e;
+    }
+
+    public T AddProjectilEffect<T>() where T : ProjectileEffect
+    {
+        T p = projectileEffects.gameObject.AddComponent<T>();
+        p.AddTo(GetEffectsDict());
+        return p;
     }
 
     public EffectDictProjectile GetEffectsDict()
@@ -90,12 +80,6 @@ public class Projectile : Entity
         DoTickEffects(projectileEffects);
         DoMovementEffects(projectileEffects);
         DoGeneralEffects(projectileEffects);
-        DoGeneralProjectileEffects(projectileEffects);
-    }
-
-    protected void DoGeneralProjectileEffects(EffectDictProjectile dict)
-    {
-        dict.generalProjectileEffects.Activate(this);
     }
 
     /*
