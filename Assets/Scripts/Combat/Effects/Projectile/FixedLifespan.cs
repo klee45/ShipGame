@@ -4,10 +4,13 @@ using UnityEngine;
 
 public class FixedLifespan : ProjectileEffect, EntityEffect.ITickEffect, EffectDict.IEffectUpdates
 {
+    [SerializeField]
+    private float duration;
     protected Timer timer;
 
     public virtual void Setup(float duration, float start=0)
     {
+        this.duration = duration;
         timer = gameObject.AddComponent<Timer>();
         timer.Initialize(duration, start);
         timer.OnComplete += () => DestroySelf();
@@ -22,7 +25,8 @@ public class FixedLifespan : ProjectileEffect, EntityEffect.ITickEffect, EffectD
     {
         if (effect is FixedLifespan f)
         {
-            f.Setup(timer.GetMaxTime(), timer.GetTime());
+            float time = 0;
+            f.Setup(duration, time);
         }
         didReplace = false;
         return effect;

@@ -76,7 +76,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e54766dbfec82aa478cbb348e26719bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: 0.5
+  scale: 1
 --- !u!114 &7000236587950819072
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -145,6 +145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   priority: 0
   duration: 0.5
+  doesFade: 0
 --- !u!1 &7000236587952284956
 GameObject:
   m_ObjectHideFlags: 0

@@ -55,7 +55,9 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
 
     public override Projectile Create(GameObject obj)
     {
+        float duration = movementStats.GetVelocity().GetDuration(remainingRange);
         Projectile projectile = base.Create(obj);
+        projectile.Setup(remainingRange, duration, immuneTags);
         foreach (ProjectileEffectTemplate effect in projectileEffects)
         {
             ProjectileEffect e = effect.Create(projectile.gameObject);
@@ -66,12 +68,9 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
             EntityEffect e = effect.Create(projectile.gameObject);
             e.AddTo(projectile.GetEffectsDict());
         }
-        float duration = movementStats.GetVelocity().GetDuration(remainingRange);
         projectile.SetParent(obj);
 
         SetupColliders(projectile, team);
-
-        projectile.Setup(remainingRange, duration, immuneTags);
 
         return projectile;
     }

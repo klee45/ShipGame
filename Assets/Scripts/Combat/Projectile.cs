@@ -22,12 +22,6 @@ public class Projectile : Entity
         }
     }
 
-    protected override void Start()
-    {
-        base.Start();
-        SetupLifespan();
-    }
-
     public void Setup(float range, float duration, Tag[] immuneTags)
     {
         this.range = range;
