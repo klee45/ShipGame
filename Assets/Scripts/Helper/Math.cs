@@ -53,4 +53,10 @@ public static class Math
         }
         return result;
     }
+
+    public static int GetParts(this float f, out float remainder)
+    {
+        remainder = f % 1.0f;
+        return (int)f;
+    }
 }

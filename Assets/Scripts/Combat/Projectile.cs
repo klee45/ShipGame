@@ -10,6 +10,8 @@ public class Projectile : Entity
     [SerializeField]
     private float duration;
 
+    private Timer lifespan;
+
     private EffectDictProjectile projectileEffects;
 
     protected override void Awake()
@@ -32,8 +34,25 @@ public class Projectile : Entity
     protected override void Start()
     {
         base.Start();
+        SetupLifespan();
+    }
+
+    protected override void Update()
+    {
+        base.Update();
+        lifespan.Tick(TimeController.DeltaTime(timeScale));
+    }
+
+    private void SetupLifespan()
+    {
         if (duration > 0)
-            Destroy(gameObject, duration);
+        {
+            lifespan = gameObject.AddComponent<Timer>();
+            lifespan.Initialize(duration);
+            lifespan.OnComplete += () => {
+                Destroy(gameObject);
+            };
+        }
     }
 
     protected override void Move(float rotation, float velocity)
@@ -48,6 +67,11 @@ public class Projectile : Entity
         transform.position += translation.ToVector3();
     }
 
+    public void SetDuration(float duration)
+    {
+        this.duration = duration;
+        SetupLifespan();
+    }
 
     public override T AddEntityEffect<T>()
     {
@@ -66,11 +90,12 @@ public class Projectile : Entity
         DoTickEffects(projectileEffects);
         DoMovementEffects(projectileEffects);
         DoGeneralEffects(projectileEffects);
+        DoGeneralProjectileEffects(projectileEffects);
     }
 
-    private static void SortOrder(ProjectileEffect[] lst)
+    protected void DoGeneralProjectileEffects(EffectDictProjectile dict)
     {
-        lst.OrderBy(p => p.GetPriority());
+        dict.generalProjectileEffects.Activate(this);
     }
 
     /*
