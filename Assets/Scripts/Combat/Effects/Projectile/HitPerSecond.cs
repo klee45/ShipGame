@@ -5,7 +5,6 @@ using UnityEngine;
 public class HitPerSecond : ProjectileEffect,
     EntityEffect.IFixedTickEffect,
     ProjectileEffect.IOnHitStayEffect,
-    ProjectileEffect.IOnHitEffect,
     EffectDict.IEffectAdds
 {
     [SerializeField]
@@ -31,7 +30,6 @@ public class HitPerSecond : ProjectileEffect,
     public override void AddTo(EffectDictProjectile dict)
     {
         dict.onStays.Add(this);
-        dict.onHits.Add(this);
         dict.fixedTickEffects.Add(this);
     }
 
@@ -40,12 +38,6 @@ public class HitPerSecond : ProjectileEffect,
         this.damage = damage;
         this.duration = duration;
         this.destroyOnEnd = destroyOnEnd;
-    }
-
-
-    public void OnHit(Collider2D collision, Collider2D collidee)
-    {
-        OnHitStay(collision);
     }
 
     public void OnHitStay(Collider2D collision)

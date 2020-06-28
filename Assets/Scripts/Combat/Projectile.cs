@@ -96,6 +96,7 @@ public class Projectile : Entity
         {
             e.OnHit(collision, collidee);
         }
+        DoTriggerStay2D(collision);
     }
 
     public void DoTriggerStay2D(Collider2D collision)
