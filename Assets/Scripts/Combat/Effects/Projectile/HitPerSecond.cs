@@ -2,94 +2,89 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitPerSecond : ProjectileEffect, ProjectileEffect.IOnHitStayEffect, EffectDict.IEffectAdds
+public class HitPerSecond : ProjectileEffect,
+    EntityEffect.IFixedTickEffect,
+    ProjectileEffect.IOnHitStayEffect,
+    ProjectileEffect.IOnHitEffect,
+    EffectDict.IEffectAdds
 {
     [SerializeField]
     private int damage;
     [SerializeField]
-    private float rate;
-    [SerializeField]
-    private int maxTimes;
+    private float duration;
     [SerializeField]
     private bool destroyOnEnd = true;
 
-    private Collider2D[] colliders;
-    private int times;
-    private bool disableOnUpdate;
+    private int currentDamage;
+    private int damageDone;
+    private float leftover;
+    private float dps;
     
     private void Start()
     {
-        times = 0;
-        disableOnUpdate = true;
-        InvokeRepeating("RepeatingUpdate", 0.0f, rate);
-        colliders = GetComponentsInChildren<Collider2D>();
+        currentDamage = 0;
+        damageDone = 0;
+        leftover = 0;
+        dps = damage / duration;
     }
 
     public override void AddTo(EffectDictProjectile dict)
     {
         dict.onStays.Add(this);
+        dict.onHits.Add(this);
+        dict.fixedTickEffects.Add(this);
     }
 
-    public void Setup(int damage, float rate, int maxTimes, bool destroyOnEnd)
+    public void Setup(int damage, float duration, bool destroyOnEnd)
     {
         this.damage = damage;
-        this.rate = rate;
-        this.maxTimes = maxTimes;
+        this.duration = duration;
         this.destroyOnEnd = destroyOnEnd;
+    }
+
+
+    public void OnHit(Collider2D collision, Collider2D collidee)
+    {
+        OnHitStay(collision);
     }
 
     public void OnHitStay(Collider2D collision)
     {
-        DoDamage(collision, damage);
-        WakeUp(collision);
-        disableOnUpdate = true;
-    }
-
-    private void FixedUpdate()
-    {
-        if (disableOnUpdate)
+        if (currentDamage + damageDone > damage)
         {
-            Deactivate();
-            disableOnUpdate = false;
-        }
-    }
-
-    private void WakeUp(Collider2D collision)
-    {
-        collision.GetComponent<Rigidbody2D>().WakeUp();
-    }
-
-    private void RepeatingUpdate()
-    {
-        if (times < maxTimes)
-        {
-            Activate();
-            times++;
+            WakeUp(collision);
+            DoDamage(collision, damage - damageDone);
         }
         else
+        {
+            WakeUp(collision);
+            DoDamage(collision, currentDamage);
+        }
+        Debug.Log("Damage");
+    }
+
+    public void FixedTick(float timeScale)
+    {
+        Debug.Log(damageDone);
+        if (damageDone > damage)
         {
             if (destroyOnEnd)
             {
                 DestroySelf();
             }
-            CancelInvoke("RepeatingUpdate");
         }
+        else
+        {
+            damageDone += currentDamage;
+            float damage = leftover + TimeController.FixedDeltaTime(timeScale) * dps;
+            currentDamage = damage.GetParts(out leftover);
+        }
+        Debug.Log("Tick");  
     }
 
-    private void Activate()
+    private void WakeUp(Collider2D collision)
     {
-        foreach (Collider2D collider in colliders)
-        {
-            collider.enabled = true;
-        }
-    }
-
-    private void Deactivate()
-    {
-        foreach (Collider2D collider in colliders)
-        {
-            collider.enabled = false;
-        }
+        collision.GetComponent<Rigidbody2D>().WakeUp();
     }
 
     public override string GetName()

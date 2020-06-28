@@ -164,7 +164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
-  damage: 30
+  damage: 40
   rate: 0.1
   maxTimes: 10
   destroyOnEnd: 1

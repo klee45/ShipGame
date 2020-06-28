@@ -69,6 +69,11 @@ public abstract class EntityEffect : Effect
         void Tick(float timeScale);
     }
 
+    public interface IFixedTickEffect : IEffect
+    {
+        void FixedTick(float timeScale);
+    }
+
     public interface IGeneralEffect : IEffect
     {
         void Apply(Entity e);

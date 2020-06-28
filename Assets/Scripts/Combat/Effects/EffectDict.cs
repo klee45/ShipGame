@@ -14,6 +14,7 @@ public abstract class EffectDict : MonoBehaviour
     public EmptyEffectDict<IGeneralEffect> generalEffects;
     public ASortedEffectDict<IMovementEffect> movementEffects;
     public ASortedEffectDict<ITickEffect> tickEffects;
+    public ASortedEffectDict<IFixedTickEffect> fixedTickEffects;
 
     public delegate void DictChange();
     public event DictChange OnChange;
@@ -23,6 +24,7 @@ public abstract class EffectDict : MonoBehaviour
         generalEffects = new EmptyEffectDict<IGeneralEffect>(this);
         movementEffects = new SortedEffectDict<IMovementEffect>(this);
         tickEffects = new SortedEffectDict<ITickEffect>(this);
+        fixedTickEffects = new SortedEffectDict<IFixedTickEffect>(this);
         if (immuneTags == null)
         {
             immuneTags = TagHelper.empty;
