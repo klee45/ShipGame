@@ -288,6 +288,7 @@ MonoBehaviour:
   - {fileID: 6117243713233334295}
   - {fileID: 6117243713710247634}
   - {fileID: 6117243714105148418}
+  preferedPosition: 1
 --- !u!114 &6117243713533803757
 MonoBehaviour:
   m_ObjectHideFlags: 0

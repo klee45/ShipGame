@@ -135,6 +135,7 @@ MonoBehaviour:
   - {fileID: 6764177119986833994}
   - {fileID: 6764177119894508323}
   - {fileID: 6764177120817701763}
+  preferedPosition: 1
 --- !u!114 &6764177119712478174
 MonoBehaviour:
   m_ObjectHideFlags: 0

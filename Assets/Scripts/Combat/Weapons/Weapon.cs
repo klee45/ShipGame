@@ -12,6 +12,8 @@ public class Weapon : MonoBehaviour
     private bool attachProjectile = false;
     [SerializeField]
     protected ProjectileTemplate[] projectileTemplates;
+    [SerializeField]
+    private Arsenal.WeaponPosition preferedPosition = Arsenal.WeaponPosition.CENTER;
 
 
     protected RangeEstimator rangeEstimator;
@@ -33,6 +35,11 @@ public class Weapon : MonoBehaviour
     {
         cooldown.TurnOff();
         ready = true;
+    }
+
+    public Arsenal.WeaponPosition GetPreferedPosition()
+    {
+        return preferedPosition;
     }
 
     protected virtual void InitializeRangeEstimator()

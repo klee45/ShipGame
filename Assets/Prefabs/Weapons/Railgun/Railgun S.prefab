@@ -56,6 +56,7 @@ MonoBehaviour:
   attachProjectile: 0
   projectileTemplates:
   - {fileID: 5276561946879384204}
+  preferedPosition: 0
 --- !u!114 &6653935266458077953
 MonoBehaviour:
   m_ObjectHideFlags: 0

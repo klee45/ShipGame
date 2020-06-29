@@ -685,6 +685,7 @@ MonoBehaviour:
   - {fileID: 4967667840472135416}
   - {fileID: 4967667840141216366}
   - {fileID: 4967667839457484305}
+  preferedPosition: 1
 --- !u!114 &8078504241892350582
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -55,6 +55,7 @@ MonoBehaviour:
   attachProjectile: 1
   projectileTemplates:
   - {fileID: 5148600555912020430}
+  preferedPosition: 0
 --- !u!114 &5148600555912020425
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -165,6 +166,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   priority: 0
   damage: 10
-  rate: 0.1
-  maxTimes: 10
+  duration: 0
   destroyOnEnd: 1
