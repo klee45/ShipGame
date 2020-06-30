@@ -18,6 +18,8 @@ GameObject:
   - component: {fileID: 417356578338336176}
   - component: {fileID: 4637009319613975195}
   - component: {fileID: 5438399703054162853}
+  - component: {fileID: 5991472638481638149}
+  - component: {fileID: 5991472638481638148}
   m_Layer: 11
   m_Name: Heat Blast M
   m_TagString: Untagged
@@ -56,6 +58,7 @@ MonoBehaviour:
   attachProjectile: 1
   projectileTemplates:
   - {fileID: 6779193199024491051}
+  preferedPosition: 2
 --- !u!114 &5438399703054162854
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -94,6 +97,7 @@ MonoBehaviour:
   projectileEffects:
   - {fileID: 1181313070417639420}
   - {fileID: 5438399703054162853}
+  - {fileID: 5991472638481638149}
   generalEffects: []
   colliderLength: 4
   delay: 0
@@ -182,3 +186,32 @@ MonoBehaviour:
   priority: 0
   duration: 0.5
   doesFade: 1
+--- !u!114 &5991472638481638149
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5438399703054162852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9cba882ca3ac61246ab7becab1666730, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 0
+  template: {fileID: 5991472638481638148}
+--- !u!114 &5991472638481638148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5438399703054162852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5fe856efa3b384e4cacdda926d34e2b8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 0
+  damage: 50
+  duration: 5

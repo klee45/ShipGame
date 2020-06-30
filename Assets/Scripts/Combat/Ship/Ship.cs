@@ -24,7 +24,7 @@ public class Ship : Entity
 
     private Arsenal arsenal;
 
-    private bool markedForDelete = false;
+    //private bool markedForDelete = false;
 
     private Rigidbody2D body;
     private Vector3 desiredPosition;
@@ -61,7 +61,8 @@ public class Ship : Entity
         combatStats.OnDeath += (d) =>
         {
             //Debug.Log(string.Format("Destroy {0}", gameObject.name));
-            markedForDelete = true;
+            Destroy(gameObject);
+            //markedForDelete = true;
         };
 
         foreach (EntityEffect e in GetComponents<EntityEffect>())
@@ -74,6 +75,7 @@ public class Ship : Entity
         }
     }
 
+    /*
     private void FixedUpdate()
     {
         if (markedForDelete)
@@ -81,6 +83,7 @@ public class Ship : Entity
             Destroy(gameObject);
         }
     }
+    */
 
     protected override void Update()
     {
