@@ -197,5 +197,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b374364c89759254c8235c012ede97e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  priority: -1
+  priority: 1
   bonusDamage: 40

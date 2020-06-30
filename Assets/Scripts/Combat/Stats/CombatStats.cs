@@ -86,6 +86,21 @@ public class CombatStats : MonoBehaviour
         this.initialShieldMax = initialShieldMax;
     }
 
+    public bool AnyShield()
+    {
+        return shield > 0;
+    }
+
+    public bool AnyArmor()
+    {
+        return armor > 0;
+    }
+
+    public bool IsOnlyHull()
+    {
+        return !AnyShield() & !AnyArmor();
+    }
+
     public bool IsAlive()
     {
         return hull > 0;
@@ -106,25 +121,79 @@ public class CombatStats : MonoBehaviour
         return GetTotalHP() / (maxHull.GetValue() + maxArmor.GetValue() + maxShield.GetValue());
     }
 
-    public void TakeShieldDamage(int damage)
+    public void BonusShieldDamage(int damage, bool isHit)
     {
         int currentDamage = damage;
-        OnShipHit?.Invoke(currentDamage);
+        if (isHit)
+        {
+            OnShipHit?.Invoke(currentDamage);
+        }
         ShieldDamageHelper(ref currentDamage);
     }
 
-    private void ShieldDamageHelper(ref int currentDamage)
+    public void BonusArmorDamage(int damage, bool isHit, bool ignoreShields)
     {
-        int damage = currentDamage;
+        if (ignoreShields || !AnyShield())
+        {
+            int currentDamage = damage;
+            if (isHit)
+            {
+                OnShipHit?.Invoke(currentDamage);
+            }
+            ArmorDamageHelper(ref currentDamage);
+        }
+    }
+
+    public void BonusHullDamage(int damage, bool isHit, bool ignoreOther)
+    {
+        if (ignoreOther || IsOnlyHull())
+        {
+            int currentDamage = damage;
+            if (isHit)
+            {
+                OnShipHit?.Invoke(currentDamage);
+            }
+            HullDamageHelper(currentDamage);
+        }
+    }
+
+    private void ShieldDamageHelper(ref int damage)
+    {
+        int currentDamage = damage;
         if (shield > 0)
         {
-            if (DoDamage(ref shield, ref damage, () => OnShieldHit?.Invoke(damage)))
+            if (DoDamage(ref shield, ref damage, () => OnShieldHit?.Invoke(currentDamage)))
             {
                 OnShieldDestroy?.Invoke(damage);
             }
             UpdateShieldGraphic();
         }
-        currentDamage = damage;
+    }
+
+    private void ArmorDamageHelper(ref int damage)
+    {
+        int currentDamage = damage;
+        if (armor > 0)
+        {
+            if (DoDamage(ref armor, ref damage, () => OnArmorHit?.Invoke(currentDamage)))
+            {
+                OnArmorDestroy?.Invoke(damage);
+            }
+            UpdateArmorGraphic();
+        }
+    }
+
+    private void HullDamageHelper(int damage)
+    {
+        int currentDamage = damage;
+        if (hull > 0)
+        {
+            if (DoDamage(ref hull, ref damage, () => OnHullHit?.Invoke(currentDamage)))
+            {
+                OnDeath?.Invoke(damage);
+            }
+            UpdateHullGraphic();
+        }
     }
 
     public void TakeDamage(int damage)
@@ -132,22 +201,8 @@ public class CombatStats : MonoBehaviour
         int currentDamage = damage;
         OnShipHit?.Invoke(damage);
         ShieldDamageHelper(ref currentDamage);
-        if (armor > 0)
-        {
-            if (DoDamage(ref armor, ref currentDamage, () => OnArmorHit?.Invoke(damage)))
-            {
-                OnArmorDestroy?.Invoke(damage);
-            }
-            UpdateArmorGraphic();
-        }
-        if (hull > 0)
-        {
-            if (DoDamage(ref hull, ref currentDamage, () => OnHullHit?.Invoke(damage)))
-            {
-                OnDeath?.Invoke(damage);
-            }
-            UpdateHullGraphic();
-        }
+        ArmorDamageHelper(ref currentDamage);
+        HullDamageHelper(currentDamage);
     }
 
     private delegate void OnHitCheck();

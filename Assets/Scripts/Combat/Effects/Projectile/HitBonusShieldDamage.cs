@@ -30,6 +30,6 @@ public class HitBonusShieldDamage : ProjectileEffect, ProjectileEffect.IOnHitEff
 
     public void OnHit(Collider2D collision, Collider2D collidee)
     {
-        collision.GetComponent<Ship>().GetCombatStats().TakeShieldDamage(bonusDamage);
+        collision.GetComponent<Ship>().GetCombatStats().BonusShieldDamage(bonusDamage, false);
     }
 }
