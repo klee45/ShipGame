@@ -106,18 +106,32 @@ public class CombatStats : MonoBehaviour
         return GetTotalHP() / (maxHull.GetValue() + maxArmor.GetValue() + maxShield.GetValue());
     }
 
-    public void TakeDamage(int damage)
+    public void TakeShieldDamage(int damage)
     {
         int currentDamage = damage;
-        OnShipHit?.Invoke(damage);
+        OnShipHit?.Invoke(currentDamage);
+        ShieldDamageHelper(ref currentDamage);
+    }
+
+    private void ShieldDamageHelper(ref int currentDamage)
+    {
+        int damage = currentDamage;
         if (shield > 0)
         {
-            if (DoDamage(ref shield, ref currentDamage, () => OnShieldHit?.Invoke(damage)))
+            if (DoDamage(ref shield, ref damage, () => OnShieldHit?.Invoke(damage)))
             {
                 OnShieldDestroy?.Invoke(damage);
             }
             UpdateShieldGraphic();
         }
+        currentDamage = damage;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        int currentDamage = damage;
+        OnShipHit?.Invoke(damage);
+        ShieldDamageHelper(ref currentDamage);
         if (armor > 0)
         {
             if (DoDamage(ref armor, ref currentDamage, () => OnArmorHit?.Invoke(damage)))

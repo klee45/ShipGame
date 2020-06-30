@@ -7,6 +7,7 @@ public enum Tag
     WARP,
     MOVEMENT,
     DAMAGE,
+    SHIELD_DAMAGE,
     FORCE,
     TIME
 }
