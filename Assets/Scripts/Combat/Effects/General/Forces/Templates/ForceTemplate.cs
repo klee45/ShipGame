@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ForceTemplate : GeneralEffectTemplate
+public class ForceTemplate : EntityEffectTemplate
 {
     [SerializeField]
     private Vector2 force;
@@ -13,9 +13,18 @@ public class ForceTemplate : GeneralEffectTemplate
 
     protected override EntityEffect CreateEffect(GameObject obj)
     {
-        Force f = obj.AddComponent<Force>();
-        f.Setup(force, duration, isRelative);
-        return f;
+        if (duration > 0)
+        {
+            Force f = obj.AddComponent<Force>();
+            f.Setup(force, duration, isRelative);
+            return f;
+        }
+        else
+        {
+            ForceEndless f = obj.AddComponent<ForceEndless>();
+            f.Setup(force, isRelative);
+            return f;
+        }
     }
 
     public override float GetRangeMod()

@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitAddShipEffectTemplate : ProjectileEffectTemplate
+public class HitAddEntityEffectTemplate : ProjectileEffectTemplate
 {
     [SerializeField]
-    private ShipEffectTemplate template;
+    private EntityEffectTemplate template;
     [SerializeField]
     private Tag[] tags;
 
     protected override ProjectileEffect CreateEffect(GameObject obj)
     {
-        var s = obj.AddComponent<HitAddShipEffect>();
+        var s = obj.AddComponent<HitAddEntityEffect>();
         s.Setup(template, tags);
         return s;
     }

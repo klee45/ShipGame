@@ -61,7 +61,7 @@ public abstract class Effect : MonoBehaviour, Effect.IEffect
     public abstract string GetName();
 }
 
-public abstract class GeneralEffectTemplate : EffectTemplate<EntityEffect>
+public abstract class EntityEffectTemplate : EffectTemplate<EntityEffect>
 {
 
 }

@@ -96,6 +96,11 @@ public class Ship : Entity
         TickWeapons(deltaTime);
     }
 
+    protected void FixedUpdate()
+    {
+        DoFixedTickEffects(shipEffects);
+    }
+
     private void TickWeapons(float deltaTime)
     {
         foreach(Weapon weapon in arsenal.GetWeapons())
@@ -107,8 +112,13 @@ public class Ship : Entity
     public override T AddEntityEffect<T>()
     {
         T e = shipEffects.gameObject.AddComponent<T>();
-        e.AddTo(GetEffectsDict());
+        e.AddTo(shipEffects);
         return e;
+    }
+
+    public override EffectDict GetGeneralEffectDict()
+    {
+        return shipEffects;
     }
 
     public T AddShipEffect<T>() where T : ShipEffect

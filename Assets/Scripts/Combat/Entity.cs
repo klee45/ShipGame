@@ -75,6 +75,7 @@ public abstract class Entity : MonoBehaviour
     }
 
     public abstract T AddEntityEffect<T>() where T : EntityEffect;
+    public abstract EffectDict GetGeneralEffectDict();
 
     public ResettingFloat GetTimeScale()
     {
@@ -136,6 +137,14 @@ public abstract class Entity : MonoBehaviour
         foreach (ITickEffect effects in dict.tickEffects.GetAll())
         {
             effects.Tick(timeScale.GetValue());
+        }
+    }
+
+    protected void DoFixedTickEffects(EffectDict dict)
+    {
+        foreach (IFixedTickEffect effects in dict.fixedTickEffects.GetAll())
+        {
+            effects.FixedTick(timeScale.GetValue());
         }
     }
 }

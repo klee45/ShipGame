@@ -198,11 +198,13 @@ public class CombatStats : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        int currentDamage = damage;
-        OnShipHit?.Invoke(damage);
-        ShieldDamageHelper(ref currentDamage);
-        ArmorDamageHelper(ref currentDamage);
-        HullDamageHelper(currentDamage);
+        if (damage > 0)
+        {
+            OnShipHit?.Invoke(damage);
+            ShieldDamageHelper(ref damage);
+            ArmorDamageHelper(ref damage);
+            HullDamageHelper(damage);
+        }
     }
 
     private delegate void OnHitCheck();

@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class ForceEndless : AForce, EffectDict.IEffectAdds
 {
+    public void Setup(Vector2 force, bool isRelative)
+    {
+        this.force = force;
+        this.isRelative = isRelative;
+    }
+
     public override void AddTo(EffectDict dict)
     {
         dict.movementEffects.Add(this);

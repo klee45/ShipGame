@@ -2,17 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitBonusShieldDamage : ProjectileEffect, ProjectileEffect.IOnHitEffect, EffectDict.IEffectAdds
+public class HitBonusHullDamage : ProjectileEffect, ProjectileEffect.IOnHitEffect, EffectDict.IEffectAdds
 {
     [SerializeField]
     private int bonusDamage;
     [SerializeField]
     private bool isHit = false;
+    [SerializeField]
+    private bool ignoreOther = false;
 
-    public void Setup(int bonusDamage, bool isHit)
+    public void Setup(int bonusDamage, bool isHit, bool ignoreOther)
     {
         this.bonusDamage = bonusDamage;
         this.isHit = isHit;
+        this.ignoreOther = ignoreOther;
     }
 
     public override void AddTo(EffectDictProjectile dict)
@@ -33,6 +36,6 @@ public class HitBonusShieldDamage : ProjectileEffect, ProjectileEffect.IOnHitEff
 
     public void OnHit(Collider2D collision, Collider2D collidee)
     {
-        collision.GetComponent<Ship>().GetCombatStats().BonusShieldDamage(bonusDamage, isHit);
+        collision.GetComponent<Ship>().GetCombatStats().BonusHullDamage(bonusDamage, isHit, ignoreOther);
     }
 }

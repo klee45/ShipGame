@@ -8,7 +8,7 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
     [SerializeField]
     private ProjectileEffectTemplate[] projectileEffects;
     [SerializeField]
-    private GeneralEffectTemplate[] generalEffects;
+    private EntityEffectTemplate[] generalEffects;
     [SerializeField]
     private float colliderLength = 0;
     [SerializeField]
@@ -41,7 +41,7 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
         {
             remainingRange -= effect.GetRangeMod();
         }
-        foreach (GeneralEffectTemplate effect in generalEffects)
+        foreach (EntityEffectTemplate effect in generalEffects)
         {
             remainingRange -= effect.GetRangeMod();
         }
@@ -63,7 +63,7 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
             ProjectileEffect e = effect.Create(projectile.gameObject);
             e.AddTo(projectile.GetEffectsDict());
         }
-        foreach (GeneralEffectTemplate effect in generalEffects)
+        foreach (EntityEffectTemplate effect in generalEffects)
         {
             EntityEffect e = effect.Create(projectile.gameObject);
             e.AddTo(projectile.GetEffectsDict());
@@ -77,6 +77,7 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
 
     private void SetupColliders(Projectile projectile, Team team)
     {
+        //Debug.Log(team);
         Collider2D collider = projectile.GetComponentInChildren<Collider2D>();
         collider.isTrigger = true;
         collider.gameObject.name = "Base collider";

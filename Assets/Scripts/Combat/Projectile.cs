@@ -22,12 +22,22 @@ public class Projectile : Entity
         }
     }
 
+    protected void FixedUpdate()
+    {
+        DoFixedTickEffects(projectileEffects);
+    }
+
     public void Setup(float range, float duration, Tag[] immuneTags)
     {
         this.range = range;
         this.duration = duration;
         this.projectileEffects.SetImmuneTags(immuneTags);
         SetupLifespan();
+    }
+
+    public override EffectDict GetGeneralEffectDict()
+    {
+        return projectileEffects;
     }
 
     private void SetupLifespan()
