@@ -52,7 +52,7 @@ public class Burn : ShipEffect, EntityEffect.ITickEffect, EffectDict.IEffectAdds
             Destroy(this);
         }
 
-        Debug.Log(currentDamage);
+        //Debug.Log(currentDamage);
         
         ship.GetCombatStats().TakeDamage(flatDamage);
         damageSoFar += flatDamage;
