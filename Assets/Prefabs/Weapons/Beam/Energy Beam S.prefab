@@ -165,6 +165,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
-  damage: 10
-  duration: 0
+  damage: 100
+  duration: 1
   destroyOnEnd: 1

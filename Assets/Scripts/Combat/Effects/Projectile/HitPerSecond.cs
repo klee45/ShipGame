@@ -42,6 +42,7 @@ public class HitPerSecond : ProjectileEffect,
 
     public void OnHitStay(Collider2D collision)
     {
+        //Debug.Log("Hit");
         if (currentDamage + damageDone > damage)
         {
             WakeUp(collision);
@@ -52,12 +53,12 @@ public class HitPerSecond : ProjectileEffect,
             WakeUp(collision);
             DoDamage(collision, currentDamage);
         }
-        Debug.Log("Damage");
+        //Debug.Log("Damage");
     }
 
     public void FixedTick(float timeScale)
     {
-        Debug.Log(damageDone);
+        //Debug.Log(damageDone);
         if (damageDone > damage)
         {
             if (destroyOnEnd)
@@ -69,9 +70,10 @@ public class HitPerSecond : ProjectileEffect,
         {
             damageDone += currentDamage;
             float damage = leftover + TimeController.FixedDeltaTime(timeScale) * dps;
+            //Debug.Log(string.Format("{0}    {1}", damage, leftover));
             currentDamage = damage.GetParts(out leftover);
         }
-        Debug.Log("Tick");  
+        //Debug.Log("Tick");  
     }
 
     private void WakeUp(Collider2D collision)
