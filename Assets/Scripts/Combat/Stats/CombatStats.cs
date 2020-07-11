@@ -22,6 +22,20 @@ public class CombatStatsTemplate : Template<CombatStats, Ship>
 
 public class CombatStats : MonoBehaviour
 {
+    private class Health
+    {
+        public ResettingFloat max;
+        public ResettingFloat mult;
+        public int val;
+
+        public Health(int baseValue)
+        {
+            max = new ResettingFloat(baseValue);
+            mult = new ResettingFloat(1);
+            val = baseValue;
+        }
+    }
+
     [SerializeField]
     private HealthBar healthBar;
 
@@ -34,15 +48,10 @@ public class CombatStats : MonoBehaviour
     public Timer shieldDelay;
 
     public bool shieldsDown;
-
-    private ResettingFloat maxHull;
-    private int hull;
-
-    private ResettingFloat maxArmor;
-    private int armor;
-
-    private ResettingFloat maxShield;
-    private int shield;
+    
+    private Health hull;
+    private Health armor;
+    private Health shield;
 
     public delegate void DamageEvent(int damage);
 
@@ -59,12 +68,9 @@ public class CombatStats : MonoBehaviour
 
     void Awake()
     {
-        this.maxHull = new ResettingFloat(initialHullMax);
-        this.maxArmor = new ResettingFloat(initialArmorMax);
-        this.maxShield = new ResettingFloat(initialShieldMax);
-        hull = initialHullMax;
-        armor = initialArmorMax;
-        shield = initialShieldMax;
+        this.hull = new Health(initialHullMax);
+        this.armor = new Health(initialArmorMax);
+        this.shield = new Health(initialShieldMax);
 
         healthBar = GetComponentInParent<Ship>().GetComponentInChildren<HealthBar>();
     }
@@ -88,12 +94,12 @@ public class CombatStats : MonoBehaviour
 
     public bool AnyShield()
     {
-        return shield > 0;
+        return shield.val > 0;
     }
 
     public bool AnyArmor()
     {
-        return armor > 0;
+        return armor.val > 0;
     }
 
     public bool IsOnlyHull()
@@ -103,22 +109,37 @@ public class CombatStats : MonoBehaviour
 
     public bool IsAlive()
     {
-        return hull > 0;
+        return hull.val > 0;
     }
 
     public float GetTotalHP()
     {
-        return hull + armor + shield;
+        return hull.val + armor.val + shield.val;
     }
 
     public int GetTotalMaxHP()
     {
-        return maxHull.GetInt() + maxArmor.GetInt() + maxShield.GetInt();
+        return hull.max.GetInt() + armor.max.GetInt() + shield.max.GetInt();
     }
 
     public float GetOverallPercent()
     {
-        return GetTotalHP() / (maxHull.GetValue() + maxArmor.GetValue() + maxShield.GetValue());
+        return GetTotalHP() / (hull.max.GetValue() + armor.max.GetValue() + shield.max.GetValue());
+    }
+
+    public ResettingFloat GetShieldMult()
+    {
+        return shield.mult;
+    }
+
+    public ResettingFloat GetArmorMult()
+    {
+        return armor.mult;
+    }
+
+    public ResettingFloat GetHullMult()
+    {
+        return hull.mult;
     }
 
     public void BonusShieldDamage(int damage, bool isHit)
@@ -160,9 +181,9 @@ public class CombatStats : MonoBehaviour
     private void ShieldDamageHelper(ref int damage)
     {
         int currentDamage = damage;
-        if (shield > 0)
+        if (shield.val > 0)
         {
-            if (DoDamage(ref shield, ref damage, () => OnShieldHit?.Invoke(currentDamage)))
+            if (DoDamage(ref shield.val, ref damage, () => OnShieldHit?.Invoke(currentDamage)))
             {
                 OnShieldDestroy?.Invoke(damage);
             }
@@ -173,9 +194,9 @@ public class CombatStats : MonoBehaviour
     private void ArmorDamageHelper(ref int damage)
     {
         int currentDamage = damage;
-        if (armor > 0)
+        if (armor.val > 0)
         {
-            if (DoDamage(ref armor, ref damage, () => OnArmorHit?.Invoke(currentDamage)))
+            if (DoDamage(ref armor.val, ref damage, () => OnArmorHit?.Invoke(currentDamage)))
             {
                 OnArmorDestroy?.Invoke(damage);
             }
@@ -186,9 +207,9 @@ public class CombatStats : MonoBehaviour
     private void HullDamageHelper(int damage)
     {
         int currentDamage = damage;
-        if (hull > 0)
+        if (hull.val > 0)
         {
-            if (DoDamage(ref hull, ref damage, () => OnHullHit?.Invoke(currentDamage)))
+            if (DoDamage(ref hull.val, ref damage, () => OnHullHit?.Invoke(currentDamage)))
             {
                 OnDeath?.Invoke(damage);
             }
@@ -232,17 +253,17 @@ public class CombatStats : MonoBehaviour
         return false;
     }
 
-    public int GetHullMax() { return maxHull.GetInt(); }
-    public int GetArmorMax() { return maxArmor.GetInt(); }
-    public int GetShieldMax() { return maxShield.GetInt(); }
+    public int GetHullMax() { return hull.max.GetInt(); }
+    public int GetArmorMax() { return armor.max.GetInt(); }
+    public int GetShieldMax() { return shield.max.GetInt(); }
 
-    public int GetHullCurrent() { return hull; }
-    public int GetArmorCurrent() { return armor; }
-    public int GetShieldCurrent() { return shield; }
+    public int GetHullCurrent() { return hull.val; }
+    public int GetArmorCurrent() { return armor.val; }
+    public int GetShieldCurrent() { return shield.val; }
 
-    public void TrimHullToMax() { hull = Mathf.Min(hull, maxHull.GetInt()); }
-    public void TrimArmorToMax() { armor = Mathf.Min(armor, maxArmor.GetInt()); }
-    public void TrimShieldToMax() { shield = Mathf.Min(shield, maxShield.GetInt()); }
+    public void TrimHullToMax() { hull.val = Mathf.Min(hull.val, hull.max.GetInt()); }
+    public void TrimArmorToMax() { armor.val = Mathf.Min(armor.val, armor.max.GetInt()); }
+    public void TrimShieldToMax() { shield.val = Mathf.Min(shield.val, shield.max.GetInt()); }
 
     public void TrimAllToMax()
     {
@@ -253,17 +274,17 @@ public class CombatStats : MonoBehaviour
 
     private void UpdateShieldGraphic()
     {
-        healthBar?.UpdateShieldGraphic(shield, maxShield.GetInt(), maxArmor.GetInt(), maxHull.GetInt());
+        healthBar?.UpdateShieldGraphic(shield.val, shield.max.GetInt(), armor.max.GetInt(), hull.max.GetInt());
     }
 
     private void UpdateArmorGraphic()
     {
-        healthBar?.UpdateArmorGraphic(armor, maxShield.GetInt(), maxArmor.GetInt(), maxHull.GetInt());
+        healthBar?.UpdateArmorGraphic(armor.val, shield.max.GetInt(), armor.max.GetInt(), hull.max.GetInt());
     }
 
     private void UpdateHullGraphic()
     {
-        healthBar?.UpdateHullGraphic(hull, maxShield.GetInt(), maxArmor.GetInt(), maxHull.GetInt());
+        healthBar?.UpdateHullGraphic(hull.val, shield.max.GetInt(), armor.max.GetInt(), hull.max.GetInt());
     }
 
     private void UpdateAllGraphics()

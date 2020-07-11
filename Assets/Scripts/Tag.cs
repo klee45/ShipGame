@@ -8,6 +8,12 @@ public enum Tag
     MOVEMENT,
     DAMAGE,
     SHIELD_DAMAGE,
+    ARMOR_DAMAGE,
+    HULL_DAMAGE,
+    SHRED,
+    SHRED_SHIELD,
+    SHRED_ARMOR,
+    SHRED_HULL,
     FORCE,
     TIME
 }

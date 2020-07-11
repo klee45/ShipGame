@@ -82,12 +82,44 @@ public abstract class EffectDict : MonoBehaviour
         public abstract List<List<IEffect>> GetAdds();
         public abstract List<IEffect> GetUniques();
         public abstract List<U> GetAll();
-        public abstract void AddUpdate<T>(T effect) where T : Effect, U, IEffectUpdates;
-        public abstract void RemoveUpdate<T>(T effect) where T : Effect, U, IEffectUpdates;
-        public abstract void Add<T>(T effect) where T : Effect, U, IEffectAdds;
-        public abstract void RemoveAdd<T>(T effect) where T : Effect, U, IEffectAdds;
+
+        public void AddUpdate<T>(T effect) where T : Effect, U, IEffectUpdates
+        {
+            if (AllowedTags(effect))
+            {
+                AddUpdateHelper(effect);
+            }
+        }
+        protected abstract void AddUpdateHelper<T>(T effect) where T : Effect, U, IEffectUpdates;
+
+        public void RemoveUpdate<T>(T effect) where T : Effect, U, IEffectUpdates
+        {
+            if (AllowedTags(effect))
+            {
+                RemoveUpdateHelper(effect);
+            }
+        }
+        protected abstract void RemoveUpdateHelper<T>(T effect) where T : Effect, U, IEffectUpdates;
+
+        public void Add<T>(T effect) where T : Effect, U, IEffectAdds
+        {
+            if (AllowedTags(effect))
+            {
+                AddHelper(effect);
+            }
+        }
+        protected abstract void AddHelper<T>(T effect) where T : Effect, U, IEffectAdds;
+
+        public void RemoveAdd<T>(T effect) where T : Effect, U, IEffectAdds
+        {
+            if (AllowedTags(effect))
+            {
+                RemoveAddHelper(effect);
+            }
+        }
+        protected abstract void RemoveAddHelper<T>(T effect) where T : Effect, U, IEffectAdds;
         
-        protected bool AllowedTags<T>(T effect) where T : Effect, U
+        private bool AllowedTags<T>(T effect) where T : Effect, U
         {
             foreach (Tag tag in effect.GetTags())
             {
@@ -104,6 +136,7 @@ public abstract class EffectDict : MonoBehaviour
         }
     }
 
+    /**
     public class EmptyEffectDict<U, V> : ASortedEffectDict<U> where U : IGeneralEffectBase<V> where V : Entity
     {
         private static readonly List<List<IEffect>> emptyAdds = new List<List<IEffect>>();
@@ -114,7 +147,7 @@ public abstract class EffectDict : MonoBehaviour
 
         private int needsChecking;
 
-        private V entity;
+        protected V entity;
 
         public EmptyEffectDict(EffectDict parent) : base(parent)
         {
@@ -187,7 +220,7 @@ public abstract class EffectDict : MonoBehaviour
             RemoveHelper(effect);
         }
 
-        public override void AddUpdate<T>(T effect)
+        public override bool AddUpdate<T>(T effect)
         {
             //Debug.Log("Add update");
             Debug.LogWarning("General effects should not be unique! They are applied once and removed once");
@@ -199,6 +232,38 @@ public abstract class EffectDict : MonoBehaviour
             //Debug.Log("Remove update");
             Debug.LogWarning("General effects should not be unique! They are applied once and removed once");
             RemoveHelper(effect);
+        }
+    }
+    **/
+
+    public class ApplyOnceEffectDict<U, V> : SortedEffectDict<U> where U : IGeneralEffectBase<V> where V : Entity
+    {
+        private V entity;
+
+        public ApplyOnceEffectDict(EffectDict parent) : base(parent)
+        {
+            entity = parent.GetComponentInParent<V>();
+        }
+
+        protected override void AddHelper<T>(T effect)
+        {
+            base.Add(effect);
+            effect.Apply(entity);
+            effect.OnDestroyEvent += (e) => effect.Cleanup(entity);
+        }
+
+        protected override void AddUpdateHelper<T>(T effect)
+        {
+            base.AddUpdate(effect);
+        }
+
+        protected override void AddUpdateFoundExisting<T>(IEffect savedEffect, T effect)
+        {
+            if (savedEffect is Effect e)
+            {
+                
+            }
+            base.AddUpdateFoundExisting(savedEffect, effect);
         }
     }
 
@@ -246,77 +311,70 @@ public abstract class EffectDict : MonoBehaviour
             lst.Add(effect);
         }
 
-        public override void AddUpdate<T>(T effect)
+        protected override void AddUpdateHelper<T>(T effect)
         {
-            if (AllowedTags(effect))
+            System.Type type = effect.GetType();
+            if (updateDict.TryGetValue(type, out IEffect savedEffect))
             {
-                System.Type type = effect.GetType();
-                if (updateDict.TryGetValue(type, out IEffect savedEffect))
-                {
-                    effect.UpdateEffect(savedEffect, out bool didReplace);
-                    if (didReplace)
-                    {
-                        RemoveUpdateHelper(savedEffect);
-                        ListInsert(effect);
-                        effect.OnDestroyEvent += RemoveUpdateHelper;
-                    }
-                }
-                else
-                {
-                    updateDict.Add(type, effect);
-                    ListInsert(effect);
-                    effect.OnDestroyEvent += RemoveUpdateHelper;
-                }
-                parent.InvokeChange();
+                AddUpdateFoundExisting(savedEffect, effect);
             }
-        }
-
-        public override void RemoveUpdate<T>(T effect)
-        {
-            if (AllowedTags(effect))
+            else
             {
-                RemoveUpdateHelper(effect);
+                updateDict.Add(type, effect);
+                ListInsert(effect);
+                effect.OnDestroyEvent += RemoveUpdateCallback;
             }
-        }
-
-        private void RemoveUpdateHelper(IEffect effect)
-        {
-            RemoveAsGeneric(effect);
-            updateDict.Remove(effect.GetType());
-            effect.OnDestroyEvent -= RemoveUpdateHelper;
             parent.InvokeChange();
         }
 
-        public override void Add<T>(T effect)
+        protected virtual void AddUpdateFoundExisting<T>(IEffect savedEffect, T effect) where T : Effect, U, IEffectUpdates
         {
-            if (AllowedTags(effect))
+            effect.UpdateEffect(savedEffect, out bool didReplace);
+            if (didReplace)
             {
-                System.Type type = effect.GetType();
-                if (addDict.TryGetValue(type, out List<IEffect> effects))
-                {
-                    effects.Add(effect);
-                }
-                else
-                {
-                    List<IEffect> lst = new List<IEffect>();
-                    lst.Add(effect);
-                    addDict.Add(type, lst);
-                }
+                RemoveUpdateCallback(savedEffect);
                 ListInsert(effect);
-                effect.OnDestroyEvent += RemoveAddHelper;
-                parent.InvokeChange();
+                effect.OnDestroyEvent += RemoveUpdateCallback;
             }
         }
 
-        public override void RemoveAdd<T>(T effect)
+        protected override void RemoveUpdateHelper<T>(T effect)
         {
-            if (AllowedTags(effect))
-            {
-                RemoveAddHelper(effect);
-            }
+                RemoveUpdateCallback(effect);
         }
 
-        private void RemoveAddHelper(IEffect effect)
+        private void RemoveUpdateCallback(IEffect effect)
+        {
+            RemoveAsGeneric(effect);
+            updateDict.Remove(effect.GetType());
+            effect.OnDestroyEvent -= RemoveUpdateCallback;
+            parent.InvokeChange();
+        }
+
+        protected override void AddHelper<T>(T effect)
+        {
+            System.Type type = effect.GetType();
+            if (addDict.TryGetValue(type, out List<IEffect> effects))
+            {
+                effects.Add(effect);
+            }
+            else
+            {
+                List<IEffect> lst = new List<IEffect>();
+                lst.Add(effect);
+                addDict.Add(type, lst);
+            }
+            ListInsert(effect);
+            effect.OnDestroyEvent += RemoveAddCallback;
+            parent.InvokeChange();
+        }
+
+        protected override void RemoveAddHelper<T>(T effect)
+        {
+            RemoveAddCallback(effect);
+        }
+
+        private void RemoveAddCallback(IEffect effect)
         {
             System.Type type = effect.GetType();
             if (addDict.TryGetValue(type, out List<IEffect> effectList))
@@ -326,7 +384,7 @@ public abstract class EffectDict : MonoBehaviour
                 {
                     RemoveAsGeneric(effect);
                     addDict.Remove(type);
-                    effect.OnDestroyEvent -= RemoveAddHelper;
+                    effect.OnDestroyEvent -= RemoveAddCallback;
                 }
                 else if (count <= 0)
                 {
@@ -336,7 +394,7 @@ public abstract class EffectDict : MonoBehaviour
                 {
                     RemoveAsGeneric(effect);
                     effectList.Remove(effect);
-                    effect.OnDestroyEvent -= RemoveAddHelper;
+                    effect.OnDestroyEvent -= RemoveAddCallback;
                 }
             }
             parent.InvokeChange();

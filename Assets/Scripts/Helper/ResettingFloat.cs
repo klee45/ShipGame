@@ -7,15 +7,25 @@ public class ResettingFloat
     private const bool DEBUG = true;
     private const float MIN_DIFF = 0.05f;
 
-    public readonly float baseValue;
+    private float baseValue;
     private float currentValue;
     private int modVal;
 
     public ResettingFloat(float baseValue)
     {
-        this.baseValue = baseValue;
+        SetBase(baseValue);
         this.currentValue = baseValue;
         modVal = 0;
+    }
+
+    public void SetBase(float baseValue)
+    {
+        this.baseValue = baseValue;
+    }
+
+    public float GetBase()
+    {
+        return baseValue;
     }
 
     public float GetValue()
