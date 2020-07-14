@@ -498,7 +498,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 0.12731493
+  m_Mass: 1.0553982
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 1
@@ -520,8 +520,8 @@ CapsuleCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: 0.022063464}
-  m_Size: {x: 0.32445717, y: 0.46202272}
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 1, y: 1.27}
   m_Direction: 0
 --- !u!1 &1689643123053324345
 GameObject:
