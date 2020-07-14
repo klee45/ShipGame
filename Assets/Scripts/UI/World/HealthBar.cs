@@ -117,6 +117,6 @@ public class HealthBar : MonoBehaviour
         //Debug.Log(middPercent);
         Quaternion middAngle = Quaternion.Euler(0, 0, middPercent);
         text.rectTransform.localPosition = middAngle * new Vector3(0, 0.55f);
-        text.rectTransform.localRotation = middAngle;
+        text.rectTransform.rotation = Quaternion.identity;// middAngle;
     }
 }

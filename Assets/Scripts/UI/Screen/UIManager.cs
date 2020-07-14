@@ -35,6 +35,7 @@ public class UIManager : Singleton<UIManager>
             }
             //Debug.Log("Step 4");
             ship.GetEffectsDict().OnChange += UpdateEffects;
+            effectsUI.DisplayEffects(ship.GetEffectsDict());
         }
         //Debug.Log("Step 5");
     }
