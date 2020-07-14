@@ -111,11 +111,6 @@ public abstract class Entity : MonoBehaviour
         movementStats.GetVelocityStatGroup().Tick(val, TimeController.DeltaTime(timeScale));
     }
 
-    protected void DoGeneralEffects(EffectDict dict)
-    {
-        dict.generalEffects.Activate(this);
-    }
-
     protected void DoMovementEffects(EffectDict dict)
     {
         bool atLeastOne = false;

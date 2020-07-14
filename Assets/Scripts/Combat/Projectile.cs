@@ -83,7 +83,6 @@ public class Projectile : Entity
     {
         DoTickEffects(projectileEffects);
         DoMovementEffects(projectileEffects);
-        DoGeneralEffects(projectileEffects);
     }
 
     /*

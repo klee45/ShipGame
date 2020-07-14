@@ -183,7 +183,7 @@ public class CombatStats : MonoBehaviour
         int currentDamage = damage;
         if (shield.val > 0)
         {
-            if (DoDamage(ref shield.val, ref damage, () => OnShieldHit?.Invoke(currentDamage)))
+            if (DoDamage(ref shield.val, ref damage, shield.mult, () => OnShieldHit?.Invoke(currentDamage)))
             {
                 OnShieldDestroy?.Invoke(damage);
             }
@@ -196,7 +196,7 @@ public class CombatStats : MonoBehaviour
         int currentDamage = damage;
         if (armor.val > 0)
         {
-            if (DoDamage(ref armor.val, ref damage, () => OnArmorHit?.Invoke(currentDamage)))
+            if (DoDamage(ref armor.val, ref damage, armor.mult, () => OnArmorHit?.Invoke(currentDamage)))
             {
                 OnArmorDestroy?.Invoke(damage);
             }
@@ -209,7 +209,7 @@ public class CombatStats : MonoBehaviour
         int currentDamage = damage;
         if (hull.val > 0)
         {
-            if (DoDamage(ref hull.val, ref damage, () => OnHullHit?.Invoke(currentDamage)))
+            if (DoDamage(ref hull.val, ref damage, hull.mult, () => OnHullHit?.Invoke(currentDamage)))
             {
                 OnDeath?.Invoke(damage);
             }
@@ -230,15 +230,46 @@ public class CombatStats : MonoBehaviour
 
     private delegate void OnHitCheck();
 
-    private bool DoDamage(ref int val, ref int damage, OnHitCheck check)
+    /*
+    private bool DoDamage(ref int val, ref int damage, ResettingFloat mult, OnHitCheck check)
     {
         if (damage > 0)
         {
+            Debug.Log("Mult: " + mult.GetValue());
+            int tempDamage = Mathf.RoundToInt(damage * mult.GetValue());
+            Debug.Log("Damage: " + tempDamage);
             int result = val - damage;
             if (result <= 0)
             {
                 val = 0;
                 damage = -result;
+                check();
+                return true;
+            }
+            else
+            {
+                val = result;
+                damage = 0;
+                check();
+                return false;
+            }
+        }
+        return false;
+    }
+    */
+
+    private bool DoDamage(ref int val, ref int damage, ResettingFloat mult, OnHitCheck check)
+    {
+        if (damage > 0)
+        {
+            Debug.Log("Mult: " + mult.GetValue());
+            int tempDamage = Mathf.RoundToInt(damage * mult.GetValue());
+            Debug.Log("Damage: " + tempDamage);
+            int result = val - tempDamage;
+            if (result <= 0)
+            {
+                val = 0;
+                damage = Mathf.RoundToInt(-result / mult.GetValue());
                 check();
                 return true;
             }

@@ -11,7 +11,7 @@ public abstract class EffectDict : MonoBehaviour
     [SerializeField]
     protected Tag[] immuneTags;
 
-    public EmptyEffectDict<IGeneralEffect, Entity> generalEffects;
+    public ApplyOnceEffectDict<IGeneralEffect> generalEffects;
     public SortedEffectDict<IMovementEffect> movementEffects;
     public SortedEffectDict<ITickEffect> tickEffects;
     public SortedEffectDict<IFixedTickEffect> fixedTickEffects;
@@ -21,7 +21,7 @@ public abstract class EffectDict : MonoBehaviour
 
     protected virtual void Awake()
     {
-        generalEffects = new EmptyEffectDict<IGeneralEffect, Entity>(this);
+        generalEffects = new ApplyOnceEffectDict<IGeneralEffect>(this);
         movementEffects = new SortedEffectDict<IMovementEffect>(this);
         tickEffects = new SortedEffectDict<ITickEffect>(this);
         fixedTickEffects = new SortedEffectDict<IFixedTickEffect>(this);
@@ -236,34 +236,42 @@ public abstract class EffectDict : MonoBehaviour
     }
     **/
 
-    public class ApplyOnceEffectDict<U, V> : SortedEffectDict<U> where U : IGeneralEffectBase<V> where V : Entity
+    public class ApplyOnceEffectDict<U> : SortedEffectDict<U> where U : IGeneralEffectBase<Entity>
     {
-        private V entity;
+        private Entity entity;
 
         public ApplyOnceEffectDict(EffectDict parent) : base(parent)
         {
-            entity = parent.GetComponentInParent<V>();
+            entity = parent.GetComponentInParent<Entity>();
         }
 
         protected override void AddHelper<T>(T effect)
         {
-            base.Add(effect);
+            base.AddHelper(effect);
             effect.Apply(entity);
             effect.OnDestroyEvent += (e) => effect.Cleanup(entity);
         }
 
         protected override void AddUpdateHelper<T>(T effect)
         {
-            base.AddUpdate(effect);
+            base.AddUpdateHelper(effect);
         }
 
         protected override void AddUpdateFoundExisting<T>(IEffect savedEffect, T effect)
         {
-            if (savedEffect is Effect e)
+            if (savedEffect is T e)
             {
-                
+                e.Cleanup(entity);
+                base.AddUpdateFoundExisting(savedEffect, effect);
+                e.Apply(entity);
             }
-            base.AddUpdateFoundExisting(savedEffect, effect);
+        }
+
+        protected override void AddUpdateNotExisting<T>(T effect)
+        {
+            base.AddUpdateNotExisting(effect);
+            effect.Apply(entity);
+            effect.OnDestroyEvent += (e) => effect.Cleanup(entity);
         }
     }
 
@@ -313,16 +321,17 @@ public abstract class EffectDict : MonoBehaviour
 
         protected override void AddUpdateHelper<T>(T effect)
         {
-            System.Type type = effect.GetType();
-            if (updateDict.TryGetValue(type, out IEffect savedEffect))
+            //Debug.Log(type);
+            //Debug.Log(updateDict.Count);
+            if (updateDict.TryGetValue(effect.GetType(), out IEffect savedEffect))
             {
+                //Debug.Log("Existing");
                 AddUpdateFoundExisting(savedEffect, effect);
             }
             else
             {
-                updateDict.Add(type, effect);
-                ListInsert(effect);
-                effect.OnDestroyEvent += RemoveUpdateCallback;
+                //Debug.Log("Not existing");
+                AddUpdateNotExisting(effect);
             }
             parent.InvokeChange();
         }
@@ -336,11 +345,22 @@ public abstract class EffectDict : MonoBehaviour
                 ListInsert(effect);
                 effect.OnDestroyEvent += RemoveUpdateCallback;
             }
+            else
+            {
+                Destroy(effect);
+            }
+        }
+
+        protected virtual void AddUpdateNotExisting<T>(T effect) where T : Effect, U, IEffectUpdates
+        {
+            updateDict.Add(effect.GetType(), effect);
+            ListInsert(effect);
+            effect.OnDestroyEvent += RemoveUpdateCallback;
         }
 
         protected override void RemoveUpdateHelper<T>(T effect)
         {
-                RemoveUpdateCallback(effect);
+            RemoveUpdateCallback(effect);
         }
 
         private void RemoveUpdateCallback(IEffect effect)

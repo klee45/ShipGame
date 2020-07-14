@@ -14,6 +14,9 @@ public class ShipSwapper : MonoBehaviour
     private UIManager ui;
     private int pos = 0;
 
+    [SerializeField]
+    private Ship focusedShip;
+
     private bool first = true;
 
     private void Awake()
@@ -50,6 +53,7 @@ public class ShipSwapper : MonoBehaviour
     {
         Ship ship = ships[swapPos];
         ui.SetShip(ship);
+        focusedShip = ship;
         GameObject shipPilot = ship.GetComponentInChildren<Pilot>().gameObject;
 
         pilotObj.transform.SetParent(ship.transform);

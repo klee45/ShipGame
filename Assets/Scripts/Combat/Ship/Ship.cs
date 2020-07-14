@@ -182,7 +182,6 @@ public class Ship : Entity
     {
         DoTickEffects(shipEffects);
         DoMovementEffects(shipEffects);
-        DoGeneralEffects(shipEffects);
     }
 
     public void SetPilot(Pilot pilot)
