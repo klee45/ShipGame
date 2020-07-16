@@ -28,7 +28,7 @@ public class UIManager : Singleton<UIManager>
             SetupHealthBar();
             int i = 0;
             //Debug.Log("Step 3");
-            foreach (Weapon weapon in ship.GetComponentInChildren<Arsenal>().GetWeapons())
+            foreach (AWeapon weapon in ship.GetComponentInChildren<Arsenal>().GetWeapons())
             {
                 weaponsUI.SetIcon(i, weapon);
                 weaponsUI.SetPercent(i++, weapon);
@@ -46,7 +46,7 @@ public class UIManager : Singleton<UIManager>
         if (ActiveShip())
         {
             int i = 0;
-            foreach (Weapon weapon in ship.GetComponentInChildren<Arsenal>().GetWeapons())
+            foreach (AWeapon weapon in ship.GetComponentInChildren<Arsenal>().GetWeapons())
             {
                 weaponsUI.SetPercent(i++, weapon);
             }

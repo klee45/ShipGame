@@ -103,7 +103,7 @@ public class Ship : Entity
 
     private void TickWeapons(float deltaTime)
     {
-        foreach(Weapon weapon in arsenal.GetWeapons())
+        foreach(AWeapon weapon in arsenal.GetWeapons())
         {
             weapon.Tick(deltaTime);
         }
@@ -191,7 +191,7 @@ public class Ship : Entity
 
     public CombatStats GetCombatStats() { return combatStats; }
     public Arsenal GetArsenal() { return arsenal; }
-    public Weapon GetWeapon(int weaponPos)
+    public AWeapon GetWeapon(int weaponPos)
     {
         return arsenal.GetWeapon(weaponPos);
     }

@@ -72,7 +72,10 @@ public class Boundry : Singleton<Boundry>
         outOfBounds.Remove(e);
     }
 
-    public class BoundryForce : AForce, EntityEffect.ITickEffect, EffectDict.IEffectUpdates
+    public class BoundryForce : AForce,
+        EntityEffect.ITickEffect,
+        EffectDict.IEffectUpdates<EntityEffect.IMovementEffect>,
+        EffectDict.IEffectUpdates<EntityEffect.ITickEffect>
     {
         private static float scale = 3f;
 
@@ -104,15 +107,21 @@ public class Boundry : Singleton<Boundry>
             dict.movementEffects.AddUpdate(this);
         }
 
-        public IEffect UpdateEffect(IEffect effect, out bool didReplace)
+        public override Tag[] GetTags()
+        {
+            return TagHelper.empty;
+        }
+
+        public ITickEffect UpdateEffect(ITickEffect effect, out bool didReplace)
         {
             didReplace = false;
             return effect;
         }
 
-        public override Tag[] GetTags()
+        public IMovementEffect UpdateEffect(IMovementEffect effect, out bool didReplace)
         {
-            return TagHelper.empty;
+            didReplace = false;
+            return effect;
         }
     }
 }

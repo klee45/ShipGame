@@ -54,7 +54,7 @@ public class PilotPlayer : Pilot
         CheckButtons();
     }
 
-    private Weapon[] GetWeapons()
+    private AWeapon[] GetWeapons()
     {
         return ship.GetComponentInChildren<Arsenal>().GetWeapons();
     }

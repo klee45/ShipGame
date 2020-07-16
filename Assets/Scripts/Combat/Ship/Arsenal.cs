@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Arsenal : MonoBehaviour
 {
-    private Weapon[] weapons;
+    private AWeapon[] weapons;
     [SerializeField] private GameObject frontWeaponPlace;
     [SerializeField] private GameObject centerWeaponPlace;
     [SerializeField] private GameObject backWeaponPlace;
@@ -20,8 +20,8 @@ public class Arsenal : MonoBehaviour
 
     private void Awake()
     {
-        weapons = GetComponentsInChildren<Weapon>();
-        foreach (Weapon weapon in weapons)
+        weapons = GetComponentsInChildren<AWeapon>();
+        foreach (AWeapon weapon in weapons)
         {
             GameObject obj = GetWeaponPositionObj(weapon);
             weapon.gameObject.transform.SetParent(obj.transform);
@@ -30,7 +30,7 @@ public class Arsenal : MonoBehaviour
         }
     }
 
-    private GameObject GetWeaponPositionObj(Weapon weapon)
+    private GameObject GetWeaponPositionObj(AWeapon weapon)
     {
         WeaponPosition pos = weapon.GetPreferedPosition();
         switch (pos)
@@ -60,7 +60,7 @@ public class Arsenal : MonoBehaviour
 
     private void Start()
     {
-        foreach (Weapon weapon in weapons)
+        foreach (AWeapon weapon in weapons)
         {
             weapon.gameObject.layer = GetComponentInParent<Ship>().gameObject.layer;
         }
@@ -81,12 +81,12 @@ public class Arsenal : MonoBehaviour
         }
     }
 
-    public Weapon[] GetWeapons()
+    public AWeapon[] GetWeapons()
     {
         return weapons;
     }
 
-    public Weapon GetWeapon(int weaponPos)
+    public AWeapon GetWeapon(int weaponPos)
     {
         return weapons[weaponPos];
     }

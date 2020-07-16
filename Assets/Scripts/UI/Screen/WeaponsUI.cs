@@ -61,13 +61,13 @@ public class WeaponsUI : MonoBehaviour
         }
     }
 
-    public void SetIcon(int num, Weapon weapon)
+    public void SetIcon(int num, AWeapon weapon)
     {
         icons[num].SetIcon(weapon.GetIcon());
         icons[num].gameObject.SetActive(true);
     }
 
-    public void SetPercent(int num, Weapon weapon)
+    public void SetPercent(int num, AWeapon weapon)
     {
         float percent;
         if (weapon.IsReady())

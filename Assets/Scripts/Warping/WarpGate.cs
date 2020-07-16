@@ -50,7 +50,7 @@ public class WarpGate : MonoBehaviour
         warping.Remove(e);
     }
 
-    public class WarpEffect : ShipEffect, EntityEffect.ITickEffect, EffectDict.IEffectUpdates
+    public class WarpEffect : ShipEffect, EntityEffect.ITickEffect, EffectDict.IEffectUpdates<EntityEffect.ITickEffect>
     {
         private GalaxyMapVertex targetSector;
         private float duration;
@@ -82,8 +82,8 @@ public class WarpGate : MonoBehaviour
                 Destroy(this);
             }
         }
-        
-        public IEffect UpdateEffect(IEffect effect, out bool didReplace)
+
+        public EntityEffect.ITickEffect UpdateEffect(EntityEffect.ITickEffect effect, out bool didReplace)
         {
             didReplace = false;
             return effect;

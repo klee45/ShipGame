@@ -12,7 +12,7 @@ public class RangeEstimator : MonoBehaviour
         return range;
     }
 
-    public void Estimate(ProjectileTemplate[] templates)
+    public void Estimate(params ProjectileTemplate[] templates)
     {
         float best = 0;
         foreach (ProjectileTemplate template in templates)
