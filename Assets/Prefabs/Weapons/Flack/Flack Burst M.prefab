@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 7966492580703610604}
   - component: {fileID: 374306111992705486}
   m_Layer: 11
-  m_Name: Flack Burst S
+  m_Name: Flack Burst M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
-  damage: 5
+  damage: 10
 --- !u!1 &1310512387177938983
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,8 +258,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
-  bonus: 2
-  max: 20
+  bonus: 3
+  max: 30
   duration: 10
 --- !u!1 &1961078222008127500
 GameObject:
@@ -348,7 +348,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e54766dbfec82aa478cbb348e26719bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: 2
+  scale: 4
 --- !u!114 &6572660706774931162
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -362,7 +362,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 1148757961816497483, guid: 11fd9846f386fb640b109cf376ed0874, type: 3}
-  position: {x: 0, y: 0.5}
+  position: {x: 0, y: 1}
   rotation: 0
   scale: {fileID: 1961078222008127501}
   movementStats: {fileID: 1961078222008127498}
@@ -372,7 +372,7 @@ MonoBehaviour:
   - {fileID: 1310512388391387718}
   - {fileID: 1310512387904885799}
   generalEffects: []
-  colliderLength: 2
+  colliderLength: 4
   delay: 0
   range: 0
   layerType: 1
