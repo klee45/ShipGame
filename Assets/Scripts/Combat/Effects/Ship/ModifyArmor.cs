@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ModifyArmor : ShipEffect, EntityEffect.IGeneralEffect, EntityEffect.ITickEffect, EffectDict.IEffectUpdates
+public class ModifyArmor :
+    ShipEffect,
+    EntityEffect.IGeneralEffect,
+    EntityEffect.ITickEffect,
+    EffectDict.IEffectUpdates<EntityEffect.IGeneralEffect>,
+    EffectDict.IEffectUpdates<EntityEffect.ITickEffect>
 {
     [SerializeField]
     private int bonus;
@@ -61,7 +66,7 @@ public class ModifyArmor : ShipEffect, EntityEffect.IGeneralEffect, EntityEffect
         this.timer.SetMaxTime(duration);
     }
 
-    public IEffect UpdateEffect(IEffect effect, out bool didReplace)
+    public EntityEffect.ITickEffect UpdateEffect(EntityEffect.ITickEffect effect, out bool didReplace)
     {
         if (effect is ModifyArmor e)
         {
@@ -70,7 +75,16 @@ public class ModifyArmor : ShipEffect, EntityEffect.IGeneralEffect, EntityEffect
                 e.SetDuration(this.duration);
             }
             e.timer.SetTime(0);
+        }
+        didReplace = false;
+        return effect;
+    }
 
+    public EntityEffect.IGeneralEffect UpdateEffect(EntityEffect.IGeneralEffect effect, out bool didReplace)
+    {
+        Debug.Log("Update4 effect");
+        if (effect is ModifyArmor e)
+        {
             int sum = e.bonus + this.bonus;
             if (this.max > e.max)
             {

@@ -64,10 +64,13 @@ public abstract class EffectDict : MonoBehaviour
         return lst;
     }
 
-    public interface IEffectAdds { }
-    public interface IEffectUpdates
+    public interface IEffectAdds<V> where V : IEffect
     {
-        IEffect UpdateEffect(IEffect effect, out bool didReplace);
+    }
+
+    public interface IEffectUpdates<V> where V : IEffect
+    {
+        V UpdateEffect(V effect, out bool didReplace);
     }
 
     public abstract class ASortedEffectDict<U> where U : IEffect
@@ -83,41 +86,41 @@ public abstract class EffectDict : MonoBehaviour
         public abstract List<IEffect> GetUniques();
         public abstract List<U> GetAll();
 
-        public void AddUpdate<T>(T effect) where T : Effect, U, IEffectUpdates
+        public void AddUpdate<T>(T effect) where T : Effect, U, IEffectUpdates<U>
         {
             if (AllowedTags(effect))
             {
                 AddUpdateHelper(effect);
             }
         }
-        protected abstract void AddUpdateHelper<T>(T effect) where T : Effect, U, IEffectUpdates;
+        protected abstract void AddUpdateHelper<T>(T effect) where T : Effect, U, IEffectUpdates<U>;
 
-        public void RemoveUpdate<T>(T effect) where T : Effect, U, IEffectUpdates
+        public void RemoveUpdate<T>(T effect) where T : Effect, U, IEffectUpdates<U>
         {
             if (AllowedTags(effect))
             {
                 RemoveUpdateHelper(effect);
             }
         }
-        protected abstract void RemoveUpdateHelper<T>(T effect) where T : Effect, U, IEffectUpdates;
+        protected abstract void RemoveUpdateHelper<T>(T effect) where T : Effect, U, IEffectUpdates<U>;
 
-        public void Add<T>(T effect) where T : Effect, U, IEffectAdds
+        public void Add<T>(T effect) where T : Effect, U, IEffectAdds<U>
         {
             if (AllowedTags(effect))
             {
                 AddHelper(effect);
             }
         }
-        protected abstract void AddHelper<T>(T effect) where T : Effect, U, IEffectAdds;
+        protected abstract void AddHelper<T>(T effect) where T : Effect, U, IEffectAdds<U>;
 
-        public void RemoveAdd<T>(T effect) where T : Effect, U, IEffectAdds
+        public void RemoveAdd<T>(T effect) where T : Effect, U, IEffectAdds<U>
         {
             if (AllowedTags(effect))
             {
                 RemoveAddHelper(effect);
             }
         }
-        protected abstract void RemoveAddHelper<T>(T effect) where T : Effect, U, IEffectAdds;
+        protected abstract void RemoveAddHelper<T>(T effect) where T : Effect, U, IEffectAdds<U>;
         
         private bool AllowedTags<T>(T effect) where T : Effect, U
         {
@@ -323,7 +326,8 @@ public abstract class EffectDict : MonoBehaviour
         {
             //Debug.Log(type);
             //Debug.Log(updateDict.Count);
-            if (updateDict.TryGetValue(effect.GetType(), out IEffect savedEffect))
+            System.Type type = effect.GetType();
+            if (updateDict.TryGetValue(type, out IEffect savedEffect))
             {
                 //Debug.Log("Existing");
                 AddUpdateFoundExisting(savedEffect, effect);
@@ -336,22 +340,25 @@ public abstract class EffectDict : MonoBehaviour
             parent.InvokeChange();
         }
 
-        protected virtual void AddUpdateFoundExisting<T>(IEffect savedEffect, T effect) where T : Effect, U, IEffectUpdates
+        protected virtual void AddUpdateFoundExisting<T>(IEffect savedEffect, T effect) where T : Effect, U, IEffectUpdates<U>
         {
-            effect.UpdateEffect(savedEffect, out bool didReplace);
-            if (didReplace)
+            if (savedEffect is T e)
             {
-                RemoveUpdateCallback(savedEffect);
-                ListInsert(effect);
-                effect.OnDestroyEvent += RemoveUpdateCallback;
-            }
-            else
-            {
-                Destroy(effect);
+                effect.UpdateEffect(e, out bool didReplace);
+                if (didReplace)
+                {
+                    RemoveUpdateCallback(savedEffect);
+                    ListInsert(effect);
+                    effect.OnDestroyEvent += RemoveUpdateCallback;
+                }
+                else
+                {
+                    Destroy(effect);
+                }
             }
         }
 
-        protected virtual void AddUpdateNotExisting<T>(T effect) where T : Effect, U, IEffectUpdates
+        protected virtual void AddUpdateNotExisting<T>(T effect) where T : Effect, U, IEffectUpdates<U>
         {
             updateDict.Add(effect.GetType(), effect);
             ListInsert(effect);

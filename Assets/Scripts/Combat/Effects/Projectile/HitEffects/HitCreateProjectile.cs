@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitCreateProjectile : ProjectileEffect, ProjectileEffect.IOnHitEffect, EffectDict.IEffectAdds
+public class HitCreateProjectile : ProjectileEffect, ProjectileEffect.IOnHitEffect, EffectDict.IEffectAdds<ProjectileEffect.IOnHitEffect>
 {
     [SerializeField]
     private ProjectileTemplate template;

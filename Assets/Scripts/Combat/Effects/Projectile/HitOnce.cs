@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitOnce : ProjectileEffect, ProjectileEffect.IOnHitEffect, EffectDict.IEffectUpdates
+public class HitOnce : ProjectileEffect, ProjectileEffect.IOnHitEffect, EffectDict.IEffectUpdates<ProjectileEffect.IOnHitEffect>
 {
     [SerializeField]
     private int damage;
@@ -23,7 +23,7 @@ public class HitOnce : ProjectileEffect, ProjectileEffect.IOnHitEffect, EffectDi
         dict.onHits.AddUpdate(this);
     }
 
-    public IEffect UpdateEffect(IEffect effect, out bool didReplace)
+    public IOnHitEffect UpdateEffect(IOnHitEffect effect, out bool didReplace)
     {
         if (effect is HitOnce e)
         {

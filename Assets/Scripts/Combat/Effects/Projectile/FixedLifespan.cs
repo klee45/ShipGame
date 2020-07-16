@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FixedLifespan : ProjectileEffect, EntityEffect.ITickEffect, EffectDict.IEffectUpdates
+public class FixedLifespan : ProjectileEffect, EntityEffect.ITickEffect, EffectDict.IEffectUpdates<EntityEffect.ITickEffect>
 {
     [SerializeField]
     private float duration;
@@ -30,6 +30,11 @@ public class FixedLifespan : ProjectileEffect, EntityEffect.ITickEffect, EffectD
         }
         didReplace = false;
         return effect;
+    }
+
+    public EntityEffect.ITickEffect UpdateEffect(EntityEffect.ITickEffect effect, out bool didReplace)
+    {
+        throw new System.NotImplementedException();
     }
 
     public virtual void Tick(float timeScale)

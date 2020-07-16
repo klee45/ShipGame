@@ -2,7 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChangeTimeScaleOnHit : ProjectileEffect, ProjectileEffect.IOnHitEffect, ProjectileEffect.IOnEXitEffect, EffectDict.IEffectAdds
+public class ChangeTimeScaleOnHit :
+    ProjectileEffect,
+    ProjectileEffect.IOnHitEffect, 
+    ProjectileEffect.IOnExitEffect,
+    EffectDict.IEffectAdds<ProjectileEffect.IOnHitEffect>,
+    EffectDict.IEffectAdds<ProjectileEffect.IOnExitEffect>
 {
     [SerializeField]
     private float timeScale = 1f;

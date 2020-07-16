@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ForceEndless : AForce, EffectDict.IEffectAdds
+public class ForceEndless : AForce, EffectDict.IEffectAdds<EntityEffect.IMovementEffect>
 {
     public void Setup(Vector2 force, bool isRelative)
     {

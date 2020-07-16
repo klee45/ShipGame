@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitAddCollisionForceEffect : ProjectileEffect, ProjectileEffect.IOnHitEffect, EffectDict.IEffectAdds
+public class HitAddCollisionForceEffect :
+    ProjectileEffect,
+    ProjectileEffect.IOnHitEffect,
+    EffectDict.IEffectAdds<ProjectileEffect.IOnHitEffect>
 {
     [SerializeField]
     private float duration;

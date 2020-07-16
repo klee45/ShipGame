@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TimeModEffect : EntityEffect, EntityEffect.IGeneralEffect, EffectDict.IEffectAdds
+public class TimeModEffect : EntityEffect, EntityEffect.IGeneralEffect, EffectDict.IEffectAdds<EntityEffect.IGeneralEffect>
 {
     [SerializeField]
     private float scale;

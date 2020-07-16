@@ -5,7 +5,8 @@ using UnityEngine;
 public class HitPerSecond : ProjectileEffect,
     EntityEffect.IFixedTickEffect,
     ProjectileEffect.IOnHitStayEffect,
-    EffectDict.IEffectAdds
+    EffectDict.IEffectAdds<EntityEffect.IFixedTickEffect>,
+    EffectDict.IEffectAdds<ProjectileEffect.IOnHitStayEffect>
 {
     [SerializeField]
     private int damage;

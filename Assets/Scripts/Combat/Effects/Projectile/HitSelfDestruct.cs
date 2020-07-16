@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitSelfDestruct : ProjectileEffect, ProjectileEffect.IOnHitEffect, EffectDict.IEffectUpdates
+public class HitSelfDestruct : ProjectileEffect, ProjectileEffect.IOnHitEffect, EffectDict.IEffectUpdates<ProjectileEffect.IOnHitEffect>
 {
     public void OnHit(Collider2D collision, Collider2D collidee)
     {
@@ -14,7 +14,7 @@ public class HitSelfDestruct : ProjectileEffect, ProjectileEffect.IOnHitEffect, 
         dict.onHits.AddUpdate(this);
     }
 
-    public IEffect UpdateEffect(IEffect effect, out bool didReplace)
+    public IOnHitEffect UpdateEffect(IOnHitEffect effect, out bool didReplace)
     {
         didReplace = false;
         return effect;

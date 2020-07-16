@@ -20,7 +20,7 @@ public abstract class ProjectileEffect : Effect
         void OnHitStay(Collider2D collision);
     }
 
-    public interface IOnEXitEffect : IEffect
+    public interface IOnExitEffect : IEffect
     {
         void OnExit(Collider2D collision);
     }

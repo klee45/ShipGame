@@ -7,13 +7,13 @@ public class EffectDictProjectile : EffectDict
 {
     public SortedEffectDict<IOnHitEffect> onHits;
     public SortedEffectDict<IOnHitStayEffect> onStays;
-    public SortedEffectDict<IOnEXitEffect> onExits;
+    public SortedEffectDict<IOnExitEffect> onExits;
 
     protected override void Awake()
     {
         base.Awake();
         onHits = new SortedEffectDict<IOnHitEffect>(this);
         onStays = new SortedEffectDict<IOnHitStayEffect>(this);
-        onExits = new SortedEffectDict<IOnEXitEffect>(this);
+        onExits = new SortedEffectDict<IOnExitEffect>(this);
     }
 }
