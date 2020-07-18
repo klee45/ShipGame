@@ -74,7 +74,8 @@ public abstract class Entity : MonoBehaviour
         return team;
     }
 
-    public abstract T AddEntityEffect<T>() where T : EntityEffect;
+    public delegate void EffectSetup<T>(T effect);
+    public abstract T AddEntityEffect<T>(EffectSetup<T> setup) where T : EntityEffect;
     public abstract EffectDict GetGeneralEffectDict();
 
     public ResettingFloat GetTimeScale()

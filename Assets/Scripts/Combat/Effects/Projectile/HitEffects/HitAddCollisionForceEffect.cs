@@ -35,11 +35,8 @@ public class HitAddCollisionForceEffect :
 
     public void OnHit(Collider2D collision, Collider2D collidee)
     {
-        Force force = collision.GetComponent<Entity>().AddEntityEffect<Force>();
-
         Vector3 diff = (collision.transform.position - collidee.transform.position);
         Vector2 norm = diff.ToVector2().normalized;
-
-        force.Setup(norm * strength, duration, false);
+        Force force = collision.GetComponent<Entity>().AddEntityEffect<Force>((e) => e.Setup(norm * strength, duration, false));
     }
 }

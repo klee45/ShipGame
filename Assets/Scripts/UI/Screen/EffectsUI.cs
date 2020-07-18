@@ -60,7 +60,16 @@ public class EffectsUI : MonoBehaviour
         int pos = 0;
         foreach (string s in unique)
         {
-            sb.AppendFormat("{0} x{1}\n", s, counts[pos++]);
+            int count = counts[pos++];
+
+            if (count > 1)
+            {
+                sb.AppendFormat("{0} x{1}\n", s, count);
+            }
+            else
+            {
+                sb.AppendFormat("{0}\n", s);
+            }
         }
         text.text = sb.ToString();
     }

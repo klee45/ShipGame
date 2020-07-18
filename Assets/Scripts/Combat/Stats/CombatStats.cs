@@ -262,9 +262,9 @@ public class CombatStats : MonoBehaviour
     {
         if (damage > 0)
         {
-            Debug.Log("Mult: " + mult.GetValue());
+            //Debug.Log("Mult: " + mult.GetValue());
             int tempDamage = Mathf.RoundToInt(damage * mult.GetValue());
-            Debug.Log("Damage: " + tempDamage);
+            //Debug.Log("Damage: " + tempDamage);
             int result = val - tempDamage;
             if (result <= 0)
             {

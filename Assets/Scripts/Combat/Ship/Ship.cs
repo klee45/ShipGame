@@ -109,9 +109,10 @@ public class Ship : Entity
         }
     }
 
-    public override T AddEntityEffect<T>()
+    public override T AddEntityEffect<T>(EffectSetup<T> setup)
     {
         T e = shipEffects.gameObject.AddComponent<T>();
+        setup(e);
         e.AddTo(shipEffects);
         return e;
     }

@@ -85,6 +85,8 @@ public class ModifyArmor :
         Debug.Log("Update4 effect");
         if (effect is ModifyArmor e)
         {
+            e.bonus = Math.MaxBonus(e.bonus, this.bonus, e.max, this.max);
+            /*
             int sum = e.bonus + this.bonus;
             if (this.max > e.max)
             {
@@ -97,6 +99,7 @@ public class ModifyArmor :
                     e.bonus = Mathf.Min(this.max, sum);
                 }
             }
+            */
         }
         didReplace = false;
         return effect;

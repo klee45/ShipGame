@@ -60,9 +60,10 @@ public class Projectile : Entity
         transform.position += translation.ToVector3();
     }
 
-    public override T AddEntityEffect<T>()
+    public override T AddEntityEffect<T>(EffectSetup<T> setup)
     {
         T e = projectileEffects.gameObject.AddComponent<T>();
+        setup(e);
         e.AddTo(GetEffectsDict());
         return e;
     }

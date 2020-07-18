@@ -48,7 +48,7 @@ public class Boundry : Singleton<Boundry>
     private void OnTriggerExit2D(Collider2D collision)
     {
         Ship ship = collision.gameObject.GetComponent<Ship>();
-        BoundryForce force = ship.AddEntityEffect<BoundryForce>();
+        BoundryForce force = ship.AddEntityEffect<BoundryForce>((e) => { });
         ship.OnEntityDestroy += Remove;
         outOfBounds.Add(ship, force);
 
