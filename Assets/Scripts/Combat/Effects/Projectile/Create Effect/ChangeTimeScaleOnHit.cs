@@ -5,9 +5,7 @@ using UnityEngine;
 public class ChangeTimeScaleOnHit :
     ProjectileEffect,
     ProjectileEffect.IOnHitEffect, 
-    ProjectileEffect.IOnExitEffect,
-    EffectDict.IEffectAdds<ProjectileEffect.IOnHitEffect>,
-    EffectDict.IEffectAdds<ProjectileEffect.IOnExitEffect>
+    ProjectileEffect.IOnExitEffect
 {
     [SerializeField]
     private int bonus = 0;

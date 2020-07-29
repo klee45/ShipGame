@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EffectDictShip : EffectDict
 {
+    /*
     public override List<List<Effect.IEffect>> GetAddEffects()
     {
         return base.GetAddEffects();
@@ -13,4 +14,5 @@ public class EffectDictShip : EffectDict
     {
         return base.GetUpdateEffects();
     }
+    */
 }

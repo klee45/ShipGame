@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitBonusHullDamage : ProjectileEffect, ProjectileEffect.IOnHitEffect, EffectDict.IEffectAdds<ProjectileEffect.IOnHitEffect>
+public class HitBonusHullDamage : ProjectileEffect, ProjectileEffect.IOnHitEffect
 {
     [SerializeField]
     private int bonusDamage;

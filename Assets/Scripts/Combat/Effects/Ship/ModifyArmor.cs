@@ -5,9 +5,7 @@ using UnityEngine;
 public class ModifyArmor :
     ShipEffect,
     EntityEffect.IGeneralEffect,
-    EntityEffect.ITickEffect,
-    EffectDict.IEffectUpdates<EntityEffect.IGeneralEffect>,
-    EffectDict.IEffectUpdates<EntityEffect.ITickEffect>
+    EntityEffect.ITickEffect
 {
     [SerializeField]
     private int bonus;

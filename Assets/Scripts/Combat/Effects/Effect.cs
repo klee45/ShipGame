@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
@@ -50,12 +51,6 @@ public abstract class Effect : MonoBehaviour, Effect.IEffect
         Tag[] GetTags();
     }
 
-    public interface IGeneralEffectBase<U> : IEffect where U : Entity
-    {
-        void Apply(U e);
-        void Cleanup(U e);
-    }
-
     public int GetPriority() { return priority; }
 
     public abstract string GetName();
@@ -80,10 +75,12 @@ public abstract class EntityEffect : Effect
         void FixedTick(float timeScale);
     }
 
-    public interface IGeneralEffect : IGeneralEffectBase<Entity>
+    public interface IGeneralEffect : IEffect
     {
+        /*
         void Apply(Entity e);
         void Cleanup(Entity e);
+        */
     }
 
     public interface IMovementEffect : IEffect

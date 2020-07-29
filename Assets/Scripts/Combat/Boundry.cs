@@ -72,10 +72,7 @@ public class Boundry : Singleton<Boundry>
         outOfBounds.Remove(e);
     }
 
-    public class BoundryForce : AForce,
-        EntityEffect.ITickEffect,
-        EffectDict.IEffectUpdates<EntityEffect.IMovementEffect>,
-        EffectDict.IEffectUpdates<EntityEffect.ITickEffect>
+    public class BoundryForce : AForce, EntityEffect.ITickEffect
     {
         private static float scale = 3f;
 
@@ -101,15 +98,34 @@ public class Boundry : Singleton<Boundry>
             return "Boundry Force";
         }
 
-        public override void AddTo(EffectDict dict)
-        {
-            dict.tickEffects.AddUpdate(this);
-            dict.movementEffects.AddUpdate(this);
-        }
-
         public override Tag[] GetTags()
         {
             return TagHelper.empty;
+        }
+
+        public override void AddTo(EffectDict dict)
+        {
+            dict.tickEffects.Add(this, () => new BoundryTickEffectCase(EffectDict.EffectCaseType.Multiple));
+            dict.movementEffects.Add(this, () => new BoundryMovementEffectCase(EffectDict.EffectCaseType.Multiple));
+        }
+
+        public class BoundryTickEffectCase : EffectDict.ATickEffectCase<BoundryForce>
+        {
+            public BoundryTickEffectCase(EffectDict.EffectCaseType type) : base(type)
+            {
+            }
+        }
+
+        public class BoundryMovementEffectCase : EffectDict.AMovementEffectCase<BoundryForce>
+        {
+            public BoundryMovementEffectCase(EffectDict.EffectCaseType type) : base(type)
+            {
+            }
+
+            public override Vector3 GetMovement(float deltaTime)
+            {
+                throw new System.NotImplementedException();
+            }
         }
 
         public ITickEffect UpdateEffect(ITickEffect effect, out bool didReplace)

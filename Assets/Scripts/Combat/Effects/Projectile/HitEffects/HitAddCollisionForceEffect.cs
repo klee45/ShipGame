@@ -4,8 +4,7 @@ using UnityEngine;
 
 public class HitAddCollisionForceEffect :
     ProjectileEffect,
-    ProjectileEffect.IOnHitEffect,
-    EffectDict.IEffectAdds<ProjectileEffect.IOnHitEffect>
+    ProjectileEffect.IOnHitEffect
 {
     [SerializeField]
     private float duration;

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FixedLifespan : ProjectileEffect, EntityEffect.ITickEffect, EffectDict.IEffectUpdates<EntityEffect.ITickEffect>
+public class FixedLifespan : ProjectileEffect, EntityEffect.ITickEffect
 {
     [SerializeField]
     private float duration;
@@ -18,7 +18,14 @@ public class FixedLifespan : ProjectileEffect, EntityEffect.ITickEffect, EffectD
 
     public override void AddTo(EffectDictProjectile dict)
     {
-        dict.tickEffects.AddUpdate(this);
+        dict.tickEffects.Add(this, () => new FixedLifespanEffectCase(EffectDict.EffectCaseType.SingleReplace));
+    }
+
+    private class FixedLifespanEffectCase : EffectDict.TickEffectCase<FixedLifespan>
+    {
+        public FixedLifespanEffectCase(EffectDict.EffectCaseType type) : base(type)
+        {
+        }
     }
 
     public virtual IEffect UpdateEffect(IEffect effect, out bool didReplace)

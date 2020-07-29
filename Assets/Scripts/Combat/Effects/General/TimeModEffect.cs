@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class TimeModEffect :
     EntityEffect,
-    EntityEffect.IGeneralEffect,
-    EffectDict.IEffectAdds<EntityEffect.IGeneralEffect>
-{
+    EntityEffect.IGeneralEffect
+{ 
     [SerializeField]
     private int bonus;
     [SerializeField]
@@ -20,7 +19,7 @@ public class TimeModEffect :
 
     public override void AddTo(EffectDict dict)
     {
-        dict.generalEffects.AddUpdate(this);
+        dict.generalEffects.Add(this, () => new TimeModeEffectCase(dict.GetEntity(), EffectDict.EffectCaseType.Multiple));
     }
 
     public override string GetName()
@@ -34,6 +33,7 @@ public class TimeModEffect :
         return tags;
     }
 
+    /*
     public void Apply(Entity e)
     {
         //Debug.Log("Timescale apply");
@@ -46,7 +46,36 @@ public class TimeModEffect :
     {
         e.GetTimeScale().MultUndo(1f / (1 + bonus / 100f));
     }
+    */
 
+    private class TimeModeEffectCase : EffectDict.AGeneralEffectCase<TimeModEffect>
+    {
+        public TimeModeEffectCase(Entity e, EffectDict.EffectCaseType type) : base(e, type)
+        {
+        }
+
+        public override void Apply(Entity entity)
+        {
+            int totalBonus = 0;
+            foreach (TimeModEffect t in effectsList.GetAll())
+            {
+                totalBonus = Mathf.Max(totalBonus, Mathf.Min(totalBonus + t.bonus, t.limit));
+            }
+            entity.GetTimeScale().Mult(totalBonus);
+        }
+
+        public override void Cleanup(Entity entity)
+        {
+            int totalBonus = 0;
+            foreach (TimeModEffect t in effectsList.GetAll())
+            {
+                totalBonus = Mathf.Max(totalBonus, Mathf.Min(totalBonus + t.bonus, t.limit));
+            }
+            entity.GetTimeScale().MultUndo(1f / totalBonus);
+        }
+    }
+
+    /*
     public IGeneralEffect UpdateEffect(IGeneralEffect effect, out bool didReplace)
     {
         if (effect is TimeModEffect t)
@@ -63,4 +92,5 @@ public class TimeModEffect :
         didReplace = false;
         return effect;
     }
+    */
 }

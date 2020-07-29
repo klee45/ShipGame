@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Burn : ShipEffect, EntityEffect.ITickEffect, EffectDict.IEffectAdds<EntityEffect.ITickEffect>
+public class Burn : ShipEffect, EntityEffect.ITickEffect
 {
     [SerializeField]
     private int damage;

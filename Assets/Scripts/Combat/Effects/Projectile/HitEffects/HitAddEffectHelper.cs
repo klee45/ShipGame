@@ -4,8 +4,7 @@ using UnityEngine;
 
 public abstract class HitAddEffectHelper<T, U> :
     ProjectileEffect,
-    ProjectileEffect.IOnHitEffect,
-    EffectDict.IEffectAdds<ProjectileEffect.IOnHitEffect>
+    ProjectileEffect.IOnHitEffect
     where T : EffectTemplate<U>
     where U : Effect
 {

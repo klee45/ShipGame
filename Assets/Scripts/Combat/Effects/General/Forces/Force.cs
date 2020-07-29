@@ -3,9 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Force : AForce, 
-    EntityEffect.ITickEffect,
-    EffectDict.IEffectAdds<EntityEffect.IMovementEffect>,
-    EffectDict.IEffectAdds<EntityEffect.ITickEffect>
+    EntityEffect.ITickEffect
 {
     [SerializeField]
     private float maxDuration;

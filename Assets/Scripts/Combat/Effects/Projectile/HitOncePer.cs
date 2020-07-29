@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitOncePer : ProjectileEffect, ProjectileEffect.IOnHitEffect, EffectDict.IEffectAdds<ProjectileEffect.IOnHitEffect>
+public class HitOncePer : ProjectileEffect, ProjectileEffect.IOnHitEffect
 {
     [SerializeField]
     private int damage;
