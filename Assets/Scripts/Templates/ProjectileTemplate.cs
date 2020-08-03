@@ -57,7 +57,7 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
     {
         float duration = movementStats.GetVelocity().GetDuration(remainingRange);
         Projectile projectile = base.Create(obj);
-        projectile.Setup(remainingRange, duration, immuneTags);
+        projectile.Setup(team, remainingRange, duration, immuneTags);
         foreach (ProjectileEffectTemplate effect in projectileEffects)
         {
             ProjectileEffect e = effect.Create(projectile.gameObject);
@@ -123,7 +123,7 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
             case ProjectileLayerType.AFFECTS_ENEMY_ALL:
                 needsRigidbody = true;
                 int[] a = Layers.GetProjectileHitShipLayerFromTeam(team);
-                int[] b = Layers.GetProjectileHitShipLayerFromTeam(team);
+                int[] b = Layers.GetProjectileHitProjectileLayerFromTeam(team);
                 return a.Concat(b).ToArray();
 
             case ProjectileLayerType.AFFECTS_ALLIED_PROJECTILES:

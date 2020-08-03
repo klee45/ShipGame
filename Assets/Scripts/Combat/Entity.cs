@@ -63,10 +63,17 @@ public abstract class Entity : MonoBehaviour
 
     protected virtual void Start()
     {
+        SetupColor();
+    }
+
+    protected void SetupColor()
+    {
         foreach (CanColorize canColorize in GetComponentsInChildren<CanColorize>())
         {
             canColorize.GetComponent<SpriteRenderer>().color = Layers.GetColorFromTeam(team);
         }
+        //Debug.Log("Setup color");
+        //Debug.Log(Layers.GetColorFromTeam(team));
     }
 
     public Team GetTeam()

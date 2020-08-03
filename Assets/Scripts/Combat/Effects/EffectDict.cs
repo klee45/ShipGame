@@ -45,7 +45,7 @@ public abstract class EffectDict : MonoBehaviour
 
     private void InvokeChange()
     {
-        Debug.Log("Invoke change");
+        //Debug.Log("Invoke change");
         OnChange?.Invoke();
     }
 
@@ -104,7 +104,7 @@ public abstract class EffectDict : MonoBehaviour
         event EffectCaseFinishedEvent OnEffectCaseFinished;
         event EffectCaseChanged OnEffectCaseChange;
         event PriorityChangeEvent OnPriorityChange;
-        void Update<V>(V effect) where V : Effect;
+        bool Update<V>(V effect) where V : Effect;
         string GetName();
     }
 
@@ -188,14 +188,18 @@ public abstract class EffectDict : MonoBehaviour
         public abstract void Apply(Entity entity);
         public abstract void Cleanup(Entity entity);
 
-        public override void Update<V>(V effect)
+        public override bool Update<V>(V effect)
         {
             if (effectsList.IsNotEmpty())
             {
                 Cleanup(affectedEntity);
             }
-            base.Update(effect);
-            Apply(affectedEntity);
+            if (base.Update(effect))
+            {
+                Apply(affectedEntity);
+                return true;
+            }
+            return false;
         }
 
         protected override void Remove<V>(V effect)
@@ -524,16 +528,17 @@ public abstract class EffectDict : MonoBehaviour
         }
 
         // Returns true if the priority is different
-        public virtual void Update<V>(V effect) where V : Effect
+        public virtual bool Update<V>(V effect) where V : Effect
         {
             if (effect is W e)
             {
                 if (effectsList.Update(effect))
                 {
-                    OnEffectCaseChange?.Invoke();
                     effect.OnDestroyEvent += (_) => Remove(e);
+                    return true;
                 }
             }
+            return false;
         }
 
         protected virtual void Remove<V>(V effect) where V : Effect, U
@@ -590,7 +595,10 @@ public abstract class EffectDict : MonoBehaviour
                 System.Type type = effect.GetType();
                 if (dict.TryGetValue(type, out W val))
                 {
-                    val.Update(effect);
+                    if (val.Update(effect))
+                    {
+                        parent.InvokeChange();
+                    }
                 }
                 else
                 {
@@ -605,6 +613,7 @@ public abstract class EffectDict : MonoBehaviour
                         lst.Remove(newCase);
                     };
                     ListInsert(newCase, lst);
+                    parent.InvokeChange();
                 }
             }
         }

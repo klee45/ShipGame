@@ -27,12 +27,14 @@ public class Projectile : Entity
         DoFixedTickEffects(projectileEffects);
     }
 
-    public void Setup(float range, float duration, EffectTag[] immuneTags)
+    public void Setup(Team team, float range, float duration, EffectTag[] immuneTags)
     {
+        this.team = team;
         this.range = range;
         this.duration = duration;
         this.projectileEffects.SetImmuneTags(immuneTags);
         SetupLifespan();
+        SetupColor();
     }
 
     public override EffectDict GetGeneralEffectDict()
