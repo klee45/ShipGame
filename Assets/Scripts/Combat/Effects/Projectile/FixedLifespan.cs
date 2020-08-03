@@ -18,7 +18,7 @@ public class FixedLifespan : ProjectileEffect, EntityEffect.ITickEffect
 
     public override void AddTo(EffectDictProjectile dict)
     {
-        dict.tickEffects.Add(this, () => new EffectDictProjectile.TickEffectCase<FixedLifespan>(new EffectDict.EffectSingleReplace<EntityEffect.ITickEffect, FixedLifespan>()));
+        dict.tickEffects.Add(this, () => new EffectDictProjectile.TickEffectCase<FixedLifespan>(true, new EffectDict.EffectSingleReplace<EntityEffect.ITickEffect, FixedLifespan>()));
     }
 
     public virtual IEffect UpdateEffect(IEffect effect, out bool didReplace)

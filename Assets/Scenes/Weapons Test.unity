@@ -4615,12 +4615,12 @@ PrefabInstance:
     - target: {fileID: 2966730610005057949, guid: f59f26dc13f6e0c4ea23b7e56be0c7d0,
         type: 3}
       propertyPath: timeScaleBonus
-      value: -10
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 2966730610005057949, guid: f59f26dc13f6e0c4ea23b7e56be0c7d0,
         type: 3}
       propertyPath: limit
-      value: -20
+      value: 50
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f59f26dc13f6e0c4ea23b7e56be0c7d0, type: 3}

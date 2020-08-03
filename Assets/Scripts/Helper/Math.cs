@@ -6,6 +6,46 @@ public static class Math
 {
     // --------- Effects
 
+    public interface IStackableBonus
+    {
+        int GetBonus();
+        int GetLimit();
+    }
+
+    public static float GetStackableBonusModInverse(IEnumerable<IStackableBonus> lst)
+    {
+        return 1f / GetStackableBonusMod(lst);
+    }
+
+    public static float GetStackableBonusMod(IEnumerable<IStackableBonus> lst)
+    {
+        int mod = 0;
+        foreach (IStackableBonus effect in lst)
+        {
+            Math.EffectLimit(ref mod, effect.GetBonus(), effect.GetLimit());
+        }
+        return 1 + (mod / 100f);
+    }
+
+    public static void EffectLimit(ref int val, int bonus, int max)
+    {
+        if (bonus > 0)
+        {
+            if (val < max)
+            {
+                val = Mathf.Min(val + bonus, max);
+            }
+        }
+        else // Negative val (with negative max)
+        {
+            if (val > max)
+            {
+                val = Mathf.Max(val + bonus, max);
+            }
+        }
+    }
+
+    /**
     public static int MaxBonus(int initial, int bonus, int initialMax, int bonusMax)
     {
         int sum = initial + bonus;
@@ -31,6 +71,7 @@ public static class Math
             return initial;
         }
     }
+    **/
 
     // --------- Math
 

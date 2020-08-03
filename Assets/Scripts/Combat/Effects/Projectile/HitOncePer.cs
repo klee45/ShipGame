@@ -14,7 +14,7 @@ public class HitOncePer : ProjectileEffect, ProjectileEffect.IOnHitEffect
 
     public override void AddTo(EffectDictProjectile dict)
     {
-        dict.onHits.Add(this, () => new EffectDictProjectile.OnHitEffectCase<HitOncePer>(new EffectDict.EffectList<IOnHitEffect, HitOncePer>()));
+        dict.onHits.Add(this, () => new EffectDictProjectile.OnHitEffectCase<HitOncePer>(true, new EffectDict.EffectList<IOnHitEffect, HitOncePer>()));
     }
 
     public void OnHit(Collider2D collision, Collider2D collidee)

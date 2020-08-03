@@ -27,8 +27,8 @@ public class Force : AForce,
 
     public override void AddTo(EffectDict dict)
     {
-        dict.movementEffects.Add(this, () => new EffectDict.MovementEffectCase<Force>(new EffectDict.EffectList<IMovementEffect, Force>()));
-        dict.tickEffects.Add(this, () => new EffectDict.TickEffectCase<Force>(new EffectDict.EffectList<ITickEffect, Force>()));
+        dict.movementEffects.Add(this, () => new EffectDict.MovementEffectCase<Force>(true, new EffectDict.EffectList<IMovementEffect, Force>()));
+        dict.tickEffects.Add(this, () => new EffectDict.TickEffectCase<Force>(false, new EffectDict.EffectList<ITickEffect, Force>()));
     }
 
     public override string GetName()

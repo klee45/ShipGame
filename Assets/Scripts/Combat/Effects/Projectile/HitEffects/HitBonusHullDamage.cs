@@ -20,7 +20,7 @@ public class HitBonusHullDamage : ProjectileEffect, ProjectileEffect.IOnHitEffec
 
     public override void AddTo(EffectDictProjectile dict)
     {
-        dict.onHits.Add(this, () => new EffectDictProjectile.OnHitEffectCase<HitBonusHullDamage>(new EffectDict.EffectList<IOnHitEffect, HitBonusHullDamage>()));
+        dict.onHits.Add(this, () => new EffectDictProjectile.OnHitEffectCase<HitBonusHullDamage>(true, new EffectDict.EffectList<IOnHitEffect, HitBonusHullDamage>()));
     }
 
     public override string GetName()

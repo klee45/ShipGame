@@ -105,13 +105,13 @@ public class Boundry : Singleton<Boundry>
 
         public override void AddTo(EffectDict dict)
         {
-            dict.tickEffects.Add(this, () => new EffectDict.TickEffectCase<BoundryForce>(new EffectDict.EffectSingleKeep<ITickEffect, BoundryForce>()));
-            dict.movementEffects.Add(this, () => new BoundryMovementEffectCase(new EffectDict.EffectSingleKeep<IMovementEffect, BoundryForce>()));
+            dict.tickEffects.Add(this, () => new EffectDict.TickEffectCase<BoundryForce>(true, new EffectDict.EffectSingleKeep<ITickEffect, BoundryForce>()));
+            dict.movementEffects.Add(this, () => new BoundryMovementEffectCase(false, new EffectDict.EffectSingleKeep<IMovementEffect, BoundryForce>()));
         }
 
         public class BoundryMovementEffectCase : EffectDict.MovementEffectCase<BoundryForce>
         {
-            public BoundryMovementEffectCase(EffectDict.IEffectList<IMovementEffect, BoundryForce> effectsList) : base(effectsList)
+            public BoundryMovementEffectCase(bool isVisible, EffectDict.IEffectList<IMovementEffect, BoundryForce> effectsList) : base(isVisible, effectsList)
             {
             }
 

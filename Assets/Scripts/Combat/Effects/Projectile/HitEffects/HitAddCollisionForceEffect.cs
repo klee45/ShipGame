@@ -24,7 +24,7 @@ public class HitAddCollisionForceEffect :
 
     public override void AddTo(EffectDictProjectile dict)
     {
-        dict.onHits.Add(this, () => new EffectDictProjectile.OnHitEffectCase<HitAddCollisionForceEffect>(new EffectDict.EffectList<IOnHitEffect, HitAddCollisionForceEffect>()));
+        dict.onHits.Add(this, () => new EffectDictProjectile.OnHitEffectCase<HitAddCollisionForceEffect>(true, new EffectDict.EffectList<IOnHitEffect, HitAddCollisionForceEffect>()));
     }
 
     public override EffectTag[] GetTags()

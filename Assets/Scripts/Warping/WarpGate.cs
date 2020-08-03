@@ -65,7 +65,7 @@ public class WarpGate : MonoBehaviour
 
         public override void AddTo(EffectDictShip dict)
         {
-            dict.tickEffects.Add(this, () => new EffectDict.TickEffectCase<WarpEffect>(new EffectDict.EffectSingleKeep<EntityEffect.ITickEffect, WarpEffect>()));
+            dict.tickEffects.Add(this, () => new EffectDict.TickEffectCase<WarpEffect>(true, new EffectDict.EffectSingleKeep<EntityEffect.ITickEffect, WarpEffect>()));
         }
 
         public override string GetName()

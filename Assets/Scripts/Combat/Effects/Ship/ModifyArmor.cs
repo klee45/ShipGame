@@ -5,12 +5,13 @@ using UnityEngine;
 public class ModifyArmor :
     ShipEffect,
     EntityEffect.IGeneralEffect,
-    EntityEffect.ITickEffect
+    EntityEffect.ITickEffect,
+    Math.IStackableBonus
 {
     [SerializeField]
     private int bonus;
     [SerializeField]
-    private int max;
+    private int limit;
     [SerializeField]
     private float duration;
 
@@ -19,7 +20,7 @@ public class ModifyArmor :
     public void Setup(int bonus, int max, float duration)
     {
         this.bonus = bonus;
-        this.max = max;
+        this.limit = max;
         timer = gameObject.AddComponent<Timer>();
         timer.Initialize(duration);
         timer.OnComplete += () =>
@@ -32,40 +33,50 @@ public class ModifyArmor :
 
     public override void AddTo(EffectDictShip dict)
     {
-        dict.generalEffects.Add(this, () => new ModifyArmorGeneralEffectCase(dict.GetEntity(), new EffectDict.EffectList<EntityEffect.IGeneralEffect, ModifyArmor>()));
-        dict.tickEffects.Add(this, () => new EffectDict.TickEffectCase<ModifyArmor>(new EffectDict.EffectList<EntityEffect.ITickEffect, ModifyArmor>()));
+        dict.generalEffects.Add(this, () => new ModifyArmorGeneralEffectCase(true, dict.GetEntity(), new EffectDict.EffectList<EntityEffect.IGeneralEffect, ModifyArmor>()));
+        dict.tickEffects.Add(this, () => new EffectDict.TickEffectCase<ModifyArmor>(false, new EffectDict.EffectList<EntityEffect.ITickEffect, ModifyArmor>()));
     }
 
     private class ModifyArmorGeneralEffectCase : EffectDict.AGeneralEffectCase<ModifyArmor>
     {
-        public ModifyArmorGeneralEffectCase(Entity affectedEntity, EffectDict.IEffectList<EntityEffect.IGeneralEffect, ModifyArmor> effectsList) : base(affectedEntity, effectsList)
+        private float mod = 0;
+
+        public ModifyArmorGeneralEffectCase(bool isVisible, Entity affectedEntity, EffectDict.IEffectList<EntityEffect.IGeneralEffect, ModifyArmor> effectsList) : base(isVisible, affectedEntity, effectsList)
         {
+        }
+
+        public override string GetName()
+        {
+            return string.Format("Modify armor {0}%", (mod - 1) * 100);
         }
 
         public override void Apply(Entity entity)
         {
-            int mod = 0;
-            foreach (ModifyArmor effect in effectsList.GetAll())
+            if (entity is Ship s)
             {
-                mod += effect.bonus;
+                s.GetCombatStats().GetArmorMult().Mult(Math.GetStackableBonusMod(effectsList.GetAll()));
             }
         }
 
         public override void Cleanup(Entity entity)
         {
-            throw new System.NotImplementedException();
+            if (entity is Ship s)
+            {
+                s.GetCombatStats().GetArmorMult().MultUndo(Math.GetStackableBonusModInverse(effectsList.GetAll()));
+            }
         }
-    }
-
-    public void Apply(Entity e)
-    {
-        Debug.Log("Multiply by " + (1 + GetPercent()));
-        e.GetComponentInChildren<CombatStats>().GetArmorMult().Mult(1 + GetPercent());
     }
 
     public void Tick(float timeScale)
     {
         timer.Tick(TimeController.DeltaTime(timeScale));
+    }
+
+    /*
+    public void Apply(Entity e)
+    {
+        Debug.Log("Multiply by " + (1 + GetPercent()));
+        e.GetComponentInChildren<CombatStats>().GetArmorMult().Mult(1 + GetPercent());
     }
 
     public void Cleanup(Entity e)
@@ -84,54 +95,26 @@ public class ModifyArmor :
         this.duration = duration;
         this.timer.SetMaxTime(duration);
     }
-
-    public EntityEffect.ITickEffect UpdateEffect(EntityEffect.ITickEffect effect, out bool didReplace)
-    {
-        if (effect is ModifyArmor e)
-        {
-            if (this.duration > e.duration)
-            {
-                e.SetDuration(this.duration);
-            }
-            e.timer.SetTime(0);
-        }
-        didReplace = false;
-        return effect;
-    }
-
-    public EntityEffect.IGeneralEffect UpdateEffect(EntityEffect.IGeneralEffect effect, out bool didReplace)
-    {
-        Debug.Log("Update4 effect");
-        if (effect is ModifyArmor e)
-        {
-            e.bonus = Math.MaxBonus(e.bonus, this.bonus, e.max, this.max);
-            /*
-            int sum = e.bonus + this.bonus;
-            if (this.max > e.max)
-            {
-                e.bonus = Mathf.Min(this.max, sum);
-            }
-            else
-            {
-                if (e.bonus < this.max)
-                {
-                    e.bonus = Mathf.Min(this.max, sum);
-                }
-            }
-            */
-        }
-        didReplace = false;
-        return effect;
-    }
+    */
 
     public override string GetName()
     {
-        return string.Format("Modify armor {0}%", bonus);
+        return "Modify Armor";
     }
 
     private static readonly EffectTag[] tags = new EffectTag[] { EffectTag.SHRED, EffectTag.SHRED_HULL };
     public override EffectTag[] GetTags()
     {
         return tags;
+    }
+
+    public int GetBonus()
+    {
+        return bonus;
+    }
+
+    public int GetLimit()
+    {
+        return limit;
     }
 }

@@ -27,24 +27,31 @@ public class Burn : ShipEffect, EntityEffect.ITickEffect
 
     public override void AddTo(EffectDictShip dict)
     {
-        dict.tickEffects.Add(this, () => new BurnEffectCase(new EffectDict.EffectList<EntityEffect.ITickEffect, Burn>()));
+        dict.tickEffects.Add(this, () => new BurnEffectCase(true, new EffectDict.EffectList<EntityEffect.ITickEffect, Burn>()));
     }
 
     private class BurnEffectCase : EffectDictProjectile.TickEffectCase<Burn>
     {
-        public BurnEffectCase(EffectDict.IEffectList<EntityEffect.ITickEffect, Burn> effectsList) : base(effectsList)
+        public BurnEffectCase(bool isVisible, EffectDict.IEffectList<EntityEffect.ITickEffect, Burn> effectsList) : base(isVisible, effectsList)
         {
         }
 
-        public override void Update<V>(V effect)
+        public override string GetName()
         {
-            base.Update(effect);
+            int soFar = 0;
+            int total = 0;
+            foreach (Burn b in effectsList.GetAll())
+            {
+                soFar += b.damageSoFar;
+                total += b.damage;
+            }
+            return string.Format("Burn {0} / {1}", total - soFar, total);
         }
     }
 
     public override string GetName()
     {
-        return string.Format("Burn ({0})", damage);
+        return "Burn";
     }
 
     private static EffectTag[] tags = new EffectTag[] { EffectTag.DAMAGE };

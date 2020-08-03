@@ -27,8 +27,8 @@ public class ChangeTimeScaleOnHit :
 
     public override void AddTo(EffectDictProjectile dict)
     {
-        dict.onHits.Add(this, () => new EffectDictProjectile.OnHitEffectCase<ChangeTimeScaleOnHit>(new EffectDict.EffectSingleKeep<IOnHitEffect, ChangeTimeScaleOnHit>()));
-        dict.onExits.Add(this, () => new EffectDictProjectile.OnExitEffectCase<ChangeTimeScaleOnHit>(new EffectDict.EffectSingleKeep<IOnExitEffect, ChangeTimeScaleOnHit>()));
+        dict.onHits.Add(this, () => new EffectDictProjectile.OnHitEffectCase<ChangeTimeScaleOnHit>(true, new EffectDict.EffectSingleKeep<IOnHitEffect, ChangeTimeScaleOnHit>()));
+        dict.onExits.Add(this, () => new EffectDictProjectile.OnExitEffectCase<ChangeTimeScaleOnHit>(false, new EffectDict.EffectSingleKeep<IOnExitEffect, ChangeTimeScaleOnHit>()));
     }
 
     public override string GetName()

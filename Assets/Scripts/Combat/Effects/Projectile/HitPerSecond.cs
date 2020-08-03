@@ -28,8 +28,8 @@ public class HitPerSecond : ProjectileEffect,
 
     public override void AddTo(EffectDictProjectile dict)
     {
-        dict.onStays.Add(this, () => new EffectDictProjectile.OnHitStayEffectCase<HitPerSecond>(new EffectDict.EffectList<IOnHitStayEffect, HitPerSecond>()));
-        dict.fixedTickEffects.Add(this, () => new EffectDict.FixedTickEffectCase<HitPerSecond>(new EffectDict.EffectList<EntityEffect.IFixedTickEffect, HitPerSecond>()));
+        dict.onStays.Add(this, () => new EffectDictProjectile.OnHitStayEffectCase<HitPerSecond>(true, new EffectDict.EffectList<IOnHitStayEffect, HitPerSecond>()));
+        dict.fixedTickEffects.Add(this, () => new EffectDict.FixedTickEffectCase<HitPerSecond>(false, new EffectDict.EffectList<EntityEffect.IFixedTickEffect, HitPerSecond>()));
     }
 
     public void Setup(int damage, float duration, bool destroyOnEnd)

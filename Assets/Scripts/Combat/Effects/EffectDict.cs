@@ -45,6 +45,7 @@ public abstract class EffectDict : MonoBehaviour
 
     private void InvokeChange()
     {
+        Debug.Log("Invoke change");
         OnChange?.Invoke();
     }
 
@@ -94,12 +95,14 @@ public abstract class EffectDict : MonoBehaviour
     }
     */
 
-    public delegate void PriorityChangeEvent(int previous);
     public delegate void EffectCaseFinishedEvent();
+    public delegate void EffectCaseChanged();
+    public delegate void PriorityChangeEvent(int previous);
 
     public interface IEffectCase<out U> : IHasPriority where U : IEffect
     {
         event EffectCaseFinishedEvent OnEffectCaseFinished;
+        event EffectCaseChanged OnEffectCaseChange;
         event PriorityChangeEvent OnPriorityChange;
         void Update<V>(V effect) where V : Effect;
         string GetName();
@@ -112,7 +115,7 @@ public abstract class EffectDict : MonoBehaviour
     }
     public class FixedTickEffectCase<W> : AEffectCase<IFixedTickEffect, W>, IFixedTickEffectCase where W : Effect, IFixedTickEffect
     {
-        public FixedTickEffectCase(IEffectList<IFixedTickEffect, W> effectsList) : base(effectsList)
+        public FixedTickEffectCase(bool isVisible, IEffectList<IFixedTickEffect, W> effectsList) : base(isVisible, effectsList)
         {
         }
 
@@ -132,7 +135,7 @@ public abstract class EffectDict : MonoBehaviour
     }
     public class TickEffectCase<W> : AEffectCase<ITickEffect, W>, ITickEffectCase where W : Effect, ITickEffect
     {
-        public TickEffectCase(IEffectList<ITickEffect, W> effectsList) : base(effectsList)
+        public TickEffectCase(bool isVisible, IEffectList<ITickEffect, W> effectsList) : base(isVisible, effectsList)
         {
         }
 
@@ -152,7 +155,7 @@ public abstract class EffectDict : MonoBehaviour
     }
     public class MovementEffectCase<W> : AEffectCase<IMovementEffect, W>, IMovementEffectCase where W : Effect, IMovementEffect
     {
-        public MovementEffectCase(IEffectList<IMovementEffect, W> effectsList) : base(effectsList)
+        public MovementEffectCase(bool isVisible, IEffectList<IMovementEffect, W> effectsList) : base(isVisible, effectsList)
         {
         }
 
@@ -177,7 +180,7 @@ public abstract class EffectDict : MonoBehaviour
     {
         protected Entity affectedEntity;
 
-        protected AGeneralEffectCase(Entity affectedEntity, IEffectList<IGeneralEffect, W> effectsList) : base(effectsList)
+        protected AGeneralEffectCase(bool isVisible, Entity affectedEntity, IEffectList<IGeneralEffect, W> effectsList) : base(isVisible, effectsList)
         {
             this.affectedEntity = affectedEntity;
         }
@@ -239,38 +242,42 @@ public abstract class EffectDict : MonoBehaviour
         bool IsEmpty();
         bool IsNotEmpty();
         void Setup(AEffectCase<U, W> parent);
-        void Update<V>(V effect) where V : Effect;
-        void Remove<V>(V effect) where V : Effect;
+        bool Update<V>(V effect) where V : Effect;
+        bool Remove<V>(V effect) where V : Effect;
         int GetPriority();
     }
 
     public class EffectSingleReplace<U, W> : AEffectSingle<U, W> where U : IEffect where W : Effect, U
     {
-        public override void Update<V>(V effect)
+        public override bool Update<V>(V effect)
         {
             if (effect is W e)
             {
                 Destroy(this.effect);
                 this.effect = e;
+                return true;
             }
+            return false;
         }
     }
 
     public class EffectSingleKeep<U, W> : AEffectSingle<U, W> where U : IEffect where W : Effect, U
     {
-        public override void Update<V>(V effect)
+        public override bool Update<V>(V effect)
         {
             if (this.effect == null)
             {
                 if (effect is W e)
                 {
                     this.effect = e;
+                    return true;
                 }
             }
             else
             {
                 Destroy(effect);
             }
+            return false;
         }
     }
 
@@ -305,9 +312,9 @@ public abstract class EffectDict : MonoBehaviour
             return effect;
         }
 
-        public abstract void Update<V>(V effect) where V : Effect;
+        public abstract bool Update<V>(V effect) where V : Effect;
 
-        public void Remove<V>(V effect) where V : Effect
+        public bool Remove<V>(V effect) where V : Effect
         {
             if (effect is W e)
             {
@@ -315,7 +322,9 @@ public abstract class EffectDict : MonoBehaviour
                 {
                     parent.EffectCaseFinishedInvoke();
                 }
+                return true;
             }
+            return false;
         }
 
         public int Count()
@@ -384,20 +393,21 @@ public abstract class EffectDict : MonoBehaviour
             return effects.Last();
         }
 
-        public void Update<V>(V effect) where V : Effect
+        public bool Update<V>(V effect) where V : Effect
         {
             if (effect is W e)
             {
                 int pos = ListInsert(e, effects);
-                effect.OnDestroyEvent += (_) => effects.Remove(e);
                 if (pos == 0)
                 {
                     priority = e.GetPriority();
                 }
+                return true;
             }
+            return false;
         }
 
-        public void Remove<V>(V effect) where V : Effect
+        public bool Remove<V>(V effect) where V : Effect
         {
             if (effect is W e)
             {
@@ -409,6 +419,7 @@ public abstract class EffectDict : MonoBehaviour
                 catch (System.Exception err)
                 {
                     Debug.LogError("Tried to remove effect from effectlist but it didn't exist\n" + err, effect);
+                    return false;
                 }
 
                 if (effects.Count > 0)
@@ -422,7 +433,9 @@ public abstract class EffectDict : MonoBehaviour
                 {
                     parent.EffectCaseFinishedInvoke();
                 }
+                return true;
             }
+            return false;
         }
 
         /*
@@ -465,13 +478,17 @@ public abstract class EffectDict : MonoBehaviour
     public abstract class AEffectCase<U, W> : IEffectCase<U> where U : IEffect where W : Effect, U
     {
         protected readonly IEffectList<U, W> effectsList;
+        public readonly bool isVisible;
 
         public event PriorityChangeEvent OnPriorityChange;
         public event EffectCaseFinishedEvent OnEffectCaseFinished;
+        public event EffectCaseChanged OnEffectCaseChange;
 
-        public AEffectCase(IEffectList<U, W> effectsList)
+        public AEffectCase(bool isVisible, IEffectList<U, W> effectsList)
         {
+            this.isVisible = isVisible;
             this.effectsList = effectsList;
+            this.effectsList.Setup(this);
             /*
             switch(type)
             {
@@ -509,12 +526,22 @@ public abstract class EffectDict : MonoBehaviour
         // Returns true if the priority is different
         public virtual void Update<V>(V effect) where V : Effect
         {
-            effectsList.Update(effect);
+            if (effect is W e)
+            {
+                if (effectsList.Update(effect))
+                {
+                    OnEffectCaseChange?.Invoke();
+                    effect.OnDestroyEvent += (_) => Remove(e);
+                }
+            }
         }
 
         protected virtual void Remove<V>(V effect) where V : Effect, U
         {
-            effectsList.Remove(effect);
+            if (effectsList.Remove(effect))
+            {
+                OnEffectCaseChange?.Invoke();
+            }
         }
 
         public virtual int GetPriority()
@@ -568,10 +595,15 @@ public abstract class EffectDict : MonoBehaviour
                 else
                 {
                     W newCase = createNewCase();
+                    newCase.OnPriorityChange += (p) => TryResort(newCase, p);
+                    newCase.OnEffectCaseChange += () => parent.InvokeChange();
                     newCase.Update(effect);
                     dict.Add(type, newCase);
-                    newCase.OnEffectCaseFinished += () => lst.Remove(newCase);
-                    newCase.OnPriorityChange += (p) => TryResort(newCase, p);
+                    newCase.OnEffectCaseFinished += () =>
+                    {
+                        dict.Remove(type);
+                        lst.Remove(newCase);
+                    };
                     ListInsert(newCase, lst);
                 }
             }

@@ -6,7 +6,7 @@ public class HitAddEntityEffect : HitAddEffectHelper<EntityEffectTemplate, Entit
 {
     public override void AddTo(EffectDictProjectile dict)
     {
-        dict.onHits.Add(this, () => new EffectDictProjectile.OnHitEffectCase<HitAddEntityEffect>(new EffectDict.EffectList<IOnHitEffect, HitAddEntityEffect>()));
+        dict.onHits.Add(this, () => new EffectDictProjectile.OnHitEffectCase<HitAddEntityEffect>(true, new EffectDict.EffectList<IOnHitEffect, HitAddEntityEffect>()));
     }
 
     public override string GetName()

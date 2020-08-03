@@ -21,12 +21,12 @@ public class HitOnce : ProjectileEffect, ProjectileEffect.IOnHitEffect
 
     public override void AddTo(EffectDictProjectile dict)
     {
-        dict.onHits.Add(this, () => new HitOnceEffectCase(new EffectDict.EffectList<IOnHitEffect, HitOnce>()));
+        dict.onHits.Add(this, () => new HitOnceEffectCase(true, new EffectDict.EffectList<IOnHitEffect, HitOnce>()));
     }
 
     private class HitOnceEffectCase : EffectDictProjectile.OnHitEffectCase<HitOnce>
     {
-        public HitOnceEffectCase(EffectDict.IEffectList<IOnHitEffect, HitOnce> effectsList) : base(effectsList)
+        public HitOnceEffectCase(bool isVisible, EffectDict.IEffectList<IOnHitEffect, HitOnce> effectsList) : base(isVisible, effectsList)
         {
         }
 

@@ -12,7 +12,7 @@ public class ForceEndless : AForce
 
     public override void AddTo(EffectDict dict)
     {
-        dict.movementEffects.Add(this, () => new EffectDict.MovementEffectCase<ForceEndless>(new EffectDict.EffectList<IMovementEffect, ForceEndless>()));
+        dict.movementEffects.Add(this, () => new EffectDict.MovementEffectCase<ForceEndless>(true, new EffectDict.EffectList<IMovementEffect, ForceEndless>()));
     }
 
     public override string GetName()

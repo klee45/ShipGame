@@ -33,7 +33,7 @@ public class EffectDictProjectile : EffectDict
     }
     public class OnHitEffectCase<W> : AEffectCase<IOnHitEffect, W>, IOnHitEffectCase where W : Effect, IOnHitEffect
     {
-        public OnHitEffectCase(IEffectList<IOnHitEffect, W> effectsList) : base(effectsList)
+        public OnHitEffectCase(bool isVisible, IEffectList<IOnHitEffect, W> effectsList) : base(isVisible, effectsList)
         {
         }
 
@@ -53,7 +53,7 @@ public class EffectDictProjectile : EffectDict
     }
     public class OnHitStayEffectCase<W> : AEffectCase<IOnHitStayEffect, W>, IOnHitStayEffectCase where W : Effect, IOnHitStayEffect
     {
-        public OnHitStayEffectCase(IEffectList<IOnHitStayEffect, W> effectsList) : base(effectsList)
+        public OnHitStayEffectCase(bool isVisible, IEffectList<IOnHitStayEffect, W> effectsList) : base(isVisible, effectsList)
         {
         }
 
@@ -73,7 +73,7 @@ public class EffectDictProjectile : EffectDict
     }
     public class OnExitEffectCase<W> : AEffectCase<IOnExitEffect, W>, IOnExitEffectCase where W : Effect, IOnExitEffect
     {
-        public OnExitEffectCase(IEffectList<IOnExitEffect, W> effectsList) : base(effectsList)
+        public OnExitEffectCase(bool isVisible, IEffectList<IOnExitEffect, W> effectsList) : base(isVisible, effectsList)
         {
         }
 

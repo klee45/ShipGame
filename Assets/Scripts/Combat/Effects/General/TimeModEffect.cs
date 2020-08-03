@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class TimeModEffect :
     EntityEffect,
-    EntityEffect.IGeneralEffect
+    EntityEffect.IGeneralEffect,
+    Math.IStackableBonus
 { 
     [SerializeField]
     private int bonus;
@@ -19,7 +20,7 @@ public class TimeModEffect :
 
     public override void AddTo(EffectDict dict)
     {
-        dict.generalEffects.Add(this, () => new TimeModeEffectCase(dict.GetEntity(), new EffectDict.EffectList<IGeneralEffect, TimeModEffect>()));
+        dict.generalEffects.Add(this, () => new TimeModeEffectCase(true, dict.GetEntity(), new EffectDict.EffectList<IGeneralEffect, TimeModEffect>()));
     }
 
     public override string GetName()
@@ -31,6 +32,16 @@ public class TimeModEffect :
     public override EffectTag[] GetTags()
     {
         return tags;
+    }
+
+    public int GetBonus()
+    {
+        return bonus;
+    }
+
+    public int GetLimit()
+    {
+        return limit;
     }
 
     /*
@@ -50,28 +61,20 @@ public class TimeModEffect :
 
     private class TimeModeEffectCase : EffectDict.AGeneralEffectCase<TimeModEffect>
     {
-        public TimeModeEffectCase(Entity affectedEntity, EffectDict.IEffectList<IGeneralEffect, TimeModEffect> effectsList) : base(affectedEntity, effectsList)
+        public TimeModeEffectCase(bool isVisible, Entity affectedEntity, EffectDict.IEffectList<IGeneralEffect, TimeModEffect> effectsList) : base(isVisible, affectedEntity, effectsList)
         {
         }
 
         public override void Apply(Entity entity)
         {
-            int totalBonus = 0;
-            foreach (TimeModEffect t in effectsList.GetAll())
-            {
-                totalBonus = Mathf.Max(totalBonus, Mathf.Min(totalBonus + t.bonus, t.limit));
-            }
-            entity.GetTimeScale().Mult(totalBonus);
+            //Debug.Log("Time mod - apply");
+            entity.GetTimeScale().Mult(Math.GetStackableBonusMod(effectsList.GetAll()));
         }
 
         public override void Cleanup(Entity entity)
         {
-            int totalBonus = 0;
-            foreach (TimeModEffect t in effectsList.GetAll())
-            {
-                totalBonus = Mathf.Max(totalBonus, Mathf.Min(totalBonus + t.bonus, t.limit));
-            }
-            entity.GetTimeScale().MultUndo(1f / totalBonus);
+            //Debug.Log("Time mod - cleanup");
+            entity.GetTimeScale().MultUndo(Math.GetStackableBonusModInverse(effectsList.GetAll()));
         }
     }
 

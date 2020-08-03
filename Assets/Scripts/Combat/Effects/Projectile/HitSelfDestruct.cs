@@ -11,12 +11,12 @@ public class HitSelfDestruct : ProjectileEffect, ProjectileEffect.IOnHitEffect
 
     public override void AddTo(EffectDictProjectile dict)
     {
-        dict.onHits.Add(this, () => new HitSelfDestructEffectCase(new EffectDict.EffectSingleKeep<IOnHitEffect, HitSelfDestruct>()));
+        dict.onHits.Add(this, () => new HitSelfDestructEffectCase(true, new EffectDict.EffectSingleKeep<IOnHitEffect, HitSelfDestruct>()));
     }
 
     private class HitSelfDestructEffectCase : EffectDictProjectile.OnHitEffectCase<HitSelfDestruct>
     {
-        public HitSelfDestructEffectCase(EffectDict.IEffectList<IOnHitEffect, HitSelfDestruct> effectsList) : base(effectsList)
+        public HitSelfDestructEffectCase(bool isVisible, EffectDict.IEffectList<IOnHitEffect, HitSelfDestruct> effectsList) : base(isVisible, effectsList)
         {
         }
 

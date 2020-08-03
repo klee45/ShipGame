@@ -6,7 +6,7 @@ public class HitAddShipEffect : HitAddEffectHelper<ShipEffectTemplate, ShipEffec
 {
     public override void AddTo(EffectDictProjectile dict)
     {
-        dict.onHits.Add(this, () => new EffectDictProjectile.OnHitEffectCase<HitAddShipEffect>(new EffectDict.EffectList<IOnHitEffect, HitAddShipEffect>()));
+        dict.onHits.Add(this, () => new EffectDictProjectile.OnHitEffectCase<HitAddShipEffect>(true, new EffectDict.EffectList<IOnHitEffect, HitAddShipEffect>()));
     }
 
     public override string GetName()
