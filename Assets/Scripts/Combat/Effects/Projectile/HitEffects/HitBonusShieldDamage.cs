@@ -17,7 +17,7 @@ public class HitBonusShieldDamage : ProjectileEffect, ProjectileEffect.IOnHitEff
 
     public override void AddTo(EffectDictProjectile dict)
     {
-        dict.onHits.Add(this);
+        dict.onHits.Add(this, () => new EffectDictProjectile.OnHitEffectCase<HitBonusShieldDamage>(new EffectDict.EffectList<IOnHitEffect, HitBonusShieldDamage>()));
     }
 
     public override string GetName()
@@ -25,8 +25,8 @@ public class HitBonusShieldDamage : ProjectileEffect, ProjectileEffect.IOnHitEff
         return string.Format("Bonus shield damage ({0}) effect", bonusDamage);
     }
 
-    private static Tag[] tags = new Tag[] { Tag.DAMAGE, Tag.SHIELD_DAMAGE };
-    public override Tag[] GetTags()
+    private static EffectTag[] tags = new EffectTag[] { EffectTag.DAMAGE, EffectTag.SHIELD_DAMAGE };
+    public override EffectTag[] GetTags()
     {
         return tags;
     }

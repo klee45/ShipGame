@@ -18,7 +18,7 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
     [SerializeField]
     private ProjectileLayerType layerType = ProjectileLayerType.AFFECTS_ENEMY_SHIPS;
     [SerializeField]
-    private Tag[] immuneTags;
+    private EffectTag[] immuneTags;
 
     private float remainingRange;
     private Team team;

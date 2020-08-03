@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class HitAddShipEffect : HitAddEffectHelper<ShipEffectTemplate, ShipEffect>
 {
+    public override void AddTo(EffectDictProjectile dict)
+    {
+        dict.onHits.Add(this, () => new EffectDictProjectile.OnHitEffectCase<HitAddShipEffect>(new EffectDict.EffectList<IOnHitEffect, HitAddShipEffect>()));
+    }
+
     public override string GetName()
     {
         return "Hit add ship effect " + template.name;

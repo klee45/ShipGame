@@ -27,7 +27,7 @@ public class Projectile : Entity
         DoFixedTickEffects(projectileEffects);
     }
 
-    public void Setup(float range, float duration, Tag[] immuneTags)
+    public void Setup(float range, float duration, EffectTag[] immuneTags)
     {
         this.range = range;
         this.duration = duration;
@@ -105,7 +105,7 @@ public class Projectile : Entity
 
     public void DoTriggerEnter2D(Collider2D collision, Collider2D collidee)
     {
-        foreach (var e in projectileEffects.onHits.GetAll())
+        foreach (EffectDictProjectile.IOnHitEffectCase e in projectileEffects.onHits.GetAll())
         {
             e.OnHit(collision, collidee);
         }
@@ -114,7 +114,7 @@ public class Projectile : Entity
 
     public void DoTriggerStay2D(Collider2D collision)
     {
-        foreach (var e in projectileEffects.onStays.GetAll())
+        foreach (EffectDictProjectile.IOnHitStayEffectCase e in projectileEffects.onStays.GetAll())
         {
             e.OnHitStay(collision);
         }
@@ -122,7 +122,7 @@ public class Projectile : Entity
 
     public void DoTriggerExit2D(Collider2D collision)
     {
-        foreach (var e in projectileEffects.onExits.GetAll())
+        foreach (EffectDictProjectile.IOnExitEffectCase e in projectileEffects.onExits.GetAll())
         {
             e.OnExit(collision);
         }

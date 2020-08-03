@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class HitAddEntityEffect : HitAddEffectHelper<EntityEffectTemplate, EntityEffect>
 {
+    public override void AddTo(EffectDictProjectile dict)
+    {
+        dict.onHits.Add(this, () => new EffectDictProjectile.OnHitEffectCase<HitAddEntityEffect>(new EffectDict.EffectList<IOnHitEffect, HitAddEntityEffect>()));
+    }
+
     public override string GetName()
     {
         return "Hit add entity effect " + template.name;

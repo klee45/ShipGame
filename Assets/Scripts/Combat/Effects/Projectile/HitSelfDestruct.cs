@@ -11,7 +11,19 @@ public class HitSelfDestruct : ProjectileEffect, ProjectileEffect.IOnHitEffect
 
     public override void AddTo(EffectDictProjectile dict)
     {
-        dict.onHits.AddUpdate(this);
+        dict.onHits.Add(this, () => new HitSelfDestructEffectCase(new EffectDict.EffectSingleKeep<IOnHitEffect, HitSelfDestruct>()));
+    }
+
+    private class HitSelfDestructEffectCase : EffectDictProjectile.OnHitEffectCase<HitSelfDestruct>
+    {
+        public HitSelfDestructEffectCase(EffectDict.IEffectList<IOnHitEffect, HitSelfDestruct> effectsList) : base(effectsList)
+        {
+        }
+
+        public override int GetPriority()
+        {
+            return Constants.Effects.LATE_PRIORITY;
+        }
     }
 
     public IOnHitEffect UpdateEffect(IOnHitEffect effect, out bool didReplace)
@@ -25,7 +37,7 @@ public class HitSelfDestruct : ProjectileEffect, ProjectileEffect.IOnHitEffect
         return "Self destruct on hit";
     }
     
-    public override Tag[] GetTags()
+    public override EffectTag[] GetTags()
     {
         return TagHelper.empty;
     }

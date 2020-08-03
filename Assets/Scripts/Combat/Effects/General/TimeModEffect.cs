@@ -19,7 +19,7 @@ public class TimeModEffect :
 
     public override void AddTo(EffectDict dict)
     {
-        dict.generalEffects.Add(this, () => new TimeModeEffectCase(dict.GetEntity(), EffectDict.EffectCaseType.Multiple));
+        dict.generalEffects.Add(this, () => new TimeModeEffectCase(dict.GetEntity(), new EffectDict.EffectList<IGeneralEffect, TimeModEffect>()));
     }
 
     public override string GetName()
@@ -27,8 +27,8 @@ public class TimeModEffect :
         return string.Format("Time mod effect {0:0.##}x", 1 + bonus / 100f);
     }
 
-    public static readonly Tag[] tags = new Tag[] { Tag.TIME };
-    public override Tag[] GetTags()
+    public static readonly EffectTag[] tags = new EffectTag[] { EffectTag.TIME };
+    public override EffectTag[] GetTags()
     {
         return tags;
     }
@@ -50,7 +50,7 @@ public class TimeModEffect :
 
     private class TimeModeEffectCase : EffectDict.AGeneralEffectCase<TimeModEffect>
     {
-        public TimeModeEffectCase(Entity e, EffectDict.EffectCaseType type) : base(e, type)
+        public TimeModeEffectCase(Entity affectedEntity, EffectDict.IEffectList<IGeneralEffect, TimeModEffect> effectsList) : base(affectedEntity, effectsList)
         {
         }
 

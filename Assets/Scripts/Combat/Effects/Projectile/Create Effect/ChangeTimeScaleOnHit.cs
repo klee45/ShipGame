@@ -27,8 +27,8 @@ public class ChangeTimeScaleOnHit :
 
     public override void AddTo(EffectDictProjectile dict)
     {
-        dict.onHits.Add(this);
-        dict.onExits.Add(this);
+        dict.onHits.Add(this, () => new EffectDictProjectile.OnHitEffectCase<ChangeTimeScaleOnHit>(new EffectDict.EffectSingleKeep<IOnHitEffect, ChangeTimeScaleOnHit>()));
+        dict.onExits.Add(this, () => new EffectDictProjectile.OnExitEffectCase<ChangeTimeScaleOnHit>(new EffectDict.EffectSingleKeep<IOnExitEffect, ChangeTimeScaleOnHit>()));
     }
 
     public override string GetName()
@@ -36,7 +36,7 @@ public class ChangeTimeScaleOnHit :
         return "Change timescale on hit";
     }
 
-    public override Tag[] GetTags()
+    public override EffectTag[] GetTags()
     {
         return TagHelper.empty;
     }

@@ -117,7 +117,7 @@ public abstract class Entity : MonoBehaviour
         bool atLeastOne = false;
         Vector3 translation = Vector3.zero;
         float time = TimeController.DeltaTime(timeScale);
-        foreach (IMovementEffect effect in dict.movementEffects.GetAll())
+        foreach (EffectDict.IMovementEffectCase effect in dict.movementEffects.GetAll())
         {
             translation += effect.GetMovement(time);
             atLeastOne = true;
@@ -130,7 +130,7 @@ public abstract class Entity : MonoBehaviour
 
     protected void DoTickEffects(EffectDict dict)
     {
-        foreach (ITickEffect effects in dict.tickEffects.GetAll())
+        foreach (EffectDict.ITickEffectCase effects in dict.tickEffects.GetAll())
         {
             effects.Tick(timeScale.GetValue());
         }
@@ -138,7 +138,7 @@ public abstract class Entity : MonoBehaviour
 
     protected void DoFixedTickEffects(EffectDict dict)
     {
-        foreach (IFixedTickEffect effects in dict.fixedTickEffects.GetAll())
+        foreach (EffectDict.IFixedTickEffectCase effects in dict.fixedTickEffects.GetAll())
         {
             effects.FixedTick(timeScale.GetValue());
         }

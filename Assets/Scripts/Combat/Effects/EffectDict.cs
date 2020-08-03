@@ -9,7 +9,7 @@ using static EntityEffect;
 public abstract class EffectDict : MonoBehaviour
 {
     [SerializeField]
-    protected Tag[] immuneTags;
+    protected EffectTag[] immuneTags;
     private Entity entity;
 
     public TempSortedEffectDict<IGeneralEffect, IGeneralEffectCase> generalEffects;
@@ -33,6 +33,16 @@ public abstract class EffectDict : MonoBehaviour
         }
     }
 
+    public virtual List<IEffectCase<IEffect>> GetCases()
+    {
+        List<IEffectCase<IEffect>> lst = new List<IEffectCase<IEffect>>();
+        lst.AddRange(generalEffects.GetCases());
+        lst.AddRange(movementEffects.GetCases());
+        lst.AddRange(tickEffects.GetCases());
+        lst.AddRange(fixedTickEffects.GetCases());
+        return lst;
+    }
+
     private void InvokeChange()
     {
         OnChange?.Invoke();
@@ -43,12 +53,12 @@ public abstract class EffectDict : MonoBehaviour
         return entity;
     }
 
-    public void SetImmuneTags(Tag[] tags)
+    public void SetImmuneTags(EffectTag[] tags)
     {
         this.immuneTags = tags;
     }
 
-    public Tag[] GetTags()
+    public EffectTag[] GetTags()
     {
         return immuneTags;
     }
@@ -87,12 +97,12 @@ public abstract class EffectDict : MonoBehaviour
     public delegate void PriorityChangeEvent(int previous);
     public delegate void EffectCaseFinishedEvent();
 
-    public interface IEffectCase<U> where U : IEffect
+    public interface IEffectCase<out U> : IHasPriority where U : IEffect
     {
         event EffectCaseFinishedEvent OnEffectCaseFinished;
         event PriorityChangeEvent OnPriorityChange;
-        void Update<V>(V effect) where V : Effect, U;
-        int GetPriority();
+        void Update<V>(V effect) where V : Effect;
+        string GetName();
     }
 
 
@@ -100,13 +110,13 @@ public abstract class EffectDict : MonoBehaviour
     {
         void FixedTick(float timescale);
     }
-    public abstract class AFixedTickEffectCase<W> : AEffectCase<IFixedTickEffect, W>, IFixedTickEffectCase where W : Effect, IFixedTickEffect
+    public class FixedTickEffectCase<W> : AEffectCase<IFixedTickEffect, W>, IFixedTickEffectCase where W : Effect, IFixedTickEffect
     {
-        public AFixedTickEffectCase(EffectCaseType type) : base(type)
+        public FixedTickEffectCase(IEffectList<IFixedTickEffect, W> effectsList) : base(effectsList)
         {
         }
 
-        public void FixedTick(float timescale)
+        public virtual void FixedTick(float timescale)
         {
             foreach (IFixedTickEffect t in effectsList.GetAll())
             {
@@ -122,11 +132,11 @@ public abstract class EffectDict : MonoBehaviour
     }
     public class TickEffectCase<W> : AEffectCase<ITickEffect, W>, ITickEffectCase where W : Effect, ITickEffect
     {
-        public TickEffectCase(EffectCaseType type) : base(type)
+        public TickEffectCase(IEffectList<ITickEffect, W> effectsList) : base(effectsList)
         {
         }
 
-        public void Tick(float timescale)
+        public virtual void Tick(float timescale)
         {
             foreach (ITickEffect t in effectsList.GetAll())
             {
@@ -140,13 +150,21 @@ public abstract class EffectDict : MonoBehaviour
     {
         Vector3 GetMovement(float deltaTime);
     }
-    public abstract class AMovementEffectCase<W> : AEffectCase<IMovementEffect, W>, IMovementEffectCase where W : Effect, IMovementEffect
+    public class MovementEffectCase<W> : AEffectCase<IMovementEffect, W>, IMovementEffectCase where W : Effect, IMovementEffect
     {
-        public AMovementEffectCase(EffectCaseType type) : base(type)
+        public MovementEffectCase(IEffectList<IMovementEffect, W> effectsList) : base(effectsList)
         {
         }
 
-        public abstract Vector3 GetMovement(float deltaTime);
+        public virtual Vector3 GetMovement(float deltaTime)
+        {
+            Vector3 total = Vector3.zero;
+            foreach (W effect in effectsList.GetAll())
+            {
+                total += effect.GetMovement(deltaTime);
+            }
+            return total;
+        }
     }
 
 
@@ -159,9 +177,9 @@ public abstract class EffectDict : MonoBehaviour
     {
         protected Entity affectedEntity;
 
-        public AGeneralEffectCase(Entity e, EffectCaseType type) : base(type)
+        protected AGeneralEffectCase(Entity affectedEntity, IEffectList<IGeneralEffect, W> effectsList) : base(effectsList)
         {
-            affectedEntity = e;
+            this.affectedEntity = affectedEntity;
         }
 
         public abstract void Apply(Entity entity);
@@ -169,7 +187,10 @@ public abstract class EffectDict : MonoBehaviour
 
         public override void Update<V>(V effect)
         {
-            Cleanup(affectedEntity);
+            if (effectsList.IsNotEmpty())
+            {
+                Cleanup(affectedEntity);
+            }
             base.Update(effect);
             Apply(affectedEntity);
         }
@@ -178,10 +199,30 @@ public abstract class EffectDict : MonoBehaviour
         {
             Cleanup(affectedEntity);
             base.Remove(effect);
-            Apply(affectedEntity);
+            if (effectsList.IsNotEmpty())
+            {
+                Apply(affectedEntity);
+            }
         }
     }
-
+    
+    private static int ListInsert<T>(T effectCase, List<T> lst) where T : IHasPriority
+    {
+        int i = 0;
+        int insertPriority = effectCase.GetPriority();
+        foreach (T e in lst)
+        {
+            if (e.GetPriority() > insertPriority)
+            {
+                lst.Insert(i, effectCase);
+                return i;
+            }
+            i++;
+        }
+        lst.Add(effectCase);
+        return 0;
+    }
+    
     public enum EffectCaseType
     {
         SingleKeep,
@@ -194,57 +235,52 @@ public abstract class EffectDict : MonoBehaviour
         IEnumerable<W> GetAll();
         W GetFirst();
         W GetLast();
-        void Update<V>(V effect) where V : Effect, U;
-        void Remove<V>(V effect) where V : Effect, U;
+        int Count();
+        bool IsEmpty();
+        bool IsNotEmpty();
+        void Setup(AEffectCase<U, W> parent);
+        void Update<V>(V effect) where V : Effect;
+        void Remove<V>(V effect) where V : Effect;
         int GetPriority();
     }
 
-    private class EffectSingleKeep<U, W> : AEffectSingle<U, W> where U : IEffect where W : Effect, U
+    public class EffectSingleReplace<U, W> : AEffectSingle<U, W> where U : IEffect where W : Effect, U
     {
-        public EffectSingleKeep(AEffectCase<U, W> parent) : base(parent)
-        {
-        }
-
         public override void Update<V>(V effect)
         {
             if (effect is W e)
             {
-                int oldPriority = this.effect.GetPriority();
-                if (e.GetPriority() != oldPriority)
-                {
-                    parent.PriorityChangeInvoke(oldPriority);
-                }
+                Destroy(this.effect);
                 this.effect = e;
             }
         }
     }
 
-    private class EffectSingleReplace<U, W> : AEffectSingle<U, W> where U : IEffect where W : Effect, U
+    public class EffectSingleKeep<U, W> : AEffectSingle<U, W> where U : IEffect where W : Effect, U
     {
-        public EffectSingleReplace(AEffectCase<U, W> parent) : base(parent)
-        {
-        }
-
         public override void Update<V>(V effect)
         {
-            if (effect is W e)
+            if (this.effect == null)
             {
-                int oldPriority = this.effect.GetPriority();
-                if (e.GetPriority() != oldPriority)
+                if (effect is W e)
                 {
-                    parent.PriorityChangeInvoke(oldPriority);
+                    this.effect = e;
                 }
-                this.effect = e;
+            }
+            else
+            {
+                Destroy(effect);
             }
         }
     }
 
-    private abstract class AEffectSingle<U, W> : IEffectList<U, W> where U : IEffect where W : Effect, U
+
+    public abstract class AEffectSingle<U, W> : IEffectList<U, W> where U : IEffect where W : Effect, U
     {
         protected W effect;
         protected AEffectCase<U, W> parent;
 
-        public AEffectSingle(AEffectCase<U, W> parent)
+        public void Setup(AEffectCase<U, W> parent)
         {
             this.parent = parent;
         }
@@ -269,9 +305,9 @@ public abstract class EffectDict : MonoBehaviour
             return effect;
         }
 
-        public abstract void Update<V>(V effect) where V : Effect, U;
+        public abstract void Update<V>(V effect) where V : Effect;
 
-        public void Remove<V>(V effect) where V : Effect, U
+        public void Remove<V>(V effect) where V : Effect
         {
             if (effect is W e)
             {
@@ -281,15 +317,49 @@ public abstract class EffectDict : MonoBehaviour
                 }
             }
         }
+
+        public int Count()
+        {
+            if (effect == null)
+            {
+                return 0;
+            }
+            else
+            {
+                return 1;
+            }
+        }
+
+        public bool IsEmpty()
+        {
+            if (effect == null)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        public bool IsNotEmpty()
+        {
+            return !IsEmpty();
+        }
     }
 
-    private class EffectList<U, W> : IEffectList<U, W> where U : IEffect where W : Effect, U
+    public class EffectList<U, W> : IEffectList<U, W> where U : IEffect where W : Effect, U
     {
         private List<W> effects;
         private int priority = 0;
         private AEffectCase<U, W> parent;
+
+        public EffectList()
+        {
+            effects = new List<W>();
+        }
         
-        public EffectList(AEffectCase<U, W> parent)
+        public void Setup(AEffectCase<U, W> parent)
         {
             this.parent = parent;
         }
@@ -314,32 +384,38 @@ public abstract class EffectDict : MonoBehaviour
             return effects.Last();
         }
 
-        public void Update<V>(V effect) where V : Effect, U
+        public void Update<V>(V effect) where V : Effect
         {
             if (effect is W e)
             {
-                effects.Add(e);
+                int pos = ListInsert(e, effects);
                 effect.OnDestroyEvent += (_) => effects.Remove(e);
-                int temp = effect.GetPriority();
-                if (temp < priority)
+                if (pos == 0)
                 {
-                    int old = priority;
-                    priority = temp;
-                    parent.PriorityChangeInvoke(old);
+                    priority = e.GetPriority();
                 }
             }
         }
 
-        public void Remove<V>(V effect) where V : Effect, U
+        public void Remove<V>(V effect) where V : Effect
         {
             if (effect is W e)
             {
-                effects.Remove(e);
+                int pos = effects.IndexOf(e);
+                try
+                {
+                    effects.RemoveAt(pos);
+                }
+                catch (System.Exception err)
+                {
+                    Debug.LogError("Tried to remove effect from effectlist but it didn't exist\n" + err, effect);
+                }
+
                 if (effects.Count > 0)
                 {
-                    if (e.GetPriority() <= priority)
+                    if (pos == 0)
                     {
-                        ReCalculatePriority();
+                        priority = effects.First().GetPriority();
                     }
                 }
                 else
@@ -349,6 +425,7 @@ public abstract class EffectDict : MonoBehaviour
             }
         }
 
+        /*
         private void ReCalculatePriority()
         {
             bool changed = false;
@@ -367,6 +444,22 @@ public abstract class EffectDict : MonoBehaviour
                 parent.PriorityChangeInvoke(old);
             }
         }
+        */
+
+        public int Count()
+        {
+            return effects.Count;
+        }
+
+        public bool IsEmpty()
+        {
+            return effects.Count <= 0;
+        }
+
+        public bool IsNotEmpty()
+        {
+            return !IsEmpty();
+        }
     }
 
     public abstract class AEffectCase<U, W> : IEffectCase<U> where U : IEffect where W : Effect, U
@@ -376,8 +469,10 @@ public abstract class EffectDict : MonoBehaviour
         public event PriorityChangeEvent OnPriorityChange;
         public event EffectCaseFinishedEvent OnEffectCaseFinished;
 
-        public AEffectCase(EffectCaseType type)
+        public AEffectCase(IEffectList<U, W> effectsList)
         {
+            this.effectsList = effectsList;
+            /*
             switch(type)
             {
                 case EffectCaseType.SingleKeep:
@@ -393,6 +488,12 @@ public abstract class EffectDict : MonoBehaviour
                     Debug.LogError("Unknown effect effect case type");
                     break;
             }
+            */
+        }
+
+        public virtual string GetName()
+        {
+            return effectsList.GetFirst().GetName();
         }
 
         public void PriorityChangeInvoke(int old)
@@ -406,7 +507,7 @@ public abstract class EffectDict : MonoBehaviour
         }
 
         // Returns true if the priority is different
-        public virtual void Update<V>(V effect) where V : Effect, U
+        public virtual void Update<V>(V effect) where V : Effect
         {
             effectsList.Update(effect);
         }
@@ -416,7 +517,7 @@ public abstract class EffectDict : MonoBehaviour
             effectsList.Remove(effect);
         }
 
-        public int GetPriority()
+        public virtual int GetPriority()
         {
             return effectsList.GetPriority();
         }
@@ -433,6 +534,8 @@ public abstract class EffectDict : MonoBehaviour
         public TempSortedEffectDict(EffectDict parent)
         {
             this.parent = parent;
+            this.dict = new Dictionary<System.Type, W>();
+            this.lst = new List<W>();
         }
 
         public List<W> GetAll()
@@ -440,10 +543,23 @@ public abstract class EffectDict : MonoBehaviour
             return lst;
         }
 
+        public IEnumerable<W> GetCases()
+        {
+            return dict.Values.ToList();
+        }
+
         public void Add<V>(V effect, CreateEffectCase<U, W> createNewCase) where V : Effect, U
         {
             if (AllowedTags(effect))
             {
+                if (DebugConsts.SHOW_EFFECT_DICT_CHECKING)
+                {
+                    // Not the right type
+                    if (!(typeof(U).IsAssignableFrom(typeof(V))))
+                    {
+                        Debug.LogWarning(string.Format("Effect {0} is not of type {1}", effect.GetType(), typeof(U)));
+                    }
+                }
                 System.Type type = effect.GetType();
                 if (dict.TryGetValue(type, out W val))
                 {
@@ -456,7 +572,7 @@ public abstract class EffectDict : MonoBehaviour
                     dict.Add(type, newCase);
                     newCase.OnEffectCaseFinished += () => lst.Remove(newCase);
                     newCase.OnPriorityChange += (p) => TryResort(newCase, p);
-                    ListInsert(newCase);
+                    ListInsert(newCase, lst);
                 }
             }
         }
@@ -498,27 +614,11 @@ public abstract class EffectDict : MonoBehaviour
             }
         }
 
-        private void ListInsert(W effectCase)
-        {
-            int i = 0;
-            int insertPriority = effectCase.GetPriority();
-            foreach (W e in lst)
-            {
-                if (e.GetPriority() > insertPriority)
-                {
-                    lst.Insert(i, effectCase);
-                    return;
-                }
-                i++;
-            }
-            lst.Add(effectCase);
-        }
-
         private bool AllowedTags<T>(T effect) where T : Effect, U
         {
-            foreach (Tag tag in effect.GetTags())
+            foreach (EffectTag tag in effect.GetTags())
             {
-                foreach (Tag immune in parent.immuneTags)
+                foreach (EffectTag immune in parent.immuneTags)
                 {
                     if (tag == immune)
                     {

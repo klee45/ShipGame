@@ -12,24 +12,11 @@ public class ForceEndless : AForce
 
     public override void AddTo(EffectDict dict)
     {
-        dict.movementEffects.Add(this, () => new ForceEndlessEffectCase(EffectDict.EffectCaseType.SINGLE));
+        dict.movementEffects.Add(this, () => new EffectDict.MovementEffectCase<ForceEndless>(new EffectDict.EffectList<IMovementEffect, ForceEndless>()));
     }
 
     public override string GetName()
     {
         return "Force";
-    }
-
-    private class ForceEndlessEffectCase : EffectDict.AMovementEffectCase<ForceEndless>
-    {
-        public ForceEndlessEffectCase(EffectDict.EffectCaseType type) : base(type)
-        {
-        }
-
-        public override Vector3 GetMovement(float deltaTime)
-        {
-            Debug.LogWarning("Endless force has no range estimation");
-            return Vector3.zero;
-        }
     }
 }

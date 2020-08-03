@@ -23,8 +23,8 @@ public abstract class AForce : EntityEffect, EntityEffect.IMovementEffect
         }
     }
 
-    public static readonly Tag[] tags = new Tag[] { Tag.FORCE, Tag.MOVEMENT };
-    public override Tag[] GetTags()
+    public static readonly EffectTag[] tags = new EffectTag[] { EffectTag.FORCE, EffectTag.MOVEMENT };
+    public override EffectTag[] GetTags()
     {
         return tags;
     }

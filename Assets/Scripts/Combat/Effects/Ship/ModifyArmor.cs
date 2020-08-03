@@ -32,8 +32,29 @@ public class ModifyArmor :
 
     public override void AddTo(EffectDictShip dict)
     {
-        dict.generalEffects.AddUpdate(this);
-        dict.tickEffects.AddUpdate(this);
+        dict.generalEffects.Add(this, () => new ModifyArmorGeneralEffectCase(dict.GetEntity(), new EffectDict.EffectList<EntityEffect.IGeneralEffect, ModifyArmor>()));
+        dict.tickEffects.Add(this, () => new EffectDict.TickEffectCase<ModifyArmor>(new EffectDict.EffectList<EntityEffect.ITickEffect, ModifyArmor>()));
+    }
+
+    private class ModifyArmorGeneralEffectCase : EffectDict.AGeneralEffectCase<ModifyArmor>
+    {
+        public ModifyArmorGeneralEffectCase(Entity affectedEntity, EffectDict.IEffectList<EntityEffect.IGeneralEffect, ModifyArmor> effectsList) : base(affectedEntity, effectsList)
+        {
+        }
+
+        public override void Apply(Entity entity)
+        {
+            int mod = 0;
+            foreach (ModifyArmor effect in effectsList.GetAll())
+            {
+                mod += effect.bonus;
+            }
+        }
+
+        public override void Cleanup(Entity entity)
+        {
+            throw new System.NotImplementedException();
+        }
     }
 
     public void Apply(Entity e)
@@ -108,8 +129,8 @@ public class ModifyArmor :
         return string.Format("Modify armor {0}%", bonus);
     }
 
-    private static readonly Tag[] tags = new Tag[] { Tag.SHRED, Tag.SHRED_HULL };
-    public override Tag[] GetTags()
+    private static readonly EffectTag[] tags = new EffectTag[] { EffectTag.SHRED, EffectTag.SHRED_HULL };
+    public override EffectTag[] GetTags()
     {
         return tags;
     }

@@ -24,10 +24,10 @@ public class HitAddCollisionForceEffect :
 
     public override void AddTo(EffectDictProjectile dict)
     {
-        dict.onHits.Add(this);
+        dict.onHits.Add(this, () => new EffectDictProjectile.OnHitEffectCase<HitAddCollisionForceEffect>(new EffectDict.EffectList<IOnHitEffect, HitAddCollisionForceEffect>()));
     }
 
-    public override Tag[] GetTags()
+    public override EffectTag[] GetTags()
     {
         return TagHelper.empty;
     }

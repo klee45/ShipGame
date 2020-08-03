@@ -10,21 +10,18 @@ public class EffectsUI : MonoBehaviour
     [SerializeField]
     private Text text;
 
-    private List<List<IEffect>> adds;
-    private List<IEffect> updates;
+    private List<EffectDict.IEffectCase<IEffect>> effectCases;
 
     // Start is called before the first frame update
     void Start()
     {
         text.text = "";
-        adds = new List<List<IEffect>>();
-        updates = new List<IEffect>();
+        effectCases = new List<EffectDict.IEffectCase<IEffect>>();
     }
 
     public void DisplayEffects(EffectDictShip effectDict)
     {
-        adds = effectDict.GetAddEffects();
-        updates = effectDict.GetUpdateEffects();
+        effectCases = effectDict.GetCases();
     }
 
     private void Update()
@@ -33,9 +30,9 @@ public class EffectsUI : MonoBehaviour
 
         List<string> unique = new List<string>();
         List<int> counts = new List<int>();
-        foreach (IEffect update in updates)
+        foreach (EffectDict.IEffectCase<IEffect> effectCase in effectCases)
         {
-            string effectName = update.GetName();
+            string effectName = effectCase.GetName();
             if (!unique.Contains(effectName))
             {
                 unique.Add(effectName);
@@ -47,16 +44,7 @@ public class EffectsUI : MonoBehaviour
         }
         sb.AppendLine();
         unique.Clear();
-        foreach (List<IEffect> add in adds)
-        {
-            //Debug.Log("Add add");
-            string effectName = add[0].GetName();
-            if (!unique.Contains(effectName))
-            {
-                unique.Add(effectName);
-                counts.Add(add.Count);
-            }
-        }
+
         int pos = 0;
         foreach (string s in unique)
         {

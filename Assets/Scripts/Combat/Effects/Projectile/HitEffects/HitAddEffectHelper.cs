@@ -11,9 +11,9 @@ public abstract class HitAddEffectHelper<T, U> :
     [SerializeField]
     protected T template;
     [SerializeField]
-    private Tag[] tags;
+    private EffectTag[] tags;
 
-    public void Setup(T template, Tag[] tags)
+    public void Setup(T template, EffectTag[] tags)
     {
         this.template = template;
         if (tags.Length == 0)
@@ -22,12 +22,7 @@ public abstract class HitAddEffectHelper<T, U> :
         }
     }
 
-    public override void AddTo(EffectDictProjectile dict)
-    {
-        dict.onHits.Add(this);
-    }
-
-    public override Tag[] GetTags()
+    public override EffectTag[] GetTags()
     {
         return tags;
     }

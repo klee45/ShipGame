@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Tag
+public enum EffectTag
 {
     WARP,
     MOVEMENT,
@@ -20,5 +20,5 @@ public enum Tag
 
 public static class TagHelper
 {
-    public static Tag[] empty = new Tag[0];
+    public static EffectTag[] empty = new EffectTag[0];
 }

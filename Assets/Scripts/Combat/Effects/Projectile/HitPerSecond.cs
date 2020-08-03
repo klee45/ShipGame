@@ -28,8 +28,8 @@ public class HitPerSecond : ProjectileEffect,
 
     public override void AddTo(EffectDictProjectile dict)
     {
-        dict.onStays.Add(this);
-        dict.fixedTickEffects.Add(this);
+        dict.onStays.Add(this, () => new EffectDictProjectile.OnHitStayEffectCase<HitPerSecond>(new EffectDict.EffectList<IOnHitStayEffect, HitPerSecond>()));
+        dict.fixedTickEffects.Add(this, () => new EffectDict.FixedTickEffectCase<HitPerSecond>(new EffectDict.EffectList<EntityEffect.IFixedTickEffect, HitPerSecond>()));
     }
 
     public void Setup(int damage, float duration, bool destroyOnEnd)
@@ -85,8 +85,8 @@ public class HitPerSecond : ProjectileEffect,
         return "Hit on tick";
     }
 
-    public static readonly Tag[] tags = new Tag[] { Tag.DAMAGE };
-    public override Tag[] GetTags()
+    public static readonly EffectTag[] tags = new EffectTag[] { EffectTag.DAMAGE };
+    public override EffectTag[] GetTags()
     {
         return tags;
     }

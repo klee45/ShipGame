@@ -7,7 +7,7 @@ public class HitAddShipEffectTemplate : ProjectileEffectTemplate
     [SerializeField]
     private ShipEffectTemplate template;
     [SerializeField]
-    private Tag[] tags;
+    private EffectTag[] tags;
 
     protected override ProjectileEffect CreateEffect(GameObject obj)
     {

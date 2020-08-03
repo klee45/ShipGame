@@ -18,14 +18,7 @@ public class FixedLifespan : ProjectileEffect, EntityEffect.ITickEffect
 
     public override void AddTo(EffectDictProjectile dict)
     {
-        dict.tickEffects.Add(this, () => new FixedLifespanEffectCase(EffectDict.EffectCaseType.SingleReplace));
-    }
-
-    private class FixedLifespanEffectCase : EffectDict.TickEffectCase<FixedLifespan>
-    {
-        public FixedLifespanEffectCase(EffectDict.EffectCaseType type) : base(type)
-        {
-        }
+        dict.tickEffects.Add(this, () => new EffectDictProjectile.TickEffectCase<FixedLifespan>(new EffectDict.EffectSingleReplace<EntityEffect.ITickEffect, FixedLifespan>()));
     }
 
     public virtual IEffect UpdateEffect(IEffect effect, out bool didReplace)
@@ -54,7 +47,7 @@ public class FixedLifespan : ProjectileEffect, EntityEffect.ITickEffect
         return string.Format("Fixed lifespan {0:0.#}/{1:0.#}", timer.GetTime(), timer.GetMaxTime());
     }
     
-    public override Tag[] GetTags()
+    public override EffectTag[] GetTags()
     {
         return TagHelper.empty;
     }

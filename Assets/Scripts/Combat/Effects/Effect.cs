@@ -41,14 +41,18 @@ public abstract class Effect : MonoBehaviour, Effect.IEffect
         this.priority = priority;
     }
 
-    public abstract Tag[] GetTags();
+    public abstract EffectTag[] GetTags();
 
-    public interface IEffect
+    public interface IEffect : IHasPriority
     {
         event DestroyEvent OnDestroyEvent;
-        int GetPriority();
         string GetName();
-        Tag[] GetTags();
+        EffectTag[] GetTags();
+    }
+
+    public interface IHasPriority
+    {
+        int GetPriority();
     }
 
     public int GetPriority() { return priority; }

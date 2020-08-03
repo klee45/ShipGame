@@ -17,18 +17,33 @@ public class EffectDictProjectile : EffectDict
         onExits = new TempSortedEffectDict<IOnExitEffect, IOnExitEffectCase>(this);
     }
 
+    public override List<IEffectCase<Effect.IEffect>> GetCases()
+    {
+        List<IEffectCase<Effect.IEffect>> lst = base.GetCases();
+        lst.AddRange(onHits.GetCases());
+        lst.AddRange(onStays.GetCases());
+        lst.AddRange(onStays.GetCases());
+        return lst;
+    }
+
 
     public interface IOnHitEffectCase : IEffectCase<IOnHitEffect>
     {
         void OnHit(Collider2D collision, Collider2D collidee);
     }
-    public abstract class AOnHitEffectCase<W> : AEffectCase<IOnHitEffect, W>, IOnHitEffectCase where W : Effect, IOnHitEffect
+    public class OnHitEffectCase<W> : AEffectCase<IOnHitEffect, W>, IOnHitEffectCase where W : Effect, IOnHitEffect
     {
-        public AOnHitEffectCase(EffectCaseType type) : base(type)
+        public OnHitEffectCase(IEffectList<IOnHitEffect, W> effectsList) : base(effectsList)
         {
         }
 
-        public abstract void OnHit(Collider2D collision, Collider2D collidee);
+        public virtual void OnHit(Collider2D collision, Collider2D collidee)
+        {
+            foreach (W effect in effectsList.GetAll())
+            {
+                effect.OnHit(collision, collidee);
+            }
+        }
     }
 
 
@@ -36,13 +51,19 @@ public class EffectDictProjectile : EffectDict
     {
         void OnHitStay(Collider2D collision);
     }
-    public abstract class AOnHitStayEffectCase<W> : AEffectCase<IOnHitStayEffect, W>, IOnHitStayEffectCase where W : Effect, IOnHitStayEffect
+    public class OnHitStayEffectCase<W> : AEffectCase<IOnHitStayEffect, W>, IOnHitStayEffectCase where W : Effect, IOnHitStayEffect
     {
-        public AOnHitStayEffectCase(EffectCaseType type) : base(type)
+        public OnHitStayEffectCase(IEffectList<IOnHitStayEffect, W> effectsList) : base(effectsList)
         {
         }
 
-        public abstract void OnHitStay(Collider2D collision);
+        public virtual void OnHitStay(Collider2D collision)
+        {
+            foreach (W effect in effectsList.GetAll())
+            {
+                effect.OnHitStay(collision);
+            }
+        }
     }
 
 
@@ -50,12 +71,18 @@ public class EffectDictProjectile : EffectDict
     {
         void OnExit(Collider2D collision);
     }
-    public abstract class AOnExitEffectCase<W> : AEffectCase<IOnExitEffect, W>, IOnExitEffectCase where W : Effect, IOnExitEffect
+    public class OnExitEffectCase<W> : AEffectCase<IOnExitEffect, W>, IOnExitEffectCase where W : Effect, IOnExitEffect
     {
-        public AOnExitEffectCase(EffectDict.EffectCaseType type) : base(type)
+        public OnExitEffectCase(IEffectList<IOnExitEffect, W> effectsList) : base(effectsList)
         {
         }
 
-        public abstract void OnExit(Collider2D collision);
+        public virtual void OnExit(Collider2D collision)
+        {
+            foreach (W effect in effectsList.GetAll())
+            {
+                effect.OnExit(collision);
+            }
+        }
     }
 }

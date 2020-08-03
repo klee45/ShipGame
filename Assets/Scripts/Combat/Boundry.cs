@@ -98,46 +98,27 @@ public class Boundry : Singleton<Boundry>
             return "Boundry Force";
         }
 
-        public override Tag[] GetTags()
+        public override EffectTag[] GetTags()
         {
             return TagHelper.empty;
         }
 
         public override void AddTo(EffectDict dict)
         {
-            dict.tickEffects.Add(this, () => new BoundryTickEffectCase(EffectDict.EffectCaseType.Multiple));
-            dict.movementEffects.Add(this, () => new BoundryMovementEffectCase(EffectDict.EffectCaseType.Multiple));
+            dict.tickEffects.Add(this, () => new EffectDict.TickEffectCase<BoundryForce>(new EffectDict.EffectSingleKeep<ITickEffect, BoundryForce>()));
+            dict.movementEffects.Add(this, () => new BoundryMovementEffectCase(new EffectDict.EffectSingleKeep<IMovementEffect, BoundryForce>()));
         }
 
-        public class BoundryTickEffectCase : EffectDict.ATickEffectCase<BoundryForce>
+        public class BoundryMovementEffectCase : EffectDict.MovementEffectCase<BoundryForce>
         {
-            public BoundryTickEffectCase(EffectDict.EffectCaseType type) : base(type)
-            {
-            }
-        }
-
-        public class BoundryMovementEffectCase : EffectDict.AMovementEffectCase<BoundryForce>
-        {
-            public BoundryMovementEffectCase(EffectDict.EffectCaseType type) : base(type)
+            public BoundryMovementEffectCase(EffectDict.IEffectList<IMovementEffect, BoundryForce> effectsList) : base(effectsList)
             {
             }
 
             public override Vector3 GetMovement(float deltaTime)
             {
-                throw new System.NotImplementedException();
+                return effectsList.GetFirst().GetMovement(deltaTime);
             }
-        }
-
-        public ITickEffect UpdateEffect(ITickEffect effect, out bool didReplace)
-        {
-            didReplace = false;
-            return effect;
-        }
-
-        public IMovementEffect UpdateEffect(IMovementEffect effect, out bool didReplace)
-        {
-            didReplace = false;
-            return effect;
         }
     }
 }

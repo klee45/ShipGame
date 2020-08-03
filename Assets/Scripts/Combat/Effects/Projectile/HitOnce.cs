@@ -15,22 +15,26 @@ public class HitOnce : ProjectileEffect, ProjectileEffect.IOnHitEffect
     public void OnHit(Collider2D collision, Collider2D collidee)
     {
         DoDamage(collision, damage);
-        DestroySelf();
+        // Case does the destroying
+        //DestroySelf();
     }
 
     public override void AddTo(EffectDictProjectile dict)
     {
-        dict.onHits.Add(this);
+        dict.onHits.Add(this, () => new HitOnceEffectCase(new EffectDict.EffectList<IOnHitEffect, HitOnce>()));
     }
 
-    public IOnHitEffect UpdateEffect(IOnHitEffect effect, out bool didReplace)
+    private class HitOnceEffectCase : EffectDictProjectile.OnHitEffectCase<HitOnce>
     {
-        if (effect is HitOnce e)
+        public HitOnceEffectCase(EffectDict.IEffectList<IOnHitEffect, HitOnce> effectsList) : base(effectsList)
         {
-            e.damage += this.damage;
         }
-        didReplace = false;
-        return effect;
+
+        public override void OnHit(Collider2D collision, Collider2D collidee)
+        {
+            base.OnHit(collision, collidee);
+            Destroy(effectsList.GetFirst().GetComponent<Projectile>().gameObject);
+        }
     }
 
     public override string GetName()
@@ -38,8 +42,8 @@ public class HitOnce : ProjectileEffect, ProjectileEffect.IOnHitEffect
         return "Hit once";
     }
 
-    public static readonly Tag[] tags = new Tag[] { Tag.DAMAGE };
-    public override Tag[] GetTags()
+    public static readonly EffectTag[] tags = new EffectTag[] { EffectTag.DAMAGE };
+    public override EffectTag[] GetTags()
     {
         return tags;
     }

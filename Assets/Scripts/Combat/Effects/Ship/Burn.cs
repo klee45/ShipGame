@@ -27,7 +27,19 @@ public class Burn : ShipEffect, EntityEffect.ITickEffect
 
     public override void AddTo(EffectDictShip dict)
     {
-        dict.tickEffects.Add(this);
+        dict.tickEffects.Add(this, () => new BurnEffectCase(new EffectDict.EffectList<EntityEffect.ITickEffect, Burn>()));
+    }
+
+    private class BurnEffectCase : EffectDictProjectile.TickEffectCase<Burn>
+    {
+        public BurnEffectCase(EffectDict.IEffectList<EntityEffect.ITickEffect, Burn> effectsList) : base(effectsList)
+        {
+        }
+
+        public override void Update<V>(V effect)
+        {
+            base.Update(effect);
+        }
     }
 
     public override string GetName()
@@ -35,8 +47,8 @@ public class Burn : ShipEffect, EntityEffect.ITickEffect
         return string.Format("Burn ({0})", damage);
     }
 
-    private static Tag[] tags = new Tag[] { Tag.DAMAGE };
-    public override Tag[] GetTags()
+    private static EffectTag[] tags = new EffectTag[] { EffectTag.DAMAGE };
+    public override EffectTag[] GetTags()
     {
         return tags;
     }

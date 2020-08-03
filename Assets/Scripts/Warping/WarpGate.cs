@@ -65,7 +65,7 @@ public class WarpGate : MonoBehaviour
 
         public override void AddTo(EffectDictShip dict)
         {
-            dict.tickEffects.AddUpdate(this);
+            dict.tickEffects.Add(this, () => new EffectDict.TickEffectCase<WarpEffect>(new EffectDict.EffectSingleKeep<EntityEffect.ITickEffect, WarpEffect>()));
         }
 
         public override string GetName()
@@ -83,14 +83,8 @@ public class WarpGate : MonoBehaviour
             }
         }
 
-        public EntityEffect.ITickEffect UpdateEffect(EntityEffect.ITickEffect effect, out bool didReplace)
-        {
-            didReplace = false;
-            return effect;
-        }
-
-        public static readonly Tag[] tags = new Tag[] { Tag.WARP };
-        public override Tag[] GetTags()
+        public static readonly EffectTag[] tags = new EffectTag[] { EffectTag.WARP };
+        public override EffectTag[] GetTags()
         {
             return tags;
         }

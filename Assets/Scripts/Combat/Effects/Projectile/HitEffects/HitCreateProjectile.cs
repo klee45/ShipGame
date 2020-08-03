@@ -19,7 +19,7 @@ public class HitCreateProjectile : ProjectileEffect, ProjectileEffect.IOnHitEffe
 
     public override void AddTo(EffectDictProjectile dict)
     {
-        dict.onHits.Add(this);
+        dict.onHits.Add(this, () => new EffectDictProjectile.OnHitEffectCase<HitCreateProjectile>(new EffectDict.EffectList<IOnHitEffect, HitCreateProjectile>()));
     }
 
     private IEnumerator SpawnAfterDelay(float delay)
@@ -37,7 +37,7 @@ public class HitCreateProjectile : ProjectileEffect, ProjectileEffect.IOnHitEffe
         return string.Format("Create projectile on hit");
     }
 
-    public override Tag[] GetTags()
+    public override EffectTag[] GetTags()
     {
         return TagHelper.empty;
     }
