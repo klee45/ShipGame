@@ -19,7 +19,7 @@ GameObject:
   - component: {fileID: 8534834729280476583}
   - component: {fileID: 2966730610005057949}
   m_Layer: 11
-  m_Name: Temporal Acceleration Field
+  m_Name: Temporal Deceleration Field
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47da4681b059b574e8cc77237916b35b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  icon: {fileID: 21300000, guid: 4f13cae42d64e964f8c7efaf32fd57ed, type: 3}
+  icon: {fileID: 21300000, guid: 43aee0800fc6a3c4d830c2f0bb219669, type: 3}
   cooldown: {fileID: 8534834729280476570}
   attachProjectile: 0
   preferedPosition: 2
@@ -86,7 +86,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beb573b85636410448fa8c3b6bde2142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 1148757961816497483, guid: b93bc4e6f1d491a478d326430dfb2092, type: 3}
+  prefab: {fileID: 1148757961816497483, guid: 835c555655883eb40b8adcbf13f602a4, type: 3}
   position: {x: 0, y: 0}
   rotation: 0
   scale: {fileID: 843870490427882256}
@@ -99,7 +99,7 @@ MonoBehaviour:
   colliderLength: 0
   delay: 0
   range: 10
-  layerType: 6
+  layerType: 3
   immuneTags: 0b000000
 --- !u!114 &843870490427882256
 MonoBehaviour:
@@ -182,5 +182,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: -100
-  timeScaleBonus: 25
-  limit: 25
+  timeScaleBonus: -20
+  limit: -20
