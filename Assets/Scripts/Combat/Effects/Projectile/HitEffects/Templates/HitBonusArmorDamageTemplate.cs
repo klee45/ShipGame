@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitBonusHullDamageTemplate : ProjectileEffectTemplate
+public class HitBonusArmorDamageTemplate : ProjectileEffectTemplate
 {
     [SerializeField]
     private int bonusDamage;
@@ -11,7 +11,7 @@ public class HitBonusHullDamageTemplate : ProjectileEffectTemplate
 
     protected override ProjectileEffect CreateEffect(GameObject obj)
     {
-        var p = obj.AddComponent<HitBonusHullDamage>();
+        var p = obj.AddComponent<HitBonusArmorDamage>();
         p.Setup(bonusDamage, isHit);
         return p;
     }

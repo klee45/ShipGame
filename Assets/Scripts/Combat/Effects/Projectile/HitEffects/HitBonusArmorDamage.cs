@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class HitBonusHullDamage : ProjectileEffect, ProjectileEffect.IOnHitEffect
+public class HitBonusArmorDamage : ProjectileEffect, ProjectileEffect.IOnHitEffect
 {
     [SerializeField]
     private int bonusDamage;
@@ -17,15 +17,15 @@ public class HitBonusHullDamage : ProjectileEffect, ProjectileEffect.IOnHitEffec
 
     public override void AddTo(EffectDictProjectile dict)
     {
-        dict.onHits.Add(this, () => new EffectDictProjectile.OnHitEffectCase<HitBonusHullDamage>(true, new EffectDict.EffectList<IOnHitEffect, HitBonusHullDamage>()));
+        dict.onHits.Add(this, () => new EffectDictProjectile.OnHitEffectCase<HitBonusArmorDamage>(true, new EffectDict.EffectList<IOnHitEffect, HitBonusArmorDamage>()));
     }
 
     public override string GetName()
     {
-        return string.Format("Bonus hull damage ({0}) effect", bonusDamage);
+        return string.Format("Bonus armor damage ({0}) effect", bonusDamage);
     }
 
-    private static EffectTag[] tags = new EffectTag[] { EffectTag.DAMAGE, EffectTag.HULL_DAMAGE };
+    private static EffectTag[] tags = new EffectTag[] { EffectTag.DAMAGE, EffectTag.ARMOR_DAMAGE };
     public override EffectTag[] GetTags()
     {
         return tags;
@@ -33,6 +33,6 @@ public class HitBonusHullDamage : ProjectileEffect, ProjectileEffect.IOnHitEffec
 
     public void OnHit(Collider2D collision, Collider2D collidee)
     {
-        collision.GetComponent<Ship>().GetCombatStats().BonusHullDamage(bonusDamage, isHit);
+        collision.GetComponent<Ship>().GetCombatStats().BonusArmorDamage(bonusDamage, isHit);
     }
 }
