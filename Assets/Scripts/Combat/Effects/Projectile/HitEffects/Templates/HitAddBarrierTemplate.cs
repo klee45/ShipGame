@@ -13,7 +13,7 @@ public class HitAddBarrierTemplate : ProjectileEffectTemplate
     {
         var effect = obj.AddComponent<HitAddBarrier>();
         effect.Setup(val, limit);
-        GetComponentInParent<Ship>().GetCombatStats().AddBarrier(val, limit);
+        HitAddBarrier.Helper(GetComponentInParent<Ship>(), val, limit);
         return effect;
     }
 }
