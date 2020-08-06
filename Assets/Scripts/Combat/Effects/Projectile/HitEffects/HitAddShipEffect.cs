@@ -16,6 +16,7 @@ public class HitAddShipEffect : HitAddEffectHelper<ShipEffectTemplate, ShipEffec
 
     public override void OnHit(Collider2D collision, Collider2D collidee)
     {
+        Physics2D.IgnoreCollision(collidee, collision);
         EffectDictShip e = collision.GetComponent<Ship>().GetEffectsDict();
         ShipEffect effect = template.Create(e.gameObject);
         effect.AddTo(e);

@@ -2,6 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public class ResettingFloatFixedMult : ResettingFloat
+{
+    public ResettingFloatFixedMult(float baseValue) : base(baseValue) {}
+
+    public override void Add(float val) {}
+    public override void AddUndo(float val) {}
+    public override void Mult(float val) {}
+    public override void MultUndo(float val) {}
+}
+
 public class ResettingFloat
 {
     private const bool DEBUG = true;
@@ -13,14 +23,14 @@ public class ResettingFloat
 
     public ResettingFloat(float baseValue)
     {
-        SetBase(baseValue);
-        this.currentValue = baseValue;
-        modVal = 0;
+        Reset(baseValue);
     }
 
-    public void SetBase(float baseValue)
+    public void Reset(float baseValue)
     {
         this.baseValue = baseValue;
+        this.currentValue = baseValue;
+        modVal = 0;
     }
 
     public float GetBase()
@@ -38,26 +48,26 @@ public class ResettingFloat
         return Mathf.RoundToInt(currentValue);
     }
 
-    public void Add(float val)
+    public virtual void Add(float val)
     {
         currentValue += val;
         modVal += 1;
     }
 
-    public void AddUndo(float val)
+    public virtual void AddUndo(float val)
     {
         currentValue += val;
         modVal -= 1;
         CheckReset();
     }
 
-    public void Mult(float val)
+    public virtual void Mult(float val)
     {
         currentValue *= val;
         modVal += 1;
     }
 
-    public void MultUndo(float val)
+    public virtual void MultUndo(float val)
     {
         currentValue *= val;
         modVal -= 1;

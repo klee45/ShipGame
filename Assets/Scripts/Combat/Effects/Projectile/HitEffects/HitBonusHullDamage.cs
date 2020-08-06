@@ -10,7 +10,7 @@ public class HitBonusHullDamage : ProjectileEffect, ProjectileEffect.IOnHitEffec
     private bool isHit = false;
     [SerializeField]
     private bool ignoreOther = false;
-
+    
     public void Setup(int bonusDamage, bool isHit, bool ignoreOther)
     {
         this.bonusDamage = bonusDamage;
@@ -36,6 +36,6 @@ public class HitBonusHullDamage : ProjectileEffect, ProjectileEffect.IOnHitEffec
 
     public void OnHit(Collider2D collision, Collider2D collidee)
     {
-        collision.GetComponent<Ship>().GetCombatStats().BonusHullDamage(bonusDamage, isHit, ignoreOther);
+        collision.GetComponent<Ship>().GetCombatStats().BonusHullDamage(bonusDamage, isHit);
     }
 }

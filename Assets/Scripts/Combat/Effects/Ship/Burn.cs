@@ -19,7 +19,7 @@ public class Burn : ShipEffect, EntityEffect.ITickEffect
         this.leftover = 0;
         this.damageSoFar = 0;
     }
-
+    
     private void Start()
     {
         ship = GetComponentInParent<Ship>();

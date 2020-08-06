@@ -22,20 +22,6 @@ public class CombatStatsTemplate : Template<CombatStats, Ship>
 
 public class CombatStats : MonoBehaviour
 {
-    private class Health
-    {
-        public ResettingFloat max;
-        public ResettingFloat mult;
-        public int val;
-
-        public Health(int baseValue)
-        {
-            max = new ResettingFloat(baseValue);
-            mult = new ResettingFloat(1);
-            val = baseValue;
-        }
-    }
-
     [SerializeField]
     private HealthBar healthBar;
 
@@ -49,30 +35,28 @@ public class CombatStats : MonoBehaviour
 
     public bool shieldsDown;
     
-    private Health hull;
-    private Health armor;
-    private Health shield;
+    private HealthInfo hull;
+    private HealthInfo armor;
+    private HealthInfo shield;
+    private HealthInfoBarrier barrier;
 
-    public delegate void DamageEvent(int damage);
+    public delegate void HealthChangeEvent(int value);
 
-    public event DamageEvent OnShipHit;
+    public event HealthChangeEvent OnShipHit;
 
-    public event DamageEvent OnShieldHit;
-    public event DamageEvent OnShieldDestroy;
+    public event HealthChangeEvent OnDeath;
 
-    public event DamageEvent OnArmorHit;
-    public event DamageEvent OnArmorDestroy;
-
-    public event DamageEvent OnHullHit;
-    public event DamageEvent OnDeath;
-
-    void Awake()
+    private void Awake()
     {
-        this.hull = new Health(initialHullMax);
-        this.armor = new Health(initialArmorMax);
-        this.shield = new Health(initialShieldMax);
-
         healthBar = GetComponentInParent<Ship>().GetComponentInChildren<HealthBar>();
+
+        this.hull = new HealthInfoHull(initialHullMax, healthBar);
+        this.armor = new HealthInfoArmor(initialArmorMax, healthBar);
+        this.shield = new HealthInfoShield(initialShieldMax, healthBar);
+        this.barrier = new HealthInfoBarrier(healthBar);
+
+        this.barrier.AddOnChangeEvent((damage) => UpdateAllGraphics());
+        this.hull.AddOnDestroyEvent((damage) => OnDeath?.Invoke(damage));
     }
 
     private void Start()
@@ -85,6 +69,216 @@ public class CombatStats : MonoBehaviour
         //shieldDelay.Tick(deltaTime);
     }
 
+    public class HealthBarMaxInfo
+    {
+        public int barrier;
+        public readonly int shield, armor, hull, total;
+        public HealthBarMaxInfo(HealthInfo barrier, HealthInfo shield, HealthInfo armor, HealthInfo hull)
+        {
+            this.barrier = barrier.GetCurrent();
+            this.shield = shield.GetMax();
+            this.armor = armor.GetMax();
+            this.hull = hull.GetMax();
+            this.total = this.barrier + this.shield + this.armor + this.hull;
+        }
+    }
+
+    public abstract class AHealthInfoWrappper<T> where T : HealthInfo
+    {
+        protected T info;
+        public AHealthInfoWrappper(T info)
+        {
+            this.info = info;
+        }
+        public bool Any() { return info.Any(); }
+        public ResettingFloat GetMult() { return info.GetMult(); }
+        public int GetMax() { return info.GetMax(); }
+        public int GetCurrent() { return info.GetCurrent(); }
+
+        public void AddOnChangeEvent(HealthChangeEvent onChangeEvent)
+        {
+            info.AddOnChangeEvent(onChangeEvent);
+        }
+
+        public void AddOnDestroyEvent(HealthChangeEvent onDestroyEvent)
+        {
+            info.AddOnDestroyEvent(onDestroyEvent);
+        }
+    }
+
+    public class HealthInfoWrapper : AHealthInfoWrappper<HealthInfo>
+    {
+        public HealthInfoWrapper(HealthInfo info) : base(info)
+        {
+        }
+    }
+
+    public class HealthInfoWrapperBarrier : AHealthInfoWrappper<HealthInfoBarrier>
+    {
+        public HealthInfoWrapperBarrier(HealthInfoBarrier info) : base(info)
+        {
+        }
+    }
+
+    public class HealthInfoBarrier : HealthInfo
+    {
+        public HealthInfoBarrier(HealthBar healthbar) : base(0, healthbar)
+        {
+        }
+
+        protected override ResettingFloat SetupMax(float initial)
+        {
+            return new ResettingFloatFixedMult(initial);
+        }
+
+        public void AddTo(int val, int max)
+        {
+            Math.EffectLimit(ref health.val, val, max);
+            health.max.Reset(health.val);
+            InvokeChange(val);
+        }
+
+        public override void UpdateGraphic(HealthBarMaxInfo maxInfo)
+        {
+            maxInfo.barrier = health.val;
+            healthbar.UpdateBarrierGraphic(health.val, maxInfo);
+        }
+    }
+
+    public class HealthInfoShield : HealthInfo
+    {
+        public HealthInfoShield(int initial, HealthBar healthbar) : base(initial, healthbar) {}
+        public override void UpdateGraphic(HealthBarMaxInfo maxInfo)
+        {
+            healthbar.UpdateShieldGraphic(health.val, health.max.GetInt(), maxInfo);
+        }
+    }
+
+    public class HealthInfoArmor : HealthInfo
+    {
+        public HealthInfoArmor(int initial, HealthBar healthbar) : base(initial, healthbar) { }
+        public override void UpdateGraphic(HealthBarMaxInfo maxInfo)
+        {
+            healthbar.UpdateArmorGraphic(health.val, health.max.GetInt(), maxInfo);
+        }
+    }
+
+    public class HealthInfoHull : HealthInfo
+    {
+        public HealthInfoHull(int initial, HealthBar healthbar) : base(initial, healthbar) { }
+        public override void UpdateGraphic(HealthBarMaxInfo maxInfo)
+        {
+            healthbar.UpdateHullGraphic(health.val, health.max.GetInt(), maxInfo);
+        }
+    }
+
+    public abstract class HealthInfo
+    {
+        protected class HealthVal
+        {
+            public ResettingFloat max;
+            public ResettingFloat mult;
+            public int val;
+
+            public HealthVal(ResettingFloat max)
+            {
+                this.max = max;
+                mult = new ResettingFloat(1);
+                val = max.GetInt();
+            }
+        }
+
+        protected HealthVal health;
+        protected HealthBar healthbar;
+
+        public event HealthChangeEvent OnChange;
+        public event HealthChangeEvent OnDestroy;
+
+        public HealthInfo(int initial, HealthBar healthbar)
+        {
+            health = new HealthVal(SetupMax(initial));
+            this.healthbar = healthbar;
+        }
+
+        protected void InvokeChange(int value)
+        {
+            OnChange?.Invoke(value);
+        }
+
+        protected virtual ResettingFloat SetupMax(float initial)
+        {
+            return new ResettingFloat(initial);
+        }
+
+        public bool Any() { return health.val > 0; }
+        public ResettingFloat GetMult() { return health.mult; }
+        public int GetMax() { return health.max.GetInt(); }
+        public int GetCurrent() { return health.val; }
+        public void TrimToMax() { health.val = Mathf.Min(health.val, health.max.GetInt()); }
+
+        public void AddOnChangeEvent(HealthChangeEvent onChangeEvent)
+        {
+            OnChange += onChangeEvent;
+        }
+
+        public void AddOnDestroyEvent(HealthChangeEvent onDestroyEvent)
+        {
+            OnDestroy += onDestroyEvent;
+        }
+
+        public void BonusDamage(int damage, bool isHit, HealthBarMaxInfo total)
+        {
+            int currentDamage = damage;
+            if (isHit)
+            {
+                OnChange?.Invoke(currentDamage);
+            }
+            DamageHelper(ref currentDamage, total);
+        }
+
+        public virtual void DamageHelper(ref int damage, HealthBarMaxInfo total)
+        {
+            int currentDamage = damage;
+            if (health.val > 0)
+            {
+                if (DoDamage(ref health.val, ref damage, health.mult, () => OnChange?.Invoke(currentDamage)))
+                {
+                    OnDestroy?.Invoke(damage);
+                }
+                UpdateGraphic(total);
+            }
+        }
+
+        public abstract void UpdateGraphic(HealthBarMaxInfo maxInfo);
+
+        protected delegate void OnHitCheck();
+        private bool DoDamage(ref int val, ref int damage, ResettingFloat mult, OnHitCheck check)
+        {
+            if (damage > 0)
+            {
+                //Debug.Log("Mult: " + mult.GetValue());
+                int tempDamage = Mathf.RoundToInt(damage * mult.GetValue());
+                //Debug.Log("Damage: " + tempDamage);
+                int result = val - tempDamage;
+                if (result <= 0)
+                {
+                    val = 0;
+                    damage = Mathf.RoundToInt(-result / mult.GetValue());
+                    check();
+                    return true;
+                }
+                else
+                {
+                    val = result;
+                    damage = 0;
+                    check();
+                    return false;
+                }
+            }
+            return false;
+        }
+    }
+
     public void Setup(int initialHullMax, int initialArmorMax, int initialShieldMax)
     {
         this.initialHullMax = initialHullMax;
@@ -92,287 +286,88 @@ public class CombatStats : MonoBehaviour
         this.initialShieldMax = initialShieldMax;
     }
 
-    public bool AnyShield()
-    {
-        return shield.val > 0;
-    }
-
-    public bool AnyArmor()
-    {
-        return armor.val > 0;
-    }
+    public HealthInfoWrapperBarrier GetBarrier() { return new HealthInfoWrapperBarrier(barrier); }
+    public HealthInfoWrapper GetShield() { return new HealthInfoWrapper(shield); }
+    public HealthInfoWrapper GetArmor() { return new HealthInfoWrapper(armor); }
+    public HealthInfoWrapper GetHull() { return new HealthInfoWrapper(hull); }
 
     public bool IsOnlyHull()
     {
-        return !AnyShield() & !AnyArmor();
+        return !barrier.Any() & !shield.Any() & !armor.Any();
     }
 
     public bool IsAlive()
     {
-        return hull.val > 0;
+        return hull.Any();
     }
 
     public float GetTotalHP()
     {
-        return hull.val + armor.val + shield.val;
+        return barrier.GetCurrent() + shield.GetCurrent() + armor.GetCurrent() + hull.GetCurrent();
     }
 
     public int GetTotalMaxHP()
     {
-        return hull.max.GetInt() + armor.max.GetInt() + shield.max.GetInt();
+        return barrier.GetMax() + shield.GetMax() + armor.GetMax() + hull.GetMax();
     }
 
     public float GetOverallPercent()
     {
-        return GetTotalHP() / (hull.max.GetValue() + armor.max.GetValue() + shield.max.GetValue());
+        return GetTotalHP() / GetTotalMaxHP();
     }
 
-    public ResettingFloat GetShieldMult()
+    private HealthBarMaxInfo CreateHPInfo()
     {
-        return shield.mult;
+        return new HealthBarMaxInfo(barrier, shield, armor, hull);
     }
-
-    public ResettingFloat GetArmorMult()
-    {
-        return armor.mult;
-    }
-
-    public ResettingFloat GetHullMult()
-    {
-        return hull.mult;
-    }
-
-    public void BonusShieldDamage(int damage, bool isHit)
-    {
-        int currentDamage = damage;
-        if (isHit)
-        {
-            OnShipHit?.Invoke(currentDamage);
-        }
-        ShieldDamageHelper(ref currentDamage);
-    }
-
-    public void BonusArmorDamage(int damage, bool isHit, bool ignoreShields)
-    {
-        if (ignoreShields || !AnyShield())
-        {
-            int currentDamage = damage;
-            if (isHit)
-            {
-                OnShipHit?.Invoke(currentDamage);
-            }
-            ArmorDamageHelper(ref currentDamage);
-        }
-    }
-
-    public void BonusHullDamage(int damage, bool isHit, bool ignoreOther)
-    {
-        if (ignoreOther || IsOnlyHull())
-        {
-            int currentDamage = damage;
-            if (isHit)
-            {
-                OnShipHit?.Invoke(currentDamage);
-            }
-            HullDamageHelper(currentDamage);
-        }
-    }
-
-    private void ShieldDamageHelper(ref int damage)
-    {
-        int currentDamage = damage;
-        if (shield.val > 0)
-        {
-            if (DoDamage(ref shield.val, ref damage, shield.mult, () => OnShieldHit?.Invoke(currentDamage)))
-            {
-                OnShieldDestroy?.Invoke(damage);
-            }
-            UpdateShieldGraphic();
-        }
-    }
-
-    private void ArmorDamageHelper(ref int damage)
-    {
-        int currentDamage = damage;
-        if (armor.val > 0)
-        {
-            if (DoDamage(ref armor.val, ref damage, armor.mult, () => OnArmorHit?.Invoke(currentDamage)))
-            {
-                OnArmorDestroy?.Invoke(damage);
-            }
-            UpdateArmorGraphic();
-        }
-    }
-
-    private void HullDamageHelper(int damage)
-    {
-        int currentDamage = damage;
-        if (hull.val > 0)
-        {
-            if (DoDamage(ref hull.val, ref damage, hull.mult, () => OnHullHit?.Invoke(currentDamage)))
-            {
-                OnDeath?.Invoke(damage);
-            }
-            UpdateHullGraphic();
-        }
-    }
-
+    
     public void TakeDamage(int damage)
     {
         if (damage > 0)
         {
+            HealthBarMaxInfo total = CreateHPInfo();
             OnShipHit?.Invoke(damage);
-            ShieldDamageHelper(ref damage);
-            ArmorDamageHelper(ref damage);
-            HullDamageHelper(damage);
+            barrier.DamageHelper(ref damage, total);
+            shield.DamageHelper(ref damage, total);
+            armor.DamageHelper(ref damage, total);
+            hull.DamageHelper(ref damage, total);
         }
     }
-
-    private delegate void OnHitCheck();
-
-    /*
-    private bool DoDamage(ref int val, ref int damage, ResettingFloat mult, OnHitCheck check)
+    
+    public void AddBarrier(int val, int max)
     {
-        if (damage > 0)
+        barrier.AddTo(val, max);
+    }
+
+    public void BonusBarrierDamage(int damage, bool isHit) { BonusDamageHelper(barrier, damage, isHit); }
+    public void BonusShieldDamage(int damage, bool isHit) { BonusDamageHelper(shield, damage, isHit, barrier); }
+    public void BonusArmorDamage(int damage, bool isHit) { BonusDamageHelper(armor, damage, isHit, barrier, shield); }
+    public void BonusHullDamage(int damage, bool isHit) { BonusDamageHelper(hull, damage, isHit, barrier, shield, armor); }
+
+    public void DirectBarrierDamage(int damage) { int d = damage; barrier.DamageHelper(ref d, CreateHPInfo()); }
+    public void DirectShieldDamage(int damage) { int d = damage; shield.DamageHelper(ref d, CreateHPInfo()); }
+    public void DirectArmorDamage(int damage) { int d = damage; armor.DamageHelper(ref d, CreateHPInfo()); }
+    public void DirectHullDamage(int damage) { int d = damage; hull.DamageHelper(ref d, CreateHPInfo()); }
+
+    private void BonusDamageHelper(HealthInfo self, int damage, bool isHit, params HealthInfo[] other)
+    {
+        bool hasAny = false;
+        foreach (HealthInfo info in other)
         {
-            Debug.Log("Mult: " + mult.GetValue());
-            int tempDamage = Mathf.RoundToInt(damage * mult.GetValue());
-            Debug.Log("Damage: " + tempDamage);
-            int result = val - damage;
-            if (result <= 0)
-            {
-                val = 0;
-                damage = -result;
-                check();
-                return true;
-            }
-            else
-            {
-                val = result;
-                damage = 0;
-                check();
-                return false;
-            }
+            hasAny |= info.Any();
         }
-        return false;
-    }
-    */
-
-    private bool DoDamage(ref int val, ref int damage, ResettingFloat mult, OnHitCheck check)
-    {
-        if (damage > 0)
+        if (!hasAny)
         {
-            //Debug.Log("Mult: " + mult.GetValue());
-            int tempDamage = Mathf.RoundToInt(damage * mult.GetValue());
-            //Debug.Log("Damage: " + tempDamage);
-            int result = val - tempDamage;
-            if (result <= 0)
-            {
-                val = 0;
-                damage = Mathf.RoundToInt(-result / mult.GetValue());
-                check();
-                return true;
-            }
-            else
-            {
-                val = result;
-                damage = 0;
-                check();
-                return false;
-            }
+            self.BonusDamage(damage, isHit, CreateHPInfo());
         }
-        return false;
-    }
-
-    public int GetHullMax() { return hull.max.GetInt(); }
-    public int GetArmorMax() { return armor.max.GetInt(); }
-    public int GetShieldMax() { return shield.max.GetInt(); }
-
-    public int GetHullCurrent() { return hull.val; }
-    public int GetArmorCurrent() { return armor.val; }
-    public int GetShieldCurrent() { return shield.val; }
-
-    public void TrimHullToMax() { hull.val = Mathf.Min(hull.val, hull.max.GetInt()); }
-    public void TrimArmorToMax() { armor.val = Mathf.Min(armor.val, armor.max.GetInt()); }
-    public void TrimShieldToMax() { shield.val = Mathf.Min(shield.val, shield.max.GetInt()); }
-
-    public void TrimAllToMax()
-    {
-        TrimHullToMax();
-        TrimArmorToMax();
-        TrimShieldToMax();
-    }
-
-    private void UpdateShieldGraphic()
-    {
-        healthBar?.UpdateShieldGraphic(shield.val, shield.max.GetInt(), armor.max.GetInt(), hull.max.GetInt());
-    }
-
-    private void UpdateArmorGraphic()
-    {
-        healthBar?.UpdateArmorGraphic(armor.val, shield.max.GetInt(), armor.max.GetInt(), hull.max.GetInt());
-    }
-
-    private void UpdateHullGraphic()
-    {
-        healthBar?.UpdateHullGraphic(hull.val, shield.max.GetInt(), armor.max.GetInt(), hull.max.GetInt());
     }
 
     private void UpdateAllGraphics()
     {
-        //Debug.Log(string.Format("H: {0} A: {1} S:{2}", hull, armor, shield));
-        UpdateShieldGraphic();
-        UpdateArmorGraphic();
-        UpdateHullGraphic();
+        var totalInfo = CreateHPInfo();
+        barrier.UpdateGraphic(totalInfo);
+        shield.UpdateGraphic(totalInfo);
+        armor.UpdateGraphic(totalInfo);
+        hull.UpdateGraphic(totalInfo);
     }
-
-    /*
-    private static int barOffset = 100;
-    private static int barThickness = 5;
-    
-    private void UpdateGraphic(Image image, int max, int current, Color color)
-    {
-        int numDiv = (int)Mathf.Ceil(max / barOffset);
-        int maxEnd = max + (numDiv) * barThickness;
-        int currentEnd;
-        if (current > 0)
-        {
-            currentEnd = current + (numDiv) * barThickness;
-        }
-        else
-        {
-            currentEnd = 0;
-        }
-
-        Texture2D texture = new Texture2D(maxEnd, 1);
-        Color[] colors = new Color[maxEnd];
-        for (int i = 0; i < currentEnd; i++)
-        {
-            if (i % (barOffset + barThickness) < barThickness)
-            {
-                colors[i] = betweenColor;
-            }
-            else
-            {
-                colors[i] = color;
-            }
-        }
-        for (int i = currentEnd; i < maxEnd; i++)
-        {
-            colors[i] = emptyColor;
-        }
-        if (current > 0)
-        {
-            for (int i = 1; i <= barThickness; i++)
-            {
-                colors[currentEnd - i] = betweenColor;
-            }
-        }
-        texture.SetPixels(colors);
-        texture.filterMode = FilterMode.Point;
-        texture.wrapMode = TextureWrapMode.Clamp;
-        texture.Apply();
-        image.texture = texture;
-    }
-    */
 }

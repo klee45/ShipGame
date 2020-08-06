@@ -54,7 +54,7 @@ public class ModifyArmor :
         {
             if (entity is Ship s)
             {
-                s.GetCombatStats().GetArmorMult().Mult(Math.GetStackableBonusMod(effectsList.GetAll()));
+                s.GetCombatStats().GetArmor().GetMult().Mult(Math.GetStackableBonusMod(effectsList.GetAll()));
             }
         }
 
@@ -62,7 +62,7 @@ public class ModifyArmor :
         {
             if (entity is Ship s)
             {
-                s.GetCombatStats().GetArmorMult().MultUndo(Math.GetStackableBonusModInverse(effectsList.GetAll()));
+                s.GetCombatStats().GetArmor().GetMult().MultUndo(Math.GetStackableBonusModInverse(effectsList.GetAll()));
             }
         }
     }

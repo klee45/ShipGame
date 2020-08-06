@@ -82,32 +82,43 @@ public class UIManager : Singleton<UIManager>
     private void SetupHealthBar()
     {
         CombatStats stats = ship.GetComponentInChildren<CombatStats>();
-        stats.OnShieldHit += (d) => UpdateShield(stats);
-        stats.OnArmorHit += (d) => UpdateArmor(stats);
-        stats.OnHullHit += (d) => UpdateHull(stats);
+        stats.GetBarrier().AddOnChangeEvent((d) => UpdateBarrier(stats));
+        stats.GetShield().AddOnChangeEvent((d) => UpdateShield(stats));
+        stats.GetArmor().AddOnChangeEvent((d) => UpdateArmor(stats));
+        stats.GetHull().AddOnChangeEvent((d) => UpdateHull(stats));
 
         UpdateAll(stats);
     }
 
     private void UpdateAll(CombatStats stats)
     {
+        UpdateBarrier(stats);
         UpdateShield(stats);
         UpdateArmor(stats);
         UpdateHull(stats);
     }
 
+    private void UpdateBarrier(CombatStats stats)
+    {
+        var barrier = stats.GetBarrier();
+        healthUI.UpdateBarrier(barrier.GetMax(), barrier.GetCurrent());
+    }
+
     private void UpdateShield(CombatStats stats)
     {
-        healthUI.UpdateShield(stats.GetShieldMax(), stats.GetShieldCurrent());
+        var shield = stats.GetShield();
+        healthUI.UpdateShield(shield.GetMax(), shield.GetCurrent());
     }
 
     private void UpdateArmor(CombatStats stats)
     {
-        healthUI.UpdateArmor(stats.GetArmorMax(), stats.GetArmorCurrent());
+        var armor = stats.GetArmor();
+        healthUI.UpdateArmor(armor.GetMax(), armor.GetCurrent());
     }
 
     private void UpdateHull(CombatStats stats)
     {
-        healthUI.UpdateHull(stats.GetHullMax(), stats.GetHullCurrent());
+        var hull = stats.GetHull();
+        healthUI.UpdateHull(hull.GetMax(), hull.GetCurrent());
     }
 }

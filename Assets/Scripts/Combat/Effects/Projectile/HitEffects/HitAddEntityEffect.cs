@@ -16,6 +16,7 @@ public class HitAddEntityEffect : HitAddEffectHelper<EntityEffectTemplate, Entit
 
     public override void OnHit(Collider2D collision, Collider2D collidee)
     {
+        Physics2D.IgnoreCollision(collidee, collision);
         EffectDict e = collision.GetComponent<Entity>().GetGeneralEffectDict();
         EntityEffect effect = template.Create(e.gameObject);
         effect.AddTo(e);

@@ -14,6 +14,20 @@ public class HealthBarUI : MonoBehaviour
     [SerializeField]
     private Text text;
 
+    public void Activate()
+    {
+        back.enabled = true;
+        front.enabled = true;
+        text.enabled = true;
+    }
+
+    public void Deactivate()
+    {
+        back.enabled = false;
+        front.enabled = false;
+        text.enabled = false;
+    }
+
     public void SetPercent(int max, int current)
     {
         //Debug.Log(string.Format("Percent is now {0}", (float)current / (float)max));
