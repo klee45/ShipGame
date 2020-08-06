@@ -1,5 +1,35 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &4558737230633021147
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6390968900426721847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38901cb894476cd43b51b38b725f9e62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 0
+  duration: 0.5
+  strength: 1
+--- !u!114 &7690058658334540722
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6390968900426721847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68269d846093cb04cae47d44118094f4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 0
+  template: {fileID: 4558737230633021147}
+  tags: 
 --- !u!114 &8185156119358152959
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15,22 +45,6 @@ MonoBehaviour:
   priority: 1
   bonusDamage: 50
   isHit: 0
-  ignoreOther: 0
---- !u!114 &8185156119358154496
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6390968900426721847}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0be298848f6728a44b88077f55b5c538, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  priority: 0
-  duration: 0.5
-  strength: 1
 --- !u!1 &6390968900655756665
 GameObject:
   m_ObjectHideFlags: 0
@@ -340,12 +354,12 @@ PrefabInstance:
         type: 3}
       propertyPath: projectileEffects.Array.data[2]
       value: 
-      objectReference: {fileID: 8185156119358154496}
+      objectReference: {fileID: 8185156119358152959}
     - target: {fileID: 7000236587950819074, guid: 3ea675276220a7c468b115d09ed6b6fe,
         type: 3}
       propertyPath: projectileEffects.Array.data[3]
       value: 
-      objectReference: {fileID: 8185156119358152959}
+      objectReference: {fileID: 7690058658334540722}
     - target: {fileID: 7000236587950819079, guid: 3ea675276220a7c468b115d09ed6b6fe,
         type: 3}
       propertyPath: damage
@@ -359,7 +373,7 @@ PrefabInstance:
     - target: {fileID: 7000236587950819075, guid: 3ea675276220a7c468b115d09ed6b6fe,
         type: 3}
       propertyPath: scale
-      value: 0.5
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ea675276220a7c468b115d09ed6b6fe, type: 3}
