@@ -8,12 +8,14 @@ public class Force : AForce,
     [SerializeField]
     private float maxDuration;
     private float duration = 0;
-    
-    public void Setup(Vector2 force, float maxDuration, bool isRelative)
+    private bool doesFade;
+
+    public void Setup(Vector2 force, float maxDuration, bool isRelative, bool doesFade)
     {
         this.force = force;
         this.maxDuration = maxDuration;
         this.isRelative = isRelative;
+        this.doesFade = doesFade;
     }
 
     public void Tick(float timeScale)
@@ -34,5 +36,34 @@ public class Force : AForce,
     public override string GetName()
     {
         return "Force";
+    }
+
+    protected override Vector3 RelativeHelper(float timeDelta)
+    {
+        if (doesFade)
+        {
+            return base.RelativeHelper(timeDelta) * GetFadeMod();
+        }
+        else
+        {
+            return base.RelativeHelper(timeDelta);
+        }
+    }
+
+    protected override Vector3 NotRelativeHelper(float timeDelta)
+    {
+        if (doesFade)
+        {
+            return base.NotRelativeHelper(timeDelta) * GetFadeMod();
+        }
+        else
+        {
+            return base.NotRelativeHelper(timeDelta);
+        }
+    }
+
+    private float GetFadeMod()
+    {
+        return 1 - (duration / maxDuration);
     }
 }
