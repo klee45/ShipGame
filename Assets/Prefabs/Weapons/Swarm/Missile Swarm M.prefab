@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beb573b85636410448fa8c3b6bde2142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3189834120618545894, guid: 8612488ca57c52b48a485dc0276b0d8e, type: 3}
+  prefab: {fileID: 3189834120618545894, guid: 51b1ab43723b5944b88a6df5b3023357, type: 3}
   position: {x: 0, y: 0}
   rotation: -10
   scale: {fileID: 1550935922616889584}
@@ -120,7 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beb573b85636410448fa8c3b6bde2142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3189834120618545894, guid: 8612488ca57c52b48a485dc0276b0d8e, type: 3}
+  prefab: {fileID: 3189834120618545894, guid: 51b1ab43723b5944b88a6df5b3023357, type: 3}
   position: {x: 0, y: 0}
   rotation: -5
   scale: {fileID: 1550935922616889584}
@@ -300,7 +300,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beb573b85636410448fa8c3b6bde2142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3189834120618545894, guid: 8612488ca57c52b48a485dc0276b0d8e, type: 3}
+  prefab: {fileID: 3189834120618545894, guid: 51b1ab43723b5944b88a6df5b3023357, type: 3}
   position: {x: 0, y: 0}
   rotation: 5
   scale: {fileID: 1550935922616889584}
@@ -409,7 +409,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beb573b85636410448fa8c3b6bde2142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3189834120618545894, guid: 8612488ca57c52b48a485dc0276b0d8e, type: 3}
+  prefab: {fileID: 3189834120618545894, guid: 51b1ab43723b5944b88a6df5b3023357, type: 3}
   position: {x: 0, y: 0}
   rotation: 10
   scale: {fileID: 1550935922616889584}
@@ -485,7 +485,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beb573b85636410448fa8c3b6bde2142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3189834120618545894, guid: 8612488ca57c52b48a485dc0276b0d8e, type: 3}
+  prefab: {fileID: 3189834120618545894, guid: 51b1ab43723b5944b88a6df5b3023357, type: 3}
   position: {x: 0, y: 0}
   rotation: 0
   scale: {fileID: 1550935922616889584}
@@ -561,7 +561,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beb573b85636410448fa8c3b6bde2142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3189834120618545894, guid: 8612488ca57c52b48a485dc0276b0d8e, type: 3}
+  prefab: {fileID: 3189834120618545894, guid: 51b1ab43723b5944b88a6df5b3023357, type: 3}
   position: {x: 0, y: 0}
   rotation: 0
   scale: {fileID: 1550935922616889584}
@@ -678,6 +678,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 88b43c90f519fd242bd0d745f2127684, type: 3}
   cooldown: {fileID: 8078504241892350582}
   attachProjectile: 0
+  preferedPosition: 1
   projectileTemplates:
   - {fileID: 4967667840262195172}
   - {fileID: 4967667840051252832}
@@ -685,7 +686,6 @@ MonoBehaviour:
   - {fileID: 4967667840472135416}
   - {fileID: 4967667840141216366}
   - {fileID: 4967667839457484305}
-  preferedPosition: 1
 --- !u!114 &8078504241892350582
 MonoBehaviour:
   m_ObjectHideFlags: 0
