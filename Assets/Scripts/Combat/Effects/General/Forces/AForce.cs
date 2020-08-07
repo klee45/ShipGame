@@ -24,13 +24,13 @@ public abstract class AForce : EntityEffect, EntityEffect.IMovementEffect
 
     protected virtual Vector3 RelativeHelper(float timeDelta)
     {
-        return new Vector3(force.x * timeDelta, force.y * timeDelta, 0);
+        Vector3 result = transform.localRotation * force * timeDelta;
+        return result;
     }
 
     protected virtual Vector3 NotRelativeHelper(float timeDelta)
     {
-        Vector3 result = transform.localRotation * force * timeDelta;
-        return result;
+        return new Vector3(force.x * timeDelta, force.y * timeDelta, 0);
     }
 
     public static readonly EffectTag[] tags = new EffectTag[] { EffectTag.Force, EffectTag.Movement };
