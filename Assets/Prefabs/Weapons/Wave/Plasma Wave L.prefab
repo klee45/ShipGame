@@ -54,6 +54,7 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: e887ea9a2f5b3a942858dc3e777da740, type: 3}
   cooldown: {fileID: 1056133010872339307}
   energyCost: 25
+  size: 2
   attachProjectile: 0
   preferedPosition: 0
   projectileTemplates:

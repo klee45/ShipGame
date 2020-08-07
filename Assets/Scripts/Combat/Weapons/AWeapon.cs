@@ -4,12 +4,22 @@ using UnityEngine;
 
 public abstract class AWeapon : MonoBehaviour
 {
+    public enum WeaponSize
+    {
+        Small,
+        Medium,
+        Large,
+        Huge
+    }
+
     [SerializeField]
     private Sprite icon;
     [SerializeField]
     private Timer cooldown;
     [SerializeField]
     private int energyCost = 0;
+    [SerializeField]
+    private WeaponSize size = WeaponSize.Medium;
     [SerializeField]
     private bool attachProjectile = false;
     [SerializeField]
