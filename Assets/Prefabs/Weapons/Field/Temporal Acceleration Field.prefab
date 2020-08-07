@@ -102,7 +102,7 @@ MonoBehaviour:
   delay: 0
   range: 10
   layerType: 6
-  immuneTags: 0b000000
+  immuneTags: 0b0000000a000000
 --- !u!114 &843870490427882256
 MonoBehaviour:
   m_ObjectHideFlags: 0

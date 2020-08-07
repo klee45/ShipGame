@@ -85,6 +85,7 @@ public abstract class AWeapon : MonoBehaviour
         if (attachProjectile)
         {
             AttachProjectile(projectile);
+            projectile.AddImmunityTag(EffectTag.Force);
         }
         else
         {

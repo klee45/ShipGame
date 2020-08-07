@@ -54,6 +54,15 @@ public abstract class EffectDict : MonoBehaviour
         return entity;
     }
 
+    // Slow, shouldn't be a problem (hopefully)
+    // since we add very few tags
+    public void AddImmuneTag(EffectTag tag)
+    {
+        var lst = immuneTags.ToList();
+        lst.Add(tag);
+        this.immuneTags = lst.ToArray();
+    }
+
     public void SetImmuneTags(EffectTag[] tags)
     {
         this.immuneTags = tags;

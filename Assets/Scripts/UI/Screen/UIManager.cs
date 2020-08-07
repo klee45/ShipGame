@@ -28,7 +28,7 @@ public class UIManager : Singleton<UIManager>
             SetupHealthEnergyBar();
             int i = 0;
             //Debug.Log("Step 3");
-            foreach (AWeapon weapon in ship.GetComponentInChildren<Arsenal>().GetWeapons())
+            foreach (AWeapon weapon in ship.GetArsenal().GetWeapons())
             {
                 weaponsUI.SetIcon(i, weapon);
                 weaponsUI.SetPercent(i++, weapon);
@@ -46,7 +46,7 @@ public class UIManager : Singleton<UIManager>
         if (ActiveShip())
         {
             int i = 0;
-            foreach (AWeapon weapon in ship.GetComponentInChildren<Arsenal>().GetWeapons())
+            foreach (AWeapon weapon in ship.GetArsenal().GetWeapons())
             {
                 weaponsUI.SetPercent(i++, weapon);
             }
@@ -62,6 +62,7 @@ public class UIManager : Singleton<UIManager>
     {
         if (ship != null)
         {
+            CleanupHealthEnergyBar();
             ship.GetEffectsDict().OnChange -= UpdateEffects;
             ship = null;
         }
@@ -74,6 +75,8 @@ public class UIManager : Singleton<UIManager>
 
     public void SetShip(Ship ship)
     {
+        // Debug.Log("Old: " + this.ship);
+        // Debug.Log("New: " + ship);
         RemoveShip();
         this.ship = ship;
         Start();
@@ -81,18 +84,39 @@ public class UIManager : Singleton<UIManager>
 
     private void SetupHealthEnergyBar()
     {
-        CombatStats stats = ship.GetComponentInChildren<CombatStats>();
-        stats.GetBarrier().AddOnChangeEvent((d) => UpdateBarrier(stats));
-        stats.GetShield().AddOnChangeEvent((d) => UpdateShield(stats));
-        stats.GetArmor().AddOnChangeEvent((d) => UpdateArmor(stats));
-        stats.GetHull().AddOnChangeEvent((d) => UpdateHull(stats));
+        var stats = ship.GetCombatStats();
+        stats.GetBarrier().AddOnChangeEvent(BarrierSubscribe);
+        stats.GetShield().AddOnChangeEvent(ShieldSubscribe);
+        stats.GetArmor().AddOnChangeEvent(ArmorSubscribe);
+        stats.GetHull().AddOnChangeEvent(HullSubscribe);
 
-        EnergySystem energy = ship.GetComponentInChildren<EnergySystem>();
-        energy.OnEnergyChange += (e) => UpdateEnergyUI(energy);
+        var energy = ship.GetEnergySystem();
+        energy.OnEnergyChange += EnergySubscribe;
 
         UpdateAll(stats);
         UpdateEnergyUI(energy);
     }
+
+    private void CleanupHealthEnergyBar()
+    {
+        var stats = ship.GetCombatStats();
+        stats.GetBarrier().RemoveOnChangeEvent(BarrierSubscribe);
+        stats.GetShield().RemoveOnChangeEvent(ShieldSubscribe);
+        stats.GetArmor().RemoveOnChangeEvent(ArmorSubscribe);
+        stats.GetHull().RemoveOnChangeEvent(HullSubscribe);
+
+        var energy = ship.GetEnergySystem();
+        energy.OnEnergyChange -= EnergySubscribe;
+
+        UpdateAll(stats);
+        UpdateEnergyUI(energy);
+    }
+
+    private void BarrierSubscribe(int d) { UpdateBarrier(ship.GetCombatStats()); }
+    private void ShieldSubscribe(int d) { UpdateShield(ship.GetCombatStats()); }
+    private void ArmorSubscribe(int d) { UpdateArmor(ship.GetCombatStats()); }
+    private void HullSubscribe(int d) { UpdateHull(ship.GetCombatStats()); }
+    private void EnergySubscribe(int e) { UpdateEnergyUI(ship.GetEnergySystem()); }
 
     private void UpdateAll(CombatStats stats)
     {

@@ -100,6 +100,11 @@ public class CombatStats : MonoBehaviour
             info.AddOnChangeEvent(onChangeEvent);
         }
 
+        public void RemoveOnChangeEvent(HealthChangeEvent onChangeEvent)
+        {
+            info.RemoveOnChangeEvent(onChangeEvent);
+        }
+
         public void AddOnDestroyEvent(HealthChangeEvent onDestroyEvent)
         {
             info.AddOnDestroyEvent(onDestroyEvent);
@@ -219,6 +224,11 @@ public class CombatStats : MonoBehaviour
         public void AddOnChangeEvent(HealthChangeEvent onChangeEvent)
         {
             OnChange += onChangeEvent;
+        }
+
+        public void RemoveOnChangeEvent(HealthChangeEvent onChangeEvent)
+        {
+            OnChange -= onChangeEvent;
         }
 
         public void AddOnDestroyEvent(HealthChangeEvent onDestroyEvent)

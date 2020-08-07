@@ -7,21 +7,18 @@ public class ShipSwapper : MonoBehaviour
     [SerializeField]
     private List<Ship> ships;
     [SerializeField]
-    private GameObject pilotObj;
+    private GameObject savedPilot;
     [SerializeField]
     private FollowGameObject mainCamera;
     [SerializeField]
     private UIManager ui;
     private int pos = 0;
 
-    [SerializeField]
-    private Ship focusedShip;
-
     private bool first = true;
 
     private void Awake()
     {
-        pilotObj.SetActive(false);
+        savedPilot.SetActive(false);
         pos = Random.Range(0, ships.Count - 1);
     }
 
@@ -40,28 +37,33 @@ public class ShipSwapper : MonoBehaviour
             }
             //Debug.Log("Second " + pos);
             Swap(pos);
+            ui.SetShip(ships[pos]);
             mainCamera.enabled = true;
             mainCamera.SetTarget(ships[pos].gameObject);
             pos = (pos + 1) % ships.Count;
             //Debug.Log("End " + pos);
             first = false;
-            
         }
     }
 
     private void Swap(int swapPos)
     {
+        // Debug.Log("Swap");
         Ship ship = ships[swapPos];
-        ui.SetShip(ship);
-        focusedShip = ship;
-        GameObject shipPilot = ship.GetComponentInChildren<Pilot>().gameObject;
+        // Debug.Log(ship);
+        GameObject otherPilot = ship.GetPilot().gameObject;
+        ship.SetPilot(savedPilot.GetComponent<Pilot>());
 
-        pilotObj.transform.SetParent(ship.transform);
-        ship.SetPilot(pilotObj.GetComponent<Pilot>());
-        pilotObj.SetActive(true);
+        // Debug.Log(otherPilot.name);
+        // Debug.Log(savedPilot.name);
 
-        pilotObj = shipPilot;
-        shipPilot.transform.SetParent(transform);
-        pilotObj.SetActive(false);
+        savedPilot.transform.SetParent(ship.transform);
+        ship.SetPilot(savedPilot.GetComponent<Pilot>());
+        savedPilot.SetActive(true);
+
+        savedPilot = otherPilot;
+        otherPilot.transform.SetParent(transform);
+        savedPilot.SetActive(false);
+
     }
 }

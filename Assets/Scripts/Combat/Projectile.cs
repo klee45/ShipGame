@@ -37,6 +37,11 @@ public class Projectile : Entity
         SetupColor();
     }
 
+    public void AddImmunityTag(EffectTag tag)
+    {
+        this.projectileEffects.AddImmuneTag(tag);
+    }
+
     public override EffectDict GetGeneralEffectDict()
     {
         return projectileEffects;
