@@ -59,6 +59,7 @@ MonoBehaviour:
   delay: 0.1
   range: 10
   layerType: 1
+  layerTypes: 00000000
   immuneTags: 
 --- !u!114 &6764177119568060429
 MonoBehaviour:
@@ -76,6 +77,7 @@ MonoBehaviour:
   force: {x: -4, y: -4}
   duration: 0.2
   isRelative: 1
+  doesFade: 0
 --- !u!1 &6764177119712478172
 GameObject:
   m_ObjectHideFlags: 0
@@ -127,6 +129,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 9e9cfe77f0110064b952e397397fbc91, type: 3}
   cooldown: {fileID: 6764177119712478174}
+  energyCost: 0
+  size: 1
   attachProjectile: 0
   preferedPosition: 1
   projectileTemplates:
@@ -289,6 +293,7 @@ MonoBehaviour:
   delay: 0.4
   range: 10
   layerType: 1
+  layerTypes: 00000000
   immuneTags: 
 --- !u!114 &6764177119894508320
 MonoBehaviour:
@@ -306,6 +311,7 @@ MonoBehaviour:
   force: {x: -4, y: -4}
   duration: 0.2
   isRelative: 1
+  doesFade: 0
 --- !u!1 &6764177119904182813
 GameObject:
   m_ObjectHideFlags: 0
@@ -365,6 +371,7 @@ MonoBehaviour:
   delay: 0
   range: 10
   layerType: 1
+  layerTypes: 00000000
   immuneTags: 
 --- !u!114 &6764177119904182815
 MonoBehaviour:
@@ -382,6 +389,7 @@ MonoBehaviour:
   force: {x: 0, y: -8}
   duration: 0.2
   isRelative: 1
+  doesFade: 0
 --- !u!1 &6764177119986833993
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,6 +449,7 @@ MonoBehaviour:
   delay: 0.3
   range: 10
   layerType: 1
+  layerTypes: 00000000
   immuneTags: 
 --- !u!114 &6764177119986833995
 MonoBehaviour:
@@ -458,6 +467,7 @@ MonoBehaviour:
   force: {x: 0, y: -8}
   duration: 0.2
   isRelative: 1
+  doesFade: 0
 --- !u!1 &6764177120331181482
 GameObject:
   m_ObjectHideFlags: 0
@@ -517,6 +527,7 @@ MonoBehaviour:
   delay: 0.2
   range: 10
   layerType: 1
+  layerTypes: 00000000
   immuneTags: 
 --- !u!114 &6764177120331181476
 MonoBehaviour:
@@ -534,6 +545,7 @@ MonoBehaviour:
   force: {x: 4, y: -4}
   duration: 0.2
   isRelative: 1
+  doesFade: 0
 --- !u!1 &6764177120382606463
 GameObject:
   m_ObjectHideFlags: 0
@@ -626,6 +638,7 @@ MonoBehaviour:
   delay: 0.5
   range: 10
   layerType: 1
+  layerTypes: 00000000
   immuneTags: 
 --- !u!114 &6764177120817701760
 MonoBehaviour:
@@ -643,6 +656,7 @@ MonoBehaviour:
   force: {x: 4, y: -4}
   duration: 0.2
   isRelative: 1
+  doesFade: 0
 --- !u!1 &6764177121063050356
 GameObject:
   m_ObjectHideFlags: 0
@@ -813,6 +827,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7000236587950819074, guid: 3ea675276220a7c468b115d09ed6b6fe,
+        type: 3}
+      propertyPath: layerTypes.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7000236587950819076, guid: 3ea675276220a7c468b115d09ed6b6fe,
         type: 3}

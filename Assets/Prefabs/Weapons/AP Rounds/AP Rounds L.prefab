@@ -280,6 +280,7 @@ MonoBehaviour:
   delay: 0
   range: 9
   layerType: 1
+  layerTypes: 00000000
   immuneTags: 
 --- !u!1 &4888097790446830871
 GameObject:

@@ -136,6 +136,7 @@ MonoBehaviour:
   delay: 0
   range: 25
   layerType: 1
+  layerTypes: 00000000
   immuneTags: 
 --- !u!114 &6001577145562749519
 MonoBehaviour:
@@ -353,6 +354,11 @@ PrefabInstance:
         type: 3}
       propertyPath: projectileEffects.Array.size
       value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7000236587950819074, guid: 3ea675276220a7c468b115d09ed6b6fe,
+        type: 3}
+      propertyPath: layerTypes.Array.size
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7000236587950819074, guid: 3ea675276220a7c468b115d09ed6b6fe,
         type: 3}

@@ -15,8 +15,10 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
     private float delay = 0;
     [SerializeField]
     private float range;
+    // [SerializeField]
+    // private ProjectileLayerType layerType = ProjectileLayerType.AffectsEnemyShips;
     [SerializeField]
-    private ProjectileLayerType layerType = ProjectileLayerType.AffectsEnemyShips;
+    private ProjectileLayerType2[] layerTypes;
     [SerializeField]
     private EffectTag[] immuneTags;
 
@@ -82,7 +84,7 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
         collider.isTrigger = true;
         collider.gameObject.name = "Base collider";
         collider.gameObject.layer = Layers.GetProjectileLayerFromTeam(team);
-        int[] layers = GetLayers(team, out bool needsRigidbody);
+        HashSet<int> layers = GetLayers(team, out bool needsRigidbody);
         if (needsRigidbody)
         {
             Rigidbody2D body = projectile.gameObject.AddComponent<Rigidbody2D>();
@@ -108,7 +110,35 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
         //collider.gameObject.AddComponent<ProjectileCollider>();
     }
 
-    private int[] GetLayers(Team team, out bool needsRigidbody)
+    private HashSet<int> GetLayers(Team team, out bool needsRigidbody)
+    {
+        HashSet<int> set = new HashSet<int>();
+        needsRigidbody = false;
+        foreach (ProjectileLayerType2 layer in layerTypes)
+        {
+            switch(layer)
+            {
+                case ProjectileLayerType2.AlliedProjectiles:
+                    needsRigidbody = true;
+                    set.Add(Layers.ShipToProjectileHitProjectile(Layers.GetShipLayerFromTeam(team)));
+                    break;
+                case ProjectileLayerType2.AlliedShips:
+                    set.Add(Layers.ShipToProjectileHitShip(Layers.GetShipLayerFromTeam(team)));
+                    break;
+                case ProjectileLayerType2.EnemyProjectiles:
+                    needsRigidbody = true;
+                    set.UnionWith(Layers.GetProjectileHitProjectileLayerFromTeam(team));
+                    break;
+                case ProjectileLayerType2.EnemyShips:
+                    set.UnionWith(Layers.GetProjectileHitShipLayerFromTeam(team));
+                    break;
+            }
+        }
+        return set;
+    }
+
+    /**
+    private HashSet<int> GetLayers(Team team, out bool needsRigidbody)
     {
         switch (layerType)
         {
@@ -125,7 +155,7 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
                 int[] a = Layers.GetProjectileHitShipLayerFromTeam(team);
                 int[] b = Layers.GetProjectileHitProjectileLayerFromTeam(team);
                 return a.Concat(b).ToArray();
-
+                
             case ProjectileLayerType.AffectsAlliedProjectiles:
                 needsRigidbody = true;
                 return new int[] { Layers.ShipToProjectileHitProjectile(Layers.GetShipLayerFromTeam(team)) };
@@ -148,6 +178,15 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
                 needsRigidbody = false;
                 return new int[0];
         }
+    }
+    **/
+
+    public enum ProjectileLayerType2
+    {
+        EnemyShips,
+        EnemyProjectiles,
+        AlliedShips,
+        AlliedProjectiles
     }
 
     public enum ProjectileLayerType

@@ -101,6 +101,7 @@ MonoBehaviour:
   delay: 0
   range: 5
   layerType: 1
+  layerTypes: 00000000
   immuneTags: 
 --- !u!114 &102771922224532598
 MonoBehaviour:
