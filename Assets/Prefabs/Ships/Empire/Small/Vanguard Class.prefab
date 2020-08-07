@@ -103,8 +103,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4ad08e04514e06746a996d066902c8f1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  max: 120
-  chargePerSec: 20
+  max: 100
+  chargePerSec: 6
 --- !u!1 &1689643121600038460
 GameObject:
   m_ObjectHideFlags: 0
