@@ -42,7 +42,7 @@ public class HitOnce : ProjectileEffect, ProjectileEffect.IOnHitEffect
         return "Hit once";
     }
 
-    public static readonly EffectTag[] tags = new EffectTag[] { EffectTag.DAMAGE };
+    public static readonly EffectTag[] tags = new EffectTag[] { EffectTag.Damage };
     public override EffectTag[] GetTags()
     {
         return tags;

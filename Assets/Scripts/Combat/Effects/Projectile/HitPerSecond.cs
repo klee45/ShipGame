@@ -85,7 +85,7 @@ public class HitPerSecond : ProjectileEffect,
         return "Hit on tick";
     }
 
-    public static readonly EffectTag[] tags = new EffectTag[] { EffectTag.DAMAGE };
+    public static readonly EffectTag[] tags = new EffectTag[] { EffectTag.Damage };
     public override EffectTag[] GetTags()
     {
         return tags;

@@ -68,13 +68,13 @@ public class BehaviorVisualizer : MonoBehaviour
     {
         switch(state)
         {
-            case BehaviorNode.NodeState.FAILURE:
+            case BehaviorNode.NodeState.Failure:
                 return faliureColor;
-            case BehaviorNode.NodeState.SUCCESS:
+            case BehaviorNode.NodeState.Success:
                 return successColor;
-            case BehaviorNode.NodeState.RUNNING:
+            case BehaviorNode.NodeState.Running:
                 return runningColor;
-            case BehaviorNode.NodeState.NONE:
+            case BehaviorNode.NodeState.None:
                 return noneColor;
         }
         return errorColor;

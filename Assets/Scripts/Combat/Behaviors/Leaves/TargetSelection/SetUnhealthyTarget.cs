@@ -14,8 +14,8 @@ public class SetUnhealthyTarget : BehaviorLeaf
         if (state.GetShipDetections().GetLeastHealthy(out Ship ship))
         {
             state.ship = ship;
-            return NodeState.SUCCESS;
+            return NodeState.Success;
         }
-        return NodeState.FAILURE;
+        return NodeState.Failure;
     }
 }

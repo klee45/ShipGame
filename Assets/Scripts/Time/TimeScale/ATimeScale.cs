@@ -17,7 +17,7 @@ public abstract class ATimeScale : MonoBehaviour
 
     public enum TimeScaleType
     {
-        STANDARD,
-        STATIC
+        Standard,
+        Static
     }
 }

@@ -10,8 +10,8 @@ public abstract class BehaviorBranch : BehaviorNode
 
     public enum BranchType
     {
-        AND,
-        OR
+        And,
+        Or
     }
 
     public override void ResetNode()

@@ -20,60 +20,60 @@ public class Sequential : BehaviorBranch
         NodeState childResult = children[pos].UpdateState(state);
         switch (type)
         {
-            case BranchType.AND:
+            case BranchType.And:
                 return AndBranch(childResult);
-            case BranchType.OR:
+            case BranchType.Or:
                 return OrBranch(childResult);
         }
-        return NodeState.ERROR;
+        return NodeState.Error;
     }
 
     private NodeState AndBranch(NodeState childResult)
     {
         switch (childResult)
         {
-            case NodeState.SUCCESS:
+            case NodeState.Success:
                 if (++pos >= len)
                 {
                     return Succeed();
                 }
-                return NodeState.RUNNING;
-            case NodeState.FAILURE:
+                return NodeState.Running;
+            case NodeState.Failure:
                 return Failure();
-            case NodeState.RUNNING:
-                return NodeState.RUNNING;
+            case NodeState.Running:
+                return NodeState.Running;
         }
-        return NodeState.ERROR;
+        return NodeState.Error;
     }
 
     private NodeState OrBranch(NodeState childResult)
     {
         switch (childResult)
         {
-            case NodeState.SUCCESS:
+            case NodeState.Success:
                 return Succeed();
-            case NodeState.FAILURE:
+            case NodeState.Failure:
                 if (++pos >= len)
                 {
                     return Failure();
                 }
-                 return NodeState.RUNNING;
-            case NodeState.RUNNING:
-                return NodeState.RUNNING;
+                 return NodeState.Running;
+            case NodeState.Running:
+                return NodeState.Running;
         }
-        return NodeState.ERROR;
+        return NodeState.Error;
     }
 
     private NodeState Failure()
     {
         ResetSelf();
-        return NodeState.FAILURE;
+        return NodeState.Failure;
     }
 
     private NodeState Succeed()
     {
         ResetSelf();
-        return NodeState.SUCCESS;
+        return NodeState.Success;
     }
 
     private void ResetSelf()

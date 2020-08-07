@@ -25,7 +25,7 @@ public class HitBonusShieldDamage : ProjectileEffect, ProjectileEffect.IOnHitEff
         return string.Format("Bonus shield damage ({0}) effect", bonusDamage);
     }
 
-    private static EffectTag[] tags = new EffectTag[] { EffectTag.DAMAGE, EffectTag.SHIELD_DAMAGE };
+    private static EffectTag[] tags = new EffectTag[] { EffectTag.Damage, EffectTag.ShieldDamage };
     public override EffectTag[] GetTags()
     {
         return tags;

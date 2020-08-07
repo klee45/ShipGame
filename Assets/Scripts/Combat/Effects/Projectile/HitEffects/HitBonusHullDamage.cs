@@ -25,7 +25,7 @@ public class HitBonusHullDamage : ProjectileEffect, ProjectileEffect.IOnHitEffec
         return string.Format("Bonus hull damage ({0}) effect", bonusDamage);
     }
 
-    private static EffectTag[] tags = new EffectTag[] { EffectTag.DAMAGE, EffectTag.HULL_DAMAGE };
+    private static EffectTag[] tags = new EffectTag[] { EffectTag.Damage, EffectTag.HullDamage };
     public override EffectTag[] GetTags()
     {
         return tags;

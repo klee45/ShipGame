@@ -5,12 +5,12 @@ using UnityEngine;
 public class SetRandomTarget : BehaviorLeaf
 {
     [SerializeField]
-    private SelectType type = SelectType.ENEMY;
+    private SelectType type = SelectType.Enemy;
 
     private enum SelectType
     {
-        SAME_TEAM,
-        ENEMY
+        SameTeam,
+        Enemy
     }
 
     protected override string GetName()
@@ -24,7 +24,7 @@ public class SetRandomTarget : BehaviorLeaf
         if (detections.IsScanning())
         {
             //Debug.Log("Waiting");
-            return NodeState.RUNNING;
+            return NodeState.Running;
         }
         else
         {
@@ -33,20 +33,20 @@ public class SetRandomTarget : BehaviorLeaf
             int shipLayer = state.ship.gameObject.layer;
             switch (type)
             {
-                case SelectType.ENEMY:
+                case SelectType.Enemy:
                     result = detections.GetRandomBlacklist(ref state.target.ship, shipLayer);
                     break;
-                case SelectType.SAME_TEAM:
+                case SelectType.SameTeam:
                     result = detections.GetRandomWhitelist(ref state.target.ship, shipLayer);
                     break;
             }
             if (result)
             {
-                return NodeState.SUCCESS;
+                return NodeState.Success;
             }
             else
             {
-                return NodeState.FAILURE;
+                return NodeState.Failure;
             }
         }
     }

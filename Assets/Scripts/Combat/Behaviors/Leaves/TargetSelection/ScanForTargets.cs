@@ -13,11 +13,11 @@ public class ScanForTargets : BehaviorLeaf
     {
         if (state.GetShipDetections().Scan())
         {
-            return NodeState.SUCCESS;
+            return NodeState.Success;
         }
         else
         {
-            return NodeState.FAILURE;
+            return NodeState.Failure;
         }
     }
 }

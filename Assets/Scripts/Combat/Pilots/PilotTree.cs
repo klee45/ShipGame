@@ -49,8 +49,8 @@ public class PilotTree : Pilot
         }
         switch(rootState)
         {
-            case BehaviorNode.NodeState.SUCCESS:
-            case BehaviorNode.NodeState.FAILURE:
+            case BehaviorNode.NodeState.Success:
+            case BehaviorNode.NodeState.Failure:
                 behaviorTree.ResetNode();
                 break;
         }

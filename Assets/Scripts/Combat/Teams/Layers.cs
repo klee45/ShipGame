@@ -31,10 +31,10 @@ public static class Layers
     {
         switch (team)
         {
-            case Team.ALLIED: return SHIP_1;
-            case Team.ENEMY1: return SHIP_2;
-            case Team.ENEMY2: return SHIP_3;
-            case Team.ENEMY3: return SHIP_4;
+            case Team.Allied: return SHIP_1;
+            case Team.Enemy1: return SHIP_2;
+            case Team.Enemy2: return SHIP_3;
+            case Team.Enemy3: return SHIP_4;
             default:
                 return -1;
         }
@@ -112,15 +112,15 @@ public static class Layers
     {
         switch(team)
         {
-            case Team.ALLIED:
+            case Team.Allied:
                 return Color1;
-            case Team.ENEMY1:
+            case Team.Enemy1:
                 return Color2;
-            case Team.ENEMY2:
+            case Team.Enemy2:
                 return Color3;
-            case Team.ENEMY3:
+            case Team.Enemy3:
                 return Color4;
-            case Team.NEUTRAL:
+            case Team.Neutral:
                 return ColorNeutral;
             default:
                 Debug.LogWarning("Invalid team layer given for color!");

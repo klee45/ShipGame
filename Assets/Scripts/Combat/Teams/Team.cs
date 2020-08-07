@@ -4,9 +4,9 @@ using UnityEngine;
 
 public enum Team
 {
-    ALLIED,
-    ENEMY1,
-    ENEMY2,
-    ENEMY3,
-    NEUTRAL
+    Allied,
+    Enemy1,
+    Enemy2,
+    Enemy3,
+    Neutral
 }

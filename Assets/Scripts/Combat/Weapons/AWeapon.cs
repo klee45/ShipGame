@@ -23,7 +23,7 @@ public abstract class AWeapon : MonoBehaviour
     [SerializeField]
     private bool attachProjectile = false;
     [SerializeField]
-    private Arsenal.WeaponPosition preferedPosition = Arsenal.WeaponPosition.CENTER;
+    private Arsenal.WeaponPosition preferedPosition = Arsenal.WeaponPosition.Center;
 
     protected RangeEstimator rangeEstimator;
     private bool ready;

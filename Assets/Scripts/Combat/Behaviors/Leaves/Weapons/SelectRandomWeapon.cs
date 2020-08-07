@@ -11,7 +11,7 @@ public class SelectRandomWeapon : BehaviorLeaf
         //Debug.Log("Touch selectweapon");
         state.weaponChoice = Random.Range(0, state.ship.GetArsenal().GetWeapons().Length);
         last = state.weaponChoice;
-        return NodeState.SUCCESS;
+        return NodeState.Success;
     }
 
     protected override string GetName()

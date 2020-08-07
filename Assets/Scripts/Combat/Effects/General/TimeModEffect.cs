@@ -28,7 +28,7 @@ public class TimeModEffect :
         return string.Format("Time mod effect {0:0.##}x", 1 + bonus / 100f);
     }
 
-    public static readonly EffectTag[] tags = new EffectTag[] { EffectTag.TIME };
+    public static readonly EffectTag[] tags = new EffectTag[] { EffectTag.Time };
     public override EffectTag[] GetTags()
     {
         return tags;

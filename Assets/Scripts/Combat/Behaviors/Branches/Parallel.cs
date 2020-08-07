@@ -11,12 +11,12 @@ public class Parallel : BehaviorBranch
     {
         switch (type)
         {
-            case BranchType.AND:
+            case BranchType.And:
                 return BranchAnd(state);
-            case BranchType.OR:
+            case BranchType.Or:
                 return BranchOr(state);
         }
-        return NodeState.ERROR;
+        return NodeState.Error;
     }
 
     private NodeState BranchAnd(BehaviorState state)
@@ -27,22 +27,22 @@ public class Parallel : BehaviorBranch
             NodeState result = child.UpdateState(state);
             switch (result)
             {
-                case NodeState.SUCCESS:
+                case NodeState.Success:
                     break;
-                case NodeState.RUNNING:
+                case NodeState.Running:
                     someRunning = true;
                     break;
-                case NodeState.FAILURE:
-                     return NodeState.FAILURE;
+                case NodeState.Failure:
+                     return NodeState.Failure;
             }
         }
         if (someRunning)
         {
-            return NodeState.RUNNING;
+            return NodeState.Running;
         }
         else
         {
-            return NodeState.SUCCESS;
+            return NodeState.Success;
         }
     }
 
@@ -54,22 +54,22 @@ public class Parallel : BehaviorBranch
             NodeState result = child.UpdateState(state);
             switch (result)
             {
-                case NodeState.SUCCESS:
-                    return NodeState.SUCCESS;
-                case NodeState.FAILURE:
+                case NodeState.Success:
+                    return NodeState.Success;
+                case NodeState.Failure:
                     break;
-                case NodeState.RUNNING:
+                case NodeState.Running:
                     someRunning = true;
                     break;
             }
         }
         if (someRunning)
         {
-            return NodeState.RUNNING;
+            return NodeState.Running;
         }
         else
         {
-            return NodeState.FAILURE;
+            return NodeState.Failure;
         }
     }
 

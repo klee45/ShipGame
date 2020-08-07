@@ -49,6 +49,6 @@ public abstract class Travel : BehaviorLeaf
         {
             state.queuedVelocity = 0f;
         }
-        return NodeState.RUNNING;
+        return NodeState.Running;
     }
 }

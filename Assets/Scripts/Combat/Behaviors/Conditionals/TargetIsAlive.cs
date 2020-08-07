@@ -14,7 +14,7 @@ public class TargetIsAlive : BehaviorConditional
         if (Conditional(state))
         {
             child.UpdateState(state);
-            return NodeState.RUNNING;
+            return NodeState.Running;
         }
         else
         {

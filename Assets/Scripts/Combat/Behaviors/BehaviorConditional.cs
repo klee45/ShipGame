@@ -8,7 +8,7 @@ public abstract class BehaviorConditional : BehaviorNode
     [SerializeField]
     protected BehaviorNode child;
     [SerializeField]
-    protected NodeState failState = NodeState.RUNNING;
+    protected NodeState failState = NodeState.Running;
 
     protected override NodeState UpdateStateHelper(BehaviorState state)
     {

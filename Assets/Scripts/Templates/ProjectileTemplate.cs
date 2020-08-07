@@ -16,7 +16,7 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
     [SerializeField]
     private float range;
     [SerializeField]
-    private ProjectileLayerType layerType = ProjectileLayerType.AFFECTS_ENEMY_SHIPS;
+    private ProjectileLayerType layerType = ProjectileLayerType.AffectsEnemyShips;
     [SerializeField]
     private EffectTag[] immuneTags;
 
@@ -112,29 +112,29 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
     {
         switch (layerType)
         {
-            case ProjectileLayerType.AFFECTS_ENEMY_PROJECTILES:
+            case ProjectileLayerType.AffectsEnemyProjectiles:
                 needsRigidbody = true;
                 return Layers.GetProjectileHitProjectileLayerFromTeam(team);
 
-            case ProjectileLayerType.AFFECTS_ENEMY_SHIPS:
+            case ProjectileLayerType.AffectsEnemyShips:
                 needsRigidbody = false;
                 return Layers.GetProjectileHitShipLayerFromTeam(team);
 
-            case ProjectileLayerType.AFFECTS_ENEMY_ALL:
+            case ProjectileLayerType.AffectsEnemyAll:
                 needsRigidbody = true;
                 int[] a = Layers.GetProjectileHitShipLayerFromTeam(team);
                 int[] b = Layers.GetProjectileHitProjectileLayerFromTeam(team);
                 return a.Concat(b).ToArray();
 
-            case ProjectileLayerType.AFFECTS_ALLIED_PROJECTILES:
+            case ProjectileLayerType.AffectsAlliedProjectiles:
                 needsRigidbody = true;
                 return new int[] { Layers.ShipToProjectileHitProjectile(Layers.GetShipLayerFromTeam(team)) };
 
-            case ProjectileLayerType.AFFECTS_ALLIED_SHIPS:
+            case ProjectileLayerType.AffectsAlliedShips:
                 needsRigidbody = false;
                 return new int[] { Layers.ShipToProjectileHitShip(Layers.GetShipLayerFromTeam(team)) };
 
-            case ProjectileLayerType.AFFECTS_ALLIED_ALL:
+            case ProjectileLayerType.AffectsAlliedAll:
                 needsRigidbody = true;
                 int shipLayer = Layers.GetShipLayerFromTeam(team);
                 return new int[]
@@ -152,13 +152,13 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
 
     public enum ProjectileLayerType
     {
-        NEUTRAL,
-        AFFECTS_ENEMY_SHIPS,
-        AFFECTS_ENEMY_PROJECTILES,
-        AFFECTS_ENEMY_ALL,
-        AFFECTS_ALLIED_SHIPS,
-        AFFECTS_ALLIED_PROJECTILES,
-        AFFECTS_ALLIED_ALL
+        Neutral,
+        AffectsEnemyShips,
+        AffectsEnemyProjectiles,
+        AffectsEnemyAll,
+        AffectsAlliedShips,
+        AffectsAlliedProjectiles,
+        AffectsAlliedAll
     }
 }
 

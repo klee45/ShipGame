@@ -12,6 +12,6 @@ public class SetTargetPositionFromShip : BehaviorLeaf
     protected override NodeState UpdateStateHelper(BehaviorState state)
     {
         state.target.position = state.target.ship.transform.position;
-        return NodeState.SUCCESS;
+        return NodeState.Success;
     }
 }

@@ -14,14 +14,14 @@ public class ParallelUntilFirstChild : BehaviorBranch
         NodeState result = children[0].UpdateState(state);
         switch(result)
         {
-            case NodeState.SUCCESS:
-                return NodeState.SUCCESS;
+            case NodeState.Success:
+                return NodeState.Success;
             default:
                 for (int i = 1; i < children.Length; i++)
                 {
                     children[i].UpdateState(state);
                 }
-                return NodeState.RUNNING;
+                return NodeState.Running;
         }
     }
 }

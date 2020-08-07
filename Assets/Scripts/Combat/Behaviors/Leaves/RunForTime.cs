@@ -39,6 +39,6 @@ public class RunForTime : BehaviorLeaf
             timer.TurnOn();
             return endState;
         }
-        return NodeState.RUNNING;
+        return NodeState.Running;
     }
 }

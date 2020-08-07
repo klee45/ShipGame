@@ -54,7 +54,7 @@ public class Burn : ShipEffect, EntityEffect.ITickEffect
         return "Burn";
     }
 
-    private static EffectTag[] tags = new EffectTag[] { EffectTag.DAMAGE };
+    private static EffectTag[] tags = new EffectTag[] { EffectTag.Damage };
     public override EffectTag[] GetTags()
     {
         return tags;

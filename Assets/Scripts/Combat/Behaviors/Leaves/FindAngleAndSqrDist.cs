@@ -27,11 +27,11 @@ public class FindAngleAndSqrDist : BehaviorLeaf
             
             state.target.angleDiff = angleLast;
             state.target.sqrDistDiff = distLast;
-            return NodeState.SUCCESS;
+            return NodeState.Success;
         }
         else
         {
-            return NodeState.FAILURE;
+            return NodeState.Failure;
         }
     }
 

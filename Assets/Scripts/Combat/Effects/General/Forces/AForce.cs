@@ -33,7 +33,7 @@ public abstract class AForce : EntityEffect, EntityEffect.IMovementEffect
         return result;
     }
 
-    public static readonly EffectTag[] tags = new EffectTag[] { EffectTag.FORCE, EffectTag.MOVEMENT };
+    public static readonly EffectTag[] tags = new EffectTag[] { EffectTag.Force, EffectTag.Movement };
     public override EffectTag[] GetTags()
     {
         return tags;

@@ -26,11 +26,11 @@ public class TravelToPointSmooth : Travel
             float sqrSlow = slowDist * slowDist;
             float divMod = sqrSlow * (1 + speedMod * Mathf.Abs(state.queuedRotation));
             state.queuedVelocity = Mathf.Min(state.target.sqrDistDiff / divMod, 1);
-            return NodeState.RUNNING;
+            return NodeState.Running;
         }
         else
         {
-            return NodeState.SUCCESS;
+            return NodeState.Success;
         }
     }
 }

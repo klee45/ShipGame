@@ -26,7 +26,7 @@ public class SelectFromTargetList : BehaviorLeaf
             GameObject target = targetList.targets[pos];
             state.target.position = target.transform.position;
             pos++;
-            return NodeState.SUCCESS;
+            return NodeState.Success;
         }
         else
         {
@@ -34,7 +34,7 @@ public class SelectFromTargetList : BehaviorLeaf
             state.ship.transform.position = targetList.targets[0].transform.position;
             state.ship.transform.localEulerAngles = Vector3.zero;
             pos = 0;
-            return NodeState.RUNNING;
+            return NodeState.Running;
         }
     }
 }

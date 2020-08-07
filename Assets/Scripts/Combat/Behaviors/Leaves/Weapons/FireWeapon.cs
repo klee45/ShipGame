@@ -8,7 +8,7 @@ public class FireWeapon : BehaviorLeaf
     {
         //Debug.Log("Touch fireweapon");
         state.fireWeapon = true;
-        return NodeState.SUCCESS;
+        return NodeState.Success;
     }
 
     protected override string GetName()

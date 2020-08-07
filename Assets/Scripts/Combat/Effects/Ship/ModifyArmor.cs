@@ -102,7 +102,7 @@ public class ModifyArmor :
         return "Modify Armor";
     }
 
-    private static readonly EffectTag[] tags = new EffectTag[] { EffectTag.SHRED, EffectTag.SHRED_HULL };
+    private static readonly EffectTag[] tags = new EffectTag[] { EffectTag.Shred, EffectTag.ShredHull };
     public override EffectTag[] GetTags()
     {
         return tags;

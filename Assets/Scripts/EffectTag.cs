@@ -4,18 +4,18 @@ using UnityEngine;
 
 public enum EffectTag
 {
-    WARP,
-    MOVEMENT,
-    DAMAGE,
-    SHIELD_DAMAGE,
-    ARMOR_DAMAGE,
-    HULL_DAMAGE,
-    SHRED,
-    SHRED_SHIELD,
-    SHRED_ARMOR,
-    SHRED_HULL,
-    FORCE,
-    TIME
+    Warp,
+    Movement,
+    Damage,
+    ShieldDamage,
+    ArmorDamage,
+    HullDamage,
+    Shred,
+    ShredShield,
+    ShredArmor,
+    ShredHull,
+    Force,
+    Time
 }
 
 public static class TagHelper

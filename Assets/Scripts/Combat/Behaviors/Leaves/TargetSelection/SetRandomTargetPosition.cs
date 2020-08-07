@@ -35,16 +35,16 @@ public class SetRandomTargetPosition : BehaviorLeaf
         Vector3 newPos = new Vector2(pos.x + widthMod, pos.y + heightMod);
         if (SetNewPos(state, newPos))
         {
-            return NodeState.SUCCESS;
+            return NodeState.Success;
         }
         //Debug.Log("Initial position was out of bounds");
         newPos = new Vector2(pos.x - widthMod, pos.y - heightMod);
         if (SetNewPos(state, newPos))
         {
-            return NodeState.SUCCESS;
+            return NodeState.Success;
         }
         //Debug.Log("Secondary opposite position was also out of bounds");
-        return NodeState.FAILURE;
+        return NodeState.Failure;
     }
 
     private bool SetNewPos(BehaviorState state, Vector3 pos)

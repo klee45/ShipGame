@@ -83,7 +83,7 @@ public class WarpGate : MonoBehaviour
             }
         }
 
-        public static readonly EffectTag[] tags = new EffectTag[] { EffectTag.WARP };
+        public static readonly EffectTag[] tags = new EffectTag[] { EffectTag.Warp };
         public override EffectTag[] GetTags()
         {
             return tags;

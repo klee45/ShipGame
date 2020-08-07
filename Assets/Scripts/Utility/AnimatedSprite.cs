@@ -12,7 +12,7 @@ public class AnimatedSprite : MonoBehaviour
     [SerializeField]
     private SpriteManager.SpriteSpeed speed;
     [SerializeField]
-    private AnimationType type = AnimationType.REPEAT;
+    private AnimationType type = AnimationType.Repeat;
     
     // Start is called before the first frame update
     void Start()
@@ -60,18 +60,18 @@ public class AnimatedSprite : MonoBehaviour
         Sprite sprite = null;
         switch(type)
         {
-            case AnimationType.END:
+            case AnimationType.End:
                 pos = pos + count;
                 if (pos < sprites.Length)
                 {
                     sprite = sprites[pos];
                 }
                 break;
-            case AnimationType.HOLD:
+            case AnimationType.Hold:
                 pos = Mathf.Min((pos + count), sprites.Length - 1);
                 sprite = sprites[pos];
                 break;
-            case AnimationType.REPEAT:
+            case AnimationType.Repeat:
                 pos = (pos + count) % sprites.Length;
                 sprite = sprites[pos];
                 break;
@@ -81,8 +81,8 @@ public class AnimatedSprite : MonoBehaviour
 
     public enum AnimationType
     {
-        REPEAT,
-        HOLD,
-        END
+        Repeat,
+        Hold,
+        End
     }
 }

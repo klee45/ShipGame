@@ -25,7 +25,7 @@ public class HitBonusArmorDamage : ProjectileEffect, ProjectileEffect.IOnHitEffe
         return string.Format("Bonus armor damage ({0}) effect", bonusDamage);
     }
 
-    private static EffectTag[] tags = new EffectTag[] { EffectTag.DAMAGE, EffectTag.ARMOR_DAMAGE };
+    private static EffectTag[] tags = new EffectTag[] { EffectTag.Damage, EffectTag.ArmorDamage };
     public override EffectTag[] GetTags()
     {
         return tags;

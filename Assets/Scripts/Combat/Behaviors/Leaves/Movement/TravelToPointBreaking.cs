@@ -32,11 +32,11 @@ public class TravelToPointBreaking : Travel
                 state.queuedVelocity = 1.0f;
             }
 
-            return NodeState.RUNNING;
+            return NodeState.Running;
         }
         else
         {
-            return NodeState.SUCCESS;
+            return NodeState.Success;
         }
     }
 }

@@ -38,23 +38,23 @@ public class Arsenal : MonoBehaviour
         WeaponPosition pos = weapon.GetPreferedPosition();
         switch (pos)
         {
-            case WeaponPosition.BACK:
+            case WeaponPosition.Back:
                 return backWeaponPlace;
-            case WeaponPosition.BACK_LEFT:
+            case WeaponPosition.BackLeft:
                 return backLeftWeaponPlace;
-            case WeaponPosition.BACK_RIGHT:
+            case WeaponPosition.BackRight:
                 return backRightWeaponPlace;
-            case WeaponPosition.CENTER:
+            case WeaponPosition.Center:
                 return centerWeaponPlace;
-            case WeaponPosition.FRONT:
+            case WeaponPosition.Front:
                 return frontWeaponPlace;
-            case WeaponPosition.FRONT_LEFT:
+            case WeaponPosition.FrontLeft:
                 return frontLeftWeaponPlace;
-            case WeaponPosition.FRONT_RIGHT:
+            case WeaponPosition.FrontRight:
                 return frontRightWeaponPlace;
-            case WeaponPosition.LEFT:
+            case WeaponPosition.Left:
                 return leftWeaponPlace;
-            case WeaponPosition.RIGHT:
+            case WeaponPosition.Right:
                 return rightWeaponPlace;
             default:
                 return centerWeaponPlace;
@@ -104,14 +104,14 @@ public class Arsenal : MonoBehaviour
 
     public enum WeaponPosition
     {
-        FRONT,
-        BACK,
-        CENTER,
-        LEFT,
-        RIGHT,
-        FRONT_LEFT,
-        FRONT_RIGHT,
-        BACK_LEFT,
-        BACK_RIGHT
+        Front,
+        Back,
+        Center,
+        Left,
+        Right,
+        FrontLeft,
+        FrontRight,
+        BackLeft,
+        BackRight
     }
 }

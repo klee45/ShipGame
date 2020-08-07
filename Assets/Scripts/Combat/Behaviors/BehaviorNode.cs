@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class BehaviorNode : MonoBehaviour
 {
     [SerializeField]
-    private NodeState lastState = NodeState.NONE;
+    private NodeState lastState = NodeState.None;
 
     public delegate void BehaviorUpdateEvent();
     public event BehaviorUpdateEvent OnUpdate;
@@ -22,7 +22,7 @@ public abstract class BehaviorNode : MonoBehaviour
     protected abstract string GetName();
     public virtual void ResetNode()
     {
-        lastState = NodeState.NONE;
+        lastState = NodeState.None;
         OnUpdate?.Invoke();
     }
 
@@ -70,10 +70,10 @@ public abstract class BehaviorNode : MonoBehaviour
 
     public enum NodeState
     {
-        SUCCESS,
-        RUNNING,
-        FAILURE,
-        ERROR,
-        NONE
+        Success,
+        Running,
+        Failure,
+        Error,
+        None
     }
 }

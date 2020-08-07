@@ -11,7 +11,7 @@ public class SelectWeapon : BehaviorLeaf
     {
         //Debug.Log("Touch selectweapon");
         state.weaponChoice = choice;
-        return NodeState.SUCCESS;
+        return NodeState.Success;
     }
 
     protected override string GetName()
