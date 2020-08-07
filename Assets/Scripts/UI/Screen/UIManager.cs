@@ -25,7 +25,7 @@ public class UIManager : Singleton<UIManager>
         if (ActiveShip())
         {
             //Debug.Log("Step 2");
-            SetupHealthBar();
+            SetupHealthEnergyBar();
             int i = 0;
             //Debug.Log("Step 3");
             foreach (AWeapon weapon in ship.GetComponentInChildren<Arsenal>().GetWeapons())
@@ -79,7 +79,7 @@ public class UIManager : Singleton<UIManager>
         Start();
     }
 
-    private void SetupHealthBar()
+    private void SetupHealthEnergyBar()
     {
         CombatStats stats = ship.GetComponentInChildren<CombatStats>();
         stats.GetBarrier().AddOnChangeEvent((d) => UpdateBarrier(stats));
@@ -87,7 +87,11 @@ public class UIManager : Singleton<UIManager>
         stats.GetArmor().AddOnChangeEvent((d) => UpdateArmor(stats));
         stats.GetHull().AddOnChangeEvent((d) => UpdateHull(stats));
 
+        EnergySystem energy = ship.GetComponentInChildren<EnergySystem>();
+        energy.OnEnergyChange += (e) => UpdateEnergyUI(energy);
+
         UpdateAll(stats);
+        UpdateEnergyUI(energy);
     }
 
     private void UpdateAll(CombatStats stats)
@@ -96,6 +100,11 @@ public class UIManager : Singleton<UIManager>
         UpdateShield(stats);
         UpdateArmor(stats);
         UpdateHull(stats);
+    }
+
+    private void UpdateEnergyUI(EnergySystem energy)
+    {
+        healthUI.UpdateEnergyBar(energy.GetMaxEnergy(), energy.GetEnergy());
     }
 
     private void UpdateBarrier(CombatStats stats)

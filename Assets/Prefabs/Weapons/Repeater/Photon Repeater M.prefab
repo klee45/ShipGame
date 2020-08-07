@@ -53,10 +53,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 4a0b391ce3b855e45855bf44d97f902d, type: 3}
   cooldown: {fileID: 8164844641841014600}
+  energyCost: 5
   attachProjectile: 0
+  preferedPosition: 0
   projectileTemplates:
   - {fileID: 7215541818867594949}
-  preferedPosition: 0
 --- !u!114 &8164844641841014600
 MonoBehaviour:
   m_ObjectHideFlags: 0

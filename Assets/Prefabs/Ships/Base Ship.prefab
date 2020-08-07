@@ -44,6 +44,51 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   immuneTags: 
+--- !u!1 &4274755808154734958
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 543960682888676854}
+  - component: {fileID: 4997361980280832267}
+  m_Layer: 11
+  m_Name: Energy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &543960682888676854
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4274755808154734958}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 8938241456569698608}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4997361980280832267
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4274755808154734958}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ad08e04514e06746a996d066902c8f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  max: 0
+  chargePerSec: 0
 --- !u!1 &8938241454721941121
 GameObject:
   m_ObjectHideFlags: 0
@@ -118,6 +163,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15cd1c4a2136ab4e8ab24b7332cf392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  frontWeaponPlace: {fileID: 0}
+  centerWeaponPlace: {fileID: 0}
+  backWeaponPlace: {fileID: 0}
+  frontLeftWeaponPlace: {fileID: 0}
+  leftWeaponPlace: {fileID: 0}
+  backLeftWeaponPlace: {fileID: 0}
+  frontRightWeaponPlace: {fileID: 0}
+  rightWeaponPlace: {fileID: 0}
+  backRightWeaponPlace: {fileID: 0}
 --- !u!114 &8938241455201033405
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -611,6 +665,7 @@ Transform:
   m_Children:
   - {fileID: 8938241456601758385}
   - {fileID: 8938241455201033406}
+  - {fileID: 543960682888676854}
   m_Father: {fileID: 8938241455494215640}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

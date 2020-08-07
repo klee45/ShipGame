@@ -9,6 +9,8 @@ public abstract class AWeapon : MonoBehaviour
     [SerializeField]
     private Timer cooldown;
     [SerializeField]
+    private int energyCost = 0;
+    [SerializeField]
     private bool attachProjectile = false;
     [SerializeField]
     private Arsenal.WeaponPosition preferedPosition = Arsenal.WeaponPosition.CENTER;
@@ -48,14 +50,16 @@ public abstract class AWeapon : MonoBehaviour
         Projectile p = CreateProjectile(template);
     }
 
+    public int GetEnergyCost()
+    {
+        return energyCost;
+    }
+
     public void Fire()
     {
-        if (ready)
-        {
-            FireHelper();
-            cooldown.TurnOn();
-            ready = false;
-        }
+        FireHelper();
+        cooldown.TurnOn();
+        ready = false;
     }
 
     protected abstract void FireHelper();

@@ -5,6 +5,8 @@ using UnityEngine;
 public class Arsenal : MonoBehaviour
 {
     private AWeapon[] weapons;
+    private Ship ship;
+
     [SerializeField] private GameObject frontWeaponPlace;
     [SerializeField] private GameObject centerWeaponPlace;
     [SerializeField] private GameObject backWeaponPlace;
@@ -20,6 +22,7 @@ public class Arsenal : MonoBehaviour
 
     private void Awake()
     {
+        ship = GetComponentInParent<Ship>();
         weapons = GetComponentsInChildren<AWeapon>();
         foreach (AWeapon weapon in weapons)
         {
@@ -77,7 +80,15 @@ public class Arsenal : MonoBehaviour
         if (weapon >= 0 && weapon < weapons.Length)
         {
             //Debug.Log("Actually firing");
-            weapons[weapon].Fire();
+            AWeapon selectedWeapon = weapons[weapon];
+            if (selectedWeapon.IsReady())
+            {
+                int energyCost = selectedWeapon.GetEnergyCost();
+                if (ship.GetEnergySystem().TrySpendEnergy(energyCost))
+                {
+                    selectedWeapon.Fire();
+                }
+            }
         }
     }
 

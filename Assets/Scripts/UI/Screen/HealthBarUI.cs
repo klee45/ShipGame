@@ -28,11 +28,18 @@ public class HealthBarUI : MonoBehaviour
         text.enabled = false;
     }
 
-    public void SetPercent(int max, int current)
+    public void SetPercent(int max, int current, bool showMax)
     {
         //Debug.Log(string.Format("Percent is now {0}", (float)current / (float)max));
         front.fillAmount = (float)current / (float)max;
-        text.text = string.Format("{0}", current);
+        if (showMax)
+        {
+            text.text = string.Format("{0} ({1})", current, max);
+        }
+        else
+        {
+            text.text = string.Format("{0}", current);
+        }
     }
 
     public void SetColor(Color color)

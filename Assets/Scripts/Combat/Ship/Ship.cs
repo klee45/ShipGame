@@ -23,6 +23,7 @@ public class Ship : Entity
     private EffectDictShip shipEffects;
 
     private Arsenal arsenal;
+    private EnergySystem energySystem;
 
     //private bool markedForDelete = false;
 
@@ -39,6 +40,7 @@ public class Ship : Entity
     {
         base.Awake();
         shipEffects = GetComponentInChildren<EffectDictShip>();
+        energySystem = GetComponentInChildren<EnergySystem>();
         gameObject.layer = Layers.GetShipLayerFromTeam(team);
         //Debug.Log(gameObject.layer);
     }
@@ -172,6 +174,11 @@ public class Ship : Entity
     protected override void Translate(Vector2 translation)
     {
         desiredPosition += translation.ToVector3();
+    }
+
+    public EnergySystem GetEnergySystem()
+    {
+        return energySystem;
     }
 
     public EffectDictShip GetEffectsDict()
