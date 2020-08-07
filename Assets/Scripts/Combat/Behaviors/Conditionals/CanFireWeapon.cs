@@ -4,8 +4,12 @@ using UnityEngine;
 
 public class CanFireWeapon : BehaviorConditional
 {
-    [SerializeField]
-    private Arsenal arsenal = null;
+    private Arsenal arsenal;
+
+    private void Awake()
+    {
+        arsenal = GetComponentInParent<Ship>().GetComponentInChildren<Arsenal>();
+    }
 
     protected override string GetName()
     {

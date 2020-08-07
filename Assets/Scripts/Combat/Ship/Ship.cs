@@ -39,8 +39,10 @@ public class Ship : Entity
     protected override void Awake()
     {
         base.Awake();
+        // Debug.Log("Ship awake");
         shipEffects = GetComponentInChildren<EffectDictShip>();
         energySystem = GetComponentInChildren<EnergySystem>();
+        arsenal = GetComponentInChildren<Arsenal>();
         gameObject.layer = Layers.GetShipLayerFromTeam(team);
         //Debug.Log(gameObject.layer);
     }
@@ -53,7 +55,6 @@ public class Ship : Entity
         desiredPosition = transform.position;
         desiredRotation = transform.eulerAngles.z;
 
-        arsenal = GetComponentInChildren<Arsenal>();
         if (arsenal != null)
         {
             arsenal.gameObject.layer = gameObject.layer;
@@ -190,11 +191,6 @@ public class Ship : Entity
     {
         DoTickEffects(shipEffects);
         DoMovementEffects(shipEffects);
-    }
-
-    public void SetPilot(Pilot pilot)
-    {
-        this.pilot = pilot;
     }
 
     public CombatStats GetCombatStats() { return combatStats; }

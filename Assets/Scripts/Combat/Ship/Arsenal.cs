@@ -97,6 +97,20 @@ public class Arsenal : MonoBehaviour
         return weapons;
     }
 
+    public List<AWeapon> GetWeaponsInRange(float minRange, float maxRange)
+    {
+        List<AWeapon> validWeapons = new List<AWeapon>();
+        foreach (AWeapon weapon in weapons)
+        {
+            float range = weapon.GetRange();
+            if (range >= minRange && range <= maxRange)
+            {
+                validWeapons.Add(weapon);
+            }
+        }
+        return validWeapons;
+    }
+
     public AWeapon GetWeapon(int weaponPos)
     {
         return weapons[weaponPos];
