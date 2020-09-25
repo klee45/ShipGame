@@ -2,19 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class PilotTemplate : Template<Pilot, GameObject>
+public abstract class PilotTemplate : Template<APilot, GameObject>
 {
-    public override Pilot Create(GameObject obj)
+    public override APilot Create(GameObject obj)
     {
         GameObject pilotObj = new GameObject("Pilot");
         pilotObj.transform.SetParent(obj.transform);
         return CreateHelper(pilotObj);
     }
 
-    protected abstract Pilot CreateHelper(GameObject obj);
+    protected abstract APilot CreateHelper(GameObject obj);
 }
 
-public abstract class Pilot : MonoBehaviour
+public abstract class APilot : MonoBehaviour
 {
     public abstract void MakeActions();
     public virtual void Tick(float deltaTime) { }

@@ -29,7 +29,7 @@ public abstract class EntityTemplate<OUT> : Template<OUT, GameObject> where OUT 
         entity.transform.localScale = scale.Scale(entity.transform.localScale);
 
         MovementStats s = movementStats.Create(entity.gameObject);
-        Pilot p = pilot.Create(entity.gameObject);
+        APilot p = pilot.Create(entity.gameObject);
 
         entity.Setup(s, p);
 
@@ -41,7 +41,7 @@ public abstract class Entity : MonoBehaviour
 {
     protected ResettingFloat timeScale;
     [SerializeField]
-    protected Pilot pilot;
+    protected APilot pilot;
     [SerializeField]
     protected MovementStats movementStats;
     [SerializeField]
@@ -57,7 +57,7 @@ public abstract class Entity : MonoBehaviour
 
     protected virtual void Awake()
     {
-        pilot = GetComponentInChildren<Pilot>();
+        pilot = GetComponentInChildren<APilot>();
         timeScale = new ResettingFloat(1);
     }
 
@@ -76,12 +76,12 @@ public abstract class Entity : MonoBehaviour
         //Debug.Log(Layers.GetColorFromTeam(team));
     }
 
-    public Pilot GetPilot()
+    public APilot GetPilot()
     {
         return pilot;
     }
 
-    public void SetPilot(Pilot pilot)
+    public void SetPilot(APilot pilot)
     {
         this.pilot = pilot;
     }
@@ -100,7 +100,7 @@ public abstract class Entity : MonoBehaviour
         return timeScale;
     }
 
-    public void Setup(MovementStats movementStats, Pilot pilot)
+    public void Setup(MovementStats movementStats, APilot pilot)
     {
         this.movementStats = movementStats;
         this.pilot = pilot;

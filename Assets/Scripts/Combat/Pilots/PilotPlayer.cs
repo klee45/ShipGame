@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PilotPlayer : Pilot
+public class PilotPlayer : APilot
 {
     private Ship ship;
 

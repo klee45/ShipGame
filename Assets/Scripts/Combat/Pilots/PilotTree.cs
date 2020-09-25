@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
     
-public class PilotTree : Pilot
+public class PilotTree : APilot
 {
     [SerializeField]
     private BehaviorNode behaviorTree;

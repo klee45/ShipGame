@@ -19,7 +19,9 @@ public abstract class AWeapon : MonoBehaviour
     [SerializeField]
     private int energyCost = 0;
     [SerializeField]
-    private WeaponSize size = WeaponSize.Medium;
+    private WeaponSize weaponSize = WeaponSize.Medium;
+    [SerializeField]
+    private CombatType combatType = CombatType.Offense;
     [SerializeField]
     private bool attachProjectile = false;
     [SerializeField]

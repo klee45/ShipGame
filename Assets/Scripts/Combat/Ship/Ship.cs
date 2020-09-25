@@ -19,6 +19,8 @@ public class Ship : Entity
 {
     [SerializeField]
     private CombatStats combatStats;
+    [SerializeField]
+    private CombatType combatType = CombatType.Offense;
 
     private EffectDictShip shipEffects;
 

@@ -9,7 +9,7 @@ public class PilotDummyTemplate : PilotTemplate
     [SerializeField]
     private float translation = 0;
 
-    protected override Pilot CreateHelper(GameObject obj)
+    protected override APilot CreateHelper(GameObject obj)
     {
         var pilot = obj.AddComponent<PilotDummy>();
         pilot.Setup(rotation, translation);

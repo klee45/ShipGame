@@ -52,13 +52,13 @@ public class ShipSwapper : MonoBehaviour
         Ship ship = ships[swapPos];
         // Debug.Log(ship);
         GameObject otherPilot = ship.GetPilot().gameObject;
-        ship.SetPilot(savedPilot.GetComponent<Pilot>());
+        ship.SetPilot(savedPilot.GetComponent<APilot>());
 
         // Debug.Log(otherPilot.name);
         // Debug.Log(savedPilot.name);
 
         savedPilot.transform.SetParent(ship.transform);
-        ship.SetPilot(savedPilot.GetComponent<Pilot>());
+        ship.SetPilot(savedPilot.GetComponent<APilot>());
         savedPilot.SetActive(true);
 
         savedPilot = otherPilot;

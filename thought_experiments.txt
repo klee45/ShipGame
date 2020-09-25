@@ -1,0 +1,37 @@
+Ship with mixed weapons and combat types
+	Long range support heal
+	Short range support shield
+	Long range laser weapon
+	Short range blaster
+
+	Only enemies
+		Target healthy or unhealthy?
+	Only allies
+		Support closest ally!
+		Check for next target afterwards
+	Close to enemy, far from ally
+	Close to ally, far from enemy
+
+2 (x INV-AGG)		3 (x AGG)    		4 (x INV-AGG)		5 (x AGG)
+Close enemy	->	close ally	->	far enemy	->	far ally
+
+Weapons have range for number of shots taken before swap
+	When to swap
+		Energy weapons - out of energy ?
+			Wait until you have some amount of energy before selecting
+		Out of range
+		All shots taken
+
+
+
+Pilot stats - static
+	Aggression [1 - 5]
+	Skill [1 - 5]
+		Use as rescaled percent [0.75 - 1]
+			Turning speed, movement speed, reload speed, vision range
+Metrics - dynamic
+	Confidence [.1 - 5]
+		Percent health [(capped) .1 - 1] x average of aggression and skill
+		Get closer
+		Save more energy
+		Chance to start fleeing
