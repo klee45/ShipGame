@@ -7,13 +7,13 @@ public abstract class Travel : BehaviorLeaf
 {
     protected void RotateTowardsTargetAngleDiff(BehaviorState state)
     {
-        float mag = LimitMagnitude(state.target.angleDiff / 50f, 1f, out int sign);
+        float mag = LimitMagnitude(state.targetInfo.angleDiff / 50f, 1f, out int sign);
         /*
         float reverseMag = 1 - mag;
         float squared = reverseMag * reverseMag;
         state.queuedRotation = sign * 0.9f * (1.1f - squared);
         */
-        state.queuedRotation = sign * 0.9f * (0.1f + mag * mag);
+        state.movementInfo.queuedRotation = sign * 0.9f * (0.1f + mag * mag);
         //Debug.Log("Mag " + mag);
         //Debug.Log("Rot " + state.queuedRotation);
         // Debug.Log(string.Format("Diff: {0}", angleDiff));
@@ -36,18 +36,18 @@ public abstract class Travel : BehaviorLeaf
     protected NodeState StayWithinHelper(BehaviorState state, float minDist, float maxDist)
     {
         RotateTowardsTargetAngleDiff(state);
-        float targetDist = state.target.sqrDistDiff;
+        float targetDist = state.targetInfo.sqrDistDiff;
         if (targetDist > maxDist * maxDist)
         {
-            state.queuedVelocity = 1.0f;
+            state.movementInfo.queuedVelocity = 1.0f;
         }
         else if (targetDist < minDist * minDist)
         {
-            state.queuedVelocity = -1.0f;
+            state.movementInfo.queuedVelocity = -1.0f;
         }
         else
         {
-            state.queuedVelocity = 0f;
+            state.movementInfo.queuedVelocity = 0f;
         }
         return NodeState.Running;
     }

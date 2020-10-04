@@ -28,7 +28,7 @@ public class TravelStayWeaponDist : Travel
         // Debug.Log(arsenal);
         // Debug.Log(arsenal.GetWeapon(state.weaponChoice));
         // Debug.Log(arsenal.GetWeapon(state.weaponChoice).GetRange());
-        float range = arsenal.GetWeapon(state.weaponChoice).GetRange();
+        float range = arsenal.GetWeapon(state.weaponInfo.weaponIndex).GetRange();
         float minRange = range * minPercent;
         float maxRange = range * maxPercent;
         return StayWithinHelper(state, minRange, maxRange);

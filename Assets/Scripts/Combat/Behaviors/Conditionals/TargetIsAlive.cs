@@ -6,7 +6,7 @@ public class TargetIsAlive : BehaviorConditional
 {
     protected override bool Conditional(BehaviorState state)
     {
-        return state.target.ship.GetCombatStats().IsAlive();
+        return state.targetInfo.ship.GetCombatStats().IsAlive();
     }
 
     protected override NodeState UpdateStateHelper(BehaviorState state)

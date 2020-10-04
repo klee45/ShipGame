@@ -51,8 +51,8 @@ public class SetRandomTargetPosition : BehaviorLeaf
     {
         if (Boundry.instance.Inside(pos, BOUNDRY_PADDING))
         {
-            state.target.position = pos;
-            last = state.target.position;
+            state.targetInfo.position = pos;
+            last = state.targetInfo.position;
             return true;
         }
         return false;

@@ -7,7 +7,7 @@ public class FireWeapon : BehaviorLeaf
     protected override NodeState UpdateStateHelper(BehaviorState state)
     {
         //Debug.Log("Touch fireweapon");
-        state.fireWeapon = true;
+        state.weaponInfo.fireWeapon = true;
         return NodeState.Success;
     }
 

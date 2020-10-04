@@ -69,7 +69,7 @@ public class Arsenal : MonoBehaviour
         }
     }
 
-    public bool CanFire(int weapon)
+    public bool WeaponIsReady(int weapon)
     {
         return weapons[weapon].IsReady();
     }

@@ -5,14 +5,18 @@ using UnityEngine;
 
 public abstract class Detection<T> : MonoBehaviour where T : Entity
 {
+    /*
     [SerializeField]
     private float timeInBetween;
     [SerializeField]
     private float randomIncrease;
     [SerializeField]
     private float initialRandomIncrease;
+    */
     [SerializeField]
     private float zoneScale;
+    private int scaleMod;
+    private readonly static int minScaleMod = 50;
     [SerializeField]
     private GameObject zoneObject;
 
@@ -28,10 +32,39 @@ public abstract class Detection<T> : MonoBehaviour where T : Entity
     {
         detected = new List<T>();
         zone = InitializeZone(zoneObject);
-        zone.Initialize(zoneScale, timeInBetween, randomIncrease, initialRandomIncrease);
+        scaleMod = minScaleMod;
+        zone.Initialize(GetScaleValue());//, timeInBetween, randomIncrease, initialRandomIncrease);
     }
 
-    private void PruneDestoyed()
+    public void ResetRange()
+    {
+        scaleMod = minScaleMod;
+        Scale();
+    }
+
+    public void IncreaseRange()
+    {
+        scaleMod = Mathf.Max(1, scaleMod - 1);
+        Scale();
+    }
+
+    public void IncreaseMod()
+    {
+        scaleMod = Mathf.Min(minScaleMod, scaleMod + 1);
+        Scale();
+    }
+    
+    private void Scale()
+    {
+        zone.SetScale(GetScaleValue());
+    }
+
+    private float GetScaleValue()
+    {
+        return zoneScale * (10f / scaleMod);
+    }
+
+    protected void PruneDestoyed()
     {
         for (int i = detected.Count - 1; i >= 0; i--)
         {
@@ -148,9 +181,9 @@ public abstract class Detection<T> : MonoBehaviour where T : Entity
         }
     }
 
-    protected delegate bool Comp(float a, float b);
-    protected delegate void Setter(T entity, ref T result, Comp comparer);
-    protected bool GetHelper(out T result, Setter setter, Comp comparer)
+    protected delegate bool Comp<U>(U a, U b);
+    protected delegate void Setter<U>(T entity, ref T result, Comp<U> comparer);
+    protected bool GetHelper<U>(out T result, Setter<U> setter, Comp<U> comparer)
     {
         PruneDestoyed();
         int len = detected.Count;

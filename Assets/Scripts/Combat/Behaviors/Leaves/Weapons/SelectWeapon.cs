@@ -10,7 +10,7 @@ public class SelectWeapon : BehaviorLeaf
     protected override NodeState UpdateStateHelper(BehaviorState state)
     {
         //Debug.Log("Touch selectweapon");
-        state.weaponChoice = choice;
+        state.weaponInfo.weaponIndex = choice;
         return NodeState.Success;
     }
 

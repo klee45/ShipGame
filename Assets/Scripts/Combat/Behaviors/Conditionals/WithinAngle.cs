@@ -9,7 +9,7 @@ public class WithinAngle : BehaviorConditional
 
     protected override bool Conditional(BehaviorState state)
     {
-        return Mathf.Abs(state.target.angleDiff) < angle;
+        return Mathf.Abs(state.targetInfo.angleDiff) < angle;
     }
 
     protected override string GetName()

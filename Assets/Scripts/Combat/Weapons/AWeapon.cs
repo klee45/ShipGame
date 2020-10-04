@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static SetTargetByPilotStats;
 
 public abstract class AWeapon : MonoBehaviour
 {
@@ -27,6 +28,16 @@ public abstract class AWeapon : MonoBehaviour
     [SerializeField]
     private Arsenal.WeaponPosition preferedPosition = Arsenal.WeaponPosition.Center;
 
+    [SerializeField]
+    private TargetType preferredTarget = TargetType.CloseEnemy;
+    [SerializeField]
+    private TargetType secondaryTarget = TargetType.FarEnemy;
+
+    [SerializeField]
+    private int maxSuggestedShots = 1;
+    [SerializeField]
+    private int minSuggestedShots = 1;
+
     protected RangeEstimator rangeEstimator;
     private bool ready;
 
@@ -47,6 +58,26 @@ public abstract class AWeapon : MonoBehaviour
     {
         cooldown.TurnOff();
         ready = true;
+    }
+
+    public int GetMaxSuggestedShots()
+    {
+        return maxSuggestedShots;
+    }
+
+    public int GetMinSuggestedShots()
+    {
+        return minSuggestedShots;
+    }
+
+    public TargetType GetPreferredTarget()
+    {
+        return preferredTarget;
+    }
+
+    public TargetType GetSecondaryTarget()
+    {
+        return secondaryTarget;
     }
 
     public Arsenal.WeaponPosition GetPreferedPosition()

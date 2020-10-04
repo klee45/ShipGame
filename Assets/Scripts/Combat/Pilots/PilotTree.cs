@@ -31,7 +31,7 @@ public class PilotTree : APilot
 
     public Vector2 GetTargetPos()
     {
-        return behaviorState.target.position;
+        return behaviorState.targetInfo.position;
     }
 
     public override void MakeActions()
@@ -40,12 +40,12 @@ public class PilotTree : APilot
         //Debug.Log(behaviorState.fireWeapon);
         //Debug.Log(behaviorState.weaponChoice);
         Ship ship = behaviorState.ship;
-        Rotate(ship, behaviorState.queuedRotation);
-        Move(ship, behaviorState.queuedVelocity);
-        if (behaviorState.fireWeapon)
+        Rotate(ship, behaviorState.movementInfo.queuedRotation);
+        Move(ship, behaviorState.movementInfo.queuedVelocity);
+        if (behaviorState.weaponInfo.fireWeapon)
         {
-            FireWeapon(ship, behaviorState.weaponChoice);
-            behaviorState.fireWeapon = false;
+            FireWeapon(ship, behaviorState.weaponInfo.weaponIndex);
+            behaviorState.weaponInfo.fireWeapon = false;
         }
         switch(rootState)
         {

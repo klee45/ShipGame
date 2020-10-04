@@ -18,6 +18,6 @@ public class CanFireWeapon : BehaviorConditional
 
     protected override bool Conditional(BehaviorState state)
     {
-        return arsenal.CanFire(state.weaponChoice);
+        return arsenal.WeaponIsReady(state.weaponInfo.weaponIndex);
     }
 }

@@ -34,6 +34,34 @@ public class TeamManager : MonoBehaviour
         }
     }
 
+    public static void SeparateTeams(
+        Team team,
+        List<Ship> ships,
+        out List<Ship> allied,
+        out List<Ship> enemy,
+        out List<Ship> neutral)
+    {
+        allied = new List<Ship>();
+        enemy = new List<Ship>();
+        neutral = new List<Ship>();
+        foreach (Ship ship in ships)
+        {
+            Team otherTeam = ship.GetTeam();
+            if (otherTeam == Team.Neutral)
+            {
+                neutral.Add(ship);
+            }
+            else if (otherTeam == team)
+            {
+                allied.Add(ship);
+            }
+            else
+            {
+                enemy.Add(ship);
+            }
+        }
+    }
+
     private void SetLayer(GameObject child)
     {
         child.layer = gameObject.layer;

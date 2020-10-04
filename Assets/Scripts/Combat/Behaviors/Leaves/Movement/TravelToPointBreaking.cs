@@ -20,16 +20,16 @@ public class TravelToPointBreaking : Travel
     protected override NodeState UpdateStateHelper(BehaviorState state)
     {
         RotateTowardsTargetAngleDiff(state);
-        float sqrDiff = state.target.sqrDistDiff - successDistance * successDistance;
+        float sqrDiff = state.targetInfo.sqrDistDiff - successDistance * successDistance;
         if (sqrDiff > 0)
         {
-            if (Mathf.Abs(state.target.angleDiff) > slowAngle)
+            if (Mathf.Abs(state.targetInfo.angleDiff) > slowAngle)
             {
-                state.queuedVelocity = -1.0f;
+                state.movementInfo.queuedVelocity = -1.0f;
             }
             else
             {
-                state.queuedVelocity = 1.0f;
+                state.movementInfo.queuedVelocity = 1.0f;
             }
 
             return NodeState.Running;

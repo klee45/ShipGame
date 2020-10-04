@@ -5,31 +5,30 @@ using UnityEngine.Assertions;
 
 public class PilotStats : MonoBehaviour
 {
-    [SerializeField]
-    private int aggression = 50;
-    [SerializeField]
-    private int tactics = 50;
+    public const int MIN_AGGRESSION = 1;
+    public const int MAX_AGGRESSION = 5;
+    public const int MIN_SKILL = 1;
+    public const int MAX_SKILL = 5;
+
 
     [SerializeField]
-    private int pilotSkill = 50;
+    [Range(MIN_AGGRESSION, MAX_AGGRESSION)]
+    private float aggression = (MAX_AGGRESSION + MIN_AGGRESSION) / 2;
     [SerializeField]
-    private int weaponSkill = 50;
+    [Range(MIN_SKILL, MAX_SKILL)]
+    private float skill = (MAX_SKILL + MIN_SKILL) / 2;
 
     private void Awake()
     {
-        CheckRanges();
     }
 
-    private void CheckRanges()
+    public float GetAggression()
     {
-        Assert.IsTrue(InRange(aggression));
-        Assert.IsTrue(InRange(tactics));
-        Assert.IsTrue(InRange(pilotSkill));
-        Assert.IsTrue(InRange(weaponSkill));
+        return aggression;
     }
 
-    private bool InRange(int val)
+    public float GetSkill()
     {
-        return val >= 0 && val <= 100;
+        return skill;
     }
-}
+}   

@@ -20,12 +20,12 @@ public class TravelToPointSmooth : Travel
     {
         RotateTowardsTargetAngleDiff(state);
 
-        float sqrDiff = state.target.sqrDistDiff - successDistance * successDistance;
+        float sqrDiff = state.targetInfo.sqrDistDiff - successDistance * successDistance;
         if (sqrDiff > 0)
         {
             float sqrSlow = slowDist * slowDist;
-            float divMod = sqrSlow * (1 + speedMod * Mathf.Abs(state.queuedRotation));
-            state.queuedVelocity = Mathf.Min(state.target.sqrDistDiff / divMod, 1);
+            float divMod = sqrSlow * (1 + speedMod * Mathf.Abs(state.movementInfo.queuedRotation));
+            state.movementInfo.queuedVelocity = Mathf.Min(state.targetInfo.sqrDistDiff / divMod, 1);
             return NodeState.Running;
         }
         else

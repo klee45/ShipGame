@@ -34,10 +34,10 @@ public class SetRandomTarget : BehaviorLeaf
             switch (type)
             {
                 case SelectType.Enemy:
-                    result = detections.GetRandomBlacklist(ref state.target.ship, shipLayer);
+                    result = detections.GetRandomBlacklist(ref state.targetInfo.ship, shipLayer);
                     break;
                 case SelectType.SameTeam:
-                    result = detections.GetRandomWhitelist(ref state.target.ship, shipLayer);
+                    result = detections.GetRandomWhitelist(ref state.targetInfo.ship, shipLayer);
                     break;
             }
             if (result)

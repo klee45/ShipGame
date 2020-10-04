@@ -11,11 +11,14 @@ public class SetUnhealthyTarget : BehaviorLeaf
 
     protected override NodeState UpdateStateHelper(BehaviorState state)
     {
+        throw new System.NotImplementedException();
+        /*
         if (state.GetShipDetections().GetLeastHealthy(out Ship ship))
         {
             state.ship = ship;
             return NodeState.Success;
         }
         return NodeState.Failure;
+        */
     }
 }

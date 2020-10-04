@@ -16,6 +16,18 @@ public abstract class PilotTemplate : Template<APilot, GameObject>
 
 public abstract class APilot : MonoBehaviour
 {
+    private PilotStats stats;
+
+    public PilotStats GetStats()
+    {
+        return stats;
+    }
+
+    public void SetPilotStats(PilotStats stats)
+    {
+        this.stats = stats;
+    }
+
     public abstract void MakeActions();
     public virtual void Tick(float deltaTime) { }
 

@@ -104,7 +104,7 @@ public class MemoryDictionary : MonoBehaviour
         float val = pair.Key.GetCombatStats().GetOverallPercent();
         if (comparer(val, resultsPair.GetShip().GetCombatStats().GetOverallPercent()))
         {
-            resultsPair.Set(val, pair.Key);
+            resultsPair = new ResultsPair(val, pair.Key);
         }
     }
 
@@ -113,7 +113,7 @@ public class MemoryDictionary : MonoBehaviour
         int count = pair.Value.GetCount();
         if (comparer(count, resultsPair.GetCount()))
         {
-            resultsPair.Set(count, pair.Key);
+            resultsPair = new ResultsPair(count, pair.Key);
         }
     }
 
@@ -122,7 +122,6 @@ public class MemoryDictionary : MonoBehaviour
         public ResultsPair(float a, Ship b) : base(a, b)
         {
         }
-        public void Set(float count, Ship ship) { a = count; b = ship; }
         public float GetCount() { return a; }
         public Ship GetShip() { return b; }
     }
@@ -160,7 +159,7 @@ public class MemoryDictionary : MonoBehaviour
         if (dict.ContainsKey(obj))
         {
             var pair = dict[obj];
-            pair.SetCount(pair.GetCount() + 1);
+            pair = new TimerPair(pair.GetTimer(), pair.GetCount() + 1);
             // Between x1 and x3
             float mod = 1 + Mathf.Min(pair.GetCount() + 1, 50) / 25.0f;
             pair.GetTimer().SetMaxTime(duration * mod);
@@ -199,6 +198,5 @@ public class MemoryDictionary : MonoBehaviour
         }
         public TimerStatic GetTimer() { return a; }
         public int GetCount() { return b; }
-        public void SetCount(int count) { b = count; }
     }
 }

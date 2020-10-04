@@ -1,25 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static SetTargetByPilotStats;
 
 public class BehaviorState : MonoBehaviour
 {
     public Ship ship;
     private DetectionShip shipDetections;
-    public TargetInfo target;
-
-    public float queuedVelocity = 0;
-    public float queuedRotation = 0;
-    public bool isBreaking = false;
-
-    public bool fireWeapon = false;
-    public int weaponChoice = 0;
+    public TargetInfo targetInfo;
+    public WeaponInfo weaponInfo;
+    public MovementInfo movementInfo;
 
     private void Start()
     {
         ship = GetComponentInParent<Ship>();
         shipDetections = ship.GetComponentInChildren<DetectionShip>();
-        target = new TargetInfo();
+        targetInfo = new TargetInfo();
     }
 
     public DetectionShip GetShipDetections()
@@ -29,15 +25,28 @@ public class BehaviorState : MonoBehaviour
 
     public void ResetMovement()
     {
-        queuedVelocity = 0;
-        queuedRotation = 0;
-        isBreaking = false;
+        movementInfo.queuedVelocity = 0;
+        movementInfo.queuedRotation = 0;
+        movementInfo.isBreaking = false;
     }
 
     public void ResetWeapons()
     {
-        fireWeapon = false;
-        weaponChoice = 0;
+        weaponInfo.fireWeapon = false;
+        weaponInfo.weaponIndex = 0;
+    }
+
+    public class MovementInfo
+    {
+        public float queuedVelocity = 0;
+        public float queuedRotation = 0;
+        public bool isBreaking = false;
+    }
+
+    public class WeaponInfo
+    {
+        public bool fireWeapon = false;
+        public int weaponIndex = 0;
     }
 
     public class TargetInfo
@@ -46,5 +55,7 @@ public class BehaviorState : MonoBehaviour
         public Vector2 position;
         public float angleDiff;
         public float sqrDistDiff;
+        public TargetType targetType;
+        public int shotsRemaining;
     }
 }

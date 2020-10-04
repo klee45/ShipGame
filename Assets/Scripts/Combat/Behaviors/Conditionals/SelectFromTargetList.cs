@@ -24,7 +24,7 @@ public class SelectFromTargetList : BehaviorLeaf
         if (pos < targetList.targets.Count)
         {
             GameObject target = targetList.targets[pos];
-            state.target.position = target.transform.position;
+            state.targetInfo.position = target.transform.position;
             pos++;
             return NodeState.Success;
         }
