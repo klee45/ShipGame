@@ -40,9 +40,11 @@ public class BehaviorVisualizer : MonoBehaviour
     {
         GameObject obj = Instantiate(prefab);
         var canvas = obj.GetComponent<Canvas>();
+        canvas.sortingOrder = 1001;
         canvas.worldCamera = Camera.main;
         var renderer = obj.GetComponent<SpriteRenderer>();
         renderer.sprite = GetSprite(node);
+        renderer.sortingOrder = 1000;
 
         node.OnUpdate += () => UpdateVisual(obj, renderer, node);
         return obj;
@@ -60,6 +62,7 @@ public class BehaviorVisualizer : MonoBehaviour
 
     private void UpdateVisual(GameObject obj, SpriteRenderer renderer, BehaviorNode node)
     {
+        //Debug.Log(node + ", " + node.GetLastState());
         renderer.color = GetColor(node.GetLastState());
         obj.GetComponentInChildren<UnityEngine.UI.Text>().text = node.GetText();
     }
@@ -91,6 +94,11 @@ public class BehaviorVisualizer : MonoBehaviour
     }
 
     public Sprite GetSpriteHelper(BehaviorConditional conditional)
+    {
+        return conditionalSprite;
+    }
+
+    public Sprite GetSpriteHelper(BehaviorLink link)
     {
         return conditionalSprite;
     }

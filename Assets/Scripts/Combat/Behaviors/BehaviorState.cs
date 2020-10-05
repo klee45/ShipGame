@@ -16,6 +16,8 @@ public class BehaviorState : MonoBehaviour
         ship = GetComponentInParent<Ship>();
         shipDetections = ship.GetComponentInChildren<DetectionShip>();
         targetInfo = new TargetInfo();
+        weaponInfo = new WeaponInfo();
+        movementInfo = new MovementInfo();
     }
 
     public DetectionShip GetShipDetections()
@@ -47,6 +49,7 @@ public class BehaviorState : MonoBehaviour
     {
         public bool fireWeapon = false;
         public int weaponIndex = 0;
+        public int shotsRemaining = 0;
     }
 
     public class TargetInfo
@@ -56,6 +59,5 @@ public class BehaviorState : MonoBehaviour
         public float angleDiff;
         public float sqrDistDiff;
         public TargetType targetType;
-        public int shotsRemaining;
     }
 }

@@ -73,7 +73,7 @@ public class SelectWeaponByTargetDistance : BehaviorLeaf
     private void SetupWeapon(BehaviorState state, WeaponPair pair)
     {
         state.weaponInfo.weaponIndex = pair.GetPos();
-        state.targetInfo.shotsRemaining = GetSuggestedShots(pair.GetWeapon());
+        state.weaponInfo.shotsRemaining = GetSuggestedShots(pair.GetWeapon());
     }
 
     private int GetSuggestedShots(AWeapon weapon)

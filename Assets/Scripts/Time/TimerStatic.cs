@@ -9,7 +9,9 @@ public class TimerStatic : Timer
         Tick(TimeController.DeltaTime(1));
     }
 
-    public override void Tick(float deltaTime)
+    public override bool Tick(float deltaTime)
     {
+        Debug.LogWarning("No need to tick static timers");
+        return false;
     }
 }

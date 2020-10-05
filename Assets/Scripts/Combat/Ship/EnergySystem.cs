@@ -27,6 +27,12 @@ public class EnergySystem : MonoBehaviour
     public int GetEnergy() { return Mathf.RoundToInt(currentEnergy); }
     public int GetMaxEnergy() { return maxEnergy.GetInt(); }
     public float GetPercent() { return currentEnergy / maxEnergy.GetValue(); }
+    public float GetChargePerSec() { return chargePerSec; }
+
+    public float GetTimeToRecharge(float targetEnergy)
+    {
+        return (targetEnergy - currentEnergy) / chargePerSec;
+    }
 
     public void Recharge(float charge)
     {

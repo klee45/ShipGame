@@ -18,6 +18,16 @@ public abstract class APilot : MonoBehaviour
 {
     private PilotStats stats;
 
+    protected virtual void Awake()
+    {
+        stats = gameObject.AddComponent<PilotStats>();
+    }
+
+    private void CreateRandomizedStats()
+    {
+        
+    }
+
     public PilotStats GetStats()
     {
         return stats;

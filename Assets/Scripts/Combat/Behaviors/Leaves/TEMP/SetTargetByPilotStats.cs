@@ -5,7 +5,7 @@ using System.Linq;
 
 public class SetTargetByPilotStats : BehaviorLeaf
 {
-    private const int MIN_DISTANCE_FOR_CLOSE_SQR = 1000 * 1000;
+    private const int MIN_DISTANCE_FOR_CLOSE_SQR = 10 * 10;
 
     protected override string GetName()
     {
@@ -14,14 +14,20 @@ public class SetTargetByPilotStats : BehaviorLeaf
 
     protected override NodeState UpdateStateHelper(BehaviorState state)
     {
+        state.GetShipDetections().SetupShips();
+        //Debug.Log("Setting target");
+        //Debug.Log(state.GetShipDetections().GetCount());
         PilotStats stats = state.ship.GetPilot().GetStats();
         if (FindTarget(state, stats, state.GetShipDetections(), out Ship targetShip))
         {
+            Debug.Log("Set target success " + targetShip);
             state.targetInfo.ship = targetShip;
+            state.GetShipDetections().ResetRange();
             return NodeState.Success;
         }
         else
         {
+            //Debug.Log("Set target fail");
             return NodeState.Failure;
         }
     }
@@ -57,6 +63,8 @@ public class SetTargetByPilotStats : BehaviorLeaf
             {
                 case TargetType.CloseEnemy:
                     Ship closeEnemyShip = enemies.distanceSqr.GetLowest(out distSqr);
+                    //Debug.Log(closeEnemyShip);
+                    //Debug.Log(distSqr);
                     if (distSqr < MIN_DISTANCE_FOR_CLOSE_SQR || closeEnemyShip == null)
                     {
                         break;
@@ -68,6 +76,8 @@ public class SetTargetByPilotStats : BehaviorLeaf
                     }
                 case TargetType.FarEnemy:
                     Ship farEnemyShip = enemies.distanceSqr.GetHighest(out distSqr);
+                    //Debug.Log(farEnemyShip);
+                    //Debug.Log(distSqr);
                     if (farEnemyShip == null)
                     {
                         break;
@@ -79,6 +89,8 @@ public class SetTargetByPilotStats : BehaviorLeaf
                     }
                 case TargetType.CloseAlly:
                     Ship closeAllyShip = allies.distanceSqr.GetLowest(out distSqr);
+                    //Debug.Log(closeAllyShip);
+                    //Debug.Log(distSqr);
                     if (distSqr < MIN_DISTANCE_FOR_CLOSE_SQR || closeAllyShip == null)
                     {
                         break;
@@ -90,6 +102,8 @@ public class SetTargetByPilotStats : BehaviorLeaf
                     };
                 case TargetType.FarAlly:
                     Ship farAllyShip = allies.distanceSqr.GetHighest(out distSqr);
+                    //Debug.Log(farAllyShip);
+                    //Debug.Log(distSqr);
                     if (farAllyShip == null)
                     {
                         break;
@@ -100,6 +114,7 @@ public class SetTargetByPilotStats : BehaviorLeaf
                         return true;
                     }
             }
+            //Debug.Log(pair.b + " failed");
         }
         target = null;
         return false;

@@ -18,7 +18,7 @@ public class TargetIsAlive : BehaviorConditional
         }
         else
         {
-            return failState;
+            return exitState;
         }
     }
 

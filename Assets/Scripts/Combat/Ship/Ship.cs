@@ -204,7 +204,12 @@ public class Ship : Entity
 
     public bool CanFireWeapon(int weaponPos)
     {
+        return arsenal.WeaponIsReady(weaponPos) && HasEnergyForWeapon(weaponPos);
+    }
+
+    public bool HasEnergyForWeapon(int weaponPos)
+    {
         AWeapon weapon = GetWeapon(weaponPos);
-        return arsenal.WeaponIsReady(weaponPos) && weapon.GetEnergyCost() <= energySystem.GetEnergy();
+        return weapon.GetEnergyCost() <= energySystem.GetEnergy();
     }
 }

@@ -8,6 +8,7 @@ public class FireWeapon : BehaviorLeaf
     {
         //Debug.Log("Touch fireweapon");
         state.weaponInfo.fireWeapon = true;
+        state.weaponInfo.shotsRemaining--;
         return NodeState.Success;
     }
 

@@ -10,7 +10,6 @@ public class PilotStats : MonoBehaviour
     public const int MIN_SKILL = 1;
     public const int MAX_SKILL = 5;
 
-
     [SerializeField]
     [Range(MIN_AGGRESSION, MAX_AGGRESSION)]
     private float aggression = (MAX_AGGRESSION + MIN_AGGRESSION) / 2;
@@ -20,6 +19,12 @@ public class PilotStats : MonoBehaviour
 
     private void Awake()
     {
+    }
+
+    private void Randomize()
+    {
+        aggression = Random.Range(MIN_AGGRESSION, MAX_AGGRESSION);
+        skill = Random.Range(MIN_SKILL, MAX_SKILL);
     }
 
     public float GetAggression()

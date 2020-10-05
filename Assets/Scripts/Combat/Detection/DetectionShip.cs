@@ -7,8 +7,9 @@ public class DetectionShip : Detection<Ship>
 {
     private DetectedMostImportant allies, neutral, enemies;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         allies = new DetectedMostImportant();
         neutral = new DetectedMostImportant();
         enemies = new DetectedMostImportant();
@@ -22,6 +23,28 @@ public class DetectionShip : Detection<Ship>
     {
         return zone.AddComponent<DetectionZoneShip>();
     }
+
+    public int GetCount()
+    {
+        return detected.Count();
+    }
+
+    /*
+    public override bool Scan()
+    {
+        if (base.Scan())
+        {
+            Debug.Log("Detectionship scanned");
+            SetupShips();
+            return true;
+        }
+        else
+        {
+            Debug.Log("DetectionShip failed to scan");
+            return false;
+        }
+    }
+    */
 
     public bool SetupShips()
     {
@@ -53,10 +76,15 @@ public class DetectionShip : Detection<Ship>
 
     private void SetMostImportant(List<Ship> ships, DetectedMostImportant mostImportant, Vector3 selfPos)
     {
-        foreach (Ship ship in ships)
+        if (ships.Count > 0)
         {
-            mostImportant.distanceSqr.TrySet(ship, FindDistanceSqr(ship, selfPos));
-            mostImportant.health.TrySet(ship, ship.GetCombatStats().GetTotalHP());
+            mostImportant.SetAll(ships.First(), selfPos);
+            for (int pos = 1; pos < ships.Count; pos++)
+            {
+                Ship ship = ships[pos];
+                mostImportant.distanceSqr.TrySet(ship, FindDistanceSqr(ship, selfPos));
+                mostImportant.health.TrySet(ship, ship.GetCombatStats().GetTotalHP());
+            }
         }
     }
 

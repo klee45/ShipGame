@@ -15,8 +15,9 @@ public class PilotPlayer : APilot
     private float queuedMovement = 0;
     private float queuedRotation = 0;
 
-    protected void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         Dictionary<string, string> inputKeyTranslate = input.LoadKeys();
         heldKeyActionPairs = Translate(inputKeyTranslate, heldKeys);
         pressReleasedKeyActionPairs = Translate(inputKeyTranslate, pressReleaseKeys);

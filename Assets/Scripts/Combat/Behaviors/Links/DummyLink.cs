@@ -2,18 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Repeat : BehaviorLeaf
+public class DummyLink : BehaviorLink
 {
     [SerializeField]
-    private NodeState repeatState;
+    private string nodeName;
 
     protected override string GetName()
     {
-        return string.Format("Repeat {0}", repeatState);
+        return nodeName;
     }
 
     protected override NodeState UpdateStateHelper(BehaviorState state)
     {
-        return repeatState;
+        NodeState result = child.UpdateState(state);
+        Debug.Log(nodeName + " updated " + result);
+        return result;
     }
 }

@@ -5,17 +5,16 @@ using UnityEngine;
 public class Wait : BehaviorLeaf
 {
     [SerializeField]
+    private NodeState resultState = NodeState.Success;
+    [SerializeField]
     private float duration;
-    private float currentTime;
+
+    private Timer timer;
 
     private void Awake()
     {
-        Reset();
-    }
-
-    private void Reset(float overflow=0)
-    {
-        currentTime = overflow;
+        timer = gameObject.AddComponent<Timer>();
+        timer.Initialize(duration);
     }
 
     protected override string GetName()
@@ -26,10 +25,8 @@ public class Wait : BehaviorLeaf
     protected override NodeState UpdateStateHelper(BehaviorState state)
     {
         var timeScale = state.ship.GetTimeScale();
-        currentTime += TimeController.DeltaTime(timeScale);
-        if (currentTime >= duration)
+        if (timer.Tick(TimeController.DeltaTime(timeScale)))
         {
-            Reset(currentTime - duration);
             return NodeState.Success;
         }
         else

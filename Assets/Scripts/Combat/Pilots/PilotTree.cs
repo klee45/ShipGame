@@ -8,8 +8,9 @@ public class PilotTree : APilot
     private BehaviorNode behaviorTree;
     private BehaviorState behaviorState;
 
-    protected void Awake()
+    protected override void Awake()
     {
+        base.Awake();
         behaviorState = gameObject.AddComponent<BehaviorState>();
     }
 
@@ -50,7 +51,11 @@ public class PilotTree : APilot
         switch(rootState)
         {
             case BehaviorNode.NodeState.Success:
+                Debug.Log("AI tree success");
+                behaviorTree.ResetNode();
+                break;
             case BehaviorNode.NodeState.Failure:
+                Debug.Log("AI tree failure");
                 behaviorTree.ResetNode();
                 break;
         }

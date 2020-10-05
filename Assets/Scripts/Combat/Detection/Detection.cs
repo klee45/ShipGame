@@ -16,7 +16,7 @@ public abstract class Detection<T> : MonoBehaviour where T : Entity
     [SerializeField]
     private float zoneScale;
     private int scaleMod;
-    private readonly static int minScaleMod = 50;
+    private readonly static int minScaleMod = 20;
     [SerializeField]
     private GameObject zoneObject;
 
@@ -28,11 +28,11 @@ public abstract class Detection<T> : MonoBehaviour where T : Entity
     private DetectionZone<T> zone;
     protected List<T> detected;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         detected = new List<T>();
         zone = InitializeZone(zoneObject);
-        scaleMod = minScaleMod;
+        scaleMod = 0;
         zone.Initialize(GetScaleValue());//, timeInBetween, randomIncrease, initialRandomIncrease);
     }
 
@@ -44,13 +44,13 @@ public abstract class Detection<T> : MonoBehaviour where T : Entity
 
     public void IncreaseRange()
     {
-        scaleMod = Mathf.Max(1, scaleMod - 1);
+        scaleMod = Mathf.Min(minScaleMod, scaleMod + 1);
         Scale();
     }
 
-    public void IncreaseMod()
+    public void DecreaseRange()
     {
-        scaleMod = Mathf.Min(minScaleMod, scaleMod + 1);
+        scaleMod = Mathf.Max(0, scaleMod - 1);
         Scale();
     }
     
@@ -61,7 +61,7 @@ public abstract class Detection<T> : MonoBehaviour where T : Entity
 
     private float GetScaleValue()
     {
-        return zoneScale * (10f / scaleMod);
+        return zoneScale * (1 + (scaleMod / 5f));
     }
 
     protected void PruneDestoyed()
@@ -94,7 +94,7 @@ public abstract class Detection<T> : MonoBehaviour where T : Entity
 
     protected abstract DetectionZone<T> InitializeZone(GameObject zoneObject);
 
-    public bool Scan()
+    public virtual bool Scan()
     {
         /*
         if (log)

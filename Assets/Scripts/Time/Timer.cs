@@ -37,12 +37,12 @@ public class Timer : MonoBehaviour
         Awake();
     }
 
-    public virtual void Tick(float deltaTime)
+    public virtual bool Tick(float deltaTime)
     {
-        TickHelper(deltaTime);
+        return TickHelper(deltaTime);
     }
 
-    protected void TickHelper(float deltaTime)
+    protected bool TickHelper(float deltaTime)
     {
         if (running)
         {
@@ -61,8 +61,10 @@ public class Timer : MonoBehaviour
                     }
                 }
                 OnComplete?.Invoke();
+                return true;
             }
         }
+        return false;
     }
 
     public void TurnOff() { running = false; }
@@ -115,6 +117,11 @@ public class Timer : MonoBehaviour
     public float GetTime()
     {
         return currentTime;
+    }
+
+    public float GetTimeRemaining()
+    {
+        return maxTime - currentTime;
     }
 
     public float GetPercentLeft()
