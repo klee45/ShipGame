@@ -58,7 +58,6 @@ MonoBehaviour:
   colliderLength: 0
   delay: 0.5
   range: 15
-  layerType: 1
   layerTypes: 00000000
   immuneTags: 
 --- !u!114 &4967667839457484304
@@ -136,7 +135,6 @@ MonoBehaviour:
   colliderLength: 0
   delay: 0.2
   range: 15
-  layerType: 1
   layerTypes: 00000000
   immuneTags: 
 --- !u!114 &4967667839493134335
@@ -318,7 +316,6 @@ MonoBehaviour:
   colliderLength: 0
   delay: 0.1
   range: 15
-  layerType: 1
   layerTypes: 00000000
   immuneTags: 
 --- !u!114 &4967667840051252839
@@ -429,7 +426,6 @@ MonoBehaviour:
   colliderLength: 0
   delay: 0.4
   range: 15
-  layerType: 1
   layerTypes: 00000000
   immuneTags: 
 --- !u!114 &4967667840141216365
@@ -507,7 +503,6 @@ MonoBehaviour:
   colliderLength: 0
   delay: 0
   range: 15
-  layerType: 1
   layerTypes: 00000000
   immuneTags: 
 --- !u!114 &4967667840262195195
@@ -585,7 +580,6 @@ MonoBehaviour:
   colliderLength: 0
   delay: 0.3
   range: 15
-  layerType: 1
   layerTypes: 00000000
   immuneTags: 
 --- !u!114 &4967667840472135423
@@ -690,9 +684,14 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: 88b43c90f519fd242bd0d745f2127684, type: 3}
   cooldown: {fileID: 8078504241892350582}
   energyCost: 0
-  size: 1
+  weaponSize: 1
+  combatType: 0
   attachProjectile: 0
   preferedPosition: 1
+  preferredTarget: 2
+  secondaryTarget: 0
+  maxSuggestedShots: 1
+  minSuggestedShots: 1
   projectileTemplates:
   - {fileID: 4967667840262195172}
   - {fileID: 4967667840051252832}
@@ -833,15 +832,15 @@ PrefabInstance:
       propertyPath: layerTypes.Array.size
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7000236587950819079, guid: 3ea675276220a7c468b115d09ed6b6fe,
-        type: 3}
-      propertyPath: damage
-      value: 20
-      objectReference: {fileID: 0}
     - target: {fileID: 7000236587950819076, guid: 3ea675276220a7c468b115d09ed6b6fe,
         type: 3}
       propertyPath: doesFade
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7000236587950819079, guid: 3ea675276220a7c468b115d09ed6b6fe,
+        type: 3}
+      propertyPath: damage
+      value: 20
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ea675276220a7c468b115d09ed6b6fe, type: 3}

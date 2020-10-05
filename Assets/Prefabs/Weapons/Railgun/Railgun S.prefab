@@ -54,9 +54,14 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: cf4d98f3553140742aa3d5169378d24b, type: 3}
   cooldown: {fileID: 6653935266458077953}
   energyCost: 0
-  size: 0
+  weaponSize: 1
+  combatType: 0
   attachProjectile: 0
   preferedPosition: 0
+  preferredTarget: 2
+  secondaryTarget: 0
+  maxSuggestedShots: 1
+  minSuggestedShots: 1
   projectileTemplates:
   - {fileID: 5276561946879384204}
 --- !u!114 &6653935266458077953
@@ -100,7 +105,6 @@ MonoBehaviour:
   colliderLength: 0
   delay: 0
   range: 10
-  layerType: 1
   layerTypes: 00000000
   immuneTags: 
 --- !u!114 &2418524898887525771
