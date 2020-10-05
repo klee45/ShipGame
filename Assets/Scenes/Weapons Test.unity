@@ -326,7 +326,7 @@ MonoBehaviour:
   lastState: 4
   children:
   - {fileID: 1799731428}
-  - {fileID: 0}
+  - {fileID: 1782167623}
   type: 0
 --- !u!4 &32624328 stripped
 Transform:
@@ -3589,7 +3589,7 @@ Transform:
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 1643866671}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &937333324
 SpriteRenderer:
@@ -6840,7 +6840,7 @@ PrefabInstance:
     - target: {fileID: 250282504861654494, guid: 27caf2e239a35564c9b5bfadc641a0aa,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 250282504861654494, guid: 27caf2e239a35564c9b5bfadc641a0aa,
         type: 3}
@@ -8238,6 +8238,7 @@ MonoBehaviour:
   team: 3
   combatStats: {fileID: 1689643122696384693}
   combatType: 0
+  size: 1
 --- !u!1 &1689643122722446629
 GameObject:
   m_ObjectHideFlags: 0
@@ -9505,6 +9506,7 @@ MonoBehaviour:
   team: 0
   combatStats: {fileID: 3784589113481369971}
   combatType: 0
+  size: 1
 --- !u!114 &3784589113309450909
 MonoBehaviour:
   m_ObjectHideFlags: 0

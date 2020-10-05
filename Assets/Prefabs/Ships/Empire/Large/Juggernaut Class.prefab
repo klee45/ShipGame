@@ -561,6 +561,8 @@ MonoBehaviour:
   movementStats: {fileID: 4718143795641469227}
   team: 0
   combatStats: {fileID: 4718143795949003245}
+  combatType: 0
+  size: 2
 --- !u!50 &4718143795941692870
 Rigidbody2D:
   serializedVersion: 4

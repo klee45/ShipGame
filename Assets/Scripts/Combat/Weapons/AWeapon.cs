@@ -5,14 +5,6 @@ using static SetTargetByPilotStats;
 
 public abstract class AWeapon : MonoBehaviour
 {
-    public enum WeaponSize
-    {
-        Small,
-        Medium,
-        Large,
-        Huge
-    }
-
     [SerializeField]
     private Sprite icon;
     [SerializeField]
@@ -20,7 +12,7 @@ public abstract class AWeapon : MonoBehaviour
     [SerializeField]
     private int energyCost = 0;
     [SerializeField]
-    private WeaponSize weaponSize = WeaponSize.Medium;
+    private Size weaponSize = Size.Medium;
     [SerializeField]
     private CombatType combatType = CombatType.Offense;
     [SerializeField]

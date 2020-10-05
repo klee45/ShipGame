@@ -21,6 +21,8 @@ public class Ship : Entity
     private CombatStats combatStats;
     [SerializeField]
     private CombatType combatType = CombatType.Offense;
+    [SerializeField]
+    private Size size = Size.Medium;
 
     private EffectDictShip shipEffects;
 
