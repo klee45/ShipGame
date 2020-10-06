@@ -19,6 +19,8 @@ public abstract class AWeapon : MonoBehaviour
     private bool attachProjectile = false;
     [SerializeField]
     private Arsenal.WeaponPosition preferedPosition = Arsenal.WeaponPosition.Center;
+    [SerializeField]
+    private int rarity = 100;
 
     [SerializeField]
     private TargetType preferredTarget = TargetType.CloseEnemy;

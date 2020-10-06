@@ -38,7 +38,7 @@ public class PilotTree : APilot
     public override void MakeActions()
     {
         BehaviorNode.NodeState rootState =  behaviorTree.UpdateState(behaviorState);
-        Debug.Log("Dist: " + behaviorState.targetInfo.sqrDistDiff);
+        //Debug.Log("Dist: " + behaviorState.targetInfo.sqrDistDiff);
         //Debug.Log(behaviorState.fireWeapon);
         //Debug.Log(behaviorState.weaponChoice);
         Ship ship = behaviorState.ship;
@@ -52,11 +52,9 @@ public class PilotTree : APilot
         switch(rootState)
         {
             case BehaviorNode.NodeState.Success:
-                Debug.Log("AI tree success");
                 behaviorTree.ResetNode();
                 break;
             case BehaviorNode.NodeState.Failure:
-                Debug.Log("AI tree failure");
                 behaviorTree.ResetNode();
                 break;
         }

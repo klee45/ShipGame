@@ -20,7 +20,7 @@ public class SetTargetByPilotStats : BehaviorLeaf
         PilotStats stats = state.ship.GetPilot().GetStats();
         if (FindTarget(state, stats, state.GetShipDetections(), out Ship targetShip))
         {
-            Debug.Log("Set target success " + targetShip);
+            //Debug.Log("Set target success " + targetShip);
             state.targetInfo.ship = targetShip;
             state.GetShipDetections().ResetRange();
             return NodeState.Success;

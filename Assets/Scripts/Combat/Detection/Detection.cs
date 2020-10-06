@@ -38,7 +38,7 @@ public abstract class Detection<T> : MonoBehaviour where T : Entity
 
     public void ResetRange()
     {
-        scaleMod = minScaleMod;
+        scaleMod = 0;
         Scale();
     }
 

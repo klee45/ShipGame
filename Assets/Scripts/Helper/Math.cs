@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public static class Math
@@ -10,6 +11,29 @@ public static class Math
     {
         int GetBonus();
         int GetLimit();
+    }
+
+    public static T GetRandomElement<T>(this List<T> lst)
+    {
+        return lst[Random.Range(0, lst.Count)];
+    }
+
+    public static T GetRandomElement<T>(this T[] lst)
+    {
+        return lst[Random.Range(0, lst.Length)];
+    }
+
+    public static int WeightedRandom(List<int> weights)
+    {
+        int choice = Random.Range(0, weights.Last());
+        for (int pos = 0; pos < weights.Count; pos++)
+        {
+            if (weights[pos] > choice)
+            {
+                return pos;
+            }
+        }
+        return -1;
     }
 
     public static float GetStackableBonusModInverse(IEnumerable<IStackableBonus> lst)
