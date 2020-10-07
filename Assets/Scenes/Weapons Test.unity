@@ -1399,6 +1399,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3233493058400936582, guid: 7e798759a0680654393ca4634ec73759,
+        type: 3}
+      propertyPath: m_Mass
+      value: 1.7189306
+      objectReference: {fileID: 0}
     - target: {fileID: 6218185338911376741, guid: 7e798759a0680654393ca4634ec73759,
         type: 3}
       propertyPath: m_RootOrder
@@ -1680,7 +1685,7 @@ Transform:
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 834464924}
-  m_RootOrder: 3
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &621821289
 SpriteRenderer:
@@ -2986,7 +2991,7 @@ Transform:
   m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children: []
   m_Father: {fileID: 1643866671}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &937333324
 SpriteRenderer:
@@ -4557,8 +4562,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ed0b7ed9376c0046959b1ee12052cd6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weapons: []
-  ships: []
   pilot: {fileID: 6759293993296967063, guid: 0c1bc9fed8396474ebd9dda04b0a8a33, type: 3}
   sizeWeights: 0a000000050000000100000000000000
   teamWeights: 01000000
@@ -5231,7 +5234,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 834464924}
-  m_RootOrder: 5
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1818055688
 MonoBehaviour:
@@ -5833,7 +5836,7 @@ PrefabInstance:
     - target: {fileID: 250282504861654494, guid: 27caf2e239a35564c9b5bfadc641a0aa,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 250282504861654494, guid: 27caf2e239a35564c9b5bfadc641a0aa,
         type: 3}
@@ -7037,6 +7040,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15cd1c4a2136ab4e8ab24b7332cf392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slots: 04000000040000000400000004000000
   frontWeaponPlace: {fileID: 88420126232887428}
   centerWeaponPlace: {fileID: 5714705526492445592}
   backWeaponPlace: {fileID: 8716517841455250446}
@@ -8513,6 +8517,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15cd1c4a2136ab4e8ab24b7332cf392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slots: 
   frontWeaponPlace: {fileID: 0}
   centerWeaponPlace: {fileID: 0}
   backWeaponPlace: {fileID: 0}
@@ -9346,6 +9351,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_RootOrder
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4718143795941692870, guid: 8765c97dd8533e34e944af64fd71b1e5,
+        type: 3}
+      propertyPath: m_Mass
+      value: 14.046943
       objectReference: {fileID: 0}
     - target: {fileID: 1549389770627883308, guid: 8765c97dd8533e34e944af64fd71b1e5,
         type: 3}

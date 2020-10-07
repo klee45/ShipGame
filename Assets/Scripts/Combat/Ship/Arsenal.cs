@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class Arsenal : MonoBehaviour
 {
-    private AWeapon[] weapons;
+    private List<AWeapon> weapons;
     private Ship ship;
+
+    [SerializeField] private int[] slots;
+    private int[] counts;
+
+    [Space(5)]
+    [Header("Weapon positions")]
 
     [SerializeField] private GameObject frontWeaponPlace;
     [SerializeField] private GameObject centerWeaponPlace;
     [SerializeField] private GameObject backWeaponPlace;
-
 
     [SerializeField] private GameObject frontLeftWeaponPlace;
     [SerializeField] private GameObject leftWeaponPlace;
@@ -22,15 +27,49 @@ public class Arsenal : MonoBehaviour
 
     private void Awake()
     {
+        int numSizes = System.Enum.GetValues(typeof(Size)).Length;
+        counts = new int[numSizes];
         ship = GetComponentInParent<Ship>();
-        weapons = GetComponentsInChildren<AWeapon>();
-        foreach (AWeapon weapon in weapons)
+        weapons = new List<AWeapon>();
+        foreach (AWeapon weapon in GetComponentsInChildren<AWeapon>())
         {
-            GameObject obj = GetWeaponPositionObj(weapon);
-            weapon.gameObject.transform.SetParent(obj.transform);
-            weapon.gameObject.transform.localPosition = Vector3.zero;
-            weapon.gameObject.transform.localEulerAngles = Vector3.zero;
+            TrySetWeapon(weapon);
         }
+    }
+
+    public bool TrySetWeapon(AWeapon weapon)
+    {
+        int size = (int)weapon.GetSize();
+        //Debug.Log("Size: " + (int)weapon.GetSize() + " - " + weapon.GetSize());
+        //Debug.Log(counts.Length);
+        //Debug.Log(slots.Length);
+        try
+        {
+            if (counts[size] < slots[size])
+            {
+                counts[size]++;
+                weapons.Add(weapon);
+                GameObject obj = GetWeaponPositionObj(weapon);
+                weapon.gameObject.transform.SetParent(obj.transform);
+                weapon.gameObject.transform.localPosition = Vector3.zero;
+                weapon.gameObject.transform.localEulerAngles = Vector3.zero;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        catch (System.IndexOutOfRangeException e)
+        {
+            Debug.LogWarning("Tried to set weapon counts " + size + " for counts and slots of " + counts.Length + ", " + slots.Length + " : " + GetComponentInParent<Ship>().gameObject);
+            return false;
+        }
+    }
+
+    public int[] GetSlots()
+    {
+        return slots;
     }
 
     private GameObject GetWeaponPositionObj(AWeapon weapon)
@@ -77,7 +116,7 @@ public class Arsenal : MonoBehaviour
     public void Fire(int weapon)
     {
         //Debug.Log("Fire " + pos.ToString());
-        if (weapon >= 0 && weapon < weapons.Length)
+        if (weapon >= 0 && weapon < weapons.Count)
         {
             //Debug.Log("Actually firing");
             AWeapon selectedWeapon = weapons[weapon];
@@ -92,7 +131,7 @@ public class Arsenal : MonoBehaviour
         }
     }
 
-    public AWeapon[] GetWeapons()
+    public List<AWeapon> GetWeapons()
     {
         return weapons;
     }
@@ -114,6 +153,36 @@ public class Arsenal : MonoBehaviour
     public AWeapon GetWeapon(int weaponPos)
     {
         return weapons[weaponPos];
+    }
+
+    public class SlotInfo
+    {
+        public readonly int max;
+        private int count;
+        public SlotInfo(int max)
+        {
+            this.max = max;
+            count = 0;
+        }
+
+        public int GetCount() { return count; }
+        public bool AddToCount()
+        {
+            count++;
+            if (count > max)
+            {
+                count--;
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+        public void RemoveFromCount()
+        {
+            count--;
+        }
     }
 
     public enum WeaponPosition

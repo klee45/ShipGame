@@ -704,6 +704,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b15cd1c4a2136ab4e8ab24b7332cf392, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  slots: 00000000020000000300000001000000
   frontWeaponPlace: {fileID: 2577505963316162858}
   centerWeaponPlace: {fileID: 7296485792338280597}
   backWeaponPlace: {fileID: 5660051273776049481}

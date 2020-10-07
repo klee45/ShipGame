@@ -1,14 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class ShipSpawner : MonoBehaviour
 {
-    [SerializeField]
-    List<Weapon> weapons;
-    [SerializeField]
-    List<Ship> ships;
-
     [SerializeField]
     private APilot pilot;
     /*
@@ -22,26 +18,62 @@ public class ShipSpawner : MonoBehaviour
     private List<int> teamWeights;
 
     private Ship[][] empire;
+    private List<AWeapon>[] weapons;
+    private List<int>[] weaponWeights;
 
     private void Awake()
     {
         StackList(sizeWeights);
         StackList(teamWeights);
 
-        empire = LoadShips("Ships/Empire");
-        Debug.Log(empire.Length);
-        Debug.Log(empire[0][0]);
+        empire = LoadFromFolder<Ship>("Ships/Empire", "Small", "Medium", "Large");
+        weapons = LoadWeapons();
 
         CreateShip(CivilizationType.Empire);
     }
 
-    private Ship[][] LoadShips(string path)
+    private T[][] LoadFromFolder<T>(string path, params string[] subPaths) where T : UnityEngine.Object
     {
-        Ship[] small = Resources.LoadAll<Ship>(path + "/small");
-        Ship[] medium = Resources.LoadAll<Ship>(path + "/medium");
-        Ship[] large = Resources.LoadAll<Ship>(path + "/large");
-        Ship[] huge = Resources.LoadAll<Ship>(path + "/huge");
-        return new Ship[][] { small, medium, large, huge };
+        List<T[]> lst = new List<T[]>();
+
+        foreach (string subPath in subPaths)
+        {
+            lst.Add(Resources.LoadAll<T>(path + "/" + subPath));
+        }
+        return lst.ToArray();
+    }
+
+    private List<AWeapon>[] LoadWeapons()
+    {
+        int numSizes = Enum.GetValues(typeof(Size)).Length;
+        List<AWeapon>[] weapons = new List<AWeapon>[numSizes];
+        weaponWeights = new List<int>[numSizes];
+        for (int i = 0; i < numSizes; i++)
+        {
+            weapons[i] = new List<AWeapon>();
+            weaponWeights[i] = new List<int>();
+        }
+        AWeapon[] allWeapons = Resources.LoadAll<AWeapon>("Weapons");
+        foreach(AWeapon weapon in allWeapons)
+        {
+            int pos = (int)weapon.GetSize();
+            weapons[pos].Add(weapon);
+            weaponWeights[pos].Add(weapon.GetRarity());
+        }
+        foreach (List<int> lst in weaponWeights)
+        {
+            StackList(lst);
+        }
+        return weapons;
+    }
+
+    public AWeapon GetRandomWeaponPrefab(Size size)
+    {
+        int pos = (int)size;
+        List<AWeapon> sized = weapons[pos];
+        List<int> weights = weaponWeights[pos];
+        AWeapon weapon = sized[Math.WeightedRandom(weights)];
+        return weapon;
     }
 
     private Size GetRandomSize()
@@ -54,12 +86,12 @@ public class ShipSpawner : MonoBehaviour
         return (Team)Math.WeightedRandom(teamWeights);
     }
 
-    public void CreateShip(CivilizationType civilization)
+    public void CreateShip(CivilizationType civilization, bool fill=false)
     {
         Size size = GetRandomSize();
         Team team = GetRandomTeam();
         Ship[][] allShips = GetShips(civilization);
-
+        
         Ship prefab = allShips[(int)size].GetRandomElement();
         Ship ship = Instantiate(prefab);
         ship.SetParent(gameObject);
@@ -67,6 +99,29 @@ public class ShipSpawner : MonoBehaviour
         APilot shipPilot = Instantiate(pilot);
         ship.SetPilot(shipPilot);
         shipPilot.transform.SetParent(ship.transform);
+
+        Arsenal arsenal = ship.GetArsenal();
+        int[] slots = arsenal.GetSlots();
+        for (int weaponSizeIndex = 0; weaponSizeIndex < slots.Length; weaponSizeIndex++)
+        {
+            if (weapons[weaponSizeIndex].Count <= 0)
+            {
+                Debug.Log("Weapons of size " + (Size)weaponSizeIndex + " don't exist yet");
+            }
+            else
+            {
+                int count = slots[weaponSizeIndex];
+                if (!fill)
+                {
+                    count = UnityEngine.Random.Range(1, count);
+                }
+                for (int i = 0; i < count; i++)
+                {
+                    AWeapon weapon = Instantiate<AWeapon>(GetRandomWeaponPrefab((Size)weaponSizeIndex));
+                    arsenal.TrySetWeapon(weapon);
+                }
+            }
+        }
     }
 
     private void StackList(List<int> lst)

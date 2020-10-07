@@ -54,6 +54,11 @@ public abstract class AWeapon : MonoBehaviour
         ready = true;
     }
 
+    public int GetRarity()
+    {
+        return rarity;
+    }
+
     public int GetMaxSuggestedShots()
     {
         return maxSuggestedShots;
@@ -150,5 +155,10 @@ public abstract class AWeapon : MonoBehaviour
     public float GetRange()
     {
         return rangeEstimator.GetRange();
+    }
+
+    public Size GetSize()
+    {
+        return weaponSize;
     }
 }

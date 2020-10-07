@@ -33,7 +33,18 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
     private void Awake()
     {
         CalculateTotalRange();
-        team = GetComponentInParent<Entity>().GetTeam();
+    }
+
+    private void Start()
+    {
+        try
+        {
+            team = GetComponentInParent<Entity>().GetTeam();
+        }
+        catch (System.NullReferenceException e)
+        {
+            Debug.LogWarning("Tried to set projectile template team before it existed " + gameObject.transform.parent);
+        }
     }
 
     private void CalculateTotalRange()
