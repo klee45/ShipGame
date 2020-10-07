@@ -7,7 +7,7 @@ public abstract class Travel : BehaviorLeaf
 {
     protected void RotateTowardsTargetAngleDiff(BehaviorState state)
     {
-        float mag = LimitMagnitude(state.targetInfo.angleDiff / 50f, 1f, out int sign);
+        float mag = LimitMagnitude(state.targetInfo.angleDiff / 20f, 1f, out int sign);
         /*
         float reverseMag = 1 - mag;
         float squared = reverseMag * reverseMag;

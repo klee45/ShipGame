@@ -42,11 +42,15 @@ public abstract class AWeapon : MonoBehaviour
     }
 
     // Start is called before the first frame update
-    private void Start()
+    protected void Start()
     {
         InitializeRangeEstimator();
         cooldown.OnComplete += () => Reset();
+        Debug.Log(GetComponentInParent<Ship>() + " , " + gameObject);
+        SetProjectileTemplateTeams(GetComponentInParent<Ship>().GetTeam());
     }
+
+    protected abstract void SetProjectileTemplateTeams(Team team);
 
     public void Reset()
     {

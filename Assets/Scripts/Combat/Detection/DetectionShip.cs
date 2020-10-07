@@ -56,7 +56,7 @@ public class DetectionShip : Detection<Ship>
         // If no ships, something has gone wrong
         if (detected.Count == 0)
         {
-            Debug.LogWarning("DetectionShip found no ships during setup. (called too early after scan?)");
+            //Debug.LogWarning("DetectionShip found no ships during setup. (called too early after scan?)");
             return false;
         }
         else

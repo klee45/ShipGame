@@ -4564,7 +4564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   pilot: {fileID: 6759293993296967063, guid: 0c1bc9fed8396474ebd9dda04b0a8a33, type: 3}
   sizeWeights: 0a000000050000000100000000000000
-  teamWeights: 01000000
+  teamWeights: 0100000001000000
 --- !u!4 &1618892140
 Transform:
   m_ObjectHideFlags: 0
@@ -10045,51 +10045,6 @@ PrefabInstance:
     - target: {fileID: 7318869330557707390, guid: 0c1bc9fed8396474ebd9dda04b0a8a33,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7037547493188936477, guid: 0c1bc9fed8396474ebd9dda04b0a8a33,
-        type: 3}
-      propertyPath: m_Name
-      value: 'Parallel : move and fire'
-      objectReference: {fileID: 0}
-    - target: {fileID: 7644921707399737514, guid: 0c1bc9fed8396474ebd9dda04b0a8a33,
-        type: 3}
-      propertyPath: m_Name
-      value: 'Sequence : Find target and wander -> chase target and shoot'
-      objectReference: {fileID: 0}
-    - target: {fileID: 7644921708183662298, guid: 0c1bc9fed8396474ebd9dda04b0a8a33,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 7644921706793323918, guid: 0c1bc9fed8396474ebd9dda04b0a8a33,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7644921706538250588, guid: 0c1bc9fed8396474ebd9dda04b0a8a33,
-        type: 3}
-      propertyPath: m_Name
-      value: 'Sequence : try fire -> wait'
-      objectReference: {fileID: 0}
-    - target: {fileID: 7644921708054504039, guid: 0c1bc9fed8396474ebd9dda04b0a8a33,
-        type: 3}
-      propertyPath: m_Name
-      value: 'Parallel : find target info and travel'
-      objectReference: {fileID: 0}
-    - target: {fileID: 827317598109443848, guid: 0c1bc9fed8396474ebd9dda04b0a8a33,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5436917937448415503, guid: 0c1bc9fed8396474ebd9dda04b0a8a33,
-        type: 3}
-      propertyPath: m_Name
-      value: 'Parallel : Find best target and wander'
-      objectReference: {fileID: 0}
-    - target: {fileID: 8926339609788929552, guid: 0c1bc9fed8396474ebd9dda04b0a8a33,
-        type: 3}
-      propertyPath: type
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

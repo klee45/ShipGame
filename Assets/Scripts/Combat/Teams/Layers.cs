@@ -100,12 +100,12 @@ public static class Layers
         return Color.HSVToRGB(h, s / 2f, v);
     }
 
-    private static Color Color1 = FromList(new int[] { 0, 160, 250 });
-    private static Color Color2 = FromList(new int[] { 10, 155, 75 });
-    private static Color Color3 = FromList(new int[] { 255, 130, 95 });
-    private static Color Color4 = FromList(new int[] { 170, 10, 60 });
-    private static Color ColorNeutral = FromList(new int[] { 234, 214, 68 });
-    private static Color WarningColor = FromList(new int[] { 250, 120, 250 });
+    private static Color Color1 = FromList(new int[] { 95, 255, 200 }); 
+    private static Color Color2 = FromList(new int[] { 255, 95, 95 }); 
+    private static Color Color3 = FromList(new int[] { 255, 235, 95 }); 
+    private static Color Color4 = FromList(new int[] { 110, 95, 255 });
+    private static Color ColorNeutral = FromList(new int[] { 160, 160, 160 });
+    private static Color WarningColor = FromList(new int[] { 240, 0, 255 });
 
 
     public static Color GetColorFromTeam(Team team)

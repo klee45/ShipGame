@@ -56,7 +56,7 @@ GameObject:
   - component: {fileID: 6423823486065402877}
   - component: {fileID: 8863994380696719745}
   m_Layer: 0
-  m_Name: Parallel
+  m_Name: 'Parallel : Find best target and wander'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -105,7 +105,7 @@ GameObject:
   - component: {fileID: 7037547493188936478}
   - component: {fileID: 7037547493188936479}
   m_Layer: 0
-  m_Name: Move and attack
+  m_Name: 'Parallel : move and fire'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -382,7 +382,7 @@ GameObject:
   - component: {fileID: 7644921706538250563}
   - component: {fileID: 7644921706538250562}
   m_Layer: 0
-  m_Name: Try fire -> wait
+  m_Name: 'Sequence : try fire -> wait'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -542,7 +542,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7644921707908343742}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7644921706793323919
 MonoBehaviour:
@@ -661,7 +661,7 @@ GameObject:
   - component: {fileID: 7644921707399737512}
   - component: {fileID: 7644921707399737513}
   m_Layer: 0
-  m_Name: Sequence
+  m_Name: 'Sequence : Find target and wander -> chase target and shoot'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -870,8 +870,8 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 7644921708183662298}
   - {fileID: 7644921706793323918}
+  - {fileID: 7644921708183662298}
   m_Father: {fileID: 6423823486065402877}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -947,7 +947,7 @@ GameObject:
   - component: {fileID: 7644921708054504038}
   - component: {fileID: 7644921708054504037}
   m_Layer: 0
-  m_Name: Parallel
+  m_Name: 'Parallel : find target info and travel'
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1162,7 +1162,7 @@ Transform:
   - {fileID: 7037547494332321230}
   - {fileID: 7644921707244673635}
   m_Father: {fileID: 7644921707908343742}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7644921708183662297
 MonoBehaviour:

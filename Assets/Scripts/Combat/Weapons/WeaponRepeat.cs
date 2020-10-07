@@ -21,4 +21,9 @@ public class WeaponRepeat : AWeapon
     {
         rangeEstimator.Estimate(template);
     }
+
+    protected override void SetProjectileTemplateTeams(Team team)
+    {
+        template.SetTeam(team);
+    }
 }

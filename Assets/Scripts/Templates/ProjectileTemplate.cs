@@ -43,8 +43,13 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
         }
         catch (System.NullReferenceException e)
         {
-            Debug.LogWarning("Tried to set projectile template team before it existed " + gameObject.transform.parent);
+            Debug.LogWarning("Tried to set projectile template team before it existed " + gameObject);
         }
+    }
+
+    public void SetTeam(Team team)
+    {
+        this.team = team;
     }
 
     private void CalculateTotalRange()

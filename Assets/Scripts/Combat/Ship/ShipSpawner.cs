@@ -29,7 +29,14 @@ public class ShipSpawner : MonoBehaviour
         empire = LoadFromFolder<Ship>("Ships/Empire", "Small", "Medium", "Large");
         weapons = LoadWeapons();
 
-        CreateShip(CivilizationType.Empire);
+        for (int i = 0; i < 100; i++)
+        {
+            CreateShip(
+                CivilizationType.Empire,
+                UnityEngine.Random.Range(-10f, 10f),
+                UnityEngine.Random.Range(-10f, 10f),
+                true);
+        }
     }
 
     private T[][] LoadFromFolder<T>(string path, params string[] subPaths) where T : UnityEngine.Object
@@ -86,7 +93,7 @@ public class ShipSpawner : MonoBehaviour
         return (Team)Math.WeightedRandom(teamWeights);
     }
 
-    public void CreateShip(CivilizationType civilization, bool fill=false)
+    public void CreateShip(CivilizationType civilization, float x, float y, bool fill=false)
     {
         Size size = GetRandomSize();
         Team team = GetRandomTeam();
@@ -95,6 +102,7 @@ public class ShipSpawner : MonoBehaviour
         Ship prefab = allShips[(int)size].GetRandomElement();
         Ship ship = Instantiate(prefab);
         ship.SetParent(gameObject);
+        ship.transform.position = new Vector2(x, y);
         ship.SetTeam(team);
         APilot shipPilot = Instantiate(pilot);
         ship.SetPilot(shipPilot);
@@ -111,14 +119,18 @@ public class ShipSpawner : MonoBehaviour
             else
             {
                 int count = slots[weaponSizeIndex];
-                if (!fill)
+                if (!fill && count != 0)
                 {
                     count = UnityEngine.Random.Range(1, count);
                 }
                 for (int i = 0; i < count; i++)
                 {
                     AWeapon weapon = Instantiate<AWeapon>(GetRandomWeaponPrefab((Size)weaponSizeIndex));
-                    arsenal.TrySetWeapon(weapon);
+                    bool result = arsenal.TrySetWeapon(weapon);
+                    if (!result)
+                    {
+                        Destroy(weapon.gameObject);
+                    }
                 }
             }
         }
