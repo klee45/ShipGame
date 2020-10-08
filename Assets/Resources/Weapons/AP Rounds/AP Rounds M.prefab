@@ -53,10 +53,11 @@ MonoBehaviour:
   combatType: 0
   attachProjectile: 0
   preferedPosition: 0
+  rarity: 100
   preferredTarget: 0
   secondaryTarget: 2
-  maxSuggestedShots: 1
-  minSuggestedShots: 1
+  maxSuggestedShots: 2
+  minSuggestedShots: 3
   template: {fileID: 6572660706774931162}
   delays:
   - 0

@@ -58,10 +58,11 @@ MonoBehaviour:
   combatType: 0
   attachProjectile: 0
   preferedPosition: 0
+  rarity: 100
   preferredTarget: 2
   secondaryTarget: 0
-  maxSuggestedShots: 1
-  minSuggestedShots: 1
+  maxSuggestedShots: 5
+  minSuggestedShots: 10
   projectileTemplates:
   - {fileID: 6189322435807833473}
 --- !u!114 &4650380075489115148

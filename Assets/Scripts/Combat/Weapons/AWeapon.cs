@@ -46,7 +46,7 @@ public abstract class AWeapon : MonoBehaviour
     {
         InitializeRangeEstimator();
         cooldown.OnComplete += () => Reset();
-        Debug.Log(GetComponentInParent<Ship>() + " , " + gameObject);
+        //Debug.Log(GetComponentInParent<Ship>() + " , " + gameObject);
         SetProjectileTemplateTeams(GetComponentInParent<Ship>().GetTeam());
     }
 

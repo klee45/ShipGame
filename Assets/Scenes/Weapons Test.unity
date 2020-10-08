@@ -1141,7 +1141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &428985182
 Transform:
   m_ObjectHideFlags: 0
@@ -7253,7 +7253,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!70 &1689643122717412613
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -7304,7 +7304,7 @@ Rigidbody2D:
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 1
-  m_Mass: 1
+  m_Mass: 9.498583
   m_LinearDrag: 0
   m_AngularDrag: 0
   m_GravityScale: 1
@@ -9546,11 +9546,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7245067650142660591, guid: a386a5c4d8fbf334b84fedb819cc24f6,
-        type: 3}
-      propertyPath: priority
-      value: 100
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a386a5c4d8fbf334b84fedb819cc24f6, type: 3}
 --- !u!1 &5714705526492445592
@@ -9734,7 +9729,7 @@ PrefabInstance:
         type: 3}
       propertyPath: ship
       value: 
-      objectReference: {fileID: 834464925}
+      objectReference: {fileID: 1689643122717412619}
     - target: {fileID: 9028549755756090799, guid: fa3a9da9067e68d4180f3f451f9df325,
         type: 3}
       propertyPath: heightCount

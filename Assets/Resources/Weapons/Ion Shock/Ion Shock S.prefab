@@ -63,7 +63,7 @@ MonoBehaviour:
   preferredTarget: 0
   secondaryTarget: 0
   maxSuggestedShots: 1
-  minSuggestedShots: 1
+  minSuggestedShots: 3
   projectileTemplates:
   - {fileID: 7141663424115983383}
 --- !u!114 &8534834729280476570
