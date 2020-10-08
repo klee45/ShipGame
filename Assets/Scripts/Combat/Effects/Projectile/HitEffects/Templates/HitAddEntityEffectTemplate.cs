@@ -12,7 +12,10 @@ public class HitAddEntityEffectTemplate : ProjectileEffectTemplate
     protected override ProjectileEffect CreateEffect(GameObject obj)
     {
         var s = obj.AddComponent<HitAddEntityEffect>();
-        s.Setup(template, tags);
+
+        EntityEffectTemplate templateClone = Instantiate(template);
+        templateClone.transform.SetParent(obj.transform);
+        s.Setup(templateClone, tags);
         return s;
     }
 }

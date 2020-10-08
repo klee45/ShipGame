@@ -12,6 +12,11 @@ public class RangeEstimator : MonoBehaviour
         return range;
     }
 
+    public void ForceRange(float range)
+    {
+        this.range = range;
+    }
+
     public void Estimate(params ProjectileTemplate[] templates)
     {
         float best = 0;

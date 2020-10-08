@@ -12,7 +12,9 @@ public class HitCreateProjectileTemplate : ProjectileEffectTemplate
     protected override ProjectileEffect CreateEffect(GameObject obj)
     {
         var hcp = obj.AddComponent<HitCreateProjectile>();
-        hcp.Setup(template, makeNeutral);
+        ProjectileTemplate templateClone = Instantiate(template);
+        templateClone.transform.SetParent(obj.transform);
+        hcp.Setup(templateClone, makeNeutral);
         return hcp;
     }
 }
