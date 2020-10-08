@@ -36,6 +36,12 @@ public class BehaviorVisualizer : MonoBehaviour
         root.CreateVisual(this, counts, 0, 0);
     }
 
+    private void Update()
+    {
+        var movement = GetComponentInParent<Ship>().GetMovementStats();
+        //Debug.Log("Velocity: " + movement.GetVelocityValue() + " | Rotation: " + movement.GetRotationValue());
+    }
+
     public GameObject GenerateObj(BehaviorNode node)
     {
         GameObject obj = Instantiate(prefab);

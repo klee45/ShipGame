@@ -143,7 +143,7 @@ MonoBehaviour:
   children:
   - {fileID: 7644921708095517316}
   - {fileID: 7644921708054504037}
-  type: 0
+  type: 1
 --- !u!1 &7037547494332321229
 GameObject:
   m_ObjectHideFlags: 0
@@ -232,8 +232,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lastState: 4
-  minPercent: 0.5
-  maxPercent: 0.9
+  minPercent: 0.3
+  maxPercent: 0.7
 --- !u!1 &7644921706303361112
 GameObject:
   m_ObjectHideFlags: 0
@@ -1188,11 +1188,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6423823486065402877}
     m_Modifications:
-    - target: {fileID: 2350500607200586835, guid: 8ff156b9f90bbdc4899dda917f3247cb,
-        type: 3}
-      propertyPath: m_Name
-      value: Wander
-      objectReference: {fileID: 0}
     - target: {fileID: 2350500607200586832, guid: 8ff156b9f90bbdc4899dda917f3247cb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1247,6 +1242,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2350500607200586835, guid: 8ff156b9f90bbdc4899dda917f3247cb,
+        type: 3}
+      propertyPath: m_Name
+      value: Wander
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8ff156b9f90bbdc4899dda917f3247cb, type: 3}

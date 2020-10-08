@@ -22,7 +22,7 @@ public abstract class BehaviorNode : MonoBehaviour
     protected abstract string GetName();
     public virtual void ResetNode()
     {
-        lastState = NodeState.None;
+        //lastState = NodeState.None;
         OnUpdate?.Invoke();
     }
 

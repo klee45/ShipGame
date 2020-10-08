@@ -14,7 +14,9 @@ public class Repeat : BehaviorLink
 
     protected override NodeState UpdateStateHelper(BehaviorState state)
     {
-        switch(child.UpdateState(state))
+        NodeState result = child.UpdateState(state);
+        //Debug.Log(child + " | " + result + " : " + Mathf.FloorToInt(Time.realtimeSinceStartup));
+        switch (result)
         {
             case NodeState.Success:
             case NodeState.Failure:

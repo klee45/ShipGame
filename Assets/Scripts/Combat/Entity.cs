@@ -76,6 +76,11 @@ public abstract class Entity : MonoBehaviour
         //Debug.Log(Layers.GetColorFromTeam(team));
     }
 
+    public MovementStats GetMovementStats()
+    {
+        return movementStats;
+    }
+
     public APilot GetPilot()
     {
         return pilot;
