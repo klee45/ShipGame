@@ -7,19 +7,11 @@ public class Weapon : AWeapon
     [SerializeField]
     protected ProjectileTemplate[] projectileTemplates;
 
-    protected override void SetProjectileTemplateTeams(Team team)
+    protected override void FireHelper(Ship owner)
     {
         foreach (ProjectileTemplate template in projectileTemplates)
         {
-            template.SetTeam(team);
-        }
-    }
-
-    protected override void FireHelper()
-    {
-        foreach (ProjectileTemplate template in projectileTemplates)
-        {
-            StartCoroutine(CreateProjectileCoroutine(template, template.GetDelay()));
+            StartCoroutine(CreateProjectileCoroutine(template, owner, template.GetDelay()));
         }
     }
 

@@ -7,7 +7,7 @@ public class WeaponApplyAffect : AWeapon
     [SerializeField]
     private ShipEffectTemplate[] templates;
 
-    protected override void FireHelper()
+    protected override void FireHelper(Ship owner)
     {
         foreach (ShipEffectTemplate template in templates)
         {
@@ -21,6 +21,4 @@ public class WeaponApplyAffect : AWeapon
     {
         rangeEstimator.ForceRange(0);
     }
-
-    protected override void SetProjectileTemplateTeams(Team team) { }
 }

@@ -125,7 +125,7 @@ public class Arsenal : MonoBehaviour
                 int energyCost = selectedWeapon.GetEnergyCost();
                 if (ship.GetEnergySystem().TrySpendEnergy(energyCost))
                 {
-                    selectedWeapon.Fire();
+                    selectedWeapon.Fire(ship);
                 }
             }
         }

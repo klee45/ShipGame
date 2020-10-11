@@ -9,21 +9,16 @@ public class WeaponRepeat : AWeapon
     [SerializeField]
     private float[] delays;
 
-    protected override void FireHelper()
+    protected override void FireHelper(Ship owner)
     {
         foreach (float delay in delays)
         {
-            StartCoroutine(CreateProjectileCoroutine(template, delay));
+            StartCoroutine(CreateProjectileCoroutine(template, owner, delay));
         }
     }
 
     protected override void InitializeRangeEstimator()
     {
         rangeEstimator.Estimate(template);
-    }
-
-    protected override void SetProjectileTemplateTeams(Team team)
-    {
-        template.SetTeam(team);
     }
 }

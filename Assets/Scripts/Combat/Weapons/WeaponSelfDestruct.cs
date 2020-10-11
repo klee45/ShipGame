@@ -4,15 +4,13 @@ using UnityEngine;
 
 public class WeaponSelfDestruct : AWeapon
 {
-    protected override void FireHelper()
+    protected override void FireHelper(Ship owner)
     {
-        GetComponentInParent<Ship>().GetCombatStats().TakeDamage(9999999);
+        owner.GetCombatStats().TakeDamage(9999999);
     }
 
     protected override void InitializeRangeEstimator()
     {
         rangeEstimator.ForceRange(0);
     }
-
-    protected override void SetProjectileTemplateTeams(Team team) { }
 }

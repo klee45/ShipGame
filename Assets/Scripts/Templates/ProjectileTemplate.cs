@@ -23,7 +23,6 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
     private EffectTag[] immuneTags;
 
     private float remainingRange;
-    private Team team;
 
     public float GetDelay()
     {
@@ -35,22 +34,19 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
         CalculateTotalRange();
     }
 
+    /*
     private void Start()
     {
         try
         {
-            team = GetComponentInParent<Entity>().GetTeam();
+            owner = GetComponentInParent<Ship>();
         }
         catch (System.NullReferenceException e)
         {
             Debug.LogWarning("Tried to set projectile template team before it existed " + gameObject);
         }
     }
-
-    public void SetTeam(Team team)
-    {
-        this.team = team;
-    }
+    */
 
     private void CalculateTotalRange()
     {
@@ -75,7 +71,7 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
     {
         float duration = movementStats.GetVelocity().GetDuration(remainingRange);
         Projectile projectile = base.Create(obj);
-        projectile.Setup(team, remainingRange, duration, immuneTags);
+        projectile.Setup(remainingRange, duration, immuneTags);
         foreach (ProjectileEffectTemplate effect in projectileEffects)
         {
             ProjectileEffect e = effect.Create(projectile.gameObject);
@@ -88,19 +84,23 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
         }
         projectile.SetParent(obj);
 
-        SetupColliders(projectile, team);
-
         return projectile;
     }
 
-    private void SetupColliders(Projectile projectile, Team team)
+    public void SetupCollidersForProjectile(Projectile projectile, Ship owner)
+    {
+        SetupColliders(projectile, owner);
+        projectile.SetOwner(owner);
+    }
+
+    private void SetupColliders(Projectile projectile, Ship ship)
     {
         //Debug.Log(team);
         Collider2D collider = projectile.GetComponentInChildren<Collider2D>();
         collider.isTrigger = true;
         collider.gameObject.name = "Base collider";
-        collider.gameObject.layer = Layers.GetProjectileLayerFromTeam(team);
-        HashSet<int> layers = GetLayers(team, out bool needsRigidbody);
+        collider.gameObject.layer = Layers.GetProjectileLayerFromTeam(ship.GetTeam());
+        HashSet<int> layers = GetLayers(ship.GetTeam(), out bool needsRigidbody);
         if (needsRigidbody)
         {
             Rigidbody2D body = projectile.gameObject.AddComponent<Rigidbody2D>();

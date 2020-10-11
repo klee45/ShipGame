@@ -47,10 +47,7 @@ public abstract class AWeapon : MonoBehaviour
         InitializeRangeEstimator();
         cooldown.OnComplete += () => Reset();
         //Debug.Log(GetComponentInParent<Ship>() + " , " + gameObject);
-        SetProjectileTemplateTeams(GetComponentInParent<Ship>().GetTeam());
     }
-
-    protected abstract void SetProjectileTemplateTeams(Team team);
 
     public void Reset()
     {
@@ -90,10 +87,10 @@ public abstract class AWeapon : MonoBehaviour
 
     protected abstract void InitializeRangeEstimator();
 
-    protected IEnumerator CreateProjectileCoroutine(ProjectileTemplate template, float delay)
+    protected IEnumerator CreateProjectileCoroutine(ProjectileTemplate template, Ship owner, float delay)
     {
         yield return new WaitForSeconds(delay);
-        Projectile p = CreateProjectile(template);
+        Projectile p = CreateProjectile(template, owner);
     }
 
     public int GetEnergyCost()
@@ -101,23 +98,24 @@ public abstract class AWeapon : MonoBehaviour
         return energyCost;
     }
 
-    public void Fire()
+    public void Fire(Ship owner)
     {
-        FireHelper();
+        FireHelper(owner);
         cooldown.TurnOn();
         ready = false;
     }
 
-    protected abstract void FireHelper();
+    protected abstract void FireHelper(Ship owner);
 
     public void Tick(float deltaTime)
     {
         cooldown.Tick(deltaTime);
     }
 
-    protected Projectile CreateProjectile(ProjectileTemplate template)
+    protected Projectile CreateProjectile(ProjectileTemplate template, Ship owner)
     {
         Projectile projectile = template.Create(gameObject);
+        template.SetupCollidersForProjectile(projectile, owner);
         if (attachProjectile)
         {
             AttachProjectile(projectile);

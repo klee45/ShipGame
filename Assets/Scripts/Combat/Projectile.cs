@@ -10,6 +10,8 @@ public class Projectile : Entity
     [SerializeField]
     private float duration;
 
+    private Ship owner;
+
     private EffectDictProjectile projectileEffects;
 
     protected override void Awake()
@@ -27,9 +29,8 @@ public class Projectile : Entity
         DoFixedTickEffects(projectileEffects);
     }
 
-    public void Setup(Team team, float range, float duration, EffectTag[] immuneTags)
+    public void Setup(float range, float duration, EffectTag[] immuneTags)
     {
-        this.team = team;
         this.range = range;
         this.duration = duration;
         this.projectileEffects.SetImmuneTags(immuneTags);
@@ -45,6 +46,16 @@ public class Projectile : Entity
     public override EffectDict GetGeneralEffectDict()
     {
         return projectileEffects;
+    }
+
+    public void SetOwner(Ship owner)
+    {
+        this.owner = owner;
+    }
+
+    public Ship GetOwner()
+    {
+        return owner;
     }
 
     private void SetupLifespan()
