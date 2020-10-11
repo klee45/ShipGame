@@ -39,7 +39,14 @@ public class FixedLifespan : ProjectileEffect, EntityEffect.ITickEffect
 
     public virtual void Tick(float timeScale)
     {
-        timer.Tick(TimeController.DeltaTime(timeScale));
+        try
+        {
+            timer.Tick(TimeController.DeltaTime(timeScale));
+        }
+        catch (System.NullReferenceException e)
+        {
+            Debug.LogWarning("No timer on " + GetComponentInParent<Entity>());
+        }
     }
 
     public override string GetName()
