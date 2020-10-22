@@ -2606,6 +2606,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Guardian Class Test
       objectReference: {fileID: 0}
+    - target: {fileID: 2603061942423291774, guid: 04831922c4584f149bc2eaee542c0947,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2603061942349005132, guid: 04831922c4584f149bc2eaee542c0947,
         type: 3}
       propertyPath: m_RootOrder
@@ -3181,6 +3186,28 @@ MonoBehaviour:
   entity: {fileID: 0}
   rotation: 0
   translation: 0
+--- !u!1 &975127606 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5438399703054162852, guid: c80d5d66fd25a4d4c8950adf71da605c,
+    type: 3}
+  m_PrefabInstance: {fileID: 1770639968}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &975127608
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 975127606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38901cb894476cd43b51b38b725f9e62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  priority: 0
+  duration: 0.5
+  strength: 21
+  doesFade: 1
 --- !u!1001 &983118937
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4052,6 +4079,11 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 6
       objectReference: {fileID: 0}
+    - target: {fileID: 3157410934679634328, guid: 3cfb2aa59b7b1804194bb040b554f6b6,
+        type: 3}
+      propertyPath: DEBUG_SHOW_DAMAGE_SOURCES
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3cfb2aa59b7b1804194bb040b554f6b6, type: 3}
 --- !u!4 &1377204668 stripped
@@ -4754,6 +4786,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Vanguard Class Test
       objectReference: {fileID: 0}
+    - target: {fileID: 1689643123031496073, guid: 7e401ee1de19fa04989140af169add1e,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1689643123061142551, guid: 7e401ee1de19fa04989140af169add1e,
         type: 3}
       propertyPath: m_RootOrder
@@ -5291,7 +5328,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 797504589830083283, guid: c80d5d66fd25a4d4c8950adf71da605c, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: c80d5d66fd25a4d4c8950adf71da605c, type: 3}
 --- !u!224 &1795106662 stripped
 RectTransform:
@@ -7216,6 +7254,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 0}
+  DEBUG_SHOW_DAMAGE_SOURCES: 0
   initialShieldMax: 15000
   initialArmorMax: 10000
   initialHullMax: 5000
@@ -8756,6 +8795,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 3784589113073346713}
+  DEBUG_SHOW_DAMAGE_SOURCES: 0
   initialShieldMax: 200
   initialArmorMax: 100
   initialHullMax: 200

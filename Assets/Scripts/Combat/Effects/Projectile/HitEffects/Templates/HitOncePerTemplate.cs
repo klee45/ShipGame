@@ -10,7 +10,7 @@ public class HitOncePerTemplate : ProjectileEffectTemplate
     protected override ProjectileEffect CreateEffect(GameObject obj)
     {
         HitOncePer hop = obj.AddComponent<HitOncePer>();
-        hop.Setup(damage);
+        hop.Setup(damage, obj.GetComponent<Projectile>().GetOwner());
         return hop;
     }
 }

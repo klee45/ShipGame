@@ -10,19 +10,21 @@ public class Burn : ShipEffect, EntityEffect.ITickEffect
     int damageSoFar;
     private float dps;
     float leftover;
-    private Ship ship;
+    private Ship target;
+    private Ship source;
 
-    public void Setup(int damage, float duration)
+    public void Setup(int damage, float duration, Ship source)
     {
         this.damage = damage;
         this.dps = damage / duration;
         this.leftover = 0;
         this.damageSoFar = 0;
+        this.source = source;
     }
     
     private void Start()
     {
-        ship = GetComponentInParent<Ship>();
+        target = GetComponentInParent<Ship>();
     }
 
     public override void AddTo(EffectDictShip dict)
@@ -73,7 +75,7 @@ public class Burn : ShipEffect, EntityEffect.ITickEffect
 
         //Debug.Log(currentDamage);
         
-        ship.GetCombatStats().TakeDamage(flatDamage);
+        target.GetCombatStats().TakeDamage(flatDamage, source);
         damageSoFar += flatDamage;
     }
 }

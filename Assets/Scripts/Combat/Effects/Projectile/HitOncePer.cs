@@ -6,10 +6,12 @@ public class HitOncePer : ProjectileEffect, ProjectileEffect.IOnHitEffect
 {
     [SerializeField]
     private int damage;
+    private Ship source;
 
-    public void Setup(int damage)
+    public void Setup(int damage, Ship source)
     {
         this.damage = damage;
+        this.source = source;
     }
 
     public override void AddTo(EffectDictProjectile dict)
@@ -20,7 +22,7 @@ public class HitOncePer : ProjectileEffect, ProjectileEffect.IOnHitEffect
     public void OnHit(Collider2D collision, Collider2D collidee)
     {
         Physics2D.IgnoreCollision(collidee, collision);
-        DoDamage(collision, damage);
+        DoDamage(collision, damage, source);
     }
 
     public override string GetName()

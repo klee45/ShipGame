@@ -72,6 +72,16 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
         float duration = movementStats.GetVelocity().GetDuration(remainingRange);
         Projectile projectile = base.Create(obj);
         projectile.Setup(remainingRange, duration, immuneTags);
+        projectile.SetParent(obj);
+
+        return projectile;
+    }
+
+    public Projectile CreateAndSetupProjectile(GameObject obj, Ship owner)
+    {
+        Projectile projectile = Create(obj);
+        SetupColliders(projectile, owner);
+        projectile.SetOwner(owner);
         foreach (ProjectileEffectTemplate effect in projectileEffects)
         {
             ProjectileEffect e = effect.Create(projectile.gameObject);
@@ -82,15 +92,7 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
             EntityEffect e = effect.Create(projectile.gameObject);
             e.AddTo(projectile.GetEffectsDict());
         }
-        projectile.SetParent(obj);
-
         return projectile;
-    }
-
-    public void SetupCollidersForProjectile(Projectile projectile, Ship owner)
-    {
-        SetupColliders(projectile, owner);
-        projectile.SetOwner(owner);
     }
 
     private void SetupColliders(Projectile projectile, Ship ship)

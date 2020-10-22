@@ -30,8 +30,8 @@ public abstract class ProjectileEffect : Effect
         Destroy(GetComponent<Projectile>().gameObject);
     }
 
-    protected void DoDamage(Collider2D collision, int damage)
+    protected void DoDamage(Collider2D collision, int damage, Ship source)
     {
-        collision.gameObject.GetComponentInChildren<CombatStats>()?.TakeDamage(damage);
+        collision.gameObject.GetComponentInChildren<CombatStats>()?.TakeDamage(damage, source);
     }
 }

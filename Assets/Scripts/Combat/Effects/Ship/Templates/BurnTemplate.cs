@@ -12,7 +12,7 @@ public class BurnTemplate : ShipEffectTemplate
     protected override ShipEffect CreateEffect(GameObject obj)
     {
         Burn burn = obj.AddComponent<Burn>();
-        burn.Setup(damage, duration);
+        burn.Setup(damage, duration, GetComponentInParent<Projectile>().GetOwner());
         return burn;
     }
 }

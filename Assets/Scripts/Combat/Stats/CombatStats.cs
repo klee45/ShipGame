@@ -40,6 +40,8 @@ public class CombatStats : MonoBehaviour
     private HealthInfo shield;
     private HealthInfoBarrier barrier;
 
+    private DamageSources damageSources;
+
     public delegate void HealthChangeEvent(int value);
 
     public event HealthChangeEvent OnShipHit;
@@ -57,6 +59,8 @@ public class CombatStats : MonoBehaviour
 
         this.barrier.AddOnChangeEvent((damage) => UpdateAllGraphics());
         this.hull.AddOnDestroyEvent((damage) => OnDeath?.Invoke(damage));
+
+        damageSources = new DamageSources();
     }
 
     private void Start()
@@ -331,16 +335,88 @@ public class CombatStats : MonoBehaviour
         return new HealthBarMaxInfo(barrier, shield, armor, hull);
     }
     
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, Ship source)
     {
         if (damage > 0)
         {
+            TrackSource(damage, source);
             HealthBarMaxInfo total = CreateHPInfo();
             OnShipHit?.Invoke(damage);
             barrier.DamageHelper(ref damage, total);
             shield.DamageHelper(ref damage, total);
             armor.DamageHelper(ref damage, total);
             hull.DamageHelper(ref damage, total);
+        }
+    }
+
+    private void TrackSource(int damage, Ship source)
+    {
+        damageSources.TrackDamage(damage, source);
+        /*
+        if (DEBUG_SHOW_DAMAGE_SOURCES)
+        {
+            Debug.Log(source);
+            Debug.Log(damage);
+            Debug.Log(GetComponentInParent<Ship>());
+            Debug.Log("Ship " + source.gameObject + " did " + damage + " damage to " + GetComponentInParent<Ship>().gameObject);
+        }
+        */
+    }
+
+    public DamageSources GetDamageSources()
+    {
+        return damageSources;
+    }
+
+    public class DamageSources
+    {
+        private Ship topSource;
+        private int topDamage;
+        private Dictionary<Ship, int> sources;
+
+        public DamageSources()
+        {
+            sources = new Dictionary<Ship, int>();
+            topSource = null;
+            topDamage = 0;
+        }
+
+        public IReadOnlyDictionary<Ship, int> GetDamageSources()
+        {
+            return sources;
+        }
+
+        public void Decay(float multiplier)
+        {
+            foreach (var pair in sources)
+            {
+                sources[pair.Key] = (int)(pair.Value * multiplier);
+            }
+            topDamage = sources[topSource];
+        }
+
+        public void TrackDamage(int damage, Ship source)
+        {
+            if (sources.TryGetValue(source, out int value))
+            {
+                int totalDamage = value + damage;
+                sources[source] = totalDamage;
+                TrySetTop(totalDamage, source);
+            }
+            else
+            {
+                sources.Add(source, damage);
+                TrySetTop(damage, source);
+            }
+        }
+
+        private void TrySetTop(int totalDamage, Ship source)
+        {
+            if (totalDamage > topDamage)
+            {
+                topSource = source;
+                topDamage = totalDamage;
+            }
         }
     }
     

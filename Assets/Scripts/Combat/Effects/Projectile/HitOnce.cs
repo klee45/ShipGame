@@ -6,15 +6,17 @@ public class HitOnce : ProjectileEffect, ProjectileEffect.IOnHitEffect
 {
     [SerializeField]
     private int damage;
+    private Ship source;
 
-    public void Setup(int damage)
+    public void Setup(int damage, Ship source)
     {
         this.damage = damage;
+        this.source = source;
     }
 
     public void OnHit(Collider2D collision, Collider2D collidee)
     {
-        DoDamage(collision, damage);
+        DoDamage(collision, damage, source);
         // Case does the destroying
         //DestroySelf();
     }

@@ -114,8 +114,7 @@ public abstract class AWeapon : MonoBehaviour
 
     protected Projectile CreateProjectile(ProjectileTemplate template, Ship owner)
     {
-        Projectile projectile = template.Create(gameObject);
-        template.SetupCollidersForProjectile(projectile, owner);
+        Projectile projectile = template.CreateAndSetupProjectile(gameObject, owner);
         if (attachProjectile)
         {
             AttachProjectile(projectile);

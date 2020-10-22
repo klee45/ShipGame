@@ -17,6 +17,8 @@ public class HitPerSecond : ProjectileEffect,
     private int damageDone;
     private float leftover;
     private float dps;
+
+    private Ship source;
     
     private void Start()
     {
@@ -32,11 +34,12 @@ public class HitPerSecond : ProjectileEffect,
         dict.fixedTickEffects.Add(this, () => new EffectDict.FixedTickEffectCase<HitPerSecond>(false, new EffectDict.EffectList<EntityEffect.IFixedTickEffect, HitPerSecond>()));
     }
 
-    public void Setup(int damage, float duration, bool destroyOnEnd)
+    public void Setup(int damage, float duration, bool destroyOnEnd, Ship source)
     {
         this.damage = damage;
         this.duration = duration;
         this.destroyOnEnd = destroyOnEnd;
+        this.source = source;
     }
 
     public void OnHitStay(Collider2D collision)
@@ -45,12 +48,12 @@ public class HitPerSecond : ProjectileEffect,
         if (currentDamage + damageDone > damage)
         {
             WakeUp(collision);
-            DoDamage(collision, damage - damageDone);
+            DoDamage(collision, damage - damageDone, source);
         }
         else
         {
             WakeUp(collision);
-            DoDamage(collision, currentDamage);
+            DoDamage(collision, currentDamage, source);
         }
         //Debug.Log("Damage");
     }

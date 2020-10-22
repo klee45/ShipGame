@@ -28,8 +28,7 @@ public class HitCreateProjectile : ProjectileEffect, ProjectileEffect.IOnHitEffe
         {
             yield return new WaitForSeconds(delay);
         }
-        Projectile projectile = template.Create(gameObject);
-        template.SetupCollidersForProjectile(projectile, GetComponentInParent<Projectile>().GetOwner());
+        Projectile projectile = template.CreateAndSetupProjectile(gameObject, GetComponentInParent<Projectile>().GetOwner());
         ProjectileManager.instance.AddTo(projectile);
     }
 

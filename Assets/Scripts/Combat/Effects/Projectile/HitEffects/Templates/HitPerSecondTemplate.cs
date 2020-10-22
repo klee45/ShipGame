@@ -15,7 +15,7 @@ public class HitPerSecondTemplate : ProjectileEffectTemplate
     protected override ProjectileEffect CreateEffect(GameObject obj)
     {
         HitPerSecond hps = obj.AddComponent<HitPerSecond>();
-        hps.Setup(damage, duration, destroyOnEnd);
+        hps.Setup(damage, duration, destroyOnEnd, obj.GetComponent<Projectile>().GetOwner());
         return hps;
     }
 }

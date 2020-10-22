@@ -9,8 +9,9 @@ public class HitOnceTemplate : ProjectileEffectTemplate
 
     protected override ProjectileEffect CreateEffect(GameObject obj)
     {
+        Ship source = obj.GetComponent<Projectile>().GetOwner();
         HitOnce ho = obj.AddComponent<HitOnce>();
-        ho.Setup(damage);
+        ho.Setup(damage, source);
         return ho;
     }
 }
