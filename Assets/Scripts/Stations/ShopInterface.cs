@@ -11,40 +11,51 @@ public class ShopInterface : Singleton<ShopInterface>
     private WeaponButton buttonPrefab;
     [SerializeField]
     private ButtonRow[] rows;
+    [SerializeField]
+    private Text moneyText;
 
     [SerializeField]
     private GameObject visual;
 
-    private List<WeaponButton> allButtons;
+    private List<WeaponButton> allWeaponButtons;
 
     protected override void Awake()
     {
         base.Awake();
-        allButtons = new List<WeaponButton>();
+        allWeaponButtons = new List<WeaponButton>();
         visual.SetActive(false);
-    }
-
-    private void Start()
-    {
-        SetupShop();
     }
 
     public void SetupShop()
     {
         foreach (ButtonRow row in rows)
         {
-            allButtons.AddRange(row.SetupButtons(buttonPrefab));
+            allWeaponButtons.AddRange(row.SetupButtons(buttonPrefab));
+        }
+
+        foreach (WeaponButton button in allWeaponButtons)
+        {
+            WeaponDeed deed = Instantiate(DropTable.instance.GetRandomWeaponDeed());
+            deed.transform.SetParent(transform);
+            button.SetWeaponDeed(deed);
         }
     }
 
     public void OpenShop()
     {
         visual.SetActive(true);
+        PlayerInfo.instance.GetBank().OnMoneyChange += UpdateMoneyVisual;
+        UpdateMoneyVisual(0);
     }
 
     public void CloseShop ()
     {
+        PlayerInfo.instance.GetBank().OnMoneyChange -= UpdateMoneyVisual;
         visual.SetActive(false);
     }
 
+    private void UpdateMoneyVisual(int change)
+    {
+        moneyText.text = PlayerInfo.instance.GetBank().GetTotalMoney().ToString();
+    }
 }

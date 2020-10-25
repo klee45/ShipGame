@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Station : Interactive
 {
+    private void Start()
+    {
+        ShopInterface.instance.SetupShop();
+    }
+
     public override void EnterContext()
     {
         Debug.Log("Station enter context");

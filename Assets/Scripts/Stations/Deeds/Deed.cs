@@ -7,6 +7,11 @@ public abstract class Deed<T, U> : Template<T, U>
     [SerializeField]
     private int price;
 
+    public int GetPrice()
+    {
+        return price;
+    }
+
     public bool CanPurchase(Bank bank)
     {
         return bank.GetTotalMoney() >= price;

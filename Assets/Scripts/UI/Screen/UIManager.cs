@@ -21,6 +21,24 @@ public class UIManager : Singleton<UIManager>
     // Start is called before the first frame update
     void Start()
     {
+        RedrawShipUI();
+    }
+    
+    // Update is called once per frame
+    void Update()
+    {
+        if (ActiveShip())
+        {
+            int i = 0;
+            foreach (AWeapon weapon in ship.GetArsenal().GetWeapons())
+            {
+                weaponsUI.SetPercent(i++, weapon);
+            }
+        }
+    }
+
+    public void RedrawShipUI()
+    {
         //Debug.Log("Step 1");
         if (ActiveShip())
         {
@@ -38,19 +56,6 @@ public class UIManager : Singleton<UIManager>
             effectsUI.DisplayEffects(ship.GetEffectsDict());
         }
         //Debug.Log("Step 5");
-    }
-    
-    // Update is called once per frame
-    void Update()
-    {
-        if (ActiveShip())
-        {
-            int i = 0;
-            foreach (AWeapon weapon in ship.GetArsenal().GetWeapons())
-            {
-                weaponsUI.SetPercent(i++, weapon);
-            }
-        }
     }
 
     private bool ActiveShip()

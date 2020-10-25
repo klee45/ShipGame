@@ -5,9 +5,6 @@ using UnityEngine;
 public class PilotPlayer : APilot
 {
     private Ship ship;
-
-    [SerializeField]
-    private InputManager input;
     
     private Dictionary<string, Action> heldKeyActionPairs;
     private Dictionary<string, ActionPair> pressReleasedKeyActionPairs;
@@ -18,9 +15,9 @@ public class PilotPlayer : APilot
     protected override void Awake()
     {
         base.Awake();
-        Dictionary<string, string> inputKeyTranslate = input.LoadKeys();
-        heldKeyActionPairs = Translate(inputKeyTranslate, heldKeys);
-        pressReleasedKeyActionPairs = Translate(inputKeyTranslate, pressReleaseKeys);
+        Dictionary<string, string> inputKeyTranslate = InputManager.instance.LoadCombatBindings();
+        heldKeyActionPairs = InputManager.Translate(inputKeyTranslate, heldKeys);
+        pressReleasedKeyActionPairs = InputManager.Translate(inputKeyTranslate, pressReleaseKeys);
     }
 
     private void OnEnable()
@@ -67,17 +64,17 @@ public class PilotPlayer : APilot
                     pair.Value(ship);
                 }
             }
-        }
 
-        foreach (KeyValuePair<string, ActionPair> pair in pressReleasedKeyActionPairs)
-        {
-            if (Input.GetKeyDown(pair.Key))
+            foreach (KeyValuePair<string, ActionPair> pair in pressReleasedKeyActionPairs)
             {
-                pair.Value.Down()(ship);
-            }
-            else if (Input.GetKeyUp(pair.Key))
-            {
-                pair.Value.Up()(ship);
+                if (Input.GetKeyDown(pair.Key))
+                {
+                    pair.Value.Down()(ship);
+                }
+                else if (Input.GetKeyUp(pair.Key))
+                {
+                    pair.Value.Up()(ship);
+                }
             }
         }
     }
@@ -88,16 +85,6 @@ public class PilotPlayer : APilot
         public ActionPair(Action a, Action b) : base(a, b) {}
         public Action Down() { return a; }
         public Action Up() { return b; }
-    }
-
-    private Dictionary<string, T> Translate<T>(Dictionary<string, string> dict, Dictionary<string, T> translation)
-    {
-        Dictionary<string, T> temp = new Dictionary<string, T>();
-        foreach (KeyValuePair<string, T> pair in translation)
-        {
-            temp[dict[pair.Key]] = translation[pair.Key];
-        }
-        return temp;
     }
 
     private Dictionary<string, Action> heldKeys = new Dictionary<string, Action>()

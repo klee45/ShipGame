@@ -47,10 +47,13 @@ public class WeaponDeed : Deed<AWeapon, Ship>
         return weapon;
     }
 
-    public int GetRarity()
-    {
-        return rarity;
-    }
+    public string GetName() { return weaponName; }
+    public Sprite GetIcon() { return icon; }
+    public int GetEnergyCost() { return energy; }
+    public float GetCooldown() { return cooldownTime; }      
+    public Size GetSize() { return weaponSize; }
+    public CombatType GetCombatType() { return combatType; }
+    public int GetRarity() { return rarity; }
 
     public WeaponRarity GetRarityType()
     {

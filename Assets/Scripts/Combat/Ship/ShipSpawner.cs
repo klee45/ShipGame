@@ -23,10 +23,10 @@ public class ShipSpawner : MonoBehaviour
 
     private void Awake()
     {
-        StackList(sizeWeights);
-        StackList(teamWeights);
+        sizeWeights.StackList();
+        teamWeights.StackList();
 
-        empire = LoadFromFolder<Ship>("Ships/Empire", "Small", "Medium", "Large");
+        empire = Loader.LoadFromFolder<Ship>("Ships/Empire", "Small", "Medium", "Large");
         weapons = LoadWeapons();
 
         for (int i = 0; i < 100; i++)
@@ -37,17 +37,6 @@ public class ShipSpawner : MonoBehaviour
                 UnityEngine.Random.Range(-10f, 10f),
                 true);
         }
-    }
-
-    private T[][] LoadFromFolder<T>(string path, params string[] subPaths) where T : UnityEngine.Object
-    {
-        List<T[]> lst = new List<T[]>();
-
-        foreach (string subPath in subPaths)
-        {
-            lst.Add(Resources.LoadAll<T>(path + "/" + subPath));
-        }
-        return lst.ToArray();
     }
 
     private List<AWeapon>[] LoadWeapons()
@@ -69,7 +58,7 @@ public class ShipSpawner : MonoBehaviour
         }
         foreach (List<int> lst in weaponWeights)
         {
-            StackList(lst);
+            lst.StackList();
         }
         return weapons;
     }
@@ -133,14 +122,6 @@ public class ShipSpawner : MonoBehaviour
                     }
                 }
             }
-        }
-    }
-
-    private void StackList(List<int> lst)
-    {
-        for (int i = 1; i < lst.Count; i++)
-        {
-            lst[i] += lst[i - 1];
         }
     }
 

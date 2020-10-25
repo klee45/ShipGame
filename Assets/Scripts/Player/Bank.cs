@@ -4,16 +4,22 @@ using UnityEngine;
 
 public class Bank : MonoBehaviour
 {
+    [SerializeField]
     protected int money = 0;
+
+    public event MoneyEvent OnMoneyChange;
+
+    public delegate void MoneyEvent(int amount);
 
     public int GetTotalMoney()
     {
         return money;
     }
 
-    public virtual void AddMoney(int money)
+    public virtual void AddMoney(int change)
     {
-        this.money += money;
+        this.money += change;
+        OnMoneyChange?.Invoke(change);
     }
 
     public virtual bool TryTakeMoney(int cost)
@@ -21,6 +27,7 @@ public class Bank : MonoBehaviour
         if (this.money >= cost)
         {
             this.money -= cost;
+            OnMoneyChange?.Invoke(cost);
             return true;
         }
         else

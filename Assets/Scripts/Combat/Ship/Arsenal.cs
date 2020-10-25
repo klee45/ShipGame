@@ -37,6 +37,12 @@ public class Arsenal : MonoBehaviour
         }
     }
 
+    public bool CanSetDeed(WeaponDeed deed)
+    {
+        int size = (int)deed.GetSize();
+        return counts[size] < slots[size];
+    }
+
     public bool TrySetWeapon(AWeapon weapon)
     {
         int size = (int)weapon.GetSize();
