@@ -7254,7 +7254,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 0}
-  DEBUG_SHOW_DAMAGE_SOURCES: 0
   initialShieldMax: 15000
   initialArmorMax: 10000
   initialHullMax: 5000
@@ -8795,7 +8794,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthBar: {fileID: 3784589113073346713}
-  DEBUG_SHOW_DAMAGE_SOURCES: 0
   initialShieldMax: 200
   initialArmorMax: 100
   initialHullMax: 200
