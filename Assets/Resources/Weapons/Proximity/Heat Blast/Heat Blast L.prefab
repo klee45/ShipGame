@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1834685382932495663}
   - component: {fileID: 1834685382932495638}
-  - component: {fileID: 1834685382932495639}
   - component: {fileID: 1834685382932495636}
   - component: {fileID: 1834685382932495637}
   - component: {fileID: 6129226296102916567}
@@ -54,36 +53,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: e76acce2e1daa4d4cb7025ca2ceecb7b, type: 3}
-  cooldown: {fileID: 1834685382932495639}
   energyCost: 0
+  cooldownTime: 5
   weaponSize: 2
   combatType: 0
-  attachProjectile: 1
-  preferedPosition: 2
   rarity: 50
+  preferedPosition: 2
+  attachProjectile: 1
+  cooldown: {fileID: 0}
   preferredTarget: 0
   secondaryTarget: 0
   maxSuggestedShots: 1
   minSuggestedShots: 1
   projectileTemplates:
   - {fileID: 1834685382932495636}
---- !u!114 &1834685382932495639
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1834685382932495660}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3da6fdc6aab23ea41be68b78a7846906, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxTime: 5
-  currentTime: 5
-  running: 1
-  doesReset: 1
-  overflows: 1
 --- !u!114 &1834685382932495636
 MonoBehaviour:
   m_ObjectHideFlags: 0

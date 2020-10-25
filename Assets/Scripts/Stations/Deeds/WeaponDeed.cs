@@ -8,11 +8,23 @@ public class WeaponDeed : Deed<AWeapon, Ship>
     private string weaponName;
     [SerializeField]
     private Sprite icon;
+    [SerializeField]
+    private int energy = 0;
+    [SerializeField]
+    private float cooldownTime;
+
+    [SerializeField]
+    private Size weaponSize = Size.Medium;
+    [SerializeField]
+    private CombatType combatType = CombatType.Offense;
+    [SerializeField]
+    private int rarity = 100;
+
+    [SerializeField]
+    private Arsenal.WeaponPosition preferedPosition = Arsenal.WeaponPosition.Center;
 
     [SerializeField]
     private AWeapon weaponPrefab;
-    [SerializeField]
-    private int rarity;
     private WeaponRarity rarityType;
 
     private static int rarityDivisor = 100;
@@ -28,6 +40,10 @@ public class WeaponDeed : Deed<AWeapon, Ship>
     {
         AWeapon weapon = Instantiate(weaponPrefab);
         ship.GetArsenal().TrySetWeapon(weapon);
+        weapon.Setup(
+            icon, energy, cooldownTime,
+            weaponSize, combatType, rarity,
+            preferedPosition);
         return weapon;
     }
 

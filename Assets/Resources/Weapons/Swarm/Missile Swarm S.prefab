@@ -87,7 +87,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6764177119712478175}
   - component: {fileID: 6764177119712478169}
-  - component: {fileID: 6764177119712478174}
   m_Layer: 11
   m_Name: Missile Swarm S
   m_TagString: Untagged
@@ -127,13 +126,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 9e9cfe77f0110064b952e397397fbc91, type: 3}
-  cooldown: {fileID: 6764177119712478174}
   energyCost: 0
+  cooldownTime: 6
   weaponSize: 0
   combatType: 0
-  attachProjectile: 0
-  preferedPosition: 1
   rarity: 80
+  preferedPosition: 1
+  attachProjectile: 0
+  cooldown: {fileID: 0}
   preferredTarget: 2
   secondaryTarget: 0
   maxSuggestedShots: 1
@@ -145,23 +145,6 @@ MonoBehaviour:
   - {fileID: 6764177119986833994}
   - {fileID: 6764177119894508323}
   - {fileID: 6764177120817701763}
---- !u!114 &6764177119712478174
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6764177119712478172}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3da6fdc6aab23ea41be68b78a7846906, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxTime: 3
-  currentTime: 3
-  running: 1
-  doesReset: 1
-  overflows: 1
 --- !u!1 &6764177119779008604
 GameObject:
   m_ObjectHideFlags: 0
@@ -833,15 +816,15 @@ PrefabInstance:
       propertyPath: layerTypes.Array.size
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 7000236587950819075, guid: 3ea675276220a7c468b115d09ed6b6fe,
-        type: 3}
-      propertyPath: scale
-      value: 0.5
-      objectReference: {fileID: 0}
     - target: {fileID: 7000236587950819076, guid: 3ea675276220a7c468b115d09ed6b6fe,
         type: 3}
       propertyPath: doesFade
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7000236587950819075, guid: 3ea675276220a7c468b115d09ed6b6fe,
+        type: 3}
+      propertyPath: scale
+      value: 0.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ea675276220a7c468b115d09ed6b6fe, type: 3}

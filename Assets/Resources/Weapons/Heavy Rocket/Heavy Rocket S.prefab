@@ -56,7 +56,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6390968900655756666}
   - component: {fileID: 6390968900655756668}
-  - component: {fileID: 6390968900655756667}
   m_Layer: 11
   m_Name: Heavy Rocket S
   m_TagString: Untagged
@@ -93,36 +92,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 0448f9abb9b578a46b432cb2e84c04a8, type: 3}
-  cooldown: {fileID: 6390968900655756667}
   energyCost: 0
+  cooldownTime: 8
   weaponSize: 0
   combatType: 0
-  attachProjectile: 0
-  preferedPosition: 1
   rarity: 40
+  preferedPosition: 1
+  attachProjectile: 0
+  cooldown: {fileID: 0}
   preferredTarget: 2
   secondaryTarget: 0
   maxSuggestedShots: 1
   minSuggestedShots: 1
   projectileTemplates:
   - {fileID: 6390968900717675707}
---- !u!114 &6390968900655756667
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6390968900655756665}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3da6fdc6aab23ea41be68b78a7846906, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxTime: 8
-  currentTime: 8
-  running: 1
-  doesReset: 1
-  overflows: 1
 --- !u!1 &6390968900717675704
 GameObject:
   m_ObjectHideFlags: 0
@@ -375,11 +358,6 @@ PrefabInstance:
       propertyPath: projectileEffects.Array.data[3]
       value: 
       objectReference: {fileID: 7690058658334540722}
-    - target: {fileID: 7000236587950819075, guid: 3ea675276220a7c468b115d09ed6b6fe,
-        type: 3}
-      propertyPath: scale
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7000236587950819076, guid: 3ea675276220a7c468b115d09ed6b6fe,
         type: 3}
       propertyPath: doesFade
@@ -389,6 +367,11 @@ PrefabInstance:
         type: 3}
       propertyPath: damage
       value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 7000236587950819075, guid: 3ea675276220a7c468b115d09ed6b6fe,
+        type: 3}
+      propertyPath: scale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3ea675276220a7c468b115d09ed6b6fe, type: 3}

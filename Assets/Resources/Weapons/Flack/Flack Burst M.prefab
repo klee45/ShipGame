@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 374306111992705487}
   - component: {fileID: 7966492580703610604}
-  - component: {fileID: 374306111992705486}
   m_Layer: 11
   m_Name: Flack Burst M
   m_TagString: Untagged
@@ -47,13 +46,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: 2521b85ea93c74441a1255bbf5f1ab33, type: 3}
-  cooldown: {fileID: 374306111992705486}
   energyCost: 0
+  cooldownTime: 5
   weaponSize: 1
   combatType: 0
-  attachProjectile: 1
-  preferedPosition: 0
   rarity: 60
+  preferedPosition: 0
+  attachProjectile: 1
+  cooldown: {fileID: 0}
   preferredTarget: 0
   secondaryTarget: 0
   maxSuggestedShots: 1
@@ -65,23 +65,6 @@ MonoBehaviour:
   - 0.4
   - 0.6
   - 0.8
---- !u!114 &374306111992705486
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 374306111992705484}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3da6fdc6aab23ea41be68b78a7846906, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxTime: 5
-  currentTime: 5
-  running: 1
-  doesReset: 1
-  overflows: 1
 --- !u!1 &1310512387166001182
 GameObject:
   m_ObjectHideFlags: 0

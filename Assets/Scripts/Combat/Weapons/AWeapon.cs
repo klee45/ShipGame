@@ -1,26 +1,34 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static Arsenal;
 using static SetTargetByPilotStats;
 
 public abstract class AWeapon : MonoBehaviour
 {
+    // ----- Shared with deed -----
     [SerializeField]
     private Sprite icon;
     [SerializeField]
-    private Timer cooldown;
-    [SerializeField]
     private int energyCost = 0;
+    [SerializeField]
+    private float cooldownTime;
+
     [SerializeField]
     private Size weaponSize = Size.Medium;
     [SerializeField]
     private CombatType combatType = CombatType.Offense;
     [SerializeField]
-    private bool attachProjectile = false;
+    private int rarity = 100;
+
     [SerializeField]
     private Arsenal.WeaponPosition preferedPosition = Arsenal.WeaponPosition.Center;
+
+    // ----- Info for AI -----
     [SerializeField]
-    private int rarity = 100;
+    private bool attachProjectile = false;
+    [SerializeField]
+    private Timer cooldown;
 
     [SerializeField]
     private TargetType preferredTarget = TargetType.CloseEnemy;
@@ -35,18 +43,40 @@ public abstract class AWeapon : MonoBehaviour
     protected RangeEstimator rangeEstimator;
     private bool ready;
 
+    public void Setup(
+        Sprite icon, int energy, float cooldownTime,
+        Size size, CombatType combatType, int rarity,
+        WeaponPosition position)
+    {
+        this.icon = icon;
+        this.energyCost = energy;
+        this.weaponSize = size;
+        this.combatType = combatType;
+        this.preferedPosition = position;
+        this.rarity = rarity;
+
+        SetupTimer();
+    }
+
     private void Awake()
     {
+        cooldown = gameObject.AddComponent<Timer>();
         rangeEstimator = gameObject.AddComponent<RangeEstimator>();
-        cooldown = GetComponent<Timer>();
     }
 
     // Start is called before the first frame update
     protected void Start()
     {
         InitializeRangeEstimator();
+        SetupTimer();
         cooldown.OnComplete += () => Reset();
         //Debug.Log(GetComponentInParent<Ship>() + " , " + gameObject);
+    }
+
+    private void SetupTimer()
+    {
+        cooldown.SetMaxTime(cooldownTime);
+        cooldown.SetTime(cooldownTime);
     }
 
     public void Reset()
