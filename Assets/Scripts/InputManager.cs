@@ -2,16 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputManager : MonoBehaviour
+public class InputManager : Singleton<InputManager>
 {
     [SerializeField]
-    private TextAsset bindings;
+    private TextAsset combatBindings;
+    [SerializeField]
+    private TextAsset interactionBindings;
 
-    public Dictionary<string, string> LoadKeys()
+    public Dictionary<string, string> LoadCombatBindings()
+    {
+        return LoadKeys(combatBindings);
+    }
+
+    public Dictionary<string, string> LoadInteractionBindings()
+    {
+        return LoadKeys(interactionBindings);
+    }
+
+    public static Dictionary<string, string> LoadKeys(TextAsset textAsset)
     {
         Dictionary<string, string> pairs = new Dictionary<string, string>();
 
-        string[] lst = bindings.text.Split('\n');
+        string[] lst = textAsset.text.Split('\n');
         foreach(string l in lst)
         {
             string[] pair = l.Split(':');
@@ -21,5 +33,15 @@ public class InputManager : MonoBehaviour
         }
 
         return pairs;
+    }
+
+    public static Dictionary<string, T> Translate<T>(Dictionary<string, string> dict, Dictionary<string, T> translation)
+    {
+        Dictionary<string, T> temp = new Dictionary<string, T>();
+        foreach (KeyValuePair<string, T> pair in translation)
+        {
+            temp[dict[pair.Key]] = translation[pair.Key];
+        }
+        return temp;
     }
 }

@@ -5,6 +5,23 @@ using UnityEngine;
 
 public static class Math
 {
+    // --------- List
+
+    public static void StackList(this List<int> lst)
+    {
+        for (int i = 1; i < lst.Count; i++)
+        {
+            lst[i] += lst[i - 1];
+        }
+    }
+
+    // --------- Enums
+    public static int GetCount(this System.Type enumType)
+    {
+        return System.Enum.GetValues(enumType).Length;
+    }
+
+
     // --------- Effects
 
     public interface IStackableBonus
