@@ -43,9 +43,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100e492375f3b8f4f94e4f43133e6bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 0
-  weaponName: Armor Piercing Rounds L
-  icon: {fileID: -8690287081710920443, guid: ccc3a0bbdb2bc6944b575db5afc817f6, type: 3}
+  price: 200
+  weaponName: Energy Beam S
+  icon: {fileID: -7357873357605312705, guid: c8019ff1e82c3694b916f83d818fd774, type: 3}
   energy: 75
   cooldownTime: 7
   weaponSize: 0

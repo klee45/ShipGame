@@ -43,14 +43,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100e492375f3b8f4f94e4f43133e6bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 0
-  weaponName: Energy Beam L
+  price: 4000
+  weaponName: Energy Beam H
   icon: {fileID: 5062387610151572358, guid: c8019ff1e82c3694b916f83d818fd774, type: 3}
-  energy: 75
-  cooldownTime: 15
+  energy: 150
+  cooldownTime: 17
   weaponSize: 3
   combatType: 0
-  rarity: 20
+  rarity: 5
   preferedPosition: 0
   weaponPrefab: {fileID: 3528496108618263421, guid: 685f24b27ef808c4f99a8040b0b2a7f3,
     type: 3}

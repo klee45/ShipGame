@@ -43,14 +43,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100e492375f3b8f4f94e4f43133e6bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 0
+  price: 400
   weaponName: Armor Piercing Rounds M
   icon: {fileID: 5716910050310833782, guid: ccc3a0bbdb2bc6944b575db5afc817f6, type: 3}
   energy: 0
   cooldownTime: 2
   weaponSize: 1
   combatType: 0
-  rarity: 30
+  rarity: 24
   preferedPosition: 2
   weaponPrefab: {fileID: 7966492580703610604, guid: 7265a10497e102c488b69fd7f4f876f6,
     type: 3}
