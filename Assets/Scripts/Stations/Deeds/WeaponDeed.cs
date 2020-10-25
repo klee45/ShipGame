@@ -47,6 +47,19 @@ public class WeaponDeed : Deed<AWeapon, Ship>
         return weapon;
     }
 
+    public bool IsSame(WeaponDeed deed)
+    {
+        return
+            deed.weaponName == weaponName &&
+            deed.combatType == combatType &&
+            deed.cooldownTime == cooldownTime &&
+            deed.energy == energy &&
+            deed.icon == icon &&
+            deed.rarity == rarity &&
+            deed.rarityType == rarityType &&
+            deed.weaponSize == weaponSize;
+    }
+
     public string GetName() { return weaponName; }
     public Sprite GetIcon() { return icon; }
     public int GetEnergyCost() { return energy; }

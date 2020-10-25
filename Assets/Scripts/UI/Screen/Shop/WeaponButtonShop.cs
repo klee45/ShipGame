@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class WeaponButton : MonoBehaviour
+public class WeaponButtonShop : MonoBehaviour
 {
     [SerializeField]
     private Text weaponName;
@@ -23,7 +23,7 @@ public class WeaponButton : MonoBehaviour
             PlayerInfo playerInfo = PlayerInfo.instance;
             if (linkedDeed.TryPurchase(playerInfo.GetBank()))
             {
-                playerInfo.AddWeaponDeed(linkedDeed);
+                playerInfo.GetInventory().AddWeaponDeed(linkedDeed);
                 CloseSale();
             }
         }

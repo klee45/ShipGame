@@ -12,24 +12,16 @@ public class PlayerInfo : Singleton<PlayerInfo>
     private Bank bank;
 
     [SerializeField]
-    private List<WeaponDeed> weaponDeeds;
+    private Inventory inventory;
 
     protected override void Awake()
     {
         base.Awake();
-        weaponDeeds = new List<WeaponDeed>();
     }
 
-    public void AddWeaponDeed(WeaponDeed deed)
+    public Inventory GetInventory()
     {
-        Debug.Log("Added weapon deed!");
-        this.weaponDeeds.Add(deed);
-        deed.transform.SetParent(transform);
-    }
-
-    public bool RemoveWeaponDeed(WeaponDeed deed)
-    {
-        return this.weaponDeeds.Remove(deed);
+        return inventory;
     }
 
     public Bank GetBank()

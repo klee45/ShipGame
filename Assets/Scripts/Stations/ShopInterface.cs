@@ -8,7 +8,7 @@ public class ShopInterface : Singleton<ShopInterface>
     [SerializeField]
     private Vector2 weaponsPos;
     [SerializeField]
-    private WeaponButton buttonPrefab;
+    private WeaponButtonShop buttonPrefab;
     [SerializeField]
     private ButtonRow[] rows;
     [SerializeField]
@@ -17,12 +17,12 @@ public class ShopInterface : Singleton<ShopInterface>
     [SerializeField]
     private GameObject visual;
 
-    private List<WeaponButton> allWeaponButtons;
+    private List<WeaponButtonShop> allWeaponButtons;
 
     protected override void Awake()
     {
         base.Awake();
-        allWeaponButtons = new List<WeaponButton>();
+        allWeaponButtons = new List<WeaponButtonShop>();
         visual.SetActive(false);
     }
 
@@ -33,7 +33,7 @@ public class ShopInterface : Singleton<ShopInterface>
             allWeaponButtons.AddRange(row.SetupButtons(buttonPrefab));
         }
 
-        foreach (WeaponButton button in allWeaponButtons)
+        foreach (WeaponButtonShop button in allWeaponButtons)
         {
             WeaponDeed deed = Instantiate(DropTable.instance.GetRandomWeaponDeed());
             deed.transform.SetParent(transform);
@@ -43,9 +43,16 @@ public class ShopInterface : Singleton<ShopInterface>
 
     public void OpenShop()
     {
-        visual.SetActive(true);
-        PlayerInfo.instance.GetBank().OnMoneyChange += UpdateMoneyVisual;
-        UpdateMoneyVisual(0);
+        if (visual.activeSelf)
+        {
+            CloseShop();
+        }
+        else
+        {
+            visual.SetActive(true);
+            PlayerInfo.instance.GetBank().OnMoneyChange += UpdateMoneyVisual;
+            UpdateMoneyVisual(0);
+        }
     }
 
     public void CloseShop ()

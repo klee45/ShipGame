@@ -7,15 +7,15 @@ public class ButtonRow : MonoBehaviour
     [SerializeField]
     private int[] positions;
 
-    public WeaponButton[] SetupButtons(WeaponButton button)
+    public WeaponButtonShop[] SetupButtons(WeaponButtonShop button)
     {
-        WeaponButton[] buttons = new WeaponButton[positions.Length];
+        WeaponButtonShop[] buttons = new WeaponButtonShop[positions.Length];
 
         Debug.Log("Setting up buttons");
         int pos = 0;
         foreach (int x in positions)
         {
-            WeaponButton buttonObj = Instantiate(button);
+            WeaponButtonShop buttonObj = Instantiate(button);
             buttonObj.transform.SetParent(transform); 
             buttonObj.transform.localPosition = new Vector3(x, 0, 0);
             buttonObj.transform.localScale = new Vector3(0.5f, 0.5f, 1f);

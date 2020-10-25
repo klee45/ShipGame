@@ -272,9 +272,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc7aa0a81896cb45aae666119dd2c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponName: {fileID: 0}
-  weaponCost: {fileID: 0}
-  weaponSprite: {fileID: 0}
 --- !u!1 &1945735647472483191
 GameObject:
   m_ObjectHideFlags: 0
@@ -393,7 +390,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isPresistant: 1
   weaponsPos: {x: 0, y: 0}
-  buttonPrefab: {fileID: 5413851834328816783, guid: fdbcdce2186610a4b8f9cde85cdc80f5,
+  buttonPrefab: {fileID: 1347207538788831494, guid: fdbcdce2186610a4b8f9cde85cdc80f5,
     type: 3}
   rows:
   - {fileID: 2985462781831341603}
@@ -546,9 +543,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc7aa0a81896cb45aae666119dd2c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponName: {fileID: 0}
-  weaponCost: {fileID: 0}
-  weaponSprite: {fileID: 0}
 --- !u!1 &2247329974509885013
 GameObject:
   m_ObjectHideFlags: 0
@@ -694,9 +688,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc7aa0a81896cb45aae666119dd2c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponName: {fileID: 0}
-  weaponCost: {fileID: 0}
-  weaponSprite: {fileID: 0}
 --- !u!1 &2297440463920463387
 GameObject:
   m_ObjectHideFlags: 0
@@ -839,6 +830,7 @@ Transform:
   - {fileID: 4727261614086348707}
   - {fileID: 6447003473385398400}
   - {fileID: 6358709339217967742}
+  - {fileID: 2365958394933991988}
   m_Father: {fileID: 1945735648423890410}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1066,9 +1058,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc7aa0a81896cb45aae666119dd2c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponName: {fileID: 0}
-  weaponCost: {fileID: 0}
-  weaponSprite: {fileID: 0}
 --- !u!1 &4497759046395383367
 GameObject:
   m_ObjectHideFlags: 0
@@ -1214,9 +1203,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc7aa0a81896cb45aae666119dd2c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponName: {fileID: 0}
-  weaponCost: {fileID: 0}
-  weaponSprite: {fileID: 0}
 --- !u!1 &4525244372597683701
 GameObject:
   m_ObjectHideFlags: 0
@@ -1678,9 +1664,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc7aa0a81896cb45aae666119dd2c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponName: {fileID: 0}
-  weaponCost: {fileID: 0}
-  weaponSprite: {fileID: 0}
 --- !u!1 &5389489207187292082
 GameObject:
   m_ObjectHideFlags: 0
@@ -1874,9 +1857,85 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc7aa0a81896cb45aae666119dd2c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponName: {fileID: 0}
-  weaponCost: {fileID: 0}
-  weaponSprite: {fileID: 0}
+--- !u!1 &6048649654010199624
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2365958394933991988}
+  - component: {fileID: 2934197508718249271}
+  - component: {fileID: 266274491906203653}
+  m_Layer: 0
+  m_Name: Weapon shop title
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2365958394933991988
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6048649654010199624}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 1}
+  m_Children: []
+  m_Father: {fileID: 406931247415872146}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 1}
+  m_AnchorMax: {x: 0.5, y: 1}
+  m_AnchoredPosition: {x: -280, y: 130}
+  m_SizeDelta: {x: 890, y: 58}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!222 &2934197508718249271
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6048649654010199624}
+  m_CullTransparentMesh: 0
+--- !u!114 &266274491906203653
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6048649654010199624}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 708705254, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
+      Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 50
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 0
+    m_MaxSize: 140
+    m_Alignment: 4
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: Weapons
 --- !u!1 &6358709339217967743
 GameObject:
   m_ObjectHideFlags: 0
@@ -1889,7 +1948,7 @@ GameObject:
   - component: {fileID: 6358709339217967736}
   - component: {fileID: 6358709339217967737}
   m_Layer: 0
-  m_Name: Text
+  m_Name: Money
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1911,7 +1970,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 1}
   m_AnchorMax: {x: 0.5, y: 1}
-  m_AnchoredPosition: {x: 381, y: -324}
+  m_AnchoredPosition: {x: 381, y: -345}
   m_SizeDelta: {x: 535, y: 117.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6358709339217967736
@@ -2180,9 +2239,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc7aa0a81896cb45aae666119dd2c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponName: {fileID: 0}
-  weaponCost: {fileID: 0}
-  weaponSprite: {fileID: 0}
 --- !u!1 &7062134936570893321
 GameObject:
   m_ObjectHideFlags: 0
@@ -2407,9 +2463,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc7aa0a81896cb45aae666119dd2c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponName: {fileID: 0}
-  weaponCost: {fileID: 0}
-  weaponSprite: {fileID: 0}
 --- !u!1 &7891924037873334002
 GameObject:
   m_ObjectHideFlags: 0
@@ -2713,9 +2766,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc7aa0a81896cb45aae666119dd2c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponName: {fileID: 0}
-  weaponCost: {fileID: 0}
-  weaponSprite: {fileID: 0}
 --- !u!1 &9061454900559005771
 GameObject:
   m_ObjectHideFlags: 0
@@ -2909,9 +2959,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfc7aa0a81896cb45aae666119dd2c63, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponName: {fileID: 0}
-  weaponCost: {fileID: 0}
-  weaponSprite: {fileID: 0}
 --- !u!1001 &7818250615254121606
 PrefabInstance:
   m_ObjectHideFlags: 0
