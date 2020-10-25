@@ -1,0 +1,78 @@
+Cast -------------------------
+	Initial ------------------
+		Man (pilot - P1) and
+		Woman (gunner - G2) who run a small privateer ship
+		Revolutionary (engineer - E3) from Upper Empire
+		Someone (shields - S4)
+
+
+Factions ---------------------
+	Federation
+	Empire (Lower Empire)
+	Upper Empire
+	Revolutionaries
+
+
+Locations --------------------
+	Great Barrier
+	Core
+	Core power crystal
+
+
+Setting ----------------------
+	First act ----------------
+		Purpose:
+			Introduce player to the world
+				Tells player about unreachable and dark core of the galaxy
+				Ring galaxy
+			Gives motivation and story to characters
+				The two agree that they want to reach the core someday
+				Need to build up a better ship and some supplies before making that journey
+			Setup smaller scale battles to provide familiarity with combat
+
+		End:
+			Capture pivotal station from the Federation
+			E3 is discovered during after the battle when returning to base
+			
+		Notes:
+			Working for government as a privateer
+			Large scale war by two factions over the entire galaxy
+			Most battles are pushing into enemy territory or capturing a station
+		
+
+	Second act ---------------
+		Purpose:
+			Add new information about the galaxy
+				There's actually an entire empire in the core
+				Shrouded by the "Great Barrier" which hides away the center of the galaxy using the power of the core itself
+				Filled with wealth and luxury due to the significantly higher quality resources
+					Contains the true habitable zone : https://en.wikipedia.org/wiki/Galactic_habitable_zone
+			Introduces more cast members
+				During / after a battle they meet a revolutionary from the Upper Empire who survived exile and needs to make it back
+				The trio now need a better ship and a full crew more than ever
+				Plan to travel into the high empire by entering a government defended special warp gate
+
+		End:
+			Team of P1-4 defeat a solo gateway guard to make their way into the Upper Empire
+
+		Notes:
+			Revolutionary was exiled after being found out, but was able to escape the death of exile with smuggled supplies and fuel
+			Promises of riches and seeing the core sway the main team before a shaky alliance begins
+			Plan is to make it into the Upper Empire and find a way to destroy the Great Barrier
+	
+
+	Third act ----------------
+		Purpose:
+			Introduce the Upper Empire territory
+				Still has some areas of crime and rogue ships
+			Overthrow the Upper Empire
+				Revolutionaries cook up a plan to hack into a core power crystal to overcharge the Great Barrier and cause it to fail
+				The power crystals are unreachable by anyone but a small handful of government sanctioned engineers
+					Without remote access, the revolutionaries need to be on site to deploy the virus
+			
+		End:
+			Climactic battle at one of the core power crystals where the government sends forces to try to stop the virus
+			The plan succeeds and the Great Barrier fails catastrophically, exploding into fragments next to the overcharged area
+
+
+	Fourth act ---------------
