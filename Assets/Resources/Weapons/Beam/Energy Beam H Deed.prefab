@@ -54,3 +54,7 @@ MonoBehaviour:
   preferedPosition: 0
   weaponPrefab: {fileID: 3528496108618263421, guid: 685f24b27ef808c4f99a8040b0b2a7f3,
     type: 3}
+  damageString: 40 x 20
+  description: 'Beam of energy that pierces over a large area.
+
+    Deals damage over 20 hits.'

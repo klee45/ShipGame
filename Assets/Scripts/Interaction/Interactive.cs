@@ -4,6 +4,6 @@ using UnityEngine;
 
 public abstract class Interactive : MonoBehaviour
 {
-    public abstract void EnterContext();
+    public abstract void TryEnterContext();
     public abstract void ExitContext();
 }

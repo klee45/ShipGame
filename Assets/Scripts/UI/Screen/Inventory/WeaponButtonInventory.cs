@@ -15,13 +15,14 @@ public class WeaponButtonInventory : MonoBehaviour
     public void Click()
     {
         Debug.Log("Button clicked");
+        InventoryInterface.instance.ShowDescription(linkedDeed);
     }
 
     public void Setup(Inventory.DeedCount pair)
     {
-        Debug.Log(pair);
-        Debug.Log(pair.deed);
-        Debug.Log(pair.count);
+        //Debug.Log(pair);
+        //Debug.Log(pair.deed);
+        //Debug.Log(pair.count);
         this.linkedDeed = pair.deed;
         this.countText.text = pair.count.ToString();
         this.weaponText.text = linkedDeed.GetName();

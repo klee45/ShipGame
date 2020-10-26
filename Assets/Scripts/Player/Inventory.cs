@@ -59,7 +59,7 @@ public class Inventory : MonoBehaviour
         {
             this.weaponDeeds[deedName] = new DeedCount(deed);
         }
-        PrintDict();
+        //PrintDict();
         deed.transform.SetParent(transform);
     }
 

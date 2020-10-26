@@ -27,13 +27,27 @@ public class WeaponDeed : Deed<AWeapon, Ship>
     private AWeapon weaponPrefab;
     private WeaponRarity rarityType;
 
-    private static int rarityDivisor = 100;
+    [SerializeField]
+    private string damageString;
+    [SerializeField]
+    [TextArea(15, 20)]
+    private string description = "";
+
+    private static int[] rarityRanges = new int[] { 10, 25, 45, 70, 100 };
 
     private void Awake()
     {
-        float value = rarity / rarityDivisor;
-        int rarityCounts = typeof(WeaponRarity).GetCount() - 1;
-        rarityType = (WeaponRarity)Mathf.FloorToInt(Mathf.Min(value, rarityCounts));
+        int pos = 0;
+        foreach(int rarityCheck in rarityRanges)
+        {
+            if (rarity <= rarityCheck)
+            {
+                break;
+            }
+            pos++;
+        }
+
+        rarityType = (WeaponRarity)pos;
     }
 
     public override AWeapon Create(Ship ship)
@@ -63,10 +77,12 @@ public class WeaponDeed : Deed<AWeapon, Ship>
     public string GetName() { return weaponName; }
     public Sprite GetIcon() { return icon; }
     public int GetEnergyCost() { return energy; }
-    public float GetCooldown() { return cooldownTime; }      
+    public float GetCooldown() { return cooldownTime; }
     public Size GetSize() { return weaponSize; }
     public CombatType GetCombatType() { return combatType; }
     public int GetRarity() { return rarity; }
+    public string GetDamageString() { return damageString; }
+    public string GetDescription() { return description; }
 
     public WeaponRarity GetRarityType()
     {
@@ -75,10 +91,10 @@ public class WeaponDeed : Deed<AWeapon, Ship>
 
     public enum WeaponRarity
     {
-        Common,
-        Uncommon,
-        Rare,
+        Legendary,
         Epic,
-        Legendary
+        Rare,
+        Uncommon,
+        Common,
     }
 }

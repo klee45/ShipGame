@@ -54,3 +54,5 @@ MonoBehaviour:
   preferedPosition: 2
   weaponPrefab: {fileID: 7966492580703610604, guid: e3d494a8beaebc144941bcde5411a3e7,
     type: 3}
+  damageString: (15 + <color=magenta>15</color>) x 4
+  description: Fast large rounds do double damage to armor

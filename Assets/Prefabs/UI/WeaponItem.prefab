@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8232784193265409691}
   - component: {fileID: 8232784193265409688}
   m_Layer: 0
-  m_Name: WeaponItem 0
+  m_Name: WeaponItem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -121,7 +121,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
+      - m_Target: {fileID: 8232784193265409688}
         m_MethodName: Click
         m_Mode: 1
         m_Arguments:

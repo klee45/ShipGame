@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class ShopInterface : Singleton<ShopInterface>
+public class ShopInterface : Singleton<ShopInterface>, IWindow
 {
     [SerializeField]
     private Vector2 weaponsPos;
@@ -41,21 +41,19 @@ public class ShopInterface : Singleton<ShopInterface>
         }
     }
 
-    public void OpenShop()
+    public bool IsShown()
     {
-        if (visual.activeSelf)
-        {
-            CloseShop();
-        }
-        else
-        {
-            visual.SetActive(true);
-            PlayerInfo.instance.GetBank().OnMoneyChange += UpdateMoneyVisual;
-            UpdateMoneyVisual(0);
-        }
+        return visual.activeSelf;
     }
 
-    public void CloseShop ()
+    public void Show()
+    {
+        visual.SetActive(true);
+        PlayerInfo.instance.GetBank().OnMoneyChange += UpdateMoneyVisual;
+        UpdateMoneyVisual(0);
+    }
+
+    public void Hide ()
     {
         PlayerInfo.instance.GetBank().OnMoneyChange -= UpdateMoneyVisual;
         visual.SetActive(false);

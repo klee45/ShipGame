@@ -93,38 +93,23 @@ public static class Layers
         return result.ToArray();
     }
 
-    private static Color FromList(int[] list)
-    {
-        Color color = new Color(list[0] / 255f, list[1] / 255f, list[2] / 255f);
-        Color.RGBToHSV(color, out float h, out float s, out float v);
-        return Color.HSVToRGB(h, s / 2f, v);
-    }
-
-    private static Color Color1 = FromList(new int[] { 95, 255, 200 }); 
-    private static Color Color2 = FromList(new int[] { 255, 95, 95 }); 
-    private static Color Color3 = FromList(new int[] { 255, 235, 95 }); 
-    private static Color Color4 = FromList(new int[] { 110, 95, 255 });
-    private static Color ColorNeutral = FromList(new int[] { 160, 160, 160 });
-    private static Color WarningColor = FromList(new int[] { 240, 0, 255 });
-
-
     public static Color GetColorFromTeam(Team team)
     {
         switch(team)
         {
             case Team.Allied:
-                return Color1;
+                return Colors.ColorTeam1;
             case Team.Enemy1:
-                return Color2;
+                return Colors.ColorTeam2;
             case Team.Enemy2:
-                return Color3;
+                return Colors.ColorTeam3;
             case Team.Enemy3:
-                return Color4;
+                return Colors.ColorTeam4;
             case Team.Neutral:
-                return ColorNeutral;
+                return Colors.ColorTeamNeutral;
             default:
                 Debug.LogWarning("Invalid team layer given for color!");
-                return WarningColor;
+                return Colors.ErrorColor;
         }
     }
 }

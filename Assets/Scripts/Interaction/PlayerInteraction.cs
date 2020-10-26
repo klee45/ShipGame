@@ -7,12 +7,14 @@ using UnityEngine;
 public class PlayerInteraction : MonoBehaviour
 {
     private List<Interactive> interactions;
-    private Dictionary<string, Action<Interactive>> keyPressPairs;
+    private Dictionary<string, Action<Interactive>> keyPressInteractionPairs;
+    private Dictionary<string, Action> keyPressPairs;
 
     private void Awake()
     {
         interactions = new List<Interactive>();
         Dictionary<string, string> bindings = InputManager.instance.LoadInteractionBindings();
+        keyPressInteractionPairs = InputManager.Translate(bindings, pressedKeysInteract);
         keyPressPairs = InputManager.Translate(bindings, pressedKeys);
     }
 
@@ -23,24 +25,59 @@ public class PlayerInteraction : MonoBehaviour
 
     private void CheckButtons()
     {
-        if (Input.anyKey && interactions.Count > 0)
+        if (Input.anyKey)
         {
-            foreach (KeyValuePair<string, Action<Interactive>> pair in keyPressPairs)
+            if (interactions.Count > 0)
+            {
+                foreach (KeyValuePair<string, Action<Interactive>> pair in keyPressInteractionPairs)
+                {
+                    if (Input.GetKeyDown(pair.Key))
+                    {
+                        //Debug.Log(string.Format("{0} pressed", pair.Key));
+                        foreach (Interactive interactive in interactions)
+                            pair.Value(interactive);
+                    }
+                }
+            }
+            foreach (KeyValuePair<string, Action> pair in keyPressPairs)
             {
                 if (Input.GetKeyDown(pair.Key))
                 {
-                    //Debug.Log(string.Format("{0} pressed", pair.Key));
-                    foreach (Interactive interactive in interactions)
-                        pair.Value(interactive);
+                    pair.Value();
                 }
             }
         }
     }
 
-    private Dictionary<string, Action<Interactive>> pressedKeys = new Dictionary<string, Action<Interactive>>()
+    public static void TryEnterInventory()
     {
-        { "interact", (i) => { i.EnterContext(); } },
-        { "escape", (i) => { i.ExitContext(); } },
+        WindowStack windowStack = WindowStack.instance;
+        InventoryInterface inventoryInterface = InventoryInterface.instance;
+
+        if (inventoryInterface.IsShown())
+        {
+            windowStack.CloseWindow(inventoryInterface);
+        }
+        else
+        {
+            windowStack.AddNewWindow(inventoryInterface);
+        }
+    }
+
+    public static void TryExitTopWindow()
+    {
+        WindowStack.instance.CloseTopWindow();
+    }
+
+    private Dictionary<string, Action> pressedKeys = new Dictionary<string, Action>()
+    {
+        { "inventory", () => { TryEnterInventory(); } },
+        { "escape", () => { TryExitTopWindow(); } },
+    };
+
+    private Dictionary<string, Action<Interactive>> pressedKeysInteract = new Dictionary<string, Action<Interactive>>()
+    {
+        { "interact", (i) => { i.TryEnterContext(); } },
     };
 
 

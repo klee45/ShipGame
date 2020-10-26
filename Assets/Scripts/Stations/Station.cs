@@ -9,15 +9,23 @@ public class Station : Interactive
         ShopInterface.instance.SetupShop();
     }
 
-    public override void EnterContext()
+    public override void TryEnterContext()
     {
-        Debug.Log("Station enter context");
-        ShopInterface.instance.OpenShop();
+        WindowStack windowStack = WindowStack.instance;
+        ShopInterface shopInterface = ShopInterface.instance;
+
+        if (shopInterface.IsShown())
+        {
+            windowStack.CloseWindow(shopInterface);
+        }
+        else
+        {
+            windowStack.AddNewWindow(shopInterface);
+        }
     }
 
     public override void ExitContext()
     {
-        Debug.Log("Station exit context");
-        ShopInterface.instance.CloseShop();
+        WindowStack.instance.CloseWindow(ShopInterface.instance);
     }
 }
