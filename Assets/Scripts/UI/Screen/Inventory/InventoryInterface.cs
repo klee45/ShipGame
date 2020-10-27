@@ -8,9 +8,8 @@ public class InventoryInterface : Singleton<InventoryInterface>, IWindow
 {
     [SerializeField]
     private GameObject visual;
-
     [SerializeField]
-    private WeaponButtonInventory[] weaponButtons;
+    private InventoryList inventoryList;
 
     [SerializeField]
     private Text money;
@@ -24,12 +23,6 @@ public class InventoryInterface : Singleton<InventoryInterface>, IWindow
     {
         base.Awake();
         visual.SetActive(false);
-        Debug.Log(weaponButtons.Length);
-
-        foreach (WeaponButtonInventory button in weaponButtons)
-        {
-            button.gameObject.SetActive(false);
-        }
     }
 
     public void ShowDescription(WeaponDeed deed)
@@ -61,11 +54,6 @@ public class InventoryInterface : Singleton<InventoryInterface>, IWindow
         rarity.text = "<color=#" + ColorUtility.ToHtmlStringRGB(color) + ">" + rarityType.ToString() + "</color>\n" + rarityValue;
     }
 
-    public void Update()
-    {
-        Visualize();
-    }
-
     public bool IsShown()
     {
         return visual.activeSelf;
@@ -92,22 +80,6 @@ public class InventoryInterface : Singleton<InventoryInterface>, IWindow
 
     public void Visualize()
     {
-        int pos = 0;
-        List<Inventory.DeedCount> deedCounts = PlayerInfo.instance.GetInventory().GetDeedCounts().ToList();
-        foreach (Inventory.DeedCount deedCount in deedCounts.OrderBy(c => c.deed.GetName()))
-        {
-            WeaponButtonInventory button = weaponButtons[pos];
-            button.gameObject.SetActive(true);
-            button.Setup(deedCount);
-            if(++pos >= weaponButtons.Length)
-            {
-                break;
-            }
-        }
-        for (int i = pos; i < weaponButtons.Length; i++)
-        {
-            WeaponButtonInventory button = weaponButtons[pos];
-            button.gameObject.SetActive(false);
-        }
+        inventoryList.Visualize();
     }
 }
