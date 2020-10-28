@@ -54,6 +54,7 @@ public class PilotPlayer : APilot
 
     private void CheckButtons()
     {
+        // Check pressed keys only if at least one key is pressed
         if (Input.anyKey)
         {
             foreach (KeyValuePair<string, Action> pair in heldKeyActionPairs)
@@ -69,12 +70,25 @@ public class PilotPlayer : APilot
             {
                 if (Input.GetKeyDown(pair.Key))
                 {
+                    if (pair.Key == "space")
+                    {
+                        Debug.Log("Space pressed down " + Input.GetKeyDown(pair.Key));
+                    }
                     pair.Value.Down()(ship);
                 }
-                else if (Input.GetKeyUp(pair.Key))
+            }
+        }
+
+        // Key releases have to be checked always
+        foreach (KeyValuePair<string, ActionPair> pair in pressReleasedKeyActionPairs)
+        {
+            if (Input.GetKeyUp(pair.Key))
+            {
+                if (pair.Key == "space")
                 {
-                    pair.Value.Up()(ship);
+                    Debug.Log("Space released " + Input.GetKeyDown(pair.Key));
                 }
+                pair.Value.Up()(ship);
             }
         }
     }

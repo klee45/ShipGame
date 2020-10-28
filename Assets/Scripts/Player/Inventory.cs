@@ -48,7 +48,7 @@ public class Inventory : MonoBehaviour
     
     public void AddWeaponDeed(WeaponDeed deed)
     {
-        Debug.Log("Added weapon deed!");
+        //Debug.Log("Added weapon deed!");
 
         string deedName = deed.GetName();
         if (this.weaponDeeds.ContainsKey(deedName))

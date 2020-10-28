@@ -18,4 +18,11 @@ public class MovementStats : MonoBehaviour
         this.velocity = velocity;
         this.rotation = rotation;
     }
+
+    /**
+    private void Update()
+    {
+        Debug.Log("V: " + GetVelocityValue() + " | R: " + GetRotationValue());
+    }
+    **/
 }
