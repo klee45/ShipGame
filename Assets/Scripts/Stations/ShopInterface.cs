@@ -104,6 +104,7 @@ public class ShopInterface : Singleton<ShopInterface>, IWindow
 
     public void Show()
     {
+        Debug.Log("Shop show");
         visual.SetActive(true);
         PlayerInfo.instance.GetBank().OnMoneyChange += UpdateMoneyVisual;
         UpdateMoneyVisual(0);

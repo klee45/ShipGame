@@ -21,6 +21,7 @@ public class PlayerInteraction : MonoBehaviour
     private void Update()
     {
         CheckButtons();
+        //Debug.Log("Num interactions: " + interactions.Count);
     }
 
     private void CheckButtons()
@@ -77,12 +78,13 @@ public class PlayerInteraction : MonoBehaviour
 
     private Dictionary<string, Action<Interactive>> pressedKeysInteract = new Dictionary<string, Action<Interactive>>()
     {
-        { "interact", (i) => { i.TryEnterContext(); } },
+        { "interact", (i) => { Debug.Log("Interact"); i.TryEnterContext(); } },
     };
 
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        Debug.Log("Enter station: " + collision.gameObject.name);
         interactions.Add(collision.gameObject.GetComponentInParent<Interactive>());
     }
 

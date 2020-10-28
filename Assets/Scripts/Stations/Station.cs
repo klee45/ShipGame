@@ -14,6 +14,8 @@ public class Station : Interactive
         WindowStack windowStack = WindowStack.instance;
         ShopInterface shopInterface = ShopInterface.instance;
 
+        Debug.Log("enter shop");
+
         if (shopInterface.IsShown())
         {
             windowStack.CloseWindow(shopInterface);
