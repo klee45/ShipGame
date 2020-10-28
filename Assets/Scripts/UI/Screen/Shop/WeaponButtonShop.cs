@@ -15,22 +15,41 @@ public class WeaponButtonShop : MonoBehaviour
     private bool canBuy;
     private WeaponDeed linkedDeed;
 
+    private bool isShown = false;
+
     public void Click()
     {
-        Debug.Log("Button clicked");
         if (canBuy)
         {
-            PlayerInfo playerInfo = PlayerInfo.instance;
-            if (linkedDeed.TryPurchase(playerInfo.GetBank()))
+            if (isShown)
             {
-                playerInfo.GetInventory().AddWeaponDeed(linkedDeed);
-                CloseSale();
+                ShopInterface.instance.GetPurchaseButton().Purchase();
             }
+            else
+            {
+                ShopInterface.instance.GetDescriptionBox().ShowDescription(linkedDeed);
+                ShopInterface.instance.GetPurchaseButton().SetLinkedButton(this);
+            }
+        }
+        else
+        {
+            ShopInterface.instance.GetPurchaseButton().Clear();
         }
     }
 
-    private void CloseSale()
+    public void SetShown(bool val)
     {
+        isShown = val;
+    }
+
+    public WeaponDeed GetLinkedDeed()
+    {
+        return linkedDeed;
+    }
+
+    public void CloseSale()
+    {
+        isShown = false;
         this.canBuy = false;
         this.linkedDeed = null;
         this.weaponName.text = "";

@@ -15,7 +15,7 @@ public class WeaponButtonInventory : MonoBehaviour
     public void Click()
     {
         Debug.Log("Button clicked");
-        InventoryInterface.instance.ShowDescription(linkedDeed);
+        InventoryInterface.instance.GetDescriptionBox().ShowDescription(linkedDeed);
     }
 
     public void Setup(Inventory.DeedCount pair)
