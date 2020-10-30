@@ -138,26 +138,26 @@ public class Ship : Entity
 
     public void ActivateBoost()
     {
-        Debug.Log("Boost!");
+        //Debug.Log("Boost!");
         movementStats.GetRotationStatGroup().MultMod(0.5f, 1f);
         movementStats.GetVelocityStatGroup().MultMod(1.6f, 0.8f);
     }
 
     public void DeactivateBoost()
     {
-        Debug.Log("Unboost.");
+        //Debug.Log("Unboost.");
         movementStats.GetRotationStatGroup().MultModUndo(2f, 1f);
         movementStats.GetVelocityStatGroup().MultModUndo(0.625f, 1.25f);
     }
 
     public void ActivateBrake()
     {
-        Debug.Log("Break!");
+        //Debug.Log("Break!");
         movementStats.GetRotationStatGroup().MultMod(1.6f, 1f);
     }
     public void DeactivateBrake()
     {
-        Debug.Log("Unbreak.");
+        //Debug.Log("Unbreak.");
         movementStats.GetRotationStatGroup().MultModUndo(0.625f, 1f);
     }
 

@@ -296,6 +296,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   parallaxRatio: 2
+  offset: {x: 0, y: 0}
 --- !u!1001 &1805619999
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -70,10 +70,6 @@ public class PilotPlayer : APilot
             {
                 if (Input.GetKeyDown(pair.Key))
                 {
-                    if (pair.Key == "space")
-                    {
-                        Debug.Log("Space pressed down " + Input.GetKeyDown(pair.Key));
-                    }
                     pair.Value.Down()(ship);
                 }
             }
@@ -84,10 +80,6 @@ public class PilotPlayer : APilot
         {
             if (Input.GetKeyUp(pair.Key))
             {
-                if (pair.Key == "space")
-                {
-                    Debug.Log("Space released " + Input.GetKeyDown(pair.Key));
-                }
                 pair.Value.Up()(ship);
             }
         }

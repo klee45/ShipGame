@@ -58,7 +58,7 @@ public class ShopInterface : Singleton<ShopInterface>, IWindow
         int count = Random.Range(minItems, maxItems + 1);
         int rowCount = Mathf.CeilToInt(count / 5f);
 
-        Debug.Log(count);
+        //Debug.Log(count);
 
         for (int row = 0; row < rowCount; row++)
         {
@@ -104,7 +104,7 @@ public class ShopInterface : Singleton<ShopInterface>, IWindow
 
     public void Show()
     {
-        Debug.Log("Shop show");
+        //Debug.Log("Shop show");
         visual.SetActive(true);
         PlayerInfo.instance.GetBank().OnMoneyChange += UpdateMoneyVisual;
         UpdateMoneyVisual(0);

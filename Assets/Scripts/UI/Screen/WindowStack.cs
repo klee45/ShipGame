@@ -23,8 +23,11 @@ public class WindowStack : Singleton<WindowStack>
 
     public void CloseTopWindow()
     {
-        stack.Last().Hide();
-        stack.RemoveAt(stack.Count - 1);
+        if (stack.Count > 0)
+        {
+            stack.Last().Hide();
+            stack.RemoveAt(stack.Count - 1);
+        }
     }
 
     public bool CloseWindow(IWindow window)
