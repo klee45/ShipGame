@@ -6,29 +6,31 @@ using UnityEngine.UI;
 
 public class GalaxyInfo : Singleton<GalaxyInfo>
 {
+    private GalaxyEdgeDict edgeDict;
     private List<GalaxyMapVertex> sectors;
-    private List<GalaxyMapEdge> hyperlanes;
 
     protected override void Awake()
     {
         base.Awake();
+        edgeDict = GetComponentInChildren<GalaxyEdgeDict>();
         sectors = GetComponentsInChildren<GalaxyMapVertex>().ToList();
-        hyperlanes = GetComponentsInChildren<GalaxyMapEdge>().ToList();
         SetSpriteState(false);
     }
 
     private void Start()
     {
+        /*
         int pos = 1;
         foreach (GalaxyMapVertex vertex in sectors)
         {
-            string id = "1 - " + pos.ToString();
+            string id = "1-" + pos.ToString();
             string fullName = "Sector " + id;
             vertex.gameObject.name = fullName;
             vertex.GetComponentInChildren<Text>().text = id;
             vertex.SetSectorNameDebugging(fullName);
             pos++;
         }
+        */
     }
 
     private void SetSpriteState(bool enabled)
@@ -46,8 +48,8 @@ public class GalaxyInfo : Singleton<GalaxyInfo>
         return sectors;
     }
 
-    public List<GalaxyMapEdge> GetHyperlanes()
+    public GalaxyEdgeDict GetGalaxyEdgeDict()
     {
-        return hyperlanes;
+        return edgeDict;
     }
 }

@@ -74,19 +74,26 @@ public class WarpManager : Singleton<WarpManager>
     private void CreateWarpGates(GalaxyMapVertex sector)
     {
         HashSet<GalaxyMapVertex> connectedSectors = new HashSet<GalaxyMapVertex>();
-        foreach (GalaxyMapEdge hyperlane in GalaxyInfo.instance.GetHyperlanes())
+        List<GalaxyMapVertex> connected = GalaxyInfo.instance.GetGalaxyEdgeDict().GetEdges()[sector];
+
+        foreach (GalaxyMapVertex vertex in connected)
         {
-            if (hyperlane.Contains(sector, out GalaxyMapVertex connected))
+            if (connectedSectors.Add(vertex))
             {
-                if (!connectedSectors.Add(connected))
-                {
-                    Debug.LogWarning(string.Format(
-                        "Multiple hyperlanes between {0} and {1}",
-                        sector.GetSectorName(),
-                        connected.GetSectorName()));
-                }
+                Debug.Log(string.Format(
+                    "Built path between {0} and {1}",
+                    sector.GetSectorName(),
+                    vertex.GetSectorName()));
+            }
+            else
+            {
+                Debug.LogWarning(string.Format(
+                    "Duplicate hyperlanes between {0} and {1}",
+                    sector.GetSectorName(),
+                    vertex.GetSectorName()));
             }
         }
+
         Debug.Log("Making " + connectedSectors.Count + " warp gates");
         foreach (GalaxyMapVertex connectedSector in connectedSectors)
         {
