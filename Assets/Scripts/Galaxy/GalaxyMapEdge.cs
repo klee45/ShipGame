@@ -29,16 +29,16 @@ public class GalaxyMapEdge : MonoBehaviour
 
         float startRadius = startRect.rect.width * startRect.localScale.x / 2;
         float endRadius = endRect.rect.width * endRect.localScale.x / 2;
-        Debug.Log(startRadius + ", " + endRadius);
+        //Debug.Log(startRadius + ", " + endRadius);
         Vector3 leftPos = startPos + (angle.RadToVector2() * startRadius).ToVector3();
         Vector3 rightPos = endPos - (angle.RadToVector2() * endRadius).ToVector3();
-        Debug.Log(start.GetSectorName() + " -> " + end.GetSectorName() + " : " + leftPos.ToString() + " -> " + rightPos.ToString());
+        //Debug.Log(start.GetSectorName() + " -> " + end.GetSectorName() + " : " + leftPos.ToString() + " -> " + rightPos.ToString());
         float length = (rightPos - leftPos).magnitude - (startRadius + endRadius);
 
         rectTransform.eulerAngles = new Vector3(0, 0, Mathf.Rad2Deg * angle);
         rectTransform.anchoredPosition = (leftPos + rightPos) / 2;
         rectTransform.localScale = Vector3.one;
-        Debug.Log(length);
+        //Debug.Log(length);
         rectTransform.sizeDelta = new Vector2((rightPos - leftPos).magnitude + 0.025f, 0.1f);
     }
 

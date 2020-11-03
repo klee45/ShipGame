@@ -39,15 +39,18 @@ public class GalaxyEdgeDict : MonoBehaviour
     {
         List<Vector2Int[]> allEdges = new List<Vector2Int[]> { orionEdges, libraEdges, cetusEdges };
         List<GalaxyMapVertex[]> allVertices = new List<GalaxyMapVertex[]>();
+        List<string> names = new List<string>();
 
+        GameObject constellationEdgeContainer = AddContainer("Intra-constellation edges", transform);
         foreach (GameObject constellation in constellations)
         {
             allVertices.Add(constellation.GetComponentsInChildren<GalaxyMapVertex>());
+            names.Add(constellation.name);
         }
         
         for (int i = 0; i < constellations.Length; i++)
         {
-            SetupConstellationEdges(allVertices[i], allEdges[i]);
+            SetupConstellationEdges(allVertices[i], allEdges[i], names[i], constellationEdgeContainer);
         }
 
         ConnectConstellations(allVertices.SelectMany(i => i));
@@ -58,18 +61,20 @@ public class GalaxyEdgeDict : MonoBehaviour
         return edges;
     }
 
-    private void SetupConstellationEdges(GalaxyMapVertex[] vertices, Vector2Int[] edges)
+    private void SetupConstellationEdges(GalaxyMapVertex[] vertices, Vector2Int[] edges, string name, GameObject overallContainer)
     {
+        GameObject container = AddContainer(name, overallContainer.transform);
         foreach (Vector2Int edge in edges)
         {
             GalaxyMapVertex first = vertices[edge.x - 1];
             GalaxyMapVertex second = vertices[edge.y - 1];
-            AddDoubleConnections(first, second);
+            AddDoubleConnections(first, second, container);
         }
     }
 
     private void ConnectConstellations(IEnumerable<GalaxyMapVertex> vertices)
     {
+        GameObject container = AddContainer("Inter-constellation edges", transform);
         Dictionary<string, GalaxyMapVertex> nameDict = new Dictionary<string, GalaxyMapVertex>();
         foreach (GalaxyMapVertex vertex in vertices)
         {
@@ -79,16 +84,30 @@ public class GalaxyEdgeDict : MonoBehaviour
 
         foreach (StringPair pair in constellationConnectEdges)
         {
-            AddDoubleConnections(nameDict[pair.start], nameDict[pair.end]);
+            AddDoubleConnections(nameDict[pair.start], nameDict[pair.end], container);
         }
     }
 
-    private void AddDoubleConnections(GalaxyMapVertex first, GalaxyMapVertex second)
+    private void AddDoubleConnections(GalaxyMapVertex first, GalaxyMapVertex second, GameObject container)
     {
         AddConnection(first, second);
         AddConnection(second, first);
+        AddEdgeObj(first, second, container);
+    }
+
+    private GameObject AddContainer(string name, Transform parent)
+    {
+        GameObject container = new GameObject(name);
+        container.transform.SetParent(parent);
+        container.transform.localScale = Vector3.one;
+        container.transform.localPosition = Vector3.zero;
+        return container;
+    }
+
+    private void AddEdgeObj(GalaxyMapVertex first, GalaxyMapVertex second, GameObject container)
+    {
         GalaxyMapEdge edge = Instantiate(edgePrefab);
-        edge.transform.SetParent(transform);
+        edge.transform.SetParent(container.transform);
         edge.Setup(first, second);
     }
 
