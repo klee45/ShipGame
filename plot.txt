@@ -5,6 +5,10 @@ Cast -------------------------
 		Revolutionary (engineer - E3) from Upper Empire
 		Someone (shields - S4)
 
+Ideas ------------------------
+	Galaxy -------------------
+		Sectors are grouped as constellations - named by those from center that could see the whole constellation!
+
 
 Factions ---------------------
 	Federation
