@@ -116,6 +116,16 @@ public static class Math
 
     // --------- Math
 
+    public static Vector2 DegreeToVector2(this float f)
+    {
+        return RadToVector2(Mathf.Deg2Rad * f);
+    }
+
+    public static Vector2 RadToVector2(this float f)
+    {
+        return new Vector2(Mathf.Cos(f), Mathf.Sin(f));
+    }
+
     public static float ToDegree(this float f)
     {
         return f * 180f / Mathf.PI;

@@ -13,15 +13,33 @@ public class GalaxyMapEdge : MonoBehaviour
         this.end = end;
         this.name = string.Format("Edge from {0} to {1}", start.GetSectorID(), end.GetSectorID());
 
-        Vector3 startPos = start.GetComponent<RectTransform>().anchoredPosition;
-        Vector3 endPos = end.GetComponent<RectTransform>().anchoredPosition;
+        RectTransform startRect = start.GetComponent<RectTransform>();
+        RectTransform endRect = end.GetComponent<RectTransform>();
         RectTransform rectTransform = GetComponent<RectTransform>();
-        rectTransform.anchoredPosition = (startPos + endPos) / 2;
-        Vector2 length = endPos - startPos;
-        float angle = Mathf.Atan2(length.y, length.x);
+
+        Vector3 startPos = startRect.anchoredPosition;
+        Vector3 endPos = endRect.anchoredPosition;
+        Debug.Log(startPos.ToString() + " -> " + endPos.ToString());
+        Vector2 difference = endPos - startPos;
+        float angle = Mathf.Atan2(difference.y, difference.x);
+        //float length = difference.magnitude;
+
+        //rectTransform.anchoredPosition = (startPos + endPos) / 2;
+        //length -= (startRect.sizeDelta.magnitude + endRect.sizeDelta.magnitude) / 2;
+
+        float startRadius = startRect.rect.width * startRect.localScale.x / 2;
+        float endRadius = endRect.rect.width * endRect.localScale.x / 2;
+        Debug.Log(startRadius + ", " + endRadius);
+        Vector3 leftPos = startPos + (angle.RadToVector2() * startRadius).ToVector3();
+        Vector3 rightPos = endPos - (angle.RadToVector2() * endRadius).ToVector3();
+        Debug.Log(start.GetSectorName() + " -> " + end.GetSectorName() + " : " + leftPos.ToString() + " -> " + rightPos.ToString());
+        float length = (rightPos - leftPos).magnitude - (startRadius + endRadius);
+
         rectTransform.eulerAngles = new Vector3(0, 0, Mathf.Rad2Deg * angle);
-        rectTransform.sizeDelta = new Vector2(length.magnitude, 0.1f);
+        rectTransform.anchoredPosition = (leftPos + rightPos) / 2;
         rectTransform.localScale = Vector3.one;
+        Debug.Log(length);
+        rectTransform.sizeDelta = new Vector2((rightPos - leftPos).magnitude + 0.025f, 0.1f);
     }
 
     /*
