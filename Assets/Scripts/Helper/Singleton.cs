@@ -20,5 +20,6 @@ public abstract class Singleton<T> : MonoBehaviour where T : MonoBehaviour
             Destroy(instance);
         }
         instance = this as T;
+        Debug.Log("Set instance of " + instance.ToString());
     }
 }

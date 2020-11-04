@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 8019733760651353923}
   - component: {fileID: 8703839972688297758}
   m_Layer: 0
-  m_Name: 1-1
+  m_Name: Sector
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -37,7 +37,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -6, y: -5}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 1, y: 1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1836068620474690017
@@ -52,7 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec5411023b15ad428c073303cf08807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sectorName: Sector 1 - 1
+  sectorName: 'Sector '
 --- !u!212 &7699067090585728008
 SpriteRenderer:
   m_ObjectHideFlags: 0

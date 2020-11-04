@@ -4,21 +4,24 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class GalaxyMapVertex : MonoBehaviour
+public abstract class GalaxyMapVertex : MonoBehaviour
 {
     [SerializeField]
-    private string sectorName;
     private string sectorID;
+    [SerializeField]
+    private string sectorName;
 
     private Scene sector;
 
     private void Awake()
     {
+        sectorName = SetupName(sectorID);
         this.name = sectorName;
         sector = SceneManager.GetSceneByName(sectorName);
-        sectorID = sectorName.Remove(0, "Sector ".Length);
         GetComponentInChildren<Text>().text = sectorID;
     }
+
+    protected abstract string SetupName(string sectorID);
 
     public Scene GetSector()
     {

@@ -13,6 +13,10 @@ public class PlayerInteraction : MonoBehaviour
     private void Awake()
     {
         interactions = new List<Interactive>();
+    }
+
+    private void Start()
+    {
         Dictionary<string, string> bindings = InputManager.instance.LoadInteractionBindings();
         keyPressInteractionPairs = InputManager.Translate(bindings, pressedKeysInteract);
         keyPressPairs = InputManager.Translate(bindings, pressedKeys);
