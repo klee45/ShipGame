@@ -17,11 +17,18 @@ public abstract class GalaxyMapVertex : MonoBehaviour
     {
         sectorName = SetupName(sectorID);
         this.name = sectorName;
-        sector = SceneManager.GetSceneByName(sectorName);
         GetComponentInChildren<Text>().text = sectorID;
+        sector = SceneManager.GetSceneByName(sectorName);
     }
 
     protected abstract string SetupName(string sectorID);
+
+    private void OnValidate()
+    {
+        sectorName = SetupName(sectorID);
+        this.name = sectorName;
+        GetComponentInChildren<Text>().text = sectorID;
+    }
 
     public Scene GetSector()
     {

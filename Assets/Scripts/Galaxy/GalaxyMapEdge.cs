@@ -1,24 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static GalaxyEdgeDict;
 
 public class GalaxyMapEdge : MonoBehaviour
 {
     private GalaxyMapVertex start;
     private GalaxyMapVertex end;
 
-    public void Setup(GalaxyMapVertex start, GalaxyMapVertex end)
+    public void Setup(GalaxyMapVertexObjInfo startVertexInfo, GalaxyMapVertexObjInfo endVertexInfo)
     {
-        this.start = start;
-        this.end = end;
+        this.start = startVertexInfo.vertex;
+        this.end = endVertexInfo.vertex;
         this.name = string.Format("Edge from {0} to {1}", start.GetSectorID(), end.GetSectorID());
 
         RectTransform startRect = start.GetComponent<RectTransform>();
         RectTransform endRect = end.GetComponent<RectTransform>();
         RectTransform rectTransform = GetComponent<RectTransform>();
 
-        Vector3 startPos = startRect.anchoredPosition;
-        Vector3 endPos = endRect.anchoredPosition;
+        Vector3 startPos = SetPos(startRect, startVertexInfo);
+        Vector3 endPos = SetPos(endRect, endVertexInfo);
         Debug.Log(startPos.ToString() + " -> " + endPos.ToString());
         Vector2 difference = endPos - startPos;
         float angle = Mathf.Atan2(difference.y, difference.x);
@@ -27,8 +28,8 @@ public class GalaxyMapEdge : MonoBehaviour
         //rectTransform.anchoredPosition = (startPos + endPos) / 2;
         //length -= (startRect.sizeDelta.magnitude + endRect.sizeDelta.magnitude) / 2;
 
-        float startRadius = startRect.rect.width * startRect.localScale.x / 2;
-        float endRadius = endRect.rect.width * endRect.localScale.x / 2;
+        float startRadius = SetRadius(startRect, startVertexInfo);
+        float endRadius = SetRadius(endRect, endVertexInfo);
         //Debug.Log(startRadius + ", " + endRadius);
         Vector3 leftPos = startPos + (angle.RadToVector2() * startRadius).ToVector3();
         Vector3 rightPos = endPos - (angle.RadToVector2() * endRadius).ToVector3();
@@ -40,6 +41,33 @@ public class GalaxyMapEdge : MonoBehaviour
         rectTransform.localScale = Vector3.one;
         //Debug.Log(length);
         rectTransform.sizeDelta = new Vector2((rightPos - leftPos).magnitude + 0.025f, 0.1f);
+    }
+
+    private Vector3 SetPos(RectTransform rect, GalaxyMapVertexObjInfo info)
+    {
+        if (info.isSubsector)
+        {
+            float parentScale = info.vertex.transform.parent.localScale.x;
+            Vector2 parentPos = info.vertex.transform.parent.GetComponent<RectTransform>().anchoredPosition;
+            return rect.anchoredPosition * parentScale + parentPos;
+        }
+        else
+        {
+            return rect.anchoredPosition;
+        }
+    }
+
+    private float SetRadius(RectTransform rect, GalaxyMapVertexObjInfo info)
+    {
+        float val = rect.rect.width * rect.localScale.x / 2;
+        if (info.isSubsector)
+        {
+            return val * info.vertex.transform.parent.localScale.x;
+        }
+        else
+        {
+            return val / 1.25f;
+        }
     }
 
     /*

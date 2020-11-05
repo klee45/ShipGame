@@ -1,7 +1,9 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using static Reader;
 
 public class GalaxyEdgeDict : MonoBehaviour
 {
@@ -14,19 +16,17 @@ public class GalaxyEdgeDict : MonoBehaviour
     private GameObject[] constellations;
 
     [Header("Intraconstellation edges")]
-    [Space(4)]
     [SerializeField]
-    private Vector2Int[] orionEdges;
-    [Space(4)]
-    [SerializeField]
-    private Vector2Int[] libraEdges;
-    [Space(15)]
-    [SerializeField]
-    private Vector2Int[] cetusEdges;
+    private TextAsset[] sectorConnectTexts;
 
     [Header("Connections between constellations")]
     [SerializeField]
-    private StringPair[] constellationConnectEdges;
+    private TextAsset constellationConnectText;
+
+    [Header("Connections between constellations")]
+    [SerializeField]
+    private TextAsset[] subsectorConnectTexts;
+
 
     private Dictionary<GalaxyMapVertex, List<GalaxyMapVertex>> edges;
 
@@ -37,23 +37,31 @@ public class GalaxyEdgeDict : MonoBehaviour
 
     private void Start()
     {
-        List<Vector2Int[]> allEdges = new List<Vector2Int[]> { orionEdges, libraEdges, cetusEdges };
-        List<GalaxyMapVertex[]> allVertices = new List<GalaxyMapVertex[]>();
+        List<List<StringPair>> sectorEdges = new List<List<StringPair>>();
+
+        foreach (TextAsset sectorConnection in sectorConnectTexts)
+        {
+            sectorEdges.Add(Reader.ReadPairedFile(sectorConnection, "\t"));
+        }
+
+        List<GalaxyMapSector[]> allMainSectors = new List<GalaxyMapSector[]>();
+        List<GalaxyMapSubsector[]> allSubsectors = new List<GalaxyMapSubsector[]>();
         List<string> names = new List<string>();
 
         GameObject constellationEdgeContainer = AddContainer("Intra-constellation edges", transform);
         foreach (GameObject constellation in constellations)
         {
-            allVertices.Add(constellation.GetComponentsInChildren<GalaxyMapVertex>());
+            allMainSectors.Add(constellation.GetComponentsInChildren<GalaxyMapSector>());
+            allSubsectors.Add(constellation.GetComponentsInChildren<GalaxyMapSubsector>());
             names.Add(constellation.name);
         }
         
         for (int i = 0; i < constellations.Length; i++)
         {
-            SetupConstellationEdges(allVertices[i], allEdges[i], names[i], constellationEdgeContainer);
+            SetupConstellationEdges(allMainSectors[i], sectorEdges[i], names[i], constellationEdgeContainer);
         }
 
-        ConnectConstellations(allVertices.SelectMany(i => i));
+        ConnectConstellations(allMainSectors.SelectMany(i => i), allSubsectors.SelectMany(i => i));
     }
 
     public IReadOnlyDictionary<GalaxyMapVertex, List<GalaxyMapVertex>> GetEdges()
@@ -61,37 +69,93 @@ public class GalaxyEdgeDict : MonoBehaviour
         return edges;
     }
 
-    private void SetupConstellationEdges(GalaxyMapVertex[] vertices, Vector2Int[] edges, string name, GameObject overallContainer)
+    private void SetupSubsectors(IEnumerable<GalaxyMapSector> mainSectors, GameObject overallContainer)
+    {
+        foreach (GalaxyMapSector sector in mainSectors)
+        {
+            GalaxyMapVertexObjInfo sectorInfo = new GalaxyMapVertexObjInfo(sector, false);
+            foreach (GalaxyMapSubsector subsector in sector.GetComponentsInChildren<GalaxyMapSubsector>())
+            {
+                AddDoubleConnections(sectorInfo, new GalaxyMapVertexObjInfo(subsector, true), overallContainer);
+            }
+        }
+    }
+
+    private void SetupConstellationEdges(GalaxyMapSector[] vertices, IEnumerable<StringPair> edges, string name, GameObject overallContainer)
     {
         GameObject container = AddContainer(name, overallContainer.transform);
-        foreach (Vector2Int edge in edges)
+        foreach (StringPair edge in edges)
         {
-            GalaxyMapVertex first = vertices[edge.x - 1];
-            GalaxyMapVertex second = vertices[edge.y - 1];
+            int firstPos = Int32.Parse(edge.start) - 1;
+            int secondPos = Int32.Parse(edge.end) - 1;
+
+            GalaxyMapVertexObjInfo first = new GalaxyMapVertexObjInfo(vertices[firstPos], false);
+            GalaxyMapVertexObjInfo second = new GalaxyMapVertexObjInfo(vertices[secondPos], false);
             AddDoubleConnections(first, second, container);
         }
+        SetupSubsectors(vertices, container);
     }
 
-    private void ConnectConstellations(IEnumerable<GalaxyMapVertex> vertices)
+    private void ConnectConstellations(IEnumerable<GalaxyMapSector> sectors, IEnumerable<GalaxyMapSubsector> subsectors)
     {
-        GameObject container = AddContainer("Inter-constellation edges", transform);
-        Dictionary<string, GalaxyMapVertex> nameDict = new Dictionary<string, GalaxyMapVertex>();
-        foreach (GalaxyMapVertex vertex in vertices)
+        GameObject interConstellationContainer = AddContainer("Inter-constellation edges", transform);
+        GameObject subsectorContainer = AddContainer("Subsector edges", transform);
+        Dictionary<string, GalaxyMapVertexObjInfo> nameDict = new Dictionary<string, GalaxyMapVertexObjInfo>();
+
+        foreach (GalaxyMapVertex vertex in sectors)
         {
-            string name = vertex.GetSectorID();
-            nameDict.Add(name, vertex);
+            nameDict.Add(vertex.GetSectorID(), new GalaxyMapVertexObjInfo(vertex, false));
         }
 
-        foreach (StringPair pair in constellationConnectEdges)
+        foreach (GalaxyMapVertex vertex in subsectors)
         {
-            AddDoubleConnections(nameDict[pair.start], nameDict[pair.end], container);
+            nameDict.Add(vertex.GetSectorID(), new GalaxyMapVertexObjInfo(vertex, true));
+        }
+
+        foreach (StringPair pair in Reader.ReadPairedFile(constellationConnectText, "\t"))
+        {
+            try
+            {
+                AddDoubleConnections(nameDict[pair.start], nameDict[pair.end], interConstellationContainer);
+            }
+            catch (KeyNotFoundException e)
+            {
+                Debug.LogError(string.Format("Couldn't find sector {0} or {1} for constellation connection", pair.start, pair.end));
+            }
+        }
+
+        foreach (TextAsset text in subsectorConnectTexts)
+        {
+            foreach (StringPair pair in Reader.ReadPairedFile(text, "\t"))
+            {
+                try
+                {
+                    AddDoubleConnections(nameDict[pair.start], nameDict[pair.end], subsectorContainer);
+                }
+                catch (KeyNotFoundException e)
+                {
+                    Debug.LogError(string.Format("Couldn't find sector {0} or {1} for subsector edges", pair.start, pair.end));
+                }
+            }
         }
     }
 
-    private void AddDoubleConnections(GalaxyMapVertex first, GalaxyMapVertex second, GameObject container)
+    public class GalaxyMapVertexObjInfo
     {
-        AddConnection(first, second);
-        AddConnection(second, first);
+        public readonly GalaxyMapVertex vertex;
+        public readonly bool isSubsector;
+
+        public GalaxyMapVertexObjInfo(GalaxyMapVertex vertex, bool isSubsector)
+        {
+            this.vertex = vertex;
+            this.isSubsector = isSubsector;
+        }
+    }
+
+    private void AddDoubleConnections(GalaxyMapVertexObjInfo first, GalaxyMapVertexObjInfo second, GameObject container)
+    {
+        AddConnection(first.vertex, second.vertex);
+        AddConnection(second.vertex, first.vertex);
         AddEdgeObj(first, second, container);
     }
 
@@ -104,7 +168,7 @@ public class GalaxyEdgeDict : MonoBehaviour
         return container;
     }
 
-    private void AddEdgeObj(GalaxyMapVertex first, GalaxyMapVertex second, GameObject container)
+    private void AddEdgeObj(GalaxyMapVertexObjInfo first, GalaxyMapVertexObjInfo second, GameObject container)
     {
         GalaxyMapEdge edge = Instantiate(edgePrefab);
         edge.transform.SetParent(container.transform);
@@ -121,13 +185,5 @@ public class GalaxyEdgeDict : MonoBehaviour
         {
             edges[start] = new List<GalaxyMapVertex>() { end };
         }
-    }
-
-
-    [System.Serializable]
-    private struct StringPair
-    {
-        public string start;
-        public string end;
     }
 }

@@ -52,6 +52,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bec5411023b15ad428c073303cf08807, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sectorID: 
   sectorName: 'Sector '
 --- !u!212 &7699067090585728008
 SpriteRenderer:
