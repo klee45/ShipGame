@@ -9,6 +9,8 @@ public class GalaxyInfo : Singleton<GalaxyInfo>
     private GalaxyEdgeDict edgeDict;
     private List<GalaxyMapVertex> sectors;
 
+    private GalaxyMapVertex highlighted;
+
     protected override void Awake()
     {
         base.Awake();
@@ -31,6 +33,16 @@ public class GalaxyInfo : Singleton<GalaxyInfo>
             pos++;
         }
         */
+    }
+
+    public void HighlightLocation(GalaxyMapVertex location)
+    {
+        if (highlighted != null)
+        {
+            highlighted.Unhighlight();
+        }
+        location.Highlight();
+        highlighted = location;
     }
 
     private void SetSpriteState(bool enabled)

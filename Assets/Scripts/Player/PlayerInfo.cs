@@ -14,9 +14,17 @@ public class PlayerInfo : Singleton<PlayerInfo>
     [SerializeField]
     private Inventory inventory;
 
+    private GalaxyMapVertex currentLocation;
+
     protected override void Awake()
     {
         base.Awake();
+    }
+
+    public void SetLocation(GalaxyMapVertex vertex)
+    {
+        this.currentLocation = vertex;
+        
     }
 
     public Inventory GetInventory()

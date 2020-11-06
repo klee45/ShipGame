@@ -55,6 +55,8 @@ public class WarpManager : Singleton<WarpManager>
         this.currentSector = sector;
         CreateWarpGates(sector);
         UIManager.instance.RedrawShipUI();
+        PlayerInfo.instance.SetLocation(sector);
+        GalaxyInfo.instance.HighlightLocation(sector);
     }
 
     private IEnumerator Warp(GalaxyMapVertex startSector, GalaxyMapVertex endSector, float minTime)
