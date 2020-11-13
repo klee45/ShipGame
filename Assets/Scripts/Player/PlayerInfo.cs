@@ -24,7 +24,6 @@ public class PlayerInfo : Singleton<PlayerInfo>
     public void SetLocation(GalaxyMapVertex vertex)
     {
         this.currentLocation = vertex;
-        
     }
 
     public Inventory GetInventory()

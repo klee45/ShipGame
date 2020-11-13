@@ -5,6 +5,11 @@ using UnityEngine.SceneManagement;
 
 public class GalaxyMapSubsector : GalaxyMapVertex
 {
+    private const string subsectorScene = "Subsector";
+
+    [SerializeField]
+    private SectorComponent[] components;
+
     protected override string SetupName(string sectorID)
     {
         return "Subsector " + sectorID;
@@ -23,8 +28,25 @@ public class GalaxyMapSubsector : GalaxyMapVertex
         return ColorImageUnhighlighted;
     }
 
-    protected override Scene SetSector()
+    protected override string SetSceneName()
     {
-        return SceneManager.GetSceneByName(sectorName);
+        return subsectorScene;
+    }
+
+    public override void SetupMap()
+    {
+        GameObject subsectorController = new GameObject("Subsector Controller");
+        var controller = subsectorController.AddComponent<BackgroundManager>();
+        foreach(SectorComponent component in components)
+        {
+            component.Setup();
+        }
+    }
+
+    protected override Vector3 SetSpacePosition()
+    {
+        float parentScale = transform.parent.localScale.x;
+        Vector2 parentPos = transform.parent.GetComponent<RectTransform>().anchoredPosition;
+        return GetComponent<RectTransform>().anchoredPosition * parentScale + parentPos;
     }
 }

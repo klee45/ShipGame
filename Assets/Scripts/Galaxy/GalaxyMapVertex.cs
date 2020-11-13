@@ -11,20 +11,25 @@ public abstract class GalaxyMapVertex : MonoBehaviour
     [SerializeField]
     protected string sectorName;
 
-    private Scene sector;
+    private string sceneName;
+    private Vector3 spacePosition;
 
     private void Awake()
     {
         sectorName = SetupName(sectorID);
         this.name = sectorName;
         GetComponentInChildren<Text>().text = sectorID;
-        sector = SetSector();
+        sceneName = SetSceneName();
+        spacePosition = SetSpacePosition();
     }
 
     protected abstract string SetupName(string sectorID);
     protected abstract Color GetTextUnhighlighted();
     protected abstract Color GetImageUnhighlighted();
-    protected abstract Scene SetSector();
+    protected abstract string SetSceneName();
+    protected abstract Vector3 SetSpacePosition();
+
+    public virtual void SetupMap() { }
 
     private void OnValidate()
     {
@@ -46,9 +51,9 @@ public abstract class GalaxyMapVertex : MonoBehaviour
         GetComponent<Image>().color = GetImageUnhighlighted();
     }
 
-    public Scene GetSector()
+    public string GetSceneName()
     {
-        return sector;
+        return sceneName;
     }
 
     public void SetSectorNameDebugging(string sectorName)
@@ -64,5 +69,10 @@ public abstract class GalaxyMapVertex : MonoBehaviour
     public string GetSectorID()
     {
         return sectorID;
+    }
+
+    public Vector3 GetSpacePosition()
+    {
+        return spacePosition;
     }
 }

@@ -15,4 +15,10 @@ public class BackgroundParallax : MonoBehaviour
         Vector3 pos = Camera.main.transform.localPosition / parallaxRatio;
         this.transform.localPosition = new Vector3(pos.x + offset.x, pos.y + offset.y, 0);
     }
+
+    public void Setup(float ratio, Vector2 offset)
+    {
+        this.parallaxRatio = ratio;
+        this.offset = offset;
+    }
 }

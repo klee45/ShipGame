@@ -7,6 +7,19 @@ public class TimeController : Singleton<TimeController>
     private static float deltaTime;
     private static float fixedDeltaTime;
 
+    private static float lastScale = 1f;
+
+    public static void Pause()
+    {
+        lastScale = Time.timeScale;
+        Time.timeScale = 0;
+    }
+
+    public static void Unpause()
+    {
+        Time.timeScale = lastScale;
+    }
+
     public static float DeltaTime(float timeScale)
     {
         //Debug.Log(deltaTime);

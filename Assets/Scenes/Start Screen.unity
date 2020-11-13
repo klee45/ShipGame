@@ -1050,6 +1050,26 @@ PrefabInstance:
       propertyPath: m_Mass
       value: 7.058939
       objectReference: {fileID: 0}
+    - target: {fileID: 3157410935861382997, guid: 3cfb2aa59b7b1804194bb040b554f6b6,
+        type: 3}
+      propertyPath: max
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3157410935861382997, guid: 3cfb2aa59b7b1804194bb040b554f6b6,
+        type: 3}
+      propertyPath: acceleration
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3157410935861382997, guid: 3cfb2aa59b7b1804194bb040b554f6b6,
+        type: 3}
+      propertyPath: deceleration
+      value: -12
+      objectReference: {fileID: 0}
+    - target: {fileID: 3157410935861382997, guid: 3cfb2aa59b7b1804194bb040b554f6b6,
+        type: 3}
+      propertyPath: min
+      value: -10
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3cfb2aa59b7b1804194bb040b554f6b6, type: 3}
 --- !u!4 &1345063551 stripped

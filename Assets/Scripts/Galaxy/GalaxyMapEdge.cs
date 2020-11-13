@@ -18,9 +18,9 @@ public class GalaxyMapEdge : MonoBehaviour
         RectTransform endRect = end.GetComponent<RectTransform>();
         RectTransform rectTransform = GetComponent<RectTransform>();
 
-        Vector3 startPos = SetPos(startRect, startVertexInfo);
-        Vector3 endPos = SetPos(endRect, endVertexInfo);
-        Debug.Log(startPos.ToString() + " -> " + endPos.ToString());
+        Vector3 startPos = startVertexInfo.vertex.GetSpacePosition();
+        Vector3 endPos = endVertexInfo.vertex.GetSpacePosition();
+        //Debug.Log(startPos.ToString() + " -> " + endPos.ToString());
         Vector2 difference = endPos - startPos;
         float angle = Mathf.Atan2(difference.y, difference.x);
         //float length = difference.magnitude;
@@ -41,20 +41,6 @@ public class GalaxyMapEdge : MonoBehaviour
         rectTransform.localScale = Vector3.one;
         //Debug.Log(length);
         rectTransform.sizeDelta = new Vector2((rightPos - leftPos).magnitude + 0.025f, 0.1f);
-    }
-
-    private Vector3 SetPos(RectTransform rect, GalaxyMapVertexObjInfo info)
-    {
-        if (info.isSubsector)
-        {
-            float parentScale = info.vertex.transform.parent.localScale.x;
-            Vector2 parentPos = info.vertex.transform.parent.GetComponent<RectTransform>().anchoredPosition;
-            return rect.anchoredPosition * parentScale + parentPos;
-        }
-        else
-        {
-            return rect.anchoredPosition;
-        }
     }
 
     private float SetRadius(RectTransform rect, GalaxyMapVertexObjInfo info)

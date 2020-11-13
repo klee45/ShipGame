@@ -19,14 +19,19 @@ public static class Reader
                 pairs.Add(pair);
             }
 
-            string str = "";
-            foreach (StringPair pair in pairs)
-            {
-                str += pair.start + ", " + pair.end + "\n";
-            }
-            Debug.Log(str);
+            // PrintResults(pairs);
         }
         return pairs;
+    }
+
+    private static void PrintResults(List<StringPair> pairs)
+    {
+        string str = "";
+        foreach (StringPair pair in pairs)
+        {
+            str += pair.start + ", " + pair.end + "\n";
+        }
+        Debug.Log(str);
     }
 
     [System.Serializable]

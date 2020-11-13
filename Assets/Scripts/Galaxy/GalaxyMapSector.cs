@@ -23,8 +23,13 @@ public class GalaxyMapSector : GalaxyMapVertex
         return ColorImageUnhighlighted;
     }
 
-    protected override Scene SetSector()
+    protected override string SetSceneName()
     {
-        return SceneManager.GetSceneByName(sectorName);
+        return sectorName;
+    }
+
+    protected override Vector3 SetSpacePosition()
+    {
+        return GetComponent<RectTransform>().anchoredPosition;
     }
 }
