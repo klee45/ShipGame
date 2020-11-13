@@ -29,4 +29,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Sectors/Sector 1-5.unity
     guid: 6e754e31345343c4ab2d0ced50947307
+  - enabled: 1
+    path: Assets/Scenes/Subsector.unity
+    guid: 5a63801ebe96a8e498ad041e18bbfe04
+  - enabled: 1
+    path: Assets/Scenes/Warp Loading Scene.unity
+    guid: 9dcae5a2613ee2a4994c407a315e0343
   m_configObjects: {}

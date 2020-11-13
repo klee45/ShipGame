@@ -53,6 +53,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sectorID: 
   sectorName: 'Subsector '
+  components: []
 --- !u!222 &8305568256830981819
 CanvasRenderer:
   m_ObjectHideFlags: 0
