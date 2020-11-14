@@ -35,8 +35,6 @@ public class GalaxyMapSubsector : GalaxyMapVertex
 
     public override void SetupMap()
     {
-        GameObject subsectorController = new GameObject("Subsector Controller");
-        var controller = subsectorController.AddComponent<BackgroundManager>();
         foreach(SectorComponent component in components)
         {
             component.Setup();

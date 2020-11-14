@@ -475,6 +475,8 @@ MonoBehaviour:
   percentRadiusDist: 0.95
   warpgatePrefab: {fileID: 138739213573551867, guid: 0db8ff4330861714c90c7e0fbec101af,
     type: 3}
+  shipDistance: 5
+  warpGateDistance: 7
 --- !u!4 &808552458
 Transform:
   m_ObjectHideFlags: 0

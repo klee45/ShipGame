@@ -13,6 +13,11 @@ public class WarpManager : Singleton<WarpManager>
     [SerializeField]
     private GameObject warpgatePrefab;
 
+    [SerializeField]
+    private float shipDistance = 1f;
+    [SerializeField]
+    private float warpGateDistance = 1f;
+
     private GalaxyMapVertex currentSector;
 
     public void StartGameWarp(GalaxyMapVertex linkedSector)
@@ -29,20 +34,23 @@ public class WarpManager : Singleton<WarpManager>
         StartCoroutine(WarpWithLoading(endSector));
     }
 
-    private IEnumerator WarpNoLoading(GalaxyMapVertex vertex)
+    private IEnumerator WarpNoLoading(GalaxyMapVertex sector)
     {
         TimeController.Pause();
-        yield return WarpWithLoadingToSector(vertex);
-        WarpWithLoadingSetupMap(vertex);
+        yield return WarpWithLoadingToSector(sector);
+        MoveShips(sector);
+        WarpWithLoadingSetupMap(sector);
         TimeController.Unpause();
     }
 
-    private IEnumerator WarpWithLoading(GalaxyMapVertex vertex)
+    private IEnumerator WarpWithLoading(GalaxyMapVertex sector)
     {
+        GalaxyMapVertex oldSector = currentSector;
         TimeController.Pause();
         yield return WarpWithLoadingToLoadingScreen();
-        yield return WarpWithLoadingToSector(vertex);
-        WarpWithLoadingSetupMap(vertex);
+        yield return WarpWithLoadingToSector(sector);
+        MoveShips(oldSector, sector);
+        WarpWithLoadingSetupMap(sector);
         TimeController.Unpause();
     }
 
@@ -57,10 +65,10 @@ public class WarpManager : Singleton<WarpManager>
             yield return null;
         }
         Scene loadingScene = SceneManager.GetSceneByName(loadingSceneName);
-        Debug.Log(loadingScene.name);
-        Debug.Log(loadingScene.isLoaded);
-        Debug.Log(loadingScene.path);
-        TransferObjectsToScene(loadingScene);
+        //Debug.Log(loadingScene.name);
+        //Debug.Log(loadingScene.isLoaded);
+        //Debug.Log(loadingScene.path);
+        //TransferObjectsToScene(loadingScene);
         SceneManager.UnloadSceneAsync(oldSector);
         SceneManager.SetActiveScene(loadingScene);
     }
@@ -75,43 +83,69 @@ public class WarpManager : Singleton<WarpManager>
             yield return null;
         }
         Scene newSector = SceneManager.GetSceneByName(newSectorName);
-        TransferObjectsToScene(newSector);
+        //TransferObjectsToScene(newSector);
         SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene());
         SceneManager.SetActiveScene(newSector);
     }
 
-    private void WarpWithLoadingSetupMap(GalaxyMapVertex vertex)
+    private void WarpWithLoadingSetupMap(GalaxyMapVertex sector)
     {
-        MoveShips();
         Debug.Log("Creating warp gates");
-        this.currentSector = vertex;
-        CreateWarpGates(vertex);
+        this.currentSector = sector;
+        CreateWarpGates(sector);
         Debug.Log("Setting up map specifics");
-        vertex.SetupMap();
+        sector.SetupMap();
         UIManager.instance.RedrawShipUI();
-        PlayerInfo.instance.SetLocation(vertex);
-        GalaxyInfo.instance.HighlightLocation(vertex);
+        PlayerInfo.instance.SetLocation(sector);
+        GalaxyInfo.instance.HighlightLocation(sector);
     }
 
 
+    /*
     private void TransferObjectsToScene(Scene newScene)
     {
+        //SceneManager.MoveGameObjectToScene(PlayerInfo.instance.gameObject, newScene);
         foreach (GameObject persistant in PlayerInfo.instance.GetObjectsToTransfer())
         {
             Debug.Log(persistant);
             SceneManager.MoveGameObjectToScene(persistant, newScene);
         }
     }
+    */
 
-    private void MoveShips()
+    private void MoveShips(GalaxyMapVertex sector)
     {
-        List<GameObject> objectsToTransfer = PlayerInfo.instance.GetObjectsToTransfer();
+        List<GameObject> objectsToTransfer = PlayerInfo.instance.GetTeamToTransfer().GetObjects();
         int count = objectsToTransfer.Count;
-        float radius = Boundry.instance.GetRadius();
+        Debug.Log("Transfer object count: " + count);
 
-        foreach (GameObject obj in objectsToTransfer)
+        float offset = (count - 1) / 2;
+        
+        for (int i = 0; i < count; i++)
         {
+            float xPos = (i - offset) * shipDistance;
+            GameObject obj = objectsToTransfer[i];
+            obj.transform.localPosition = new Vector3(xPos, 0, 0);
+        }
+    }
 
+    private void MoveShips(GalaxyMapVertex oldSector, GalaxyMapVertex sector)
+    {
+        List<GameObject> objectsToTransfer = PlayerInfo.instance.GetTeamToTransfer().GetObjects();
+        int count = objectsToTransfer.Count;
+        Debug.Log("Transfer object count: " + count);
+        float radius = Boundry.instance.GetRadius();
+        Vector3 unitDiff = GetUnitDiff(sector, oldSector);
+        Vector3 unitPerpendicular = unitDiff.GetPerpendicular();
+        Vector3 startPos = unitDiff * (radius - warpGateDistance);
+
+        float offset = (count - 1) / 2;
+
+        for (int i = 0; i < count; i++)
+        {
+            float length = (i - offset) * shipDistance;
+            GameObject obj = objectsToTransfer[i];
+            obj.transform.localPosition = startPos + unitPerpendicular * length;
         }
     }
 

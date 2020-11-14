@@ -11,6 +11,13 @@ public class TeamManager : MonoBehaviour
     [SerializeField]
     private List<int> counts;
 
+    private List<GameObject> objects;
+
+    private void Awake()
+    {
+        objects = new List<GameObject>();
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -21,18 +28,27 @@ public class TeamManager : MonoBehaviour
             {
                 GameObject child = Instantiate(prefabs[i]);
                 child.transform.SetParent(transform);
-                SetLayer(child.gameObject);
+                //SetLayer(child.gameObject);
                 //SetupChild(child.transform);
+                //AddChild(child);
+                SetupInitial(child);
             }
         }
 
         for (int i = 0; i < transform.childCount; i++)
         {
             Transform child = transform.GetChild(i);
-            SetupChild(child);
-            SetLayer(child.gameObject);
+            SetupInitial(child.gameObject);
         }
     }
+
+    private void SetupInitial(GameObject child)
+    {
+        SetupChild(child.transform);
+        SetLayer(child);
+        AddChild(child);
+    }
+
 
     public static void SeparateTeams(
         Team team,
@@ -73,5 +89,15 @@ public class TeamManager : MonoBehaviour
         child.position = transform.position + new Vector3(
             Random.Range(-randomOffset[0] / 2, randomOffset[0] / 2),
             Random.Range(-randomOffset[1] / 2, randomOffset[1] / 2));
+    }
+
+    public void AddChild(GameObject obj)
+    {
+        objects.Add(obj);
+    }
+
+    public List<GameObject> GetObjects()
+    {
+        return objects;
     }
 }

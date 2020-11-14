@@ -14,6 +14,7 @@ public class Boundry : Singleton<Boundry>
         outOfBounds = new Dictionary<Entity, BoundryForce>();
     }
 
+    /*
     private void Update()
     {
         if (transform.hasChanged)
@@ -21,6 +22,7 @@ public class Boundry : Singleton<Boundry>
             CalculateRadius();
         }
     }
+    */
 
     private void CalculateRadius()
     {

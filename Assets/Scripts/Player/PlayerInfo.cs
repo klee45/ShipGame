@@ -19,6 +19,7 @@ public class PlayerInfo : Singleton<PlayerInfo>
     protected override void Awake()
     {
         base.Awake();
+        DontDestroyOnLoad(playerTeam);
     }
 
     public void SetLocation(GalaxyMapVertex vertex)
@@ -36,11 +37,8 @@ public class PlayerInfo : Singleton<PlayerInfo>
         return bank;
     }
 
-    public List<GameObject> GetObjectsToTransfer()
+    public TeamManager GetTeamToTransfer()
     {
-        return new List<GameObject>
-        {
-            playerTeam.gameObject
-        };
+        return playerTeam;
     }
 }
