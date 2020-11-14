@@ -116,6 +116,29 @@ public static class Math
 
     // --------- Math
 
+    public static Vector3 PiecewiseMult(this Vector3 v1, Vector3 v2)
+    {
+        return new Vector3(v1.x * v2.x, v1.y * v2.y, v1.z * v2.z);
+    }
+
+    public static Vector2 PiecewiseMult(this Vector2 v1, Vector2 v2)
+    {
+        return new Vector2(v1.x * v2.x, v1.y * v2.y);
+    }
+
+    public static Vector3 PiecewiseInverse(this Vector3 v)
+    {
+        try
+        {
+            return new Vector3(1 / v.x, 1 / v.y, 1 / v.z);
+        }
+        catch (System.DivideByZeroException e)
+        {
+            Debug.LogError("Piecewise inverse attempted on an invalid vector " + v.ToString());
+            return v;
+        }
+    }
+
     public static Vector2 DegreeToVector2(this float f)
     {
         return RadToVector2(Mathf.Deg2Rad * f);

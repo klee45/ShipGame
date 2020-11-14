@@ -69,6 +69,21 @@ public class PlayerInteraction : MonoBehaviour
         }
     }
 
+    public static void TryOpenMap()
+    {
+        WindowStack windowStack = WindowStack.instance;
+        GalaxyInfo galaxyInfo = GalaxyInfo.instance;
+
+        if (galaxyInfo.IsShown())
+        {
+            windowStack.CloseWindow(galaxyInfo);
+        }
+        else
+        {
+            windowStack.AddNewWindow(galaxyInfo);
+        }
+    }
+
     public static void TryExitTopWindow()
     {
         WindowStack.instance.CloseTopWindow();
@@ -78,6 +93,7 @@ public class PlayerInteraction : MonoBehaviour
     {
         { "inventory", () => { TryEnterInventory(); } },
         { "escape", () => { TryExitTopWindow(); } },
+        { "map", () => { TryOpenMap(); } }
     };
 
     private Dictionary<string, Action<Interactive>> pressedKeysInteract = new Dictionary<string, Action<Interactive>>()

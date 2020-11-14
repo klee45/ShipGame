@@ -1,3 +1,4 @@
 interact: f
 escape: escape
-inventory: tab
+inventory: v
+map: tab

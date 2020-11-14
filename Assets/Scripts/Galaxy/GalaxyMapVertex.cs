@@ -13,6 +13,7 @@ public abstract class GalaxyMapVertex : MonoBehaviour
 
     private string sceneName;
     private Vector3 spacePosition;
+    private float spaceScale;
 
     private void Awake()
     {
@@ -21,6 +22,7 @@ public abstract class GalaxyMapVertex : MonoBehaviour
         GetComponentInChildren<Text>().text = sectorID;
         sceneName = SetSceneName();
         spacePosition = SetSpacePosition();
+        spaceScale = SetSpaceScale();
     }
 
     protected abstract string SetupName(string sectorID);
@@ -28,6 +30,17 @@ public abstract class GalaxyMapVertex : MonoBehaviour
     protected abstract Color GetImageUnhighlighted();
     protected abstract string SetSceneName();
     protected abstract Vector3 SetSpacePosition();
+    protected abstract float SetSpaceScale();
+
+    public Vector3 GetSpacePosition()
+    {
+        return spacePosition;
+    }
+
+    public float GetSpaceScale()
+    {
+        return spaceScale;
+    }
 
     public virtual void SetupMap() { }
 
@@ -69,10 +82,5 @@ public abstract class GalaxyMapVertex : MonoBehaviour
     public string GetSectorID()
     {
         return sectorID;
-    }
-
-    public Vector3 GetSpacePosition()
-    {
-        return spacePosition;
     }
 }

@@ -49,4 +49,9 @@ public class GalaxyMapSubsector : GalaxyMapVertex
         Vector2 parentPos = transform.parent.GetComponent<RectTransform>().anchoredPosition;
         return GetComponent<RectTransform>().anchoredPosition * parentScale + parentPos;
     }
+
+    protected override float SetSpaceScale()
+    {
+        return GetComponent<RectTransform>().localScale.x * transform.parent.localScale.x;
+    }
 }

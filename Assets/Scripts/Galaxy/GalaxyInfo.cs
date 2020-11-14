@@ -4,8 +4,10 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class GalaxyInfo : Singleton<GalaxyInfo>
+public class GalaxyInfo : Singleton<GalaxyInfo>, IWindow
 {
+    private Canvas canvas;
+
     private GalaxyEdgeDict edgeDict;
     private List<GalaxyMapVertex> sectors;
 
@@ -16,23 +18,41 @@ public class GalaxyInfo : Singleton<GalaxyInfo>
         base.Awake();
         edgeDict = GetComponentInChildren<GalaxyEdgeDict>();
         sectors = GetComponentsInChildren<GalaxyMapVertex>().ToList();
-        SetSpriteState(false);
+        canvas = GetComponent<Canvas>();
+        Hide();
     }
 
-    private void Start()
+    public bool IsShown()
     {
-        /*
-        int pos = 1;
-        foreach (GalaxyMapVertex vertex in sectors)
+        return canvas.enabled;
+    }
+
+    public void Show()
+    {
+        canvas.enabled = true;
+        CenterOnVertex();
+    }
+
+    public void Hide()
+    {
+        canvas.enabled = false;
+    }
+
+    private void CenterOnVertex()
+    {
+        float scale;
+        try
         {
-            string id = "1-" + pos.ToString();
-            string fullName = "Sector " + id;
-            vertex.gameObject.name = fullName;
-            vertex.GetComponentInChildren<Text>().text = id;
-            vertex.SetSectorNameDebugging(fullName);
-            pos++;
+            scale = 1 / highlighted.GetSpaceScale() * 3;
+            scale = Mathf.Min(3, scale);
         }
-        */
+        catch (System.DivideByZeroException e)
+        {
+            Debug.Log("Attempted to divide highlighted scale of 0 " + highlighted.GetSectorName() + " " + e);
+            scale = 1;
+        }
+        transform.localPosition = -highlighted.GetSpacePosition() * scale * 35;
+        transform.localScale = new Vector3(scale, scale, 1);
     }
 
     public void HighlightLocation(GalaxyMapVertex location)
@@ -43,16 +63,7 @@ public class GalaxyInfo : Singleton<GalaxyInfo>
         }
         location.Highlight();
         highlighted = location;
-    }
-
-    private void SetSpriteState(bool enabled)
-    {
-        /*
-        foreach(SpriteRenderer sprite in sprites)
-        {
-            sprite.enabled = enabled;
-        }
-        */
+        CenterOnVertex();
     }
 
     public List<GalaxyMapVertex> GetSectors()

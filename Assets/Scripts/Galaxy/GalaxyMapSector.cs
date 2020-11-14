@@ -32,4 +32,9 @@ public class GalaxyMapSector : GalaxyMapVertex
     {
         return GetComponent<RectTransform>().anchoredPosition;
     }
+
+    protected override float SetSpaceScale()
+    {
+        return GetComponent<RectTransform>().localScale.x;
+    }
 }
