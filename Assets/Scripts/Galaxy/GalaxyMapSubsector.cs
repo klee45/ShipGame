@@ -8,7 +8,13 @@ public class GalaxyMapSubsector : GalaxyMapVertex
     private const string subsectorScene = "Subsector";
 
     [SerializeField]
-    private SectorComponent[] components;
+    private List<SectorComponent> components;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        components.AddRange(GetComponents<SectorComponent>());
+    }
 
     protected override string SetupName(string sectorID)
     {

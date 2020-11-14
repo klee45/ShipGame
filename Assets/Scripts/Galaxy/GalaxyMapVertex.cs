@@ -15,7 +15,7 @@ public abstract class GalaxyMapVertex : MonoBehaviour
     private Vector3 spacePosition;
     private float spaceScale;
 
-    private void Awake()
+    protected virtual void Awake()
     {
         sectorName = SetupName(sectorID);
         this.name = sectorName;

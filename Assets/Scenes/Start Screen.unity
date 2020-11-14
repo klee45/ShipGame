@@ -120,6 +120,31 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &20766730 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8871902691248345638, guid: fa3a9da9067e68d4180f3f451f9df325,
+    type: 3}
+  m_PrefabInstance: {fileID: 1572317253597915226}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &20766735
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 20766730}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f074f35ec9b63fc4ebcdd71eebe29522, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: 47a626e497bb9f344a59a210191ef6d4, type: 3}
+  size: 5
+  depth: -19900
+  color: {r: 0.6509434, g: 0.6509434, b: 0.6509434, a: 1}
+  xPosition: -0.616
+  yPosition: 0.626
+  parallaxModifier: 0
 --- !u!1 &187285357
 GameObject:
   m_ObjectHideFlags: 0
@@ -589,6 +614,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &973877956 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4787063076521695392, guid: fa3a9da9067e68d4180f3f451f9df325,
+    type: 3}
+  m_PrefabInstance: {fileID: 1572317253597915226}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &973877961
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 973877956}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f074f35ec9b63fc4ebcdd71eebe29522, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 21300000, guid: bdeeb89763c246a40859089d36264af1, type: 3}
+  size: 10
+  depth: -19300
+  color: {r: 1, g: 1, b: 1, a: 1}
+  xPosition: 0.549
+  yPosition: -0.35
+  parallaxModifier: 0
 --- !u!4 &1045176933 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3157410934601786264, guid: 3cfb2aa59b7b1804194bb040b554f6b6,

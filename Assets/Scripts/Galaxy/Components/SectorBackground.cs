@@ -11,18 +11,21 @@ public class SectorBackground : SectorComponent
     private float size = 10;
     [SerializeField]
     private int depth = Constants.Visuals.COMPONENT_SPRITE_ORDER;
-
     [SerializeField]
+    private Color color = Color.white;
+
     [Header("Position in percent location from center")]
+    [SerializeField]
     [Range(-1.5f, 1.5f)]
     private float xPosition;
+    [SerializeField]
     [Range(-1.5f, 1.5f)]
     private float yPosition;
 
     [SerializeField]
     private float parallaxModifier = 0;
 
-    private const int parallaxNormal = 10;
+    private const int parallaxNormal = 4;
     private const int depthDiv = 4;
     private const int depthScale = 2500;
     private const int depthNormal = -20000;
@@ -40,12 +43,14 @@ public class SectorBackground : SectorComponent
 
         SetupPosition(obj);
         SetupSizeAndDepth(obj, renderer, parallax);
+        renderer.color = color;
     }
 
     private void SetupPosition(GameObject obj)
     {
         Boundry boundry = Boundry.instance;
-        float dist = boundry.GetRadius() * boundry.transform.localScale.x;
+        float dist = boundry.GetRadius();
+        obj.transform.localPosition = new Vector3(xPosition * dist, yPosition * dist, 0);
     }
 
     private void SetupSizeAndDepth(GameObject obj, SpriteRenderer renderer, BackgroundParallax parallax)
