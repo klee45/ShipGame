@@ -16,9 +16,9 @@ public class BehaviorVisualizer : MonoBehaviour
     private GameObject linePrefab = null;
 
     private static float opacity = 1f;
-    private static Color runningColor = ColorHelper.SetAlpha(Color.yellow, opacity);
-    private static Color successColor = ColorHelper.SetAlpha(Color.green, opacity);
-    private static Color faliureColor = ColorHelper.SetAlpha(Color.red, opacity);
+    private static Color runningColor = Color.yellow.SetAlpha(opacity);
+    private static Color successColor = Color.green.SetAlpha(opacity);
+    private static Color faliureColor = Color.red.SetAlpha(opacity);
     private static Color errorColor = new Color(1f, 0.5f, 0.5f, opacity);
     private static Color noneColor = new Color(0.5f, 0.5f, 0.5f, opacity);
 

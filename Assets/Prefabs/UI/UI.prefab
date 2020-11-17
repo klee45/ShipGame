@@ -2085,6 +2085,16 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 578361712240447990, guid: 415c888608bb3ab438b306b554e75944,
+        type: 3}
+      propertyPath: isPresistant
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 578361712240447990, guid: 415c888608bb3ab438b306b554e75944,
+        type: 3}
+      propertyPath: visual
+      value: 
+      objectReference: {fileID: 4490415197220048872}
     - target: {fileID: 8330811364472739144, guid: 415c888608bb3ab438b306b554e75944,
         type: 3}
       propertyPath: m_Camera
@@ -2110,16 +2120,6 @@ PrefabInstance:
       propertyPath: m_Color.a
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 578361712240447990, guid: 415c888608bb3ab438b306b554e75944,
-        type: 3}
-      propertyPath: isPresistant
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 578361712240447990, guid: 415c888608bb3ab438b306b554e75944,
-        type: 3}
-      propertyPath: visual
-      value: 
-      objectReference: {fileID: 4490415197220048872}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 415c888608bb3ab438b306b554e75944, type: 3}
 --- !u!224 &3929434230074318666 stripped
