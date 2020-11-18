@@ -1,19 +1,19 @@
 fileFormatVersion: 2
-guid: ccc3a0bbdb2bc6944b575db5afc817f6
+guid: 8760cdb05eb75b14c8f9d4501c956f5a
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -6587419396516342962
-    second: ArmorPiercingRounds_0
+      213: -6058388287502534815
+    second: IconBorder_0
   - first:
-      213: 5716910050310833782
-    second: ArmorPiercingRounds_1
+      213: 6858727551128713408
+    second: IconBorder_1
   - first:
-      213: -8690287081710920443
-    second: ArmorPiercingRounds_2
+      213: 4881323010064869604
+    second: IconBorder_2
   - first:
-      213: 6095666285669800258
-    second: ArmorPiercingRounds_3
+      213: 7134575969431015462
+    second: IconBorder_3
   externalObjects: {}
   serializedVersion: 10
   mipmaps:
@@ -52,12 +52,12 @@ TextureImporter:
   nPOTScale: 0
   lightmap: 0
   compressionQuality: 50
-  spriteMode: 1
+  spriteMode: 2
   spriteExtrude: 1
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 64
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -75,7 +75,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -86,7 +86,7 @@ TextureImporter:
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
-    textureCompression: 1
+    textureCompression: 0
     compressionQuality: 50
     crunchedCompression: 0
     allowsAlphaSplitting: 0
@@ -96,7 +96,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: ArmorPiercingRounds_0
+      name: IconBorder_0
       rect:
         serializedVersion: 2
         x: 0
@@ -110,8 +110,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 67ff8b5f86e655340b54bebcdfe7ab60
-      internalID: -6587419396516342962
+      spriteID: 57e6b06bafc3ff84687bffd0b1d5702a
+      internalID: -6058388287502534815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IconBorder_1
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 11cdc40d198aa0c4599f349689241523
+      internalID: 6858727551128713408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IconBorder_2
+      rect:
+        serializedVersion: 2
+        x: 128
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a25dd9fbd05bafb4aaef18285c865024
+      internalID: 4881323010064869604
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: IconBorder_3
+      rect:
+        serializedVersion: 2
+        x: 192
+        y: 0
+        width: 64
+        height: 64
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a60a2cf3903e5f042af86a8852d5b8a4
+      internalID: 7134575969431015462
       vertices: []
       indices: 
       edges: []
@@ -119,7 +182,7 @@ TextureImporter:
     outline: []
     physicsShape: []
     bones: []
-    spriteID: 6f48eba1a836bc342ad98264dfc4177d
+    spriteID: 94faf73512e4c2a4ca797636f2a8063e
     internalID: 0
     vertices: []
     indices: 

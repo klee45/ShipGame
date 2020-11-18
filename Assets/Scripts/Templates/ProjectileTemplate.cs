@@ -10,11 +10,11 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
     [SerializeField]
     private EntityEffectTemplate[] generalEffects;
     [SerializeField]
-    private float colliderLength = 0;
+    private float colliderLength;
     [SerializeField]
-    private float delay = 0;
+    private SizeMod delay;
     [SerializeField]
-    private float range;
+    private SizeMod range;
     // [SerializeField]
     // private ProjectileLayerType layerType = ProjectileLayerType.AffectsEnemyShips;
     [SerializeField]
@@ -24,15 +24,22 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
 
     private float remainingRange;
 
-    public float GetDelay()
+    public void Setup()
     {
-        return delay;
+        CalculateTotalRange();
     }
 
+    public float GetDelay()
+    {
+        return delay.ToFloat();
+    }
+
+    /*
     private void Awake()
     {
         CalculateTotalRange();
     }
+    */
 
     /*
     private void Start()
@@ -50,7 +57,8 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
 
     private void CalculateTotalRange()
     {
-        remainingRange = range;
+        remainingRange = range.ToFloat();
+        Debug.Log(remainingRange);
         foreach (ProjectileEffectTemplate effect in projectileEffects)
         {
             remainingRange -= effect.GetRangeMod();
@@ -64,7 +72,7 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
 
     public float GetTotalRange()
     {
-        return range + colliderLength;
+        return range.ToFloat() + colliderLength;
     }
 
     public override Projectile Create(GameObject obj)
@@ -154,7 +162,6 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
         }
         return set;
     }
-
     /**
     private HashSet<int> GetLayers(Team team, out bool needsRigidbody)
     {

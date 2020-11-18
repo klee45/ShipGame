@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ScalePer : ScaleInfo
+public class ScaleBothAxes : ScaleInfo
 {
     [SerializeField]
-    private Vector2 scale = Vector2.one;
+    private SizeMod scale;
 
     public override Vector3 Scale(Vector3 v)
     {
-        return new Vector3(v.x * scale.x, v.y * scale.y, v.z);
+        return v * scale.ToFloat();
     }
 }

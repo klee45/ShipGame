@@ -5,7 +5,7 @@ using UnityEngine;
 public abstract class Deed<T, U> : Template<T, U>
 {
     [SerializeField]
-    private int price;
+    protected int price;
 
     public int GetPrice()
     {

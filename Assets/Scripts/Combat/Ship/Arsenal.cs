@@ -59,6 +59,7 @@ public class Arsenal : MonoBehaviour
                 weapon.gameObject.transform.SetParent(obj.transform);
                 weapon.gameObject.transform.localPosition = Vector3.zero;
                 weapon.gameObject.transform.localEulerAngles = Vector3.zero;
+                weapon.SetupShipSizeMods(ship.GetSize());
                 return true;
             }
             else

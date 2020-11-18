@@ -4,32 +4,31 @@ using UnityEngine;
 using static Arsenal;
 using static SetTargetByPilotStats;
 
-public abstract class AWeapon : MonoBehaviour
+public abstract class AWeapon : MonoBehaviour, IRequiresShipSize
 {
+    [SerializeField]
+    private string weaponName;
+
     // ----- Shared with deed -----
+    [Header("Weapon stats")]
+    [SerializeField]
+    private SizeMod energyCost;
+    [SerializeField]
+    private SizeMod cooldownTime;
+    [SerializeField]
+    private CombatType combatType = CombatType.Offense;
+
+    //[SerializeField]
+    [Header("Misc information")]
     [SerializeField]
     private Sprite icon;
     [SerializeField]
-    private int energyCost = 0;
-    [SerializeField]
-    private float cooldownTime;
-
-    [SerializeField]
-    private Size weaponSize = Size.Medium;
-    [SerializeField]
-    private CombatType combatType = CombatType.Offense;
-    [SerializeField]
-    private int rarity = 100;
-
+    private bool attachProjectile = false;
     [SerializeField]
     private Arsenal.WeaponPosition preferedPosition = Arsenal.WeaponPosition.Center;
 
     // ----- Info for AI -----
-    [SerializeField]
-    private bool attachProjectile = false;
-    [SerializeField]
-    private Timer cooldown;
-
+    [Header("AI information")]
     [SerializeField]
     private TargetType preferredTarget = TargetType.CloseEnemy;
     [SerializeField]
@@ -40,9 +39,46 @@ public abstract class AWeapon : MonoBehaviour
     [SerializeField]
     private int minSuggestedShots = 1;
 
+    [Header("Shop information")]
+    [SerializeField]
+    private SizeMod cost;
+    [SerializeField]
+    private DescriptionSwitch damageString;
+    [SerializeField]
+    private DescriptionSwitch description;
+
     protected RangeEstimator rangeEstimator;
     private bool ready;
+    private Timer cooldown;
 
+    [SerializeField]
+    private Size slotSize = Size.Medium;
+    [SerializeField]
+    private Size shipSize = Size.Medium;
+
+    public virtual void SetupShipSizeMods(Size shipSize)
+    {
+        foreach (SizeMod toSetup in GetComponentsInChildren<SizeMod>())
+        {
+            toSetup.SetupShip(this.shipSize);
+            Debug.Log(toSetup.name);
+        }
+        damageString.Setup(this.slotSize);
+        description.Setup(this.slotSize);
+        SetupTimer();
+    }
+
+    // Only for use when initial weapons applied
+    private void SetupSlotSizeMods(Size slotSize)
+    {
+        foreach (SizeMod toSetup in GetComponentsInChildren<SizeMod>())
+        {
+            toSetup.SetupSlot(slotSize);
+            Debug.Log(toSetup.name);
+        }
+    }
+
+    /*
     public void Setup(
         Sprite icon, int energy, float cooldownTime,
         Size size, CombatType combatType, int rarity,
@@ -57,6 +93,7 @@ public abstract class AWeapon : MonoBehaviour
 
         SetupTimer();
     }
+    */
 
     private void Awake()
     {
@@ -71,12 +108,15 @@ public abstract class AWeapon : MonoBehaviour
         SetupTimer();
         cooldown.OnComplete += () => Reset();
         //Debug.Log(GetComponentInParent<Ship>() + " , " + gameObject);
+
+        SetupSlotSizeMods(slotSize);
+        SetupShipSizeMods(Size.Large);
     }
 
     private void SetupTimer()
     {
-        cooldown.SetMaxTime(cooldownTime);
-        cooldown.SetTime(cooldownTime);
+        cooldown.SetMaxTime(cooldownTime.ToFloat());
+        cooldown.SetTime(cooldownTime.ToFloat());
     }
 
     public void Reset()
@@ -85,35 +125,21 @@ public abstract class AWeapon : MonoBehaviour
         ready = true;
     }
 
-    public int GetRarity()
-    {
-        return rarity;
-    }
+    public string GetName() { return weaponName; }
+    public string GetDescription() { return description.GetDescription(); }
+    public string GetDamageString() { return damageString.GetDescription(); }
 
-    public int GetMaxSuggestedShots()
-    {
-        return maxSuggestedShots;
-    }
+    public float GetCooldown() { return cooldownTime.ToFloat(); }
+    public int GetEnergyCost() { return energyCost.ToInt(); }
+    public Sprite GetIcon() { return icon; }
+    public float GetRange() { return rangeEstimator.GetRange(); }
+    public Size GetSize() { return slotSize; }
 
-    public int GetMinSuggestedShots()
-    {
-        return minSuggestedShots;
-    }
-
-    public TargetType GetPreferredTarget()
-    {
-        return preferredTarget;
-    }
-
-    public TargetType GetSecondaryTarget()
-    {
-        return secondaryTarget;
-    }
-
-    public Arsenal.WeaponPosition GetPreferedPosition()
-    {
-        return preferedPosition;
-    }
+    public int GetMaxSuggestedShots() { return maxSuggestedShots; }
+    public int GetMinSuggestedShots() { return minSuggestedShots; }
+    public TargetType GetPreferredTarget() { return preferredTarget; }
+    public TargetType GetSecondaryTarget() { return secondaryTarget; }
+    public Arsenal.WeaponPosition GetPreferedPosition() { return preferedPosition; }
 
     protected abstract void InitializeRangeEstimator();
 
@@ -121,11 +147,6 @@ public abstract class AWeapon : MonoBehaviour
     {
         yield return new WaitForSeconds(delay);
         Projectile p = CreateProjectile(template, owner);
-    }
-
-    public int GetEnergyCost()
-    {
-        return energyCost;
     }
 
     public void Fire(Ship owner)
@@ -176,20 +197,5 @@ public abstract class AWeapon : MonoBehaviour
     public Timer GetCooldownTimer()
     {
         return cooldown;
-    }
-
-    public Sprite GetIcon()
-    {
-        return icon;
-    }
-
-    public float GetRange()
-    {
-        return rangeEstimator.GetRange();
-    }
-
-    public Size GetSize()
-    {
-        return weaponSize;
     }
 }

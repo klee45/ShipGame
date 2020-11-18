@@ -23,16 +23,25 @@ public class DropTable : Singleton<DropTable>
     // Start is called before the first frame update
     void Start()
     {
-        weaponDeeds.AddRange(Resources.LoadAll<WeaponDeed>(folderPath));
-
-        foreach (WeaponDeed deed in weaponDeeds)
+        weaponDeeds = new List<WeaponDeed>();
+        List<WeaponDeed> deedBlueprints = new List<WeaponDeed>();
+        deedBlueprints.AddRange(Resources.LoadAll<WeaponDeed>(folderPath));
+        
+        foreach (WeaponDeed deedBlueprint in deedBlueprints)
         {
-            originalWeights.Add(deed.GetRarity());
+            foreach (WeaponDeed.WeaponDeedInfo info in deedBlueprint.GetSizeRarityPairs())
+            {
+                WeaponDeed deed = Instantiate(deedBlueprint);
+                deed.Setup(info);
+                weaponDeeds.Add(deed);
+                deed.transform.SetParent(transform);
+                originalWeights.Add(info.rarity);
+            }
         }
         StackWeightedList(originalWeights);
     }
 
-    public void StackWeightedList(List<int> lst)
+    private void StackWeightedList(List<int> lst)
     {
         weights = new List<int>(lst);
         weights.StackList();

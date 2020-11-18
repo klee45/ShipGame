@@ -20,4 +20,13 @@ public static class Constants
         public const float WARP_GATE_DISTANCE_FROM_BOUNDRY = 0.95f;
         public const string LOADING = "Warp Loading Scene";
     }
+
+    public static class SizeMod
+    {
+        // x^(1.5) from 1 to 4
+        public const float SMALL =  1.0f;
+        public const float MEDIUM = 2.8f;
+        public const float LARGE =  5.2f;
+        public const float HUGE =   8.0f;
+    }
 }

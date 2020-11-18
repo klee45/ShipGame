@@ -18,7 +18,7 @@ public class ShipSpawner : MonoBehaviour
     private List<int> teamWeights;
 
     private Ship[][] empire;
-    private List<AWeapon>[] weapons;
+    private List<WeaponDeed>[] deeds;
     private List<int>[] weaponWeights;
 
     private void Awake()
@@ -27,7 +27,7 @@ public class ShipSpawner : MonoBehaviour
         teamWeights.StackList();
 
         empire = Loader.LoadFromFolder<Ship>("Ships/Empire", "Small", "Medium", "Large");
-        weapons = LoadWeapons();
+        deeds = LoadDeeds();
 
         for (int i = 0; i < 100; i++)
         {
@@ -39,37 +39,38 @@ public class ShipSpawner : MonoBehaviour
         }
     }
 
-    private List<AWeapon>[] LoadWeapons()
+    private List<WeaponDeed>[] LoadDeeds()
     {
         int numSizes = Enum.GetValues(typeof(Size)).Length;
-        List<AWeapon>[] weapons = new List<AWeapon>[numSizes];
+        List<WeaponDeed>[] deeds = new List<WeaponDeed>[numSizes];
         weaponWeights = new List<int>[numSizes];
         for (int i = 0; i < numSizes; i++)
         {
-            weapons[i] = new List<AWeapon>();
+            deeds[i] = new List<WeaponDeed>();
             weaponWeights[i] = new List<int>();
         }
-        AWeapon[] allWeapons = Resources.LoadAll<AWeapon>("Weapons");
-        foreach(AWeapon weapon in allWeapons)
+
+        WeaponDeed[] weaponDeeds = Resources.LoadAll<WeaponDeed>("Weapons");
+        foreach(WeaponDeed deed in weaponDeeds)
         {
-            int pos = (int)weapon.GetSize();
-            weapons[pos].Add(weapon);
-            weaponWeights[pos].Add(weapon.GetRarity());
+            int pos = (int)deed.GetSize();
+            deeds[pos].Add(deed);
+            weaponWeights[pos].Add(1);
         }
         foreach (List<int> lst in weaponWeights)
         {
             lst.StackList();
         }
-        return weapons;
+        return deeds;
     }
 
-    public AWeapon GetRandomWeaponPrefab(Size size)
+    public WeaponDeed GetRandomWeaponPrefab(Size size)
     {
         int pos = (int)size;
-        List<AWeapon> sized = weapons[pos];
+        List<WeaponDeed> sized = deeds[pos];
         List<int> weights = weaponWeights[pos];
-        AWeapon weapon = sized[Math.WeightedRandom(weights)];
-        return weapon;
+        WeaponDeed deed = sized[Math.WeightedRandom(weights)];
+        return deed;
     }
 
     private Size GetRandomSize()
@@ -101,7 +102,7 @@ public class ShipSpawner : MonoBehaviour
         int[] slots = arsenal.GetSlots();
         for (int weaponSizeIndex = 0; weaponSizeIndex < slots.Length; weaponSizeIndex++)
         {
-            if (weapons[weaponSizeIndex].Count <= 0)
+            if (deeds[weaponSizeIndex].Count <= 0)
             {
                 Debug.Log("Weapons of size " + (Size)weaponSizeIndex + " don't exist yet");
             }
@@ -114,11 +115,11 @@ public class ShipSpawner : MonoBehaviour
                 }
                 for (int i = 0; i < count; i++)
                 {
-                    AWeapon weapon = Instantiate<AWeapon>(GetRandomWeaponPrefab((Size)weaponSizeIndex));
-                    bool result = arsenal.TrySetWeapon(weapon);
+                    WeaponDeed deed = Instantiate<WeaponDeed>(GetRandomWeaponPrefab((Size)weaponSizeIndex));
+                    bool result = deed.Create(ship);
                     if (!result)
                     {
-                        Destroy(weapon.gameObject);
+                        Destroy(deed.gameObject);
                     }
                 }
             }

@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4470785435401410580}
   - component: {fileID: 4470785435401410581}
   m_Layer: 0
-  m_Name: AP Rounds M Deed
+  m_Name: AP Rounds Deed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -43,16 +43,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100e492375f3b8f4f94e4f43133e6bd3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  price: 400
-  weaponName: Armor Piercing Rounds M
-  icon: {fileID: 5716910050310833782, guid: ccc3a0bbdb2bc6944b575db5afc817f6, type: 3}
-  energy: 0
-  cooldownTime: 2
-  weaponSize: 1
-  combatType: 0
-  rarity: 24
-  preferedPosition: 2
-  weaponPrefab: {fileID: 7966492580703610604, guid: 7265a10497e102c488b69fd7f4f876f6,
-    type: 3}
-  damageString: (10 + <color=magenta>10</color>) x 3
-  description: Fast large rounds do double damage to armor
+  price: 800
+  sizeRarityPairs:
+  - weaponSize: 0
+    rarity: 32
+    price: 160
+  - weaponSize: 1
+    rarity: 24
+    price: 400
+  - weaponSize: 2
+    rarity: 16
+    price: 800
+  weapon: {fileID: 7966492580703610604, guid: e3d494a8beaebc144941bcde5411a3e7, type: 3}
+  weaponSize: 0
+  rarity: 0

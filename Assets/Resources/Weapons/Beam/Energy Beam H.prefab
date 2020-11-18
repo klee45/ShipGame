@@ -50,7 +50,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   icon: {fileID: 21300000, guid: fa8039e5884791641b07a9135a5bd9e4, type: 3}
-  energyCost: 150
+  energyCost: 0
   cooldownTime: 17
   weaponSize: 3
   combatType: 0

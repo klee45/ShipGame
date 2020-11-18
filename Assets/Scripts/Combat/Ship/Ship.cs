@@ -197,6 +197,7 @@ public class Ship : Entity
         DoMovementEffects(shipEffects);
     }
 
+    public Size GetSize() { return size; }
     public CombatStats GetCombatStats() { return combatStats; }
     public Arsenal GetArsenal() { return arsenal; }
     public AWeapon GetWeapon(int weaponPos)
