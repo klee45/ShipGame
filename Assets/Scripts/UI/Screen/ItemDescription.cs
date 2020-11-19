@@ -6,9 +6,9 @@ using UnityEngine.UI;
 public class ItemDescription : MonoBehaviour
 {
     [SerializeField]
-    private Text name, description, resource, size, cooldown, rarity, damage;
+    private Text itemName, description, resource, size, cooldown, rarity, damage;
     [SerializeField]
-    private Image icon;
+    private Image icon, border;
 
     private bool changed = false;
 
@@ -20,20 +20,23 @@ public class ItemDescription : MonoBehaviour
     public void ShowDescription(WeaponDeed deed)
     {
         changed = true;
-        name.text = deed.GetName();
+        itemName.text = deed.GetName();
         description.text = deed.GetDescription();
         SetResource(deed.GetEnergyCost());
         size.text = "Size\n" + deed.GetSize().ToString();
         cooldown.text = "Cooldown\n" + deed.GetCooldown();
         SetRarity(deed.GetRarityType(), deed.GetRarity());
         damage.text = deed.GetDamageString();
+        //Debug.Log("------------ Damage string: " + deed.GetDamageString());
         icon.sprite = deed.GetIcon();
         icon.color = Color.white;
+        border.sprite = DropTable.instance.GetBorder(deed.GetSize());
+        border.color = Color.white;
     }
 
     public void ResetImage()
     {
-        name.text = "";
+        itemName.text = "";
         description.text = "";
         resource.text = "";
         size.text = "";
@@ -41,6 +44,7 @@ public class ItemDescription : MonoBehaviour
         rarity.text = "";
         damage.text = "";
         icon.color = Color.clear;
+        border.color = Color.clear;
     }
 
     private void SetResource(int energyCost)

@@ -45,10 +45,20 @@ public class WeaponDeed : Deed<AWeapon, Ship>
 
         rarityType = (WeaponRarity)pos;
 
+        weapon = Instantiate(weapon);
+        weapon.transform.SetParent(transform);
+        weapon.SetupSlotSizeMods(this.weaponSize);
+
+        /*
         foreach (SizeMod sizeMod in GetComponentsInChildren<SizeMod>())
         {
             sizeMod.SetupSlot(weaponSize);
         }
+        foreach (DescriptionSwitch descriptionMod in GetComponentsInChildren<DescriptionSwitch>())
+        {
+            descriptionMod.Setup(weaponSize);
+        }
+        */
     }
 
     public WeaponDeedInfo[] GetSizeRarityPairs()
@@ -56,16 +66,20 @@ public class WeaponDeed : Deed<AWeapon, Ship>
         return sizeRarityPairs;
     }
 
+    public bool TryLink(Ship ship)
+    {
+        return ship.GetArsenal().TrySetWeapon(weapon);
+    }
+
     public override AWeapon Create(Ship ship)
     {
-        ship.GetArsenal().TrySetWeapon(weapon);
+        return weapon;
         /*
         weapon.Setup(
             icon, energy, cooldownTime,
             weaponSize, combatType, rarity,
             preferedPosition);
         */
-        return weapon;
     }
 
     public bool IsSame(WeaponDeed deed)
@@ -78,12 +92,16 @@ public class WeaponDeed : Deed<AWeapon, Ship>
     public Size GetSize() { return weaponSize; }
     public WeaponRarity GetRarityType() { return rarityType; }
     public int GetRarity() { return rarity; }
-    public string GetName() { return weapon.GetName(); }
     public string GetDescription() { return weapon.GetDescription(); }
     public string GetDamageString() { return weapon.GetDamageString(); }
     public int GetEnergyCost() { return weapon.GetEnergyCost(); }
     public float GetCooldown() { return weapon.GetCooldown(); }
     public Sprite GetIcon() { return weapon.GetIcon(); }
+
+    public string GetName()
+    {
+        return weapon.GetName() + " " + GetSize().ToString()[0];
+    }
 
     public enum WeaponRarity
     {

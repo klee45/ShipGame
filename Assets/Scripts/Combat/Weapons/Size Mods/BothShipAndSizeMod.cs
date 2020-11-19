@@ -7,10 +7,10 @@ public class BothShipAndSizeMod : SizeMod
     [SerializeField] BothModType modType = BothModType.multiplication;
 
     [Header("Ship size, slot size")]
-    [SerializeField] private Vector2 smallMod = new Vector2(Constants.SizeMod.SMALL, Constants.SizeMod.SMALL);
-    [SerializeField] private Vector2 mediumMod = new Vector2(Constants.SizeMod.MEDIUM, Constants.SizeMod.MEDIUM);
-    [SerializeField] private Vector2 largeMod = new Vector2(Constants.SizeMod.LARGE, Constants.SizeMod.LARGE);
-    [SerializeField] private Vector2 hugeMod = new Vector2(Constants.SizeMod.HUGE, Constants.SizeMod.HUGE);
+    [SerializeField] private Vector2 smallMod = new Vector2(Constants.SizeMod.SMALL / 2, Constants.SizeMod.SMALL / 2);
+    [SerializeField] private Vector2 mediumMod = new Vector2(Constants.SizeMod.MEDIUM / 2, Constants.SizeMod.MEDIUM / 2);
+    [SerializeField] private Vector2 largeMod = new Vector2(Constants.SizeMod.LARGE / 2, Constants.SizeMod.LARGE / 2);
+    [SerializeField] private Vector2 hugeMod = new Vector2(Constants.SizeMod.HUGE / 2, Constants.SizeMod.HUGE / 2);
 
     public override void SetupShip(Size shipSize)
     {

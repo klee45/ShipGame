@@ -724,7 +724,7 @@ MonoBehaviour:
   team: 0
   combatStats: {fileID: 7653412210923459658}
   combatType: 0
-  size: 1
+  size: 2
 --- !u!50 &7653412210886619556
 Rigidbody2D:
   serializedVersion: 4

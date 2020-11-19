@@ -41,5 +41,6 @@ public class DescriptionSwitchSize : DescriptionSwitch
                 str = huge;
                 break;
         }
+        //Debug.Log("-------------- Description switch setup " + str);
     }
 }

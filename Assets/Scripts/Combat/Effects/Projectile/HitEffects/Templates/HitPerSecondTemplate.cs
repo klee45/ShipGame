@@ -6,7 +6,7 @@ using UnityEngine;
 public class HitPerSecondTemplate : ProjectileEffectTemplate
 {
     [SerializeField]
-    private int damage;
+    private SizeMod damage;
     [SerializeField]
     private float duration;
     [SerializeField]
@@ -15,7 +15,7 @@ public class HitPerSecondTemplate : ProjectileEffectTemplate
     protected override ProjectileEffect CreateEffect(GameObject obj)
     {
         HitPerSecond hps = obj.AddComponent<HitPerSecond>();
-        hps.Setup(damage, duration, destroyOnEnd, obj.GetComponent<Projectile>().GetOwner());
+        hps.Setup(damage.ToInt(), duration, destroyOnEnd, obj.GetComponent<Projectile>().GetOwner());
         return hps;
     }
 }

@@ -9,16 +9,19 @@ public class WeaponIcon : MonoBehaviour
     private Image iconFront;
     [SerializeField]
     private Image iconBack;
+    [SerializeField]
+    private Image border;
 
-    public void SetIcon(Sprite sprite)
+    public void SetIcon(AWeapon weapon)
     {
-        iconFront.sprite = sprite;
+        iconFront.sprite = weapon.GetIcon();
+        iconBack.sprite = weapon.GetIcon();
+        border.sprite = DropTable.instance.GetBorder(weapon.GetSize());
         /*
         iconFront.type = Image.Type.Filled;
         iconFront.fillMethod = Image.FillMethod.Vertical;
         iconFront.color = new Color(0.1f, 0.1f, 0.1f);
         */
-        iconBack.sprite = sprite;
     }
 
     public void UpdatePercent(float percent)

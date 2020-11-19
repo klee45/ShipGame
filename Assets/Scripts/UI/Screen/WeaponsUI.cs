@@ -17,6 +17,10 @@ public class WeaponsUI : MonoBehaviour
     private int widthSize = 0;
     [SerializeField]
     private int heightSize = 0;
+    [SerializeField]
+    private int widthDistance = 0;
+    [SerializeField]
+    private int heightDistance = 0;
 
     [SerializeField]
     private GameObject iconPrefab;
@@ -50,8 +54,8 @@ public class WeaponsUI : MonoBehaviour
                 GameObject obj = Instantiate(iconPrefab);
                 obj.transform.SetParent(transform);
                 obj.GetComponent<RectTransform>().anchoredPosition = new Vector3(
-                    -((x * widthSize) + widthOffset),
-                    -((y * heightSize) + heightOffset));
+                    -((x * (widthSize + widthDistance)) + widthOffset),
+                    -((y * (heightSize + heightDistance)) + heightOffset));
                 //Debug.Log(string.Format("{0} {1}", obj.transform.localPosition.x, obj.transform.localPosition.y));
                 WeaponIcon icon = obj.GetComponent<WeaponIcon>();
                 obj.transform.localScale = new Vector3(widthSize, heightSize);
@@ -63,7 +67,7 @@ public class WeaponsUI : MonoBehaviour
 
     public void SetIcon(int num, AWeapon weapon)
     {
-        icons[num].SetIcon(weapon.GetIcon());
+        icons[num].SetIcon(weapon);
         icons[num].gameObject.SetActive(true);
     }
 

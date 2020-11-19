@@ -81,9 +81,9 @@ public class ShopInterface : Singleton<ShopInterface>, IWindow
         rectTransform.anchoredPosition = new Vector3(col * buttonWidth, -row * buttonHeight, 0);
         buttonObj.name = "Button (" + col + ", " + row + ")";
 
-        WeaponDeed deed = Instantiate(DropTable.instance.GetRandomWeaponDeed());
+        WeaponDeed deed = DropTable.instance.CreateRandomWeaponDeed();
         deed.transform.SetParent(deedContainer.transform);
-        buttonObj.SetWeaponDeed(deed);
+        buttonObj.SetWeaponDeed(deed, DropTable.instance.GetBorder(deed.GetSize()));
 
         allWeaponButtons.Add(buttonObj);
     }
@@ -110,7 +110,7 @@ public class ShopInterface : Singleton<ShopInterface>, IWindow
         UpdateMoneyVisual(0);
     }
 
-    public void Hide ()
+    public void Hide()
     {
         PlayerInfo.instance.GetBank().OnMoneyChange -= UpdateMoneyVisual;
         visual.SetActive(false);

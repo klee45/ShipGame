@@ -56,25 +56,31 @@ public abstract class AWeapon : MonoBehaviour, IRequiresShipSize
     [SerializeField]
     private Size shipSize = Size.Medium;
 
+    private int timesSetup = 0;
+
     public virtual void SetupShipSizeMods(Size shipSize)
     {
+        this.shipSize = shipSize;
         foreach (SizeMod toSetup in GetComponentsInChildren<SizeMod>())
         {
             toSetup.SetupShip(this.shipSize);
-            Debug.Log(toSetup.name);
+            //Debug.Log(toSetup.name);
         }
-        damageString.Setup(this.slotSize);
-        description.Setup(this.slotSize);
         SetupTimer();
     }
 
     // Only for use when initial weapons applied
-    private void SetupSlotSizeMods(Size slotSize)
+    public void SetupSlotSizeMods(Size slotSize)
     {
+        this.slotSize = slotSize;
         foreach (SizeMod toSetup in GetComponentsInChildren<SizeMod>())
         {
             toSetup.SetupSlot(slotSize);
-            Debug.Log(toSetup.name);
+            //Debug.Log(toSetup.name);
+        }
+        foreach (DescriptionSwitch descriptionMod in GetComponentsInChildren<DescriptionSwitch>())
+        {
+            descriptionMod.Setup(slotSize);
         }
     }
 
@@ -97,7 +103,6 @@ public abstract class AWeapon : MonoBehaviour, IRequiresShipSize
 
     private void Awake()
     {
-        cooldown = gameObject.AddComponent<Timer>();
         rangeEstimator = gameObject.AddComponent<RangeEstimator>();
     }
 
@@ -105,18 +110,23 @@ public abstract class AWeapon : MonoBehaviour, IRequiresShipSize
     protected void Start()
     {
         InitializeRangeEstimator();
-        SetupTimer();
-        cooldown.OnComplete += () => Reset();
+        //SetupTimer();
         //Debug.Log(GetComponentInParent<Ship>() + " , " + gameObject);
 
-        SetupSlotSizeMods(slotSize);
-        SetupShipSizeMods(Size.Large);
+        //SetupSlotSizeMods(slotSize);
+        //SetupShipSizeMods(Size.Large);
     }
 
     private void SetupTimer()
     {
+        if (cooldown != null)
+        {
+            Destroy(cooldown);
+        }
+        cooldown = gameObject.AddComponent<Timer>();
         cooldown.SetMaxTime(cooldownTime.ToFloat());
         cooldown.SetTime(cooldownTime.ToFloat());
+        cooldown.OnComplete += () => Reset();
     }
 
     public void Reset()

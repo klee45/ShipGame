@@ -11,6 +11,8 @@ public class WeaponButtonShop : MonoBehaviour
     private Text weaponCost;
     [SerializeField]
     private Image weaponSprite;
+    [SerializeField]
+    private Image borderSprite;
 
     private bool canBuy;
     private WeaponDeed linkedDeed;
@@ -55,16 +57,20 @@ public class WeaponButtonShop : MonoBehaviour
         this.weaponName.text = "";
         this.weaponSprite.sprite = null;
         this.weaponSprite.color = Color.clear;
+        this.borderSprite.sprite = null;
+        this.borderSprite.color = Color.clear;
         this.weaponCost.text = "";
     }
 
-    public void SetWeaponDeed(WeaponDeed deed)
+    public void SetWeaponDeed(WeaponDeed deed, Sprite border)
     {
         this.canBuy = true;
         this.linkedDeed = deed;
         this.weaponName.text = deed.GetName();
         this.weaponSprite.sprite = deed.GetIcon();
         this.weaponSprite.color = Color.white;
+        this.borderSprite.sprite = border;
+        this.borderSprite.color = Color.white;
         this.weaponCost.text = deed.GetPrice().ToString();
     }
 }

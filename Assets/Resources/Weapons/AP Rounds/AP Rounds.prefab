@@ -51,10 +51,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b2879c11c338fe47a3b3d1baa1b1b3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  weaponName: AP Rounds
   energyCost: {fileID: 6388057772526516946}
   cooldownTime: {fileID: 9120950719407392836}
   combatType: 0
-  rarity: {fileID: 6885288697126872392}
   icon: {fileID: 21300000, guid: ccc3a0bbdb2bc6944b575db5afc817f6, type: 3}
   attachProjectile: 0
   preferedPosition: 0
@@ -169,6 +169,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1310512387166001183}
   - component: {fileID: 5130893901464640440}
+  - component: {fileID: 8764148030576192201}
   m_Layer: 11
   m_Name: Damage
   m_TagString: Untagged
@@ -203,7 +204,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 0
-  damage: 20
+  damage: {fileID: 8764148030576192201}
+--- !u!114 &8764148030576192201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1310512387166001182}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3dfe06fd4a34724ea40263ea526f474, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smallMod: 5
+  mediumMod: 10
+  largeMod: 15
+  hugeMod: 20
 --- !u!1 &1310512387177938983
 GameObject:
   m_ObjectHideFlags: 0
@@ -522,6 +539,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8837453691557578227}
   - component: {fileID: 6558489945337350656}
+  - component: {fileID: 1082859667668587832}
   m_Layer: 11
   m_Name: Bonus Damage
   m_TagString: Untagged
@@ -556,8 +574,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   priority: 1
-  bonusDamage: 20
+  bonusDamage: {fileID: 1082859667668587832}
   isHit: 0
+--- !u!114 &1082859667668587832
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4888097790446830871}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e3dfe06fd4a34724ea40263ea526f474, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  smallMod: 5
+  mediumMod: 10
+  largeMod: 15
+  hugeMod: 20
 --- !u!1 &6145558987374266886
 GameObject:
   m_ObjectHideFlags: 0

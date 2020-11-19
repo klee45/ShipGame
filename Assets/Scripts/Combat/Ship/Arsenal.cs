@@ -33,6 +33,7 @@ public class Arsenal : MonoBehaviour
         weapons = new List<AWeapon>();
         foreach (AWeapon weapon in GetComponentsInChildren<AWeapon>())
         {
+            weapon.SetupSlotSizeMods(weapon.GetSize());
             TrySetWeapon(weapon);
         }
     }

@@ -48,7 +48,7 @@ GameObject:
   - component: {fileID: 3692422542064853020}
   - component: {fileID: 3692422542064853021}
   m_Layer: 0
-  m_Name: Shop 1
+  m_Name: Shop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1157,6 +1157,7 @@ MonoBehaviour:
   rarity: {fileID: 8262815569957041019}
   damage: {fileID: 8262815569851234182}
   icon: {fileID: 8262815570934828850}
+  border: {fileID: 0}
 --- !u!1 &8262815570934828848
 GameObject:
   m_ObjectHideFlags: 0

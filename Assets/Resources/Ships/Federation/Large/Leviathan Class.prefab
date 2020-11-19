@@ -624,7 +624,7 @@ RectTransform:
   m_GameObject: {fileID: 6502111010939845638}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 10, y: 10, z: 1}
+  m_LocalScale: {x: 7, y: 7, z: 1}
   m_Children:
   - {fileID: 6502111010933004821}
   - {fileID: 6502111011357915673}
@@ -714,7 +714,7 @@ MonoBehaviour:
   team: 0
   combatStats: {fileID: 6502111011048684998}
   combatType: 0
-  size: 3
+  size: 2
 --- !u!50 &6502111011011827752
 Rigidbody2D:
   serializedVersion: 4

@@ -8,7 +8,10 @@ public class DropTable : Singleton<DropTable>
     private string folderPath = "Weapons";
 
     [SerializeField]
-    List<WeaponDeed> weaponDeeds;
+    private List<DropInfo> drops;
+
+    [SerializeField]
+    private Sprite[] borders;
 
     private List<int> originalWeights;
     private List<int> weights;
@@ -23,7 +26,7 @@ public class DropTable : Singleton<DropTable>
     // Start is called before the first frame update
     void Start()
     {
-        weaponDeeds = new List<WeaponDeed>();
+        drops = new List<DropInfo>();
         List<WeaponDeed> deedBlueprints = new List<WeaponDeed>();
         deedBlueprints.AddRange(Resources.LoadAll<WeaponDeed>(folderPath));
         
@@ -31,10 +34,12 @@ public class DropTable : Singleton<DropTable>
         {
             foreach (WeaponDeed.WeaponDeedInfo info in deedBlueprint.GetSizeRarityPairs())
             {
-                WeaponDeed deed = Instantiate(deedBlueprint);
-                deed.Setup(info);
-                weaponDeeds.Add(deed);
-                deed.transform.SetParent(transform);
+                GameObject obj = new GameObject(deedBlueprint.name + " " + info.weaponSize);
+                DropInfo drop = obj.AddComponent<DropInfo>();
+                drop.deed = deedBlueprint;
+                drop.info = info;
+                drops.Add(drop);
+                drop.transform.SetParent(transform);
                 originalWeights.Add(info.rarity);
             }
         }
@@ -47,8 +52,33 @@ public class DropTable : Singleton<DropTable>
         weights.StackList();
     }
 
-    public WeaponDeed GetRandomWeaponDeed()
+    public WeaponDeed CreateRandomWeaponDeed()
     {
-        return weaponDeeds[Math.WeightedRandom(weights)];
+        DropInfo info = drops[Math.WeightedRandom(weights)];
+        WeaponDeed deed = Instantiate(info.deed);
+        deed.Setup(info.info);
+        return deed;
+    }
+
+    private class DropInfo : MonoBehaviour
+    {
+        public WeaponDeed deed;
+        public WeaponDeed.WeaponDeedInfo info;
+    }
+
+    public Sprite GetBorder(Size size)
+    {
+        switch (size)
+        {
+            case Size.Small:
+                return borders[0];
+            case Size.Medium:
+                return borders[1];
+            case Size.Large:
+                return borders[2];
+            case Size.Huge:
+                return borders[3];
+        }
+        return null;
     }
 }
