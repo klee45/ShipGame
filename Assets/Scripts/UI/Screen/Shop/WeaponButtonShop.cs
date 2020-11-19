@@ -23,6 +23,7 @@ public class WeaponButtonShop : MonoBehaviour
     {
         if (canBuy)
         {
+            Debug.Log("Can buy");
             if (isShown)
             {
                 ShopInterface.instance.GetPurchaseButton().Purchase();

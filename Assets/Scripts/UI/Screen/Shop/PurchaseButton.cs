@@ -29,7 +29,7 @@ public class PurchaseButton : MonoBehaviour
         }
     }
 
-    public void Purchase()
+    public bool Purchase()
     {
         if (linkedButton != null)
         {
@@ -41,10 +41,15 @@ public class PurchaseButton : MonoBehaviour
                 playerInfo.GetInventory().AddWeaponDeed(linkedDeed);
                 linkedButton.CloseSale();
                 linkedButton = null;
+                ShopInterface.instance.GetDescriptionBox().ResetImage();
+                return true;
             }
-
-            ShopInterface.instance.GetDescriptionBox().ResetImage();
-
+            else
+            {
+                Debug.Log("Not enough money to purchase " + linkedButton.name);
+                return false;
+            }
         }
+        return false;
     }
 }
