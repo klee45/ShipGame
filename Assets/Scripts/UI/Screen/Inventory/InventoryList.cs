@@ -15,7 +15,7 @@ public class InventoryList : MonoBehaviour
     [SerializeField]
     private int height = 45;
 
-    private void Awake()
+    public void Initialize()
     {
         inventoryItems = new List<WeaponButtonInventory>();
         itemArea.sizeDelta = new Vector2(itemArea.sizeDelta.x, 0);
@@ -26,11 +26,28 @@ public class InventoryList : MonoBehaviour
         WeaponButtonInventory newItem = Instantiate(inventoryItemPrefab);
         newItem.transform.SetParent(transform);
         RectTransform rect = newItem.GetComponent<RectTransform>();
-        rect.anchoredPosition = new Vector3(0, -height * pos, 0);
         rect.sizeDelta = new Vector2(rect.sizeDelta.x, height);
+        SetButtonPosition(rect, pos);
         newItem.transform.localScale = Vector3.one;
         inventoryItems.Add(newItem);
         IncreaseItemArea();
+    }
+
+    private void SetButtonPosition(RectTransform rect, int pos)
+    {
+        rect.anchoredPosition = new Vector3(0, -height * pos, 0);
+    }
+
+    private void RemoveInventoryItem(WeaponButtonInventory button)
+    {
+        int pos = inventoryItems.IndexOf(button);
+        if (pos < 0)
+        {
+            Debug.LogError("Error removing button " + button.name + " doesn't exist in this inventory list");
+        }
+        inventoryItems.Remove(button);
+
+        DecreaseItemArea();
     }
 
     private void IncreaseItemArea()
@@ -46,6 +63,7 @@ public class InventoryList : MonoBehaviour
     public void Visualize()
     {
         List<Inventory.DeedCount> deedCounts = PlayerInfo.instance.GetInventory().GetDeedCounts().ToList();
+        //Debug.Log(deedCounts.Count + " deeds ----------------");
 
         int numItemsPlanned = deedCounts.Count;
         int numItemsCurrent = inventoryItems.Count;
@@ -62,18 +80,20 @@ public class InventoryList : MonoBehaviour
             for (int i = 0; i < numItemsCurrent - numItemsPlanned; i++)
             {
                 WeaponButtonInventory obj = inventoryItems.First();
-                Destroy(obj);
+                Destroy(obj.gameObject);
                 inventoryItems.RemoveAt(0);
                 DecreaseItemArea();
             }
         }
 
         int pos = 0;
-        foreach (Inventory.DeedCount deedCount in deedCounts.OrderBy(c => c.deed.GetName()))
+        foreach (Inventory.DeedCount deedCount in deedCounts.OrderBy(c => c.PeekDeed().GetName()))
         {
-            WeaponButtonInventory button = inventoryItems[pos++];
+            WeaponButtonInventory button = inventoryItems[pos];
+            SetButtonPosition(button.GetComponent<RectTransform>(), pos);
             button.gameObject.SetActive(true);
             button.Setup(deedCount);
+            pos++;
         }
     }
 }

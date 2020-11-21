@@ -6,28 +6,42 @@ public class Inventory : MonoBehaviour
 {
     [SerializeField]
     private Dictionary<string, DeedCount> weaponDeeds;
+    private Dictionary<string, DeedCount> equippedDeeds;
 
     private void Awake()
     {
         weaponDeeds = new Dictionary<string, DeedCount>();
+        equippedDeeds = new Dictionary<string, DeedCount>();
     }
 
     public class DeedCount
     {
-        public WeaponDeed deed;
-        public int count;
+        private Stack<WeaponDeed> deedStack;
 
         public DeedCount(WeaponDeed deed)
         {
-            this.deed = deed;
-            this.count = 1;
+            deedStack = new Stack<WeaponDeed>();
+            deedStack.Push(deed);
         }
 
-        public void AddCount(WeaponDeed deed)
+        public void PushDeed(WeaponDeed deed)
         {
-            Destroy(this.deed.gameObject);
-            this.deed = deed;
-            this.count++;
+            deedStack.Push(deed);
+        }
+
+        public WeaponDeed PopDeed()
+        {
+            return deedStack.Pop();
+        }
+
+        public WeaponDeed PeekDeed()
+        {
+            return deedStack.Peek();
+        }
+
+        public int GetCount()
+        {
+            return deedStack.Count;
         }
     }
 
@@ -36,46 +50,67 @@ public class Inventory : MonoBehaviour
         return weaponDeeds.Values;
     }
 
+    public Dictionary<string, DeedCount>.ValueCollection GetEquippedDeedCounts()
+    {
+        return equippedDeeds.Values;
+    }
+
     private void PrintDict()
     {
         string str = "";
         foreach (KeyValuePair<string, DeedCount> pair in weaponDeeds)
         {
-            str += pair.Key + " : " + pair.Value.count + "\n";
+            str += pair.Key + " : " + pair.Value.GetCount() + "\n";
         }
         Debug.Log(str);
     }
-    
-    public void AddWeaponDeed(WeaponDeed deed)
+
+    public void AddWeaponDeedToInventory(WeaponDeed deed)
+    {
+        AddWeaponDeed(deed, weaponDeeds);
+    }
+
+    public bool RemoveWeaponDeedFromInventory(WeaponDeed deed)
+    {
+        return RemoveWeaponDeed(deed, weaponDeeds);
+    }
+
+    public void AddWeaponDeedToEquipped(WeaponDeed deed)
+    {
+        AddWeaponDeed(deed, equippedDeeds);
+    }
+
+    public bool RemoveWeaponDeedFromEquipped(WeaponDeed deed)
+    {
+        return RemoveWeaponDeed(deed, equippedDeeds);
+    }
+
+    private void AddWeaponDeed(WeaponDeed deed, Dictionary<string, DeedCount> dict)
     {
         //Debug.Log("Added weapon deed!");
 
         string deedName = deed.GetName();
-        if (this.weaponDeeds.ContainsKey(deedName))
+        if (dict.ContainsKey(deedName))
         {
-            this.weaponDeeds[deedName].AddCount(deed);
+            dict[deedName].PushDeed(deed);
         }
         else
         {
-            this.weaponDeeds[deedName] = new DeedCount(deed);
+            dict[deedName] = new DeedCount(deed);
         }
         //PrintDict();
         deed.transform.SetParent(transform);
     }
 
-    public bool RemoveWeaponDeed(WeaponDeed deed)
+    private bool RemoveWeaponDeed(WeaponDeed deed, Dictionary<string, DeedCount> dict)
     {
         string deedName = deed.GetName();
-        if (this.weaponDeeds.TryGetValue(deedName, out DeedCount value))
+        if (dict.TryGetValue(deedName, out DeedCount value))
         {
-            if (value.count == 1)
+            dict[deedName].PopDeed();
+            if (value.GetCount() == 0)
             {
-                Destroy(this.weaponDeeds[deedName].deed.gameObject);
-                this.weaponDeeds.Remove(deedName);
-            }
-            else
-            {
-                this.weaponDeeds[deedName].count--;
+                dict.Remove(deedName);
             }
             return true;
         }

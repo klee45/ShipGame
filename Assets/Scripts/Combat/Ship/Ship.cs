@@ -26,8 +26,9 @@ public class Ship : Entity
 
     private EffectDictShip shipEffects;
 
-    private Arsenal arsenal;
     private EnergySystem energySystem;
+    private Arsenal arsenal;
+    private ShipGraphics shipGraphics;
 
     //private bool markedForDelete = false;
 
@@ -47,6 +48,7 @@ public class Ship : Entity
         shipEffects = GetComponentInChildren<EffectDictShip>();
         energySystem = GetComponentInChildren<EnergySystem>();
         arsenal = GetComponentInChildren<Arsenal>();
+        shipGraphics = GetComponentInChildren<ShipGraphics>();
         gameObject.layer = Layers.GetShipLayerFromTeam(team);
         //Debug.Log(gameObject.layer);
     }
@@ -203,6 +205,10 @@ public class Ship : Entity
     public AWeapon GetWeapon(int weaponPos)
     {
         return arsenal.GetWeapon(weaponPos);
+    }
+    public ShipGraphics GetShipGraphics()
+    {
+        return shipGraphics;
     }
 
     public bool CanFireWeapon(int weaponPos)

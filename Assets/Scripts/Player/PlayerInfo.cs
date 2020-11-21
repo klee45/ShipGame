@@ -22,6 +22,11 @@ public class PlayerInfo : Singleton<PlayerInfo>
         DontDestroyOnLoad(playerTeam);
     }
 
+    private void Start()
+    {
+        InventoryInterface.instance.GetEquipmentUI().SetShip(ship);
+    }
+
     public void SetLocation(GalaxyMapVertex vertex)
     {
         this.currentLocation = vertex;

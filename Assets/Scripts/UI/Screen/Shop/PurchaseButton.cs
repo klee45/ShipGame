@@ -38,7 +38,8 @@ public class PurchaseButton : MonoBehaviour
             PlayerInfo playerInfo = PlayerInfo.instance;
             if (linkedDeed.TryPurchase(playerInfo.GetBank()))
             {
-                playerInfo.GetInventory().AddWeaponDeed(linkedDeed);
+                playerInfo.GetInventory().AddWeaponDeedToInventory(linkedDeed);
+                InventoryInterface.instance.Visualize();
                 linkedButton.CloseSale();
                 linkedButton = null;
                 ShopInterface.instance.GetDescriptionBox().ResetImage();

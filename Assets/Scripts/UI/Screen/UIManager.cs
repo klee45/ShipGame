@@ -10,12 +10,15 @@ public class UIManager : Singleton<UIManager>
     [SerializeField]
     private Ship ship;
 
+    private Canvas canvas;
+
     protected override void Awake()
     {
         base.Awake();
         healthUI = GetComponentInChildren<HealthUI>();
         weaponsUI = GetComponentInChildren<WeaponsUI>();
-        effectsUI = GetComponentInChildren<EffectsUI>(); 
+        effectsUI = GetComponentInChildren<EffectsUI>();
+        canvas = GetComponent<Canvas>();
     }
 
     // Start is called before the first frame update
@@ -35,6 +38,11 @@ public class UIManager : Singleton<UIManager>
                 weaponsUI.SetPercent(i++, weapon);
             }
         }
+    }
+
+    public Canvas GetUICanvas()
+    {
+        return canvas;
     }
 
     public void RedrawShipUI()

@@ -461,10 +461,11 @@ MonoBehaviour:
   backWeaponPlace: {fileID: 1558074663366324883}
   frontLeftWeaponPlace: {fileID: 6151902774455040563}
   leftWeaponPlace: {fileID: 6293128372484945530}
-  backLeftWeaponPlace: {fileID: 6293128372484945530}
+  backLeftWeaponPlace: {fileID: 0}
   frontRightWeaponPlace: {fileID: 8971743788474833708}
   rightWeaponPlace: {fileID: 8363469918651624714}
-  backRightWeaponPlace: {fileID: 8363469918651624714}
+  backRightWeaponPlace: {fileID: 0}
+  defaultWeaponPlace: {fileID: 4465219373124264415}
 --- !u!114 &3198002382412471049
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -492,6 +493,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3198002382779132321}
   - component: {fileID: 3198002382779132326}
+  - component: {fileID: 8269594598941734996}
   m_Layer: 11
   m_Name: Graphics
   m_TagString: Untagged
@@ -542,6 +544,21 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 100
   m_TargetDisplay: 0
+--- !u!114 &8269594598941734996
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3198002382779132320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ed7cb5656d369f4e83d307f34fdca81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderers:
+  - {fileID: 3198002382172546191}
+  - {fileID: 3198002382143306330}
 --- !u!1 &3198002383159772197
 GameObject:
   m_ObjectHideFlags: 0

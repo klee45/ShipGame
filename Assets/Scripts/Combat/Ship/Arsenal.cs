@@ -11,8 +11,7 @@ public class Arsenal : MonoBehaviour
     private int[] counts;
 
     [Space(5)]
-    [Header("Weapon positions")]
-
+    [Header("Weapon positions - can be left empty")]
     [SerializeField] private GameObject frontWeaponPlace;
     [SerializeField] private GameObject centerWeaponPlace;
     [SerializeField] private GameObject backWeaponPlace;
@@ -25,8 +24,14 @@ public class Arsenal : MonoBehaviour
     [SerializeField] private GameObject rightWeaponPlace;
     [SerializeField] private GameObject backRightWeaponPlace;
 
+    [Header("Default position")]
+    [SerializeField] private GameObject defaultWeaponPlace;
+
+    private Dictionary<WeaponPosition, GameObject> positionDict;
+
     private void Awake()
     {
+        SetupDict();
         int numSizes = System.Enum.GetValues(typeof(Size)).Length;
         counts = new int[numSizes];
         ship = GetComponentInParent<Ship>();
@@ -36,6 +41,37 @@ public class Arsenal : MonoBehaviour
             weapon.SetupSlotSizeMods(weapon.GetSize());
             TrySetWeapon(weapon);
         }
+    }
+
+    private void SetupDict()
+    {
+        positionDict = new Dictionary<WeaponPosition, GameObject>();
+        List<GameObject> objs = new List<GameObject>
+        {
+            frontLeftWeaponPlace, frontWeaponPlace, frontRightWeaponPlace,
+            leftWeaponPlace, centerWeaponPlace, rightWeaponPlace,
+            backLeftWeaponPlace, backWeaponPlace, backRightWeaponPlace
+        };
+        List<WeaponPosition> positions = new List<WeaponPosition>
+        {
+            WeaponPosition.FrontLeft, WeaponPosition.Front, WeaponPosition.FrontRight,
+            WeaponPosition.Left, WeaponPosition.Center, WeaponPosition.Right,
+            WeaponPosition.BackLeft, WeaponPosition.Back, WeaponPosition.BackRight
+        };
+
+        for (int i = 0; i < objs.Count; i++)
+        {
+            GameObject obj = objs[i];
+            if (obj != null)
+            {
+                positionDict[positions[i]] = obj;
+            }
+        }
+    }
+
+    public IReadOnlyDictionary<WeaponPosition, GameObject> GetWeaponPositions()
+    {
+        return positionDict;
     }
 
     public bool CanSetDeed(WeaponDeed deed)
@@ -83,28 +119,13 @@ public class Arsenal : MonoBehaviour
     private GameObject GetWeaponPositionObj(AWeapon weapon)
     {
         WeaponPosition pos = weapon.GetPreferedPosition();
-        switch (pos)
+        if (positionDict.TryGetValue(pos, out GameObject obj))
         {
-            case WeaponPosition.Back:
-                return backWeaponPlace;
-            case WeaponPosition.BackLeft:
-                return backLeftWeaponPlace;
-            case WeaponPosition.BackRight:
-                return backRightWeaponPlace;
-            case WeaponPosition.Center:
-                return centerWeaponPlace;
-            case WeaponPosition.Front:
-                return frontWeaponPlace;
-            case WeaponPosition.FrontLeft:
-                return frontLeftWeaponPlace;
-            case WeaponPosition.FrontRight:
-                return frontRightWeaponPlace;
-            case WeaponPosition.Left:
-                return leftWeaponPlace;
-            case WeaponPosition.Right:
-                return rightWeaponPlace;
-            default:
-                return centerWeaponPlace;
+            return obj;
+        }
+        else
+        {
+            return defaultWeaponPlace;
         }
     }
 

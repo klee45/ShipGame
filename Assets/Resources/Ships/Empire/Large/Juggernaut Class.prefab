@@ -191,6 +191,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4718143794798394179}
   - component: {fileID: 4718143794798394178}
+  - component: {fileID: 2817186204972506988}
   m_Layer: 11
   m_Name: Graphics
   m_TagString: Untagged
@@ -241,6 +242,21 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 100
   m_TargetDisplay: 0
+--- !u!114 &2817186204972506988
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4718143794798394176}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ed7cb5656d369f4e83d307f34fdca81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  renderers:
+  - {fileID: 4718143795921564890}
+  - {fileID: 4718143794831727656}
 --- !u!1 &4718143794831727663
 GameObject:
   m_ObjectHideFlags: 0
@@ -714,6 +730,7 @@ MonoBehaviour:
   frontRightWeaponPlace: {fileID: 5854227232967712771}
   rightWeaponPlace: {fileID: 6463027957526974434}
   backRightWeaponPlace: {fileID: 5256690826097163735}
+  defaultWeaponPlace: {fileID: 7296485792338280597}
 --- !u!114 &4718143795982949147
 MonoBehaviour:
   m_ObjectHideFlags: 0

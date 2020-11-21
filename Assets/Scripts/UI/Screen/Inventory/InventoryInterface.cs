@@ -10,6 +10,8 @@ public class InventoryInterface : Singleton<InventoryInterface>, IWindow
     private GameObject visual;
     [SerializeField]
     private InventoryList inventoryList;
+    [SerializeField]
+    private EquipmentUI equipmentUI;
 
     [SerializeField]
     private ItemDescription description;
@@ -20,11 +22,7 @@ public class InventoryInterface : Singleton<InventoryInterface>, IWindow
     {
         base.Awake();
         visual.SetActive(false);
-    }
-
-    public ItemDescription GetDescriptionBox()
-    {
-        return description;
+        inventoryList.Initialize();
     }
 
     public bool IsShown()
@@ -54,5 +52,20 @@ public class InventoryInterface : Singleton<InventoryInterface>, IWindow
     public void Visualize()
     {
         inventoryList.Visualize();
+    }
+
+    public ItemDescription GetDescriptionBox()
+    {
+        return description;
+    }
+
+    public InventoryList GetInventoryList()
+    {
+        return inventoryList;
+    }
+
+    public EquipmentUI GetEquipmentUI()
+    {
+        return equipmentUI;
     }
 }
