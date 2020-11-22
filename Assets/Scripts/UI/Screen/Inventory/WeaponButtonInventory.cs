@@ -64,7 +64,7 @@ public class WeaponButtonInventory : MonoBehaviour, IPointerDownHandler, IBeginD
         this.originalPosition = rect.anchoredPosition;
         this.icon.gameObject.SetActive(true);
         this.transform.SetParent(UIManager.instance.transform);
-        rect.position = eventData.pressPosition;
+        rect.position = eventData.pressPosition - new Vector2(rect.sizeDelta.x / 2, 0);
         //SetImageStatus(true);
         SetTextStatus(false);
     }

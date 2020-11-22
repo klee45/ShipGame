@@ -12,11 +12,15 @@ public class InventoryShipSlot : MonoBehaviour, IDropHandler
     [SerializeField]
     private Image border;
     [SerializeField]
-    private Text text;
+    private Text weaponPositionText;
+    [SerializeField]
+    private Text weaponKeyText;
 
     private bool occupied = false;
     private WeaponDeed linkedDeed;
+    private int weaponPos;
     private Arsenal.WeaponPosition position;
+    private EquipmentSlotContainer container;
 
     private void Awake()
     {
@@ -24,11 +28,14 @@ public class InventoryShipSlot : MonoBehaviour, IDropHandler
         border.color = Color.clear;
     }
 
-    public void Setup(Arsenal.WeaponPosition position)
+    public void Setup(Arsenal.WeaponPosition position, int weaponPos, EquipmentSlotContainer container)
     {
+        this.weaponPos = weaponPos;
         this.position = position;
         string str = string.Concat(position.ToString().Where(c => c >= 'A' && c <= 'Z'));
-        text.text = str;
+        weaponPositionText.text = str;
+        weaponKeyText.text = weaponPos.ToString();
+        this.container = container;
     }
 
     public void OnDrop(PointerEventData eventData)
