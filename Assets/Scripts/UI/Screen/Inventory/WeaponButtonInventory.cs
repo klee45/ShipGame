@@ -53,7 +53,9 @@ public class WeaponButtonInventory : MonoBehaviour, IPointerDownHandler, IBeginD
         this.weaponText.text = linkedDeed.GetName();
         this.icon.sprite = this.linkedDeed.GetIcon();
         this.border.sprite = DropTable.instance.GetBorder(this.linkedDeed.GetSize());
-        SetImageStatus(false);
+        //SetImageStatus(false);
+        SetImageStatus(true);
+        SetTextStatus(true);
     }
 
     public void OnBeginDrag(PointerEventData eventData)
@@ -63,7 +65,7 @@ public class WeaponButtonInventory : MonoBehaviour, IPointerDownHandler, IBeginD
         this.icon.gameObject.SetActive(true);
         this.transform.SetParent(UIManager.instance.transform);
         rect.position = eventData.pressPosition;
-        SetImageStatus(true);
+        //SetImageStatus(true);
         SetTextStatus(false);
     }
     
@@ -81,13 +83,17 @@ public class WeaponButtonInventory : MonoBehaviour, IPointerDownHandler, IBeginD
 
     private void ReturnToPosition()
     {
-        this.transform.SetParent(InventoryInterface.instance.GetInventoryList().transform);
-        rect.anchoredPosition = this.originalPosition;
-        SetImageStatus(false);
+        InventoryList inventoryList = InventoryInterface.instance.GetInventoryList();
+        this.transform.SetParent(inventoryList.transform);
+        inventoryList.Visualize();
+        //rect.anchoredPosition = this.originalPosition;
+        //SetImageStatus(false);
         SetTextStatus(true);
+        /*
         Vector2 anchor = new Vector2(0.5f, 1f);
         rect.anchorMin = anchor;
         rect.anchorMax = anchor;
+        */
     }
 
     public void OnPointerDown(PointerEventData eventData)

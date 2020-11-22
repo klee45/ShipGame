@@ -13,12 +13,14 @@ public class InventoryList : MonoBehaviour
     private RectTransform itemArea;
 
     [SerializeField]
-    private int height = 45;
+    private int width = 90;
+
+    private float defaultXSize;
 
     public void Initialize()
     {
         inventoryItems = new List<WeaponButtonInventory>();
-        itemArea.sizeDelta = new Vector2(itemArea.sizeDelta.x, 0);
+        defaultXSize = itemArea.sizeDelta.x;
     }
 
     private void AddInventoryItem(int pos)
@@ -26,16 +28,16 @@ public class InventoryList : MonoBehaviour
         WeaponButtonInventory newItem = Instantiate(inventoryItemPrefab);
         newItem.transform.SetParent(transform);
         RectTransform rect = newItem.GetComponent<RectTransform>();
-        rect.sizeDelta = new Vector2(rect.sizeDelta.x, height);
+        rect.sizeDelta = new Vector2(width, rect.sizeDelta.y);
         SetButtonPosition(rect, pos);
         newItem.transform.localScale = Vector3.one;
         inventoryItems.Add(newItem);
-        IncreaseItemArea();
+        SetItemArea();
     }
 
     private void SetButtonPosition(RectTransform rect, int pos)
     {
-        rect.anchoredPosition = new Vector3(0, -height * pos, 0);
+        rect.anchoredPosition = new Vector3(width * pos, 0, 0);
     }
 
     private void RemoveInventoryItem(WeaponButtonInventory button)
@@ -46,18 +48,12 @@ public class InventoryList : MonoBehaviour
             Debug.LogError("Error removing button " + button.name + " doesn't exist in this inventory list");
         }
         inventoryItems.Remove(button);
-
-        DecreaseItemArea();
     }
 
-    private void IncreaseItemArea()
+    private void SetItemArea()
     {
-        itemArea.sizeDelta = new Vector2(itemArea.sizeDelta.x, itemArea.sizeDelta.y + height);
-    }
-
-    private void DecreaseItemArea()
-    {
-        itemArea.sizeDelta = new Vector2(itemArea.sizeDelta.x, itemArea.sizeDelta.y - height);
+        float xSize = Mathf.Max(inventoryItems.Count * width, defaultXSize);
+        itemArea.sizeDelta = new Vector2(xSize, itemArea.sizeDelta.y);
     }
 
     public void Visualize()
@@ -82,7 +78,6 @@ public class InventoryList : MonoBehaviour
                 WeaponButtonInventory obj = inventoryItems.First();
                 Destroy(obj.gameObject);
                 inventoryItems.RemoveAt(0);
-                DecreaseItemArea();
             }
         }
 
@@ -95,5 +90,7 @@ public class InventoryList : MonoBehaviour
             button.Setup(deedCount);
             pos++;
         }
+
+        SetItemArea();
     }
 }
