@@ -65,28 +65,42 @@ public class EquipmentSlot : MonoBehaviour, IDropHandler
         {
             ItemDraggable droppedItem = eventData.selectedObject.GetComponent<ItemDraggable>();
 
-            if (blocked)
+
+            Inventory inventory = PlayerInfo.instance.GetInventory();
+            WeaponDeed currentDeed = item.GetDeed();
+            WeaponDeed droppedDeed = droppedItem.GetDeed();
+
+            if (occupied)
             {
-                Debug.Log("Tried to add weapon to blocked slot!");
+                Debug.LogWarning("Occupied");
+                droppedItem.DropWasOccupiedBehavior(currentDeed);
+                droppedItem.CancelDragReset();
             }
             else
             {
-                Inventory inventory = PlayerInfo.instance.GetInventory();
-                WeaponDeed currentDeed = item.GetDeed();
-                WeaponDeed droppedDeed = droppedItem.GetDeed();
-
-                if (occupied)
+                if (blocked)
                 {
-                    droppedItem.DropWasOccupiedBehavior(currentDeed);
+                    Debug.LogWarning("Blocked");
+                    if (droppedItem.MoveToBlockedSpot(slotPos))
+                    {
+                        InventoryInterface.instance.GetEquipmentUI().GetEquipmentSlotUI().BlockSlot(slotPos, weaponPosition);
+                        Debug.Log("Moved weapon from one position to another!");
+                    }
+                    else
+                    {
+                        Debug.Log("Tried to add weapon to blocked slot!");
+                        return;
+                    }
                 }
                 else
                 {
+                    Debug.LogWarning("Not blocked");
                     InventoryInterface.instance.GetEquipmentUI().GetEquipmentSlotUI().BlockSlot(slotPos, weaponPosition);
-                    droppedItem.DropWasAvailableBehavior(currentDeed);
+                    droppedItem.DropWasAvailableBehavior();
                 }
-                InventoryInterface.instance.Visualize();
-                SetEquippedSlot(droppedDeed);
             }
+            InventoryInterface.instance.Visualize();
+            SetEquippedSlot(droppedDeed);
         }
     }
 

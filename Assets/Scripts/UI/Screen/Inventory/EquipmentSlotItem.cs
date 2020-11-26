@@ -15,6 +15,8 @@ public class EquipmentSlotItem : ItemDraggable
     private Vector2 originalPosition;
     private EquipmentSlot parent;
 
+    private bool needsDragReset = false;
+
     protected override void Awake()
     {
         base.Awake();
@@ -32,9 +34,15 @@ public class EquipmentSlotItem : ItemDraggable
         parent.TrySetFront();
         InventoryInterface.instance.GetDescriptionBox().ShowDescription(deed);
     }
+
+    public override void CancelDragReset()
+    {
+        needsDragReset = false;
+    }
     
     public override void OnBeginDrag(PointerEventData eventData)
     {
+        needsDragReset = true;
         //Debug.Log("Start drag equipment slot");
         base.OnBeginDrag(eventData);
     }
@@ -49,7 +57,10 @@ public class EquipmentSlotItem : ItemDraggable
     {
         Debug.Log("End drag equipment slot");
         base.OnEndDrag(eventData);
-        OnEndDragUnequip();
+        if (needsDragReset)
+        {
+            OnEndDragUnequip();
+        }
     }
 
     private void OnEndDragUnequip()
@@ -61,6 +72,36 @@ public class EquipmentSlotItem : ItemDraggable
         parent.UnequipSlot();
     }
 
+    public override bool MoveToBlockedSpot(int slotPos)
+    {
+        if (slotPos == this.parent.GetSlotPos())
+        {
+            //InventoryInterface.instance.GetEquipmentUI().GetEquipmentSlotUI().UnblockSlot(parent.GetSlotPos(), parent.GetWeaponPosition());
+            DropWasAvailableBehavior();
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public override void DropWasOccupiedBehavior(WeaponDeed otherDeed)
+    {
+        //Debug.Log("Drop was occupied");
+
+        parent.SetEquippedSlot(otherDeed);
+        ReturnToPosition();
+    }
+
+    public override void DropWasAvailableBehavior()
+    {
+        //Debug.Log("Drop was available");
+
+        parent.UnequipSlot();
+        ReturnToPosition();
+    }
+
     protected override void ReturnToPosition()
     {
         //Debug.Log("-------------------------------Return to position");
@@ -68,25 +109,6 @@ public class EquipmentSlotItem : ItemDraggable
         rect.anchoredPosition = this.originalPosition;
         transform.SetSiblingIndex(1);
         canvasGroup.blocksRaycasts = true;
-    }
-
-    public override void DropWasOccupiedBehavior(WeaponDeed otherDeed)
-    {
-        //Debug.Log("Drop was occupied");
-
-        SetEquippedSlot(otherDeed);
-
-        ReturnToPosition();
-    }
-
-    public override void DropWasAvailableBehavior(WeaponDeed otherDeed)
-    {
-        //Debug.Log("Drop was available");
-
-        parent.UnequipSlot();
-        UnequipSlot();
-
-        ReturnToPosition();
     }
 
     public void SetEquippedSlot(WeaponDeed deed)

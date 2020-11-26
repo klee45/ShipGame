@@ -52,6 +52,13 @@ public class WeaponButtonInventory : ItemDraggable
         SetTextStatus(true);
     }
 
+    public override void CancelDragReset() { }
+
+    public override bool MoveToBlockedSpot(int slotPos)
+    {
+        return false;
+    }
+
     public override void DropWasOccupiedBehavior(WeaponDeed otherDeed)
     {
         Inventory inventory = PlayerInfo.instance.GetInventory();
@@ -61,7 +68,7 @@ public class WeaponButtonInventory : ItemDraggable
         inventory.AddWeaponDeedToEquipped(GetDeed());
     }
 
-    public override void DropWasAvailableBehavior(WeaponDeed otherDeed)
+    public override void DropWasAvailableBehavior()
     {
         Inventory inventory = PlayerInfo.instance.GetInventory();
         inventory.RemoveWeaponDeedFromInventory(GetDeed());

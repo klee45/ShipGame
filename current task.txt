@@ -1,0 +1,3 @@
+Fixing up inventory equipping system so you can put things onto your ship
+	OnDragEnd is being called when trying to put an item from one slot to another occupied one
+	This causes it to return to inventory

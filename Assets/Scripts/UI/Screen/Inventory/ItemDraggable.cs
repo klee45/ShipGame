@@ -35,8 +35,10 @@ public abstract class ItemDraggable : MonoBehaviour, IPointerDownHandler, IBegin
         //Debug.Log("On end drag");
     }
 
+    public abstract void CancelDragReset();
+    public abstract bool MoveToBlockedSpot(int slotPos);
     public abstract void DropWasOccupiedBehavior(WeaponDeed otherDeed);
-    public abstract void DropWasAvailableBehavior(WeaponDeed otherDeed);
+    public abstract void DropWasAvailableBehavior();
     protected abstract void ReturnToPosition();
 
     public void OnPointerDown(PointerEventData eventData)
