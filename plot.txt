@@ -2,12 +2,16 @@ Cast -------------------------
 	Initial ------------------
 		Man (pilot - P1) and
 		Woman (gunner - G2) who run a small privateer ship
-		Revolutionary (engineer - E3) from Upper Empire
+		Revolutionary (engineer - E3) from Upper Empire - manages finances
 		Someone (shields - S4)
 
 Ideas ------------------------
 	Galaxy -------------------
 		Sectors are grouped as constellations - named by those from center that could see the whole constellation!
+	Team ---------------------
+		Starting characters are horrible with money - gambling addicts and always lose
+			"bet on both sides always win" - "that only works at home (house always wins)"
+			"roulette hasn't hit red recently. Time to make some spacebucks"
 
 
 Factions ---------------------

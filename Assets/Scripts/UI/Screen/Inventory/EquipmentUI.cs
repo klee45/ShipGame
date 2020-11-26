@@ -20,6 +20,11 @@ public class EquipmentUI : MonoBehaviour
         equipmentSlotUI.SetShip(ship);
     }
 
+    public EquipmentSlotUI GetEquipmentSlotUI()
+    {
+        return equipmentSlotUI;
+    }
+
     private void DestroyChildren()
     {
         foreach (Transform child in shipHolder.transform)

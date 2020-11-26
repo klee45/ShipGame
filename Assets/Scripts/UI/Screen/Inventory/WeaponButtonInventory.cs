@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class WeaponButtonInventory : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class WeaponButtonInventory : ItemDraggable
 {
     [SerializeField]
     private Text weaponText;
@@ -17,29 +17,55 @@ public class WeaponButtonInventory : MonoBehaviour, IPointerDownHandler, IBeginD
     [SerializeField]
     private Image textImage;
 
-    private WeaponDeed linkedDeed;
-    private RectTransform rect;
-    private CanvasGroup canvasGroup;
-
     private int count;
 
-    private Vector3 originalPosition;
-
-    private void Awake()
+    protected override void Awake()
     {
-        rect = GetComponent<RectTransform>();
-        canvasGroup = GetComponent<CanvasGroup>();
+        base.Awake();
     }
 
     public void Click()
     {
         //Debug.Log("Button clicked");
-        InventoryInterface.instance.GetDescriptionBox().ShowDescription(linkedDeed);
+        InventoryInterface.instance.GetDescriptionBox().ShowDescription(GetDeed());
     }
 
-    public WeaponDeed GetLinkedDeed()
+    public override void OnBeginDrag(PointerEventData eventData)
     {
-        return linkedDeed;
+        base.OnBeginDrag(eventData);
+        this.icon.gameObject.SetActive(true);
+        SetTextStatus(false);
+    }
+
+    protected override void ReturnToPosition()
+    {
+        InventoryList inventoryList = InventoryInterface.instance.GetInventoryList();
+        this.transform.SetParent(inventoryList.transform);
+        inventoryList.Visualize();
+        //rect.anchoredPosition = this.originalPosition;
+        //SetImageStatus(false);
+        /*
+        Vector2 anchor = new Vector2(0.5f, 1f);
+        rect.anchorMin = anchor;
+        rect.anchorMax = anchor;
+        */
+        SetTextStatus(true);
+    }
+
+    public override void DropWasOccupiedBehavior(WeaponDeed otherDeed)
+    {
+        Inventory inventory = PlayerInfo.instance.GetInventory();
+        inventory.RemoveWeaponDeedFromEquipped(otherDeed);
+        inventory.AddWeaponDeedToInventory(otherDeed);
+        inventory.RemoveWeaponDeedFromInventory(GetDeed());
+        inventory.AddWeaponDeedToEquipped(GetDeed());
+    }
+
+    public override void DropWasAvailableBehavior(WeaponDeed otherDeed)
+    {
+        Inventory inventory = PlayerInfo.instance.GetInventory();
+        inventory.RemoveWeaponDeedFromInventory(GetDeed());
+        inventory.AddWeaponDeedToEquipped(GetDeed());
     }
 
     public void Setup(Inventory.DeedCount pair)
@@ -48,57 +74,14 @@ public class WeaponButtonInventory : MonoBehaviour, IPointerDownHandler, IBeginD
         //Debug.Log(pair);
         //Debug.Log(pair.deed);
         //Debug.Log(pair.count);
-        this.linkedDeed = pair.PeekDeed();
+        this.SetDeed(pair.PeekDeed());
         this.countText.text = this.count.ToString();
-        this.weaponText.text = linkedDeed.GetName();
-        this.icon.sprite = this.linkedDeed.GetIcon();
-        this.border.sprite = DropTable.instance.GetBorder(this.linkedDeed.GetSize());
+        this.weaponText.text = this.GetDeed().GetName();
+        this.icon.sprite = this.GetDeed().GetIcon();
+        this.border.sprite = DropTable.instance.GetBorder(this.GetDeed().GetSize());
         //SetImageStatus(false);
         SetImageStatus(true);
         SetTextStatus(true);
-    }
-
-    public void OnBeginDrag(PointerEventData eventData)
-    {
-        this.canvasGroup.blocksRaycasts = false;
-        this.originalPosition = rect.anchoredPosition;
-        this.icon.gameObject.SetActive(true);
-        this.transform.SetParent(UIManager.instance.transform);
-        rect.position = eventData.pressPosition - new Vector2(rect.sizeDelta.x / 2, 0);
-        //SetImageStatus(true);
-        SetTextStatus(false);
-    }
-    
-    public void OnDrag(PointerEventData eventData)
-    {
-        rect.anchoredPosition += eventData.delta / UIManager.instance.GetUICanvas().scaleFactor;
-    }
-
-    public void OnEndDrag(PointerEventData eventData)
-    {
-        this.canvasGroup.blocksRaycasts = true;
-        ReturnToPosition();
-        //Debug.Log("On end drag");
-    }
-
-    private void ReturnToPosition()
-    {
-        InventoryList inventoryList = InventoryInterface.instance.GetInventoryList();
-        this.transform.SetParent(inventoryList.transform);
-        inventoryList.Visualize();
-        //rect.anchoredPosition = this.originalPosition;
-        //SetImageStatus(false);
-        SetTextStatus(true);
-        /*
-        Vector2 anchor = new Vector2(0.5f, 1f);
-        rect.anchorMin = anchor;
-        rect.anchorMax = anchor;
-        */
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        //Debug.Log("On pointer down");
     }
 
     private void SetImageStatus(bool status)

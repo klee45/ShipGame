@@ -414,6 +414,62 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &2990260056062480825
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1911575302926845596}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 1392445389, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 0}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 8087393144199082824}
+        m_MethodName: DeselectSlots
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &2322815293613364125
 GameObject:
   m_ObjectHideFlags: 0
@@ -2225,7 +2281,7 @@ PrefabInstance:
     - target: {fileID: 1483200533015480724, guid: c879ead7f87a6504195240c931b5e92b,
         type: 3}
       propertyPath: m_Name
-      value: Inventory 1
+      value: Inventory
       objectReference: {fileID: 0}
     - target: {fileID: 1483200533015480725, guid: c879ead7f87a6504195240c931b5e92b,
         type: 3}
@@ -2340,6 +2396,24 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 8087393143991900155}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1911575302926845596 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7690871265993445735, guid: c879ead7f87a6504195240c931b5e92b,
+    type: 3}
+  m_PrefabInstance: {fileID: 8087393143991900155}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8087393144199082824 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 209413299, guid: c879ead7f87a6504195240c931b5e92b,
+    type: 3}
+  m_PrefabInstance: {fileID: 8087393143991900155}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 39c3165f52a0b74419e3396dad4dab27, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &8660615261338791246
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2434,6 +2508,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a1b3ae7ac30a91041b54da485fc14570, type: 3}
+--- !u!4 &5408454870301101394 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3692422542064853020, guid: a1b3ae7ac30a91041b54da485fc14570,
+    type: 3}
+  m_PrefabInstance: {fileID: 8660615261338791246}
+  m_PrefabAsset: {fileID: 0}
 --- !u!114 &764421483900925729 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8262815570345040495, guid: a1b3ae7ac30a91041b54da485fc14570,
@@ -2449,12 +2529,6 @@ MonoBehaviour:
 --- !u!224 &764421484925384984 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 8262815571499521110, guid: a1b3ae7ac30a91041b54da485fc14570,
-    type: 3}
-  m_PrefabInstance: {fileID: 8660615261338791246}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &5408454870301101394 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 3692422542064853020, guid: a1b3ae7ac30a91041b54da485fc14570,
     type: 3}
   m_PrefabInstance: {fileID: 8660615261338791246}
   m_PrefabAsset: {fileID: 0}
