@@ -2003,22 +2003,22 @@ PrefabInstance:
     - target: {fileID: 3157410934601786266, guid: 3cfb2aa59b7b1804194bb040b554f6b6,
         type: 3}
       propertyPath: slots.Array.data[1]
-      value: 8
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3157410934601786266, guid: 3cfb2aa59b7b1804194bb040b554f6b6,
         type: 3}
       propertyPath: slots.Array.data[2]
-      value: 8
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3157410934601786266, guid: 3cfb2aa59b7b1804194bb040b554f6b6,
         type: 3}
       propertyPath: slots.Array.data[3]
-      value: 8
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3157410934601786266, guid: 3cfb2aa59b7b1804194bb040b554f6b6,
         type: 3}
       propertyPath: slots.Array.data[0]
-      value: 8
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5721217532401419804, guid: 3cfb2aa59b7b1804194bb040b554f6b6,
         type: 3}

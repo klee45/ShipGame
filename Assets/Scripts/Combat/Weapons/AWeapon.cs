@@ -48,7 +48,7 @@ public abstract class AWeapon : MonoBehaviour, IRequiresShipSize
     private DescriptionSwitch description;
 
     protected RangeEstimator rangeEstimator;
-    private bool ready;
+    private bool ready = true;
     private Timer cooldown;
 
     [SerializeField]

@@ -84,12 +84,15 @@ public class WeaponButtonInventory : ItemDraggable
 
     private void OccupiedHelper(EquipmentSlot slot)
     {
-        WeaponDeed deed = this.deed;
-        MoveItemFromInventoryToEquipped(deed);
-        MoveItemFromEquippedToInventory(slot.GetEquippedDeed());
-        slot.UnequipSlot();
-        slot.SetEquippedSlot(deed);
-        InventoryInterface.instance.Visualize();
+        if (IsCooledDown() && slot.GetEquippedDeed().GetWeapon().IsReady())
+        {
+            WeaponDeed deed = this.deed;
+            MoveItemFromInventoryToEquipped(deed);
+            MoveItemFromEquippedToInventory(slot.GetEquippedDeed());
+            slot.UnequipSlot();
+            slot.SetEquippedSlot(deed);
+            InventoryInterface.instance.Visualize();
+        }
     }
 
     public override void UnoccupiedBlocked(EquipmentSlot slot)
@@ -99,7 +102,7 @@ public class WeaponButtonInventory : ItemDraggable
 
     public override void UnoccupiedUnblocked(EquipmentSlot slot)
     {
-        if (HasSlotSpace())
+        if (HasSlotSpace() && IsCooledDown())
         {
             // Add item
             // Increase slot counter

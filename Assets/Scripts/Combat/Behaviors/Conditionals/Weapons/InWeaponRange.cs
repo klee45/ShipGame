@@ -23,7 +23,14 @@ public class InWeaponRange : BehaviorConditional
 
     protected override bool Conditional(BehaviorState state)
     {
-        float weaponRange = state.ship.GetWeapon(state.weaponInfo.weaponIndex).GetRange();
-        return state.targetInfo.sqrDistDiff * percent * percent < weaponRange * weaponRange;
+        if (state.ship.TryGetWeapon(state.weaponInfo.weaponIndex, out AWeapon weapon))
+        {
+            float weaponRange = weapon.GetRange();
+            return state.targetInfo.sqrDistDiff * percent * percent < weaponRange * weaponRange;
+        }
+        else
+        {
+            return false;
+        }
     }
 }

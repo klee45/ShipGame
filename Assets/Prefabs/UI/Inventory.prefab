@@ -2453,7 +2453,7 @@ PrefabInstance:
     - target: {fileID: 8679393276910021024, guid: eb01c392d4c059a4fa89f73ba9e18a0d,
         type: 3}
       propertyPath: m_Name
-      value: Slot Counter
+      value: Slot counter small
       objectReference: {fileID: 0}
     - target: {fileID: 6381331441996702433, guid: eb01c392d4c059a4fa89f73ba9e18a0d,
         type: 3}
@@ -2513,7 +2513,7 @@ PrefabInstance:
     - target: {fileID: 6381331441996702433, guid: eb01c392d4c059a4fa89f73ba9e18a0d,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -180
+      value: -150
       objectReference: {fileID: 0}
     - target: {fileID: 6381331441996702433, guid: eb01c392d4c059a4fa89f73ba9e18a0d,
         type: 3}
@@ -2834,7 +2834,7 @@ PrefabInstance:
     - target: {fileID: 8679393276910021024, guid: eb01c392d4c059a4fa89f73ba9e18a0d,
         type: 3}
       propertyPath: m_Name
-      value: Slot Counter (3)
+      value: Slot counter huge
       objectReference: {fileID: 0}
     - target: {fileID: 6381331441996702433, guid: eb01c392d4c059a4fa89f73ba9e18a0d,
         type: 3}
@@ -2894,7 +2894,7 @@ PrefabInstance:
     - target: {fileID: 6381331441996702433, guid: eb01c392d4c059a4fa89f73ba9e18a0d,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 180
+      value: 150
       objectReference: {fileID: 0}
     - target: {fileID: 6381331441996702433, guid: eb01c392d4c059a4fa89f73ba9e18a0d,
         type: 3}
@@ -3090,7 +3090,7 @@ PrefabInstance:
     - target: {fileID: 8679393276910021024, guid: eb01c392d4c059a4fa89f73ba9e18a0d,
         type: 3}
       propertyPath: m_Name
-      value: Slot Counter (1)
+      value: Slot counter medium
       objectReference: {fileID: 0}
     - target: {fileID: 6381331441996702433, guid: eb01c392d4c059a4fa89f73ba9e18a0d,
         type: 3}
@@ -3150,7 +3150,7 @@ PrefabInstance:
     - target: {fileID: 6381331441996702433, guid: eb01c392d4c059a4fa89f73ba9e18a0d,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -60
+      value: -50
       objectReference: {fileID: 0}
     - target: {fileID: 6381331441996702433, guid: eb01c392d4c059a4fa89f73ba9e18a0d,
         type: 3}
@@ -3471,7 +3471,7 @@ PrefabInstance:
     - target: {fileID: 8679393276910021024, guid: eb01c392d4c059a4fa89f73ba9e18a0d,
         type: 3}
       propertyPath: m_Name
-      value: Slot Counter (2)
+      value: Slot counter large
       objectReference: {fileID: 0}
     - target: {fileID: 6381331441996702433, guid: eb01c392d4c059a4fa89f73ba9e18a0d,
         type: 3}
@@ -3531,7 +3531,7 @@ PrefabInstance:
     - target: {fileID: 6381331441996702433, guid: eb01c392d4c059a4fa89f73ba9e18a0d,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 60
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6381331441996702433, guid: eb01c392d4c059a4fa89f73ba9e18a0d,
         type: 3}

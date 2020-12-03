@@ -202,9 +202,9 @@ public class Ship : Entity
     public Size GetSize() { return size; }
     public CombatStats GetCombatStats() { return combatStats; }
     public Arsenal GetArsenal() { return arsenal; }
-    public AWeapon GetWeapon(int weaponPos)
+    public bool TryGetWeapon(int weaponPos, out AWeapon weapon)
     {
-        return arsenal.GetWeapon(weaponPos);
+        return arsenal.TryGetWeaponAtSlot(weaponPos, out weapon);
     }
     public ShipGraphics GetShipGraphics()
     {
@@ -218,7 +218,13 @@ public class Ship : Entity
 
     public bool HasEnergyForWeapon(int weaponPos)
     {
-        AWeapon weapon = GetWeapon(weaponPos);
-        return weapon.GetEnergyCost() <= energySystem.GetEnergy();
+        if (arsenal.TryGetWeaponAtSlot(weaponPos, out AWeapon weapon))
+        {
+            return weapon.GetEnergyCost() <= energySystem.GetEnergy();
+        }
+        else
+        {
+            return false;
+        }
     }
 }

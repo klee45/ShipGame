@@ -26,9 +26,17 @@ public class TravelStayWeaponDist : Travel
         // Debug.Log(arsenal);
         // Debug.Log(arsenal.GetWeapon(state.weaponChoice));
         // Debug.Log(arsenal.GetWeapon(state.weaponChoice).GetRange());
-        float range = state.ship.GetArsenal().GetWeapon(state.weaponInfo.weaponIndex).GetRange();
-        float minRange = range * minPercent;
-        float maxRange = range * maxPercent;
-        return StayWithinHelper(state, minRange, maxRange);
+        if (state.ship.GetArsenal().TryGetWeaponAtSlot(state.weaponInfo.weaponIndex, out AWeapon weapon))
+        {
+            float range = weapon.GetRange();
+            float minRange = range * minPercent;
+            float maxRange = range * maxPercent;
+            return StayWithinHelper(state, minRange, maxRange);
+        }
+        else
+        {
+            // Default values for no movement
+            return StayWithinHelper(state, 0, 1000);
+        }
     }
 }

@@ -24,9 +24,11 @@ public class WaitForCooldownAndEnergy : BehaviorLeaf
         if (!waiting)
         {
             waiting = true;
-            AWeapon weapon = state.ship.GetWeapon(state.weaponInfo.weaponIndex);
-            float energyTime = state.ship.GetEnergySystem().GetTimeToRecharge(weapon.GetEnergyCost());
-            float cooldownTime = weapon.GetCooldownTimer().GetTime();
+            if (state.ship.TryGetWeapon(state.weaponInfo.weaponIndex, out AWeapon weapon))
+            {
+                float energyTime = state.ship.GetEnergySystem().GetTimeToRecharge(weapon.GetEnergyCost());
+                float cooldownTime = weapon.GetCooldownTimer().GetTime();
+            }
         }
         return WaitHelper(state);
     }

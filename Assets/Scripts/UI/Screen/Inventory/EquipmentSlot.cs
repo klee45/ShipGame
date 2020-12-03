@@ -154,23 +154,29 @@ public class EquipmentSlot : MonoBehaviour, IDropHandler
         UIManager.instance.GetWeaponsUI().SetIcon(slotPos, deed.GetWeapon());
     }
 
+    public void UnequipInitial()
+    {
+        EquipmentUI ui = InventoryInterface.instance.GetEquipmentUI();
+        ui.GetEquipmentSlotUI().UnblockSlot(GetSlotPos(), GetWeaponPosition());
+        item.gameObject.SetActive(false);
+        item.UnequipSlot();
+        occupied = false;
+        UIManager.instance.GetWeaponsUI().RemoveIcon(slotPos);
+    }
+
     public void SetEquippedSlot(WeaponDeed deed)
     {
         SetInitial(deed);
         EquipmentUI ui = InventoryInterface.instance.GetEquipmentUI();
         ui.GetShip().GetArsenal().TrySetWeapon(deed, weaponPosition, slotPos);
+        ui.SetSlotCounts();
     }
 
     public void UnequipSlot()
     {
+        UnequipInitial();
         EquipmentUI ui = InventoryInterface.instance.GetEquipmentUI();
-        ui.GetEquipmentSlotUI().UnblockSlot(GetSlotPos(), GetWeaponPosition());
-        PlayerInfo.instance.GetInventory().RemoveWeaponDeedFromEquipped(item.GetDeed());
-        item.gameObject.SetActive(false);
-        item.UnequipSlot();
-        occupied = false;
-
         ui.GetShip().GetArsenal().RemoveWeapon(slotPos);
-        UIManager.instance.GetWeaponsUI().RemoveIcon(slotPos);
+        ui.SetSlotCounts();
     }
 }

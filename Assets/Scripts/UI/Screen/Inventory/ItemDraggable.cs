@@ -40,7 +40,6 @@ public abstract class ItemDraggable : MonoBehaviour, IPointerDownHandler, IBegin
     protected void MoveItemFromInventoryToEquipped(WeaponDeed deed)
     {
         Inventory inventory = PlayerInfo.instance.GetInventory();
-        inventory.AddWeaponDeedToEquipped(deed);
         inventory.RemoveWeaponDeedFromInventory(deed);
     }
 
@@ -48,7 +47,6 @@ public abstract class ItemDraggable : MonoBehaviour, IPointerDownHandler, IBegin
     {
         Inventory inventory = PlayerInfo.instance.GetInventory();
         inventory.AddWeaponDeedToInventory(deed);
-        inventory.RemoveWeaponDeedFromEquipped(deed);
     }
 
     protected bool HasSlotSpace()
@@ -60,6 +58,11 @@ public abstract class ItemDraggable : MonoBehaviour, IPointerDownHandler, IBegin
     protected bool IsSameWeaponSize(WeaponDeed deed)
     {
         return deed.GetSize() == this.deed.GetSize();
+    }
+
+    protected bool IsCooledDown()
+    {
+        return deed.GetWeapon().IsReady();
     }
 
     public abstract void Occupied(EquipmentSlot slot);

@@ -33,11 +33,11 @@ public class UIManager : Singleton<UIManager>
         if (ActiveShip())
         {
             int pos = 0;
-            foreach (AWeapon weapon in ship.GetArsenal().GetWeaponsInSlots())
+            foreach (Arsenal.WeaponDeedInfo? deedInfo in ship.GetArsenal().GetDeedInfos())
             {
-                if (weapon != null)
+                if (deedInfo.HasValue)
                 {
-                    weaponsUI.SetPercent(pos, weapon);
+                    weaponsUI.SetPercent(pos, deedInfo.Value.deed.GetWeapon());
                 }
                 pos++;
             }
@@ -63,10 +63,11 @@ public class UIManager : Singleton<UIManager>
             SetupHealthEnergyBar();
             int pos = 0;
             //Debug.Log("Step 3");
-            foreach (AWeapon weapon in ship.GetArsenal().GetWeaponsInSlots())
+            foreach (Arsenal.WeaponDeedInfo? deedInfo in ship.GetArsenal().GetDeedInfos())
             {
-                if (weapon != null)
+                if (deedInfo.HasValue)
                 {
+                    AWeapon weapon = deedInfo.Value.deed.GetWeapon();
                     weaponsUI.SetIcon(pos, weapon);
                     weaponsUI.SetPercent(pos, weapon);
                 }

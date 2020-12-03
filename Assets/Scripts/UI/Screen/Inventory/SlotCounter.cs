@@ -6,10 +6,13 @@ using UnityEngine.UI;
 public class SlotCounter : MonoBehaviour
 {
     [SerializeField]
-    private Text text;
+    private Text textCount;
+    [SerializeField]
+    private Text textMax;
 
-    public void SetCount(int count)
+    public void SetCount(int count, int max)
     {
-        text.text = count.ToString();
+        textCount.text = count.ToString();
+        textMax.text = max.ToString();
     }
 }

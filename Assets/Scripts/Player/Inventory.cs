@@ -6,12 +6,10 @@ public class Inventory : MonoBehaviour
 {
     [SerializeField]
     private Dictionary<string, DeedCount> weaponDeeds;
-    private Dictionary<string, DeedCount> equippedDeeds;
 
     private void Awake()
     {
         weaponDeeds = new Dictionary<string, DeedCount>();
-        equippedDeeds = new Dictionary<string, DeedCount>();
     }
 
     public class DeedCount
@@ -50,11 +48,6 @@ public class Inventory : MonoBehaviour
         return weaponDeeds.Values;
     }
 
-    public Dictionary<string, DeedCount>.ValueCollection GetEquippedDeedCounts()
-    {
-        return equippedDeeds.Values;
-    }
-
     private void PrintDict()
     {
         string str = "";
@@ -73,16 +66,6 @@ public class Inventory : MonoBehaviour
     public bool RemoveWeaponDeedFromInventory(WeaponDeed deed)
     {
         return RemoveWeaponDeed(deed, weaponDeeds);
-    }
-
-    public void AddWeaponDeedToEquipped(WeaponDeed deed)
-    {
-        AddWeaponDeed(deed, equippedDeeds);
-    }
-
-    public bool RemoveWeaponDeedFromEquipped(WeaponDeed deed)
-    {
-        return RemoveWeaponDeed(deed, equippedDeeds);
     }
 
     private void AddWeaponDeed(WeaponDeed deed, Dictionary<string, DeedCount> dict)

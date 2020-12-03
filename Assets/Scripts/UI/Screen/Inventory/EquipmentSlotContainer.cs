@@ -40,6 +40,14 @@ public class EquipmentSlotContainer : MonoBehaviour
         this.position = position;
         text.text = position.ToString();
     }
+
+    public void ResetSlots()
+    {
+        foreach (EquipmentSlot slot in slots)
+        {
+            slot.UnequipInitial();
+        }
+    }
     
     public bool IsShowing()
     {
@@ -66,6 +74,11 @@ public class EquipmentSlotContainer : MonoBehaviour
         {
             slots[pos].Unblock();
         }
+    }
+
+    public EquipmentSlot GetSlot(int pos)
+    {
+        return slots[pos];
     }
 
     public void SetFront()

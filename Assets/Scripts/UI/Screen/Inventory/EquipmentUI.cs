@@ -10,7 +10,14 @@ public class EquipmentUI : MonoBehaviour
     [SerializeField]
     private EquipmentSlotUI equipmentSlotUI;
 
+    private SlotCounter[] slotCounters;
+
     private Ship ship;
+
+    private void Awake()
+    {
+        slotCounters = GetComponentsInChildren<SlotCounter>();
+    }
 
     public void SetShip(Ship ship)
     {
@@ -18,6 +25,18 @@ public class EquipmentUI : MonoBehaviour
         DestroyChildren();
         SetupSprites();
         equipmentSlotUI.SetShip(ship);
+        SetSlotCounts();
+    }
+
+    public void SetSlotCounts()
+    {
+        Arsenal arsenal = ship.GetArsenal();
+        int[] slots = arsenal.GetSlots();
+        int[] counts = arsenal.GetSlotCounts();
+        for(int i = 0; i < slots.Length; i++)
+        {
+            slotCounters[i].SetCount(slots[i] - counts[i], slots[i]);
+        }
     }
 
     public EquipmentSlotUI GetEquipmentSlotUI()

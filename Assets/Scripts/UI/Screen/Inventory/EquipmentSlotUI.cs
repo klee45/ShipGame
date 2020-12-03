@@ -98,14 +98,30 @@ public class EquipmentSlotUI : MonoBehaviour
         foreach (EquipmentSlotContainer container in positionDict.Values)
         {
             container.RemoveButtonGraphic();
+            container.ResetSlots();
         }
-        
-        IReadOnlyDictionary<WeaponPosition, GameObject> shipPositions = ship.GetArsenal().GetWeaponPositions();
+
+        Arsenal arsenal = ship.GetArsenal();
+        IReadOnlyDictionary<WeaponPosition, GameObject> shipPositions = arsenal.GetWeaponPositions();
         foreach (KeyValuePair<WeaponPosition, GameObject> pair in shipPositions)
         {
             positionDict[pair.Key].SetupSlotsAtPosition(slotPrefab, distance);
         }
 
+        foreach (WeaponDeedInfo? deedInfo in arsenal.GetDeedInfos())
+        {
+            if (deedInfo.HasValue)
+            {
+                WeaponDeed deed = deedInfo.Value.deed;
+                WeaponPosition pos = deedInfo.Value.weaponPos;
+                int slot = deedInfo.Value.slotPos;
+
+                if (positionDict.TryGetValue(pos, out EquipmentSlotContainer container))
+                {
+                    container.GetSlot(slot).SetInitial(deed);
+                }
+            }
+        }
     }
 
     private void SetupDict()

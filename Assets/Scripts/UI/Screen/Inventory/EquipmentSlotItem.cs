@@ -76,26 +76,28 @@ public class EquipmentSlotItem : ItemDraggable
 
     public override void Occupied(EquipmentSlot slot)
     {
-        WeaponDeed parentDeed = parent.GetEquippedDeed();
-        WeaponDeed otherDeed = slot.GetEquippedDeed();
+        if (IsCooledDown() && slot.GetEquippedDeed().GetWeapon().IsReady())
+        {
+            WeaponDeed parentDeed = parent.GetEquippedDeed();
+            WeaponDeed otherDeed = slot.GetEquippedDeed();
 
-        parent.UnequipSlot();
-        slot.UnequipSlot();
+            parent.UnequipSlot();
+            slot.UnequipSlot();
 
-        Debug.Log(parentDeed + "\n" + otherDeed);
+            Debug.Log(parentDeed + "\n" + otherDeed);
 
-        parent.SetEquippedSlot(otherDeed);
-        slot.SetEquippedSlot(parentDeed);
+            parent.SetEquippedSlot(otherDeed);
+            slot.SetEquippedSlot(parentDeed);
 
-        Debug.Log(parent.GetEquippedDeed());
-
+            Debug.Log(parent.GetEquippedDeed());
+        }
         ReturnToPosition();
         CancelDragReset();
     }
 
     public override void UnoccupiedBlocked(EquipmentSlot slot)
     {
-        if (IsSameSlotPos(slot))
+        if (IsSameSlotPos(slot) && IsCooledDown())
         {
             WeaponDeed deed = this.deed;
             parent.UnequipSlot();
@@ -108,9 +110,12 @@ public class EquipmentSlotItem : ItemDraggable
 
     public override void UnoccupiedUnblocked(EquipmentSlot slot)
     {
-        WeaponDeed deed = this.deed;
-        parent.UnequipSlot();
-        slot.SetEquippedSlot(deed);
+        if (IsCooledDown())
+        {
+            WeaponDeed deed = this.deed;
+            parent.UnequipSlot();
+            slot.SetEquippedSlot(deed);
+        }
 
         ReturnToPosition();
         CancelDragReset();
