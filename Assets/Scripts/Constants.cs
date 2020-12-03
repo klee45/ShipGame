@@ -4,6 +4,11 @@ using UnityEngine;
 
 public static class Constants
 {
+    public static class Weapons
+    {
+        public const int MAX_NUM_WEAPONS = 8;
+    }
+
     public static class Effects
     {
         public const int LATE_PRIORITY = 1000;

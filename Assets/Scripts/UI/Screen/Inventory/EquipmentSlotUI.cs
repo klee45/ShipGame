@@ -94,17 +94,18 @@ public class EquipmentSlotUI : MonoBehaviour
     }
 
     public void SetShip(Ship ship)
-    {
+    { 
         foreach (EquipmentSlotContainer container in positionDict.Values)
         {
             container.RemoveButtonGraphic();
         }
-
+        
         IReadOnlyDictionary<WeaponPosition, GameObject> shipPositions = ship.GetArsenal().GetWeaponPositions();
         foreach (KeyValuePair<WeaponPosition, GameObject> pair in shipPositions)
         {
             positionDict[pair.Key].SetupSlotsAtPosition(slotPrefab, distance);
         }
+
     }
 
     private void SetupDict()

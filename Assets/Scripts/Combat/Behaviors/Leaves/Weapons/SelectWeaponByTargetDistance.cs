@@ -16,8 +16,8 @@ public class SelectWeaponByTargetDistance : BehaviorLeaf
         Ship target = state.targetInfo.ship;
         TargetType targetType = state.targetInfo.targetType;
 
-        List<AWeapon> allWeapons = state.ship.GetArsenal().GetWeapons();
-
+        List<AWeapon> allWeapons = state.ship.GetArsenal().GetAllWeapons();
+        
         List<WeaponPair> preferredWeapons = new List<WeaponPair>();
         List<WeaponPair> secondaryWeapons = new List<WeaponPair>();
         for (int pos = 0; pos < allWeapons.Count; pos++)

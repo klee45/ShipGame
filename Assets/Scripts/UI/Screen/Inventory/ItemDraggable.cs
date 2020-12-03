@@ -35,10 +35,49 @@ public abstract class ItemDraggable : MonoBehaviour, IPointerDownHandler, IBegin
         //Debug.Log("On end drag");
     }
 
+
+
+    protected void MoveItemFromInventoryToEquipped(WeaponDeed deed)
+    {
+        Inventory inventory = PlayerInfo.instance.GetInventory();
+        inventory.AddWeaponDeedToEquipped(deed);
+        inventory.RemoveWeaponDeedFromInventory(deed);
+    }
+
+    protected void MoveItemFromEquippedToInventory(WeaponDeed deed)
+    {
+        Inventory inventory = PlayerInfo.instance.GetInventory();
+        inventory.AddWeaponDeedToInventory(deed);
+        inventory.RemoveWeaponDeedFromEquipped(deed);
+    }
+
+    protected bool HasSlotSpace()
+    {
+        Ship ship = InventoryInterface.instance.GetEquipmentUI().GetShip();
+        return ship.GetArsenal().CanSetDeed(deed);
+    }
+
+    protected bool IsSameWeaponSize(WeaponDeed deed)
+    {
+        return deed.GetSize() == this.deed.GetSize();
+    }
+
+    public abstract void Occupied(EquipmentSlot slot);
+
+    // No items changed!
+    public abstract void UnoccupiedBlocked(EquipmentSlot slot);
+
+    public abstract void UnoccupiedUnblocked(EquipmentSlot slot);
+
+
+
+
     public abstract void CancelDragReset();
+    /*
     public abstract bool MoveToBlockedSpot(int slotPos);
     public abstract void DropWasOccupiedBehavior(WeaponDeed otherDeed);
     public abstract void DropWasAvailableBehavior();
+    */
     protected abstract void ReturnToPosition();
 
     public void OnPointerDown(PointerEventData eventData)

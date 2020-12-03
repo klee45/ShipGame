@@ -54,6 +54,80 @@ public class WeaponButtonInventory : ItemDraggable
 
     public override void CancelDragReset() { }
 
+
+
+
+
+
+
+
+    public override void Occupied(EquipmentSlot slot)
+    {
+        if (HasSlotSpace())
+        {
+            // Add item (slot counter increases)
+            OccupiedHelper(slot);
+        }
+        else
+        {
+            if (IsSameWeaponSize(slot.GetEquippedDeed()))
+            {
+                // Add item (slot counter increases)
+                OccupiedHelper(slot);
+            }
+            else
+            {
+                // No change!
+            }
+        }
+    }
+
+    private void OccupiedHelper(EquipmentSlot slot)
+    {
+        WeaponDeed deed = this.deed;
+        MoveItemFromInventoryToEquipped(deed);
+        MoveItemFromEquippedToInventory(slot.GetEquippedDeed());
+        slot.UnequipSlot();
+        slot.SetEquippedSlot(deed);
+        InventoryInterface.instance.Visualize();
+    }
+
+    public override void UnoccupiedBlocked(EquipmentSlot slot)
+    {
+        // No change
+    }
+
+    public override void UnoccupiedUnblocked(EquipmentSlot slot)
+    {
+        if (HasSlotSpace())
+        {
+            // Add item
+            // Increase slot counter
+            MoveItemFromInventoryToEquipped(deed);
+            slot.SetEquippedSlot(deed);
+            InventoryInterface.instance.Visualize();
+        }
+        else
+        {
+            // No change!
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    /*
     public override bool MoveToBlockedSpot(int slotPos)
     {
         return false;
@@ -74,6 +148,7 @@ public class WeaponButtonInventory : ItemDraggable
         inventory.RemoveWeaponDeedFromInventory(GetDeed());
         inventory.AddWeaponDeedToEquipped(GetDeed());
     }
+    */
 
     public void Setup(Inventory.DeedCount pair)
     {

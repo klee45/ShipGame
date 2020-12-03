@@ -27,6 +27,16 @@ public class WeaponDeed : Deed<AWeapon, Ship>
 
     private static int[] rarityRanges = new int[] { 10, 25, 45, 70, 100 };
 
+    public void Setup()
+    {
+        if (weapon.gameObject.IsPrefab())
+        {
+            weapon = Instantiate(weapon);
+        }
+        weapon.transform.SetParent(transform);
+        weapon.SetupSlotSizeMods(this.weaponSize);
+    }
+
     public void Setup(WeaponDeedInfo info)
     {
         this.weaponSize = info.weaponSize;
@@ -44,11 +54,7 @@ public class WeaponDeed : Deed<AWeapon, Ship>
         }
 
         rarityType = (WeaponRarity)pos;
-
-        weapon = Instantiate(weapon);
-        weapon.transform.SetParent(transform);
-        weapon.SetupSlotSizeMods(this.weaponSize);
-
+        Setup();
         /*
         foreach (SizeMod sizeMod in GetComponentsInChildren<SizeMod>())
         {
@@ -66,9 +72,16 @@ public class WeaponDeed : Deed<AWeapon, Ship>
         return sizeRarityPairs;
     }
 
-    public bool TryLink(Ship ship)
+    /*
+    public bool TryLink(Ship ship, Arsenal.WeaponPosition position)
     {
-        return ship.GetArsenal().TrySetWeapon(weapon);
+        return ship.GetArsenal().TrySetWeapon(this, position);
+    }
+    */
+
+    public AWeapon GetWeapon()
+    {
+        return weapon;
     }
 
     public override AWeapon Create(Ship ship)

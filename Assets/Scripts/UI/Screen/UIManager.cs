@@ -26,18 +26,27 @@ public class UIManager : Singleton<UIManager>
     {
         RedrawShipUI();
     }
-    
+
     // Update is called once per frame
     void Update()
     {
         if (ActiveShip())
         {
-            int i = 0;
-            foreach (AWeapon weapon in ship.GetArsenal().GetWeapons())
+            int pos = 0;
+            foreach (AWeapon weapon in ship.GetArsenal().GetWeaponsInSlots())
             {
-                weaponsUI.SetPercent(i++, weapon);
+                if (weapon != null)
+                {
+                    weaponsUI.SetPercent(pos, weapon);
+                }
+                pos++;
             }
         }
+    }
+
+    public WeaponsUI GetWeaponsUI()
+    {
+        return weaponsUI;
     }
 
     public Canvas GetUICanvas()
@@ -52,12 +61,16 @@ public class UIManager : Singleton<UIManager>
         {
             //Debug.Log("Step 2");
             SetupHealthEnergyBar();
-            int i = 0;
+            int pos = 0;
             //Debug.Log("Step 3");
-            foreach (AWeapon weapon in ship.GetArsenal().GetWeapons())
+            foreach (AWeapon weapon in ship.GetArsenal().GetWeaponsInSlots())
             {
-                weaponsUI.SetIcon(i, weapon);
-                weaponsUI.SetPercent(i++, weapon);
+                if (weapon != null)
+                {
+                    weaponsUI.SetIcon(pos, weapon);
+                    weaponsUI.SetPercent(pos, weapon);
+                }
+                pos++;
             }
             //Debug.Log("Step 4");
             ship.GetEffectsDict().OnChange += UpdateEffects;

@@ -1,23 +1,39 @@
 Cast -------------------------
-	Initial ------------------
+	Crew ---------------------
 		Man (pilot - P1) and
 		Woman (gunner - G2) who run a small privateer ship
 		Revolutionary (engineer - E3) from Upper Empire - manages finances
 		Someone (shields - S4)
 
+	Enemies ------------------
+		Small scale enemy commander - in lower empire territory
+		
+		Gatekeeper - Defends the government warpgate to the upper empire
+		
+		Moros - last of the ancients (means impending doom : greek god)
+
 Ideas ------------------------
+	Origin -------------------
+		Ancients spread throughout the galaxy - the first civilization
+		They couldn't settle as many planets as people can - low habitability, also didn't really care
+		Created humans to 
 	Galaxy -------------------
 		Sectors are grouped as constellations - named by those from center that could see the whole constellation!
 	Team ---------------------
 		Starting characters are horrible with money - gambling addicts and always lose
 			"bet on both sides always win" - "that only works at home (house always wins)"
 			"roulette hasn't hit red recently. Time to make some spacebucks"
+	Famous pirates -----------
+		Powerful ships and pilots - high bounties and rare items for taking them down
+			These are the elite equivalents for my game
+			Some stay in a sector on their own but some roam the galaxy
+			Sector will be more empty
 
 
 Factions ---------------------
 	Federation
 	Empire (Lower Empire)
-	Upper Empire
+	Avalon Kingdom
 	Revolutionaries
 
 
@@ -25,6 +41,8 @@ Locations --------------------
 	Great Barrier
 	Core
 	Core power crystal
+
+	Irkalla system - step before core (underworld land of no return)
 
 
 Setting ----------------------
@@ -73,14 +91,32 @@ Setting ----------------------
 		Purpose:
 			Introduce the Upper Empire territory
 				Still has some areas of crime and rogue ships
+				Government is hoarding energy crystals, and recently the rates have gone up significantly
+					Revolution has been brewing and they plan to bring down the wall to foster attacks from the outside
+					Not enough troops within the area, needs people from the outside
+					Can't 
 			Overthrow the Upper Empire
 				Revolutionaries cook up a plan to hack into a core power crystal to overcharge the Great Barrier and cause it to fail
 				The power crystals are unreachable by anyone but a small handful of government sanctioned engineers
 					Without remote access, the revolutionaries need to be on site to deploy the virus
-			
+				Opening the wall will allow for a full scale revolution
+				... and will divide the upper empire army
 		End:
 			Climactic battle at one of the core power crystals where the government sends forces to try to stop the virus
 			The plan succeeds and the Great Barrier fails catastrophically, exploding into fragments next to the overcharged area
 
 
 	Fourth act ---------------
+		Purpose:
+			Discover reason for missing energy crystals 
+				A significant number of energy crystals in the rich areas of the upper empire are being sent
+				... to some location to be used
+			Locate pathway to the core
+		End:
+			Take down 
+
+	Fifth act ----------------
+		Purpose:
+			Close out the game
+				Final chapter
+			Defeat Moros

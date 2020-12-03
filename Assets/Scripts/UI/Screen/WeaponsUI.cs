@@ -35,16 +35,10 @@ public class WeaponsUI : MonoBehaviour
 
     private void Reset()
     {
-        foreach (WeaponIcon obj in GetComponentsInChildren<WeaponIcon>())
-        {
-            Destroy(obj);
-        }
     }
 
     public void Setup(int widthCount, int heightCount)
     {
-        Reset();
-
         icons = new WeaponIcon[widthCount * heightCount];
         int i = 0;
         for (int y = 0; y < heightCount; y++)
@@ -67,8 +61,13 @@ public class WeaponsUI : MonoBehaviour
 
     public void SetIcon(int num, AWeapon weapon)
     {
-        icons[num].SetIcon(weapon);
         icons[num].gameObject.SetActive(true);
+        icons[num].SetIcon(weapon);
+    }
+
+    public void RemoveIcon(int num)
+    {
+        icons[num].gameObject.SetActive(false);
     }
 
     public void SetPercent(int num, AWeapon weapon)

@@ -42,8 +42,8 @@ public class EquipmentSlotItem : ItemDraggable
     
     public override void OnBeginDrag(PointerEventData eventData)
     {
+        Debug.Log("Start drag equipment slot");
         needsDragReset = true;
-        //Debug.Log("Start drag equipment slot");
         base.OnBeginDrag(eventData);
     }
 
@@ -65,13 +65,69 @@ public class EquipmentSlotItem : ItemDraggable
 
     private void OnEndDragUnequip()
     {
-        Inventory inventory = PlayerInfo.instance.GetInventory();
-        inventory.RemoveWeaponDeedFromEquipped(deed);
-        inventory.AddWeaponDeedToInventory(deed);
+        Debug.Log("On drag unequip");
+        MoveItemFromEquippedToInventory(deed);
         InventoryInterface.instance.Visualize();
         parent.UnequipSlot();
     }
 
+
+
+
+    public override void Occupied(EquipmentSlot slot)
+    {
+        WeaponDeed parentDeed = parent.GetEquippedDeed();
+        WeaponDeed otherDeed = slot.GetEquippedDeed();
+
+        parent.UnequipSlot();
+        slot.UnequipSlot();
+
+        Debug.Log(parentDeed + "\n" + otherDeed);
+
+        parent.SetEquippedSlot(otherDeed);
+        slot.SetEquippedSlot(parentDeed);
+
+        Debug.Log(parent.GetEquippedDeed());
+
+        ReturnToPosition();
+        CancelDragReset();
+    }
+
+    public override void UnoccupiedBlocked(EquipmentSlot slot)
+    {
+        if (IsSameSlotPos(slot))
+        {
+            WeaponDeed deed = this.deed;
+            parent.UnequipSlot();
+            slot.SetEquippedSlot(deed);
+        }
+
+        ReturnToPosition();
+        CancelDragReset();
+    }
+
+    public override void UnoccupiedUnblocked(EquipmentSlot slot)
+    {
+        WeaponDeed deed = this.deed;
+        parent.UnequipSlot();
+        slot.SetEquippedSlot(deed);
+
+        ReturnToPosition();
+        CancelDragReset();
+    }
+
+    private bool IsSameSlotPos(EquipmentSlot slot)
+    {
+        return parent.GetSlotPos() == slot.GetSlotPos();
+    }
+
+
+
+
+
+
+
+    /*
     public override bool MoveToBlockedSpot(int slotPos)
     {
         if (slotPos == this.parent.GetSlotPos())
@@ -101,6 +157,7 @@ public class EquipmentSlotItem : ItemDraggable
         parent.UnequipSlot();
         ReturnToPosition();
     }
+    */
 
     protected override void ReturnToPosition()
     {

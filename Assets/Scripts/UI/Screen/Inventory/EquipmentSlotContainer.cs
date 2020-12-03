@@ -40,7 +40,7 @@ public class EquipmentSlotContainer : MonoBehaviour
         this.position = position;
         text.text = position.ToString();
     }
-
+    
     public bool IsShowing()
     {
         return isShowing;

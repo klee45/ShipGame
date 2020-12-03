@@ -112,7 +112,7 @@ public class Ship : Entity
 
     private void TickWeapons(float deltaTime)
     {
-        foreach(AWeapon weapon in arsenal.GetWeapons())
+        foreach(AWeapon weapon in arsenal.GetAllWeapons())
         {
             weapon.Tick(deltaTime);
         }

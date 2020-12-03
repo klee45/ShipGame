@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -33,6 +34,7 @@ public class EquipmentSlot : MonoBehaviour, IDropHandler
         transform.SetParent(container.transform);
         rect.anchoredPosition = location;
         transform.SetAsFirstSibling();
+        transform.localScale = new Vector3(0.7f, 0.7f, 1f);
 
         this.slotPos = slotPos;
         this.weaponPosition = weaponPosition;
@@ -65,6 +67,7 @@ public class EquipmentSlot : MonoBehaviour, IDropHandler
         {
             ItemDraggable droppedItem = eventData.selectedObject.GetComponent<ItemDraggable>();
 
+            int[] slots = InventoryInterface.instance.GetEquipmentUI().GetShip().GetArsenal().GetSlots();
 
             Inventory inventory = PlayerInfo.instance.GetInventory();
             WeaponDeed currentDeed = item.GetDeed();
@@ -73,14 +76,19 @@ public class EquipmentSlot : MonoBehaviour, IDropHandler
             if (occupied)
             {
                 Debug.LogWarning("Occupied");
-                droppedItem.DropWasOccupiedBehavior(currentDeed);
-                droppedItem.CancelDragReset();
+                droppedItem.Occupied(this);
+
+                //droppedItem.DropWasOccupiedBehavior(currentDeed);
+                //droppedItem.CancelDragReset();
             }
             else
             {
                 if (blocked)
                 {
                     Debug.LogWarning("Blocked");
+                    droppedItem.UnoccupiedBlocked(this);
+
+                    /*
                     if (droppedItem.MoveToBlockedSpot(slotPos))
                     {
                         InventoryInterface.instance.GetEquipmentUI().GetEquipmentSlotUI().BlockSlot(slotPos, weaponPosition);
@@ -91,16 +99,33 @@ public class EquipmentSlot : MonoBehaviour, IDropHandler
                         Debug.Log("Tried to add weapon to blocked slot!");
                         return;
                     }
+                    */
                 }
                 else
                 {
                     Debug.LogWarning("Not blocked");
+                    droppedItem.UnoccupiedUnblocked(this);
+
+                    /*
                     InventoryInterface.instance.GetEquipmentUI().GetEquipmentSlotUI().BlockSlot(slotPos, weaponPosition);
                     droppedItem.DropWasAvailableBehavior();
+                    */
                 }
             }
-            InventoryInterface.instance.Visualize();
-            SetEquippedSlot(droppedDeed);
+            //SetEquippedSlot(droppedDeed);
+        }
+    }
+
+    public WeaponDeed GetEquippedDeed()
+    {
+        try
+        {
+            return item.GetDeed();
+        }
+        catch (NullReferenceException e)
+        {
+            Debug.LogWarning("Tried to get an equipped deed for a slot without one\n" + e);
+            return null;
         }
     }
 
@@ -118,19 +143,34 @@ public class EquipmentSlot : MonoBehaviour, IDropHandler
         slotTakenText.color = Color.clear;
         cover.color = cover.color.SetAlpha(0);
     }
-
-    public void SetEquippedSlot(WeaponDeed deed)
+    
+    public void SetInitial(WeaponDeed deed)
     {
+        EquipmentUI ui = InventoryInterface.instance.GetEquipmentUI();
+        ui.GetEquipmentSlotUI().BlockSlot(GetSlotPos(), GetWeaponPosition());
         item.gameObject.SetActive(true);
         item.SetEquippedSlot(deed);
         occupied = true;
+        UIManager.instance.GetWeaponsUI().SetIcon(slotPos, deed.GetWeapon());
+    }
+
+    public void SetEquippedSlot(WeaponDeed deed)
+    {
+        SetInitial(deed);
+        EquipmentUI ui = InventoryInterface.instance.GetEquipmentUI();
+        ui.GetShip().GetArsenal().TrySetWeapon(deed, weaponPosition, slotPos);
     }
 
     public void UnequipSlot()
     {
-        InventoryInterface.instance.GetEquipmentUI().GetEquipmentSlotUI().UnblockSlot(GetSlotPos(), GetWeaponPosition());
+        EquipmentUI ui = InventoryInterface.instance.GetEquipmentUI();
+        ui.GetEquipmentSlotUI().UnblockSlot(GetSlotPos(), GetWeaponPosition());
+        PlayerInfo.instance.GetInventory().RemoveWeaponDeedFromEquipped(item.GetDeed());
         item.gameObject.SetActive(false);
         item.UnequipSlot();
         occupied = false;
+
+        ui.GetShip().GetArsenal().RemoveWeapon(slotPos);
+        UIManager.instance.GetWeaponsUI().RemoveIcon(slotPos);
     }
 }

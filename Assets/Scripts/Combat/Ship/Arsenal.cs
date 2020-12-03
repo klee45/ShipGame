@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class Arsenal : MonoBehaviour
 {
-    private List<AWeapon> weapons;
+    private List<AWeapon> allWeapons;
+    private AWeapon[] weaponsInSlots;
     private Ship ship;
 
     [SerializeField] private int[] slots;
@@ -35,11 +36,18 @@ public class Arsenal : MonoBehaviour
         int numSizes = System.Enum.GetValues(typeof(Size)).Length;
         counts = new int[numSizes];
         ship = GetComponentInParent<Ship>();
-        weapons = new List<AWeapon>();
-        foreach (AWeapon weapon in GetComponentsInChildren<AWeapon>())
+        weaponsInSlots = new AWeapon[Constants.Weapons.MAX_NUM_WEAPONS];
+        allWeapons = new List<AWeapon>();
+
+        int pos = 0;
+        foreach (KeyValuePair<WeaponPosition, GameObject> pair in positionDict)
         {
-            weapon.SetupSlotSizeMods(weapon.GetSize());
-            TrySetWeapon(weapon);
+            WeaponPosition position = pair.Key;
+            foreach (WeaponDeed deed in pair.Value.GetComponentsInChildren<WeaponDeed>())
+            {
+                Debug.Log("Found weapon deed " + deed.name + " at " + pair.Value.name);
+                TrySetWeapon(deed, position, pos++);
+            }
         }
     }
 
@@ -80,9 +88,43 @@ public class Arsenal : MonoBehaviour
         return counts[size] < slots[size];
     }
 
-    public bool TrySetWeapon(AWeapon weapon)
+    public bool RemoveWeapon(int slot)
     {
-        int size = (int)weapon.GetSize();
+        AWeapon weapon = weaponsInSlots[slot];
+        if (weapon == null)
+        {
+            return false;
+        }
+        else
+        {
+            weaponsInSlots[slot] = null;
+            if (!allWeapons.Remove(weapon))
+            {
+                Debug.LogWarning("Weapon removed is not in all weapons list");
+            }
+            return true;
+        }
+    }
+
+    private bool PutWeaponInSlot(AWeapon weapon, int slot)
+    {
+        if (weaponsInSlots[slot] == null)
+        {
+            weaponsInSlots[slot] = weapon;
+            allWeapons.Add(weapon);
+            return true;
+        }
+        else
+        {
+            Debug.LogWarning("Tried to add weapon to slot with one already");
+            return false;
+        }
+    }
+
+    public bool TrySetWeapon(WeaponDeed deed, WeaponPosition position, int slotPosition)
+    {
+        Debug.Log("Set weapon " + deed.name + " at " + position.ToString());
+        int size = (int)deed.GetSize();
         //Debug.Log("Size: " + (int)weapon.GetSize() + " - " + weapon.GetSize());
         //Debug.Log(counts.Length);
         //Debug.Log(slots.Length);
@@ -90,12 +132,20 @@ public class Arsenal : MonoBehaviour
         {
             if (counts[size] < slots[size])
             {
+                deed.Setup();
                 counts[size]++;
-                weapons.Add(weapon);
-                GameObject obj = GetWeaponPositionObj(weapon);
-                weapon.gameObject.transform.SetParent(obj.transform);
-                weapon.gameObject.transform.localPosition = Vector3.zero;
-                weapon.gameObject.transform.localEulerAngles = Vector3.zero;
+                AWeapon weapon = deed.GetWeapon();
+                PutWeaponInSlot(weapon, slotPosition);
+                if (!positionDict.TryGetValue(position, out GameObject positionObj))
+                {
+                    // Couldn't find position. Set to default
+                    positionObj = defaultWeaponPlace;
+                }
+                GameObject deedObj = deed.gameObject;
+                deedObj.transform.SetParent(positionObj.transform);
+                deedObj.transform.localPosition = Vector3.zero;
+                deed.GetWeapon().gameObject.transform.localPosition = Vector3.zero;
+                deedObj.transform.localEulerAngles = Vector3.zero;
                 weapon.SetupShipSizeMods(ship.GetSize());
                 return true;
             }
@@ -131,7 +181,7 @@ public class Arsenal : MonoBehaviour
 
     private void Start()
     {
-        foreach (AWeapon weapon in weapons)
+        foreach (AWeapon weapon in allWeapons)
         {
             weapon.gameObject.layer = GetComponentInParent<Ship>().gameObject.layer;
         }
@@ -139,16 +189,16 @@ public class Arsenal : MonoBehaviour
 
     public bool WeaponIsReady(int weapon)
     {
-        return weapons[weapon].IsReady();
+        return weaponsInSlots[weapon].IsReady();
     }
 
-    public void Fire(int weapon)
+    public void Fire(int slot)
     {
         //Debug.Log("Fire " + pos.ToString());
-        if (weapon >= 0 && weapon < weapons.Count)
+        if (slot >= 0 && slot < weaponsInSlots.Length && weaponsInSlots[slot] != null)
         {
             //Debug.Log("Actually firing");
-            AWeapon selectedWeapon = weapons[weapon];
+            AWeapon selectedWeapon = weaponsInSlots[slot];
             if (selectedWeapon.IsReady())
             {
                 int energyCost = selectedWeapon.GetEnergyCost();
@@ -160,15 +210,20 @@ public class Arsenal : MonoBehaviour
         }
     }
 
-    public List<AWeapon> GetWeapons()
+    public List<AWeapon> GetAllWeapons()
     {
-        return weapons;
+        return allWeapons;
+    }
+
+    public AWeapon[] GetWeaponsInSlots()
+    {
+        return weaponsInSlots;
     }
 
     public List<AWeapon> GetWeaponsInRange(float minRange, float maxRange)
     {
         List<AWeapon> validWeapons = new List<AWeapon>();
-        foreach (AWeapon weapon in weapons)
+        foreach (AWeapon weapon in weaponsInSlots)
         {
             float range = weapon.GetRange();
             if (range >= minRange && range <= maxRange)
@@ -181,7 +236,7 @@ public class Arsenal : MonoBehaviour
 
     public AWeapon GetWeapon(int weaponPos)
     {
-        return weapons[weaponPos];
+        return weaponsInSlots[weaponPos];
     }
 
     public class SlotInfo
@@ -210,7 +265,7 @@ public class Arsenal : MonoBehaviour
         }
         public void RemoveFromCount()
         {
-            count--;
+            count--; 
         }
     }
 

@@ -1,0 +1,39 @@
+occupied
+	slot to slot
+		No slot counter changes!
+		Swap items
+
+	inve to slot
+		Has slots for inventory item
+			Unequip old
+			Add item
+			Increase slot counter for slot
+
+		Doesn't have slots for inventory
+			Removing same type slot
+				Unequip old
+				Add item
+				No slot counter changes!
+			Else
+				Don't add
+
+unoccupied
+	blocked
+		slot to slot
+			same slot pos
+				replace
+			else
+				no change
+		inve to slot
+			no change
+
+	unblocked
+		slot to slot
+			Add item
+
+		inve to slot
+			has slots
+				Add item
+				Increase slot counter for slot
+			no slots
+				Don't add
