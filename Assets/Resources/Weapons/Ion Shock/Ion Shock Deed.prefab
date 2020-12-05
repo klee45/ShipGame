@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4470785435401410580}
   - component: {fileID: 4470785435401410581}
   m_Layer: 0
-  m_Name: Heavy Rocket Deed
+  m_Name: Ion Shock Deed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -56,4 +56,4 @@ MonoBehaviour:
   - weaponSize: 2
     rarity: 20
     price: 300
-  weapon: {fileID: 4620992934735025009, guid: 2575457abf78dd74ca0dad8fef40eb32, type: 3}
+  weapon: {fileID: 4620992934735025009, guid: 838d727e17792754daaa5602cf92f297, type: 3}

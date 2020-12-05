@@ -89,7 +89,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a806a9b14115ec49b63763d5a8fb6eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mod: 20
+  value: 20
 --- !u!1 &1445289268490583457
 GameObject:
   m_ObjectHideFlags: 0
@@ -133,7 +133,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a806a9b14115ec49b63763d5a8fb6eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mod: 60
+  value: 60
 --- !u!1 &2306913598044336843
 GameObject:
   m_ObjectHideFlags: 0
@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a806a9b14115ec49b63763d5a8fb6eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mod: 0
+  value: 0
 --- !u!1 &3088299005005744641
 GameObject:
   m_ObjectHideFlags: 0
@@ -343,7 +343,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a806a9b14115ec49b63763d5a8fb6eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mod: 0
+  value: 0
 --- !u!1 &6562083527875805299
 GameObject:
   m_ObjectHideFlags: 0
@@ -403,6 +403,7 @@ MonoBehaviour:
   - {fileID: 6468488337624608277}
   - {fileID: 6983607845123536117}
   generalEffects: []
+  addColliderToPosition: 0
   colliderLength: 2
   delay: {fileID: 4183339058948571725}
   range: {fileID: 4939689350889142684}
@@ -497,6 +498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ec313bcf74e42fb45bbef4afc4a5bbac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  value: 0
   smallMod: 1
   mediumMod: 2.8
   largeMod: 5.2

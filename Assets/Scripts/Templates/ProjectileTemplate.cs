@@ -10,6 +10,8 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
     [SerializeField]
     private EntityEffectTemplate[] generalEffects;
     [SerializeField]
+    private bool addColliderToPosition = false;
+    [SerializeField]
     private float colliderLength;
     [SerializeField]
     private SizeModNumber delay;
@@ -80,6 +82,11 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
         Projectile projectile = base.Create(obj);
         projectile.Setup(remainingRange, duration, immuneTags);
         projectile.SetParent(obj);
+        
+        if (addColliderToPosition)
+        {
+            projectile.transform.localPosition += scale.Scale(new Vector3(0, colliderLength / 2));
+        }
 
         return projectile;
     }
@@ -87,6 +94,7 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
     public Projectile CreateAndSetupProjectile(GameObject obj, Ship owner)
     {
         Projectile projectile = Create(obj);
+        Debug.Log(scale.Scale(Vector3.one).ToString());
         SetupColliders(projectile, owner);
         projectile.SetOwner(owner);
         foreach (ProjectileEffectTemplate effect in projectileEffects)

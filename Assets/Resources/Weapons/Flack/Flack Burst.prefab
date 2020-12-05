@@ -43,6 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dfe06fd4a34724ea40263ea526f474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  value: 0
   smallMod: 20
   mediumMod: 30
   largeMod: 40
@@ -90,7 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a806a9b14115ec49b63763d5a8fb6eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mod: 6
+  value: 5
 --- !u!1 &1445289268490583457
 GameObject:
   m_ObjectHideFlags: 0
@@ -134,7 +135,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a806a9b14115ec49b63763d5a8fb6eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mod: 0
+  value: 0
 --- !u!1 &1699203377593358590
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,7 +186,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   prefab: {fileID: 1148757961816497483, guid: 11fd9846f386fb640b109cf376ed0874, type: 3}
-  position: {x: 0, y: 1.5}
+  position: {x: 0, y: 0}
   rotation: 0
   scale: {fileID: 1158053563724804344}
   movementStats: {fileID: 261270815885021914}
@@ -195,7 +196,8 @@ MonoBehaviour:
   - {fileID: 2699144545832811321}
   - {fileID: 8527600385903401738}
   generalEffects: []
-  colliderLength: 6
+  addColliderToPosition: 1
+  colliderLength: 0.5
   delay: {fileID: 4183339058948571725}
   range: {fileID: 4939689350889142684}
   layerTypes: 00000000
@@ -311,6 +313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dfe06fd4a34724ea40263ea526f474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  value: 0
   smallMod: 5
   mediumMod: 10
   largeMod: 15
@@ -358,7 +361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a806a9b14115ec49b63763d5a8fb6eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mod: 0
+  value: 0
 --- !u!1 &3088299005005744641
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,6 +484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dfe06fd4a34724ea40263ea526f474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  value: 0
   smallMod: 2
   mediumMod: 3
   largeMod: 4
@@ -607,7 +611,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a806a9b14115ec49b63763d5a8fb6eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mod: 0
+  value: 0
 --- !u!1 &6733885522952513967
 GameObject:
   m_ObjectHideFlags: 0
@@ -715,7 +719,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3443380633746160683}
   - component: {fileID: 1158053563724804344}
-  - component: {fileID: 3406714550954662836}
+  - component: {fileID: 3079498571226475537}
   m_Layer: 0
   m_Name: Scale
   m_TagString: Untagged
@@ -749,8 +753,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e54766dbfec82aa478cbb348e26719bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scale: {fileID: 3406714550954662836}
---- !u!114 &3406714550954662836
+  scale: {fileID: 3079498571226475537}
+--- !u!114 &3079498571226475537
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -759,13 +763,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 7964004101440124087}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ec313bcf74e42fb45bbef4afc4a5bbac, type: 3}
+  m_Script: {fileID: 11500000, guid: e483f0e45eacaf74fb5376396f5bf1f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  smallMod: 1
-  mediumMod: 2.8
-  largeMod: 5.2
-  hugeMod: 8
+  value: 0
+  modType: 0
+  smallMod: {x: 1, y: 2}
+  mediumMod: {x: 2, y: 4}
+  largeMod: {x: 3, y: 6}
+  hugeMod: {x: 4, y: 8}
 --- !u!1 &8534834729280476568
 GameObject:
   m_ObjectHideFlags: 0

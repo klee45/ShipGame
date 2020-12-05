@@ -335,7 +335,8 @@ MonoBehaviour:
   projectileEffects:
   - {fileID: 6535628349441673480}
   generalEffects: []
-  colliderLength: 10
+  addColliderToPosition: 1
+  colliderLength: 1
   delay: {fileID: 6731760411249517272}
   range: {fileID: 973091820135678091}
   layerTypes: 00000000
@@ -490,10 +491,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   modType: 0
-  smallMod: {x: 4, y: 4}
-  mediumMod: {x: 8, y: 8}
-  largeMod: {x: 12, y: 12}
-  hugeMod: {x: 16, y: 16}
+  smallMod: {x: 1, y: 1}
+  mediumMod: {x: 2, y: 2}
+  largeMod: {x: 3, y: 3}
+  hugeMod: {x: 4, y: 4}
 --- !u!114 &4359013564425063381
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -507,7 +508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   modType: 0
-  smallMod: {x: 5, y: 5}
-  mediumMod: {x: 10, y: 10}
-  largeMod: {x: 15, y: 15}
-  hugeMod: {x: 20, y: 20}
+  smallMod: {x: 2, y: 2}
+  mediumMod: {x: 4, y: 4}
+  largeMod: {x: 6, y: 6}
+  hugeMod: {x: 8, y: 8}

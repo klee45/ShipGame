@@ -64,7 +64,7 @@ public abstract class AWeapon : MonoBehaviour, IRequiresShipSize
         foreach (SizeMod toSetup in GetComponentsInChildren<SizeMod>())
         {
             toSetup.SetupShip(this.shipSize);
-            //Debug.Log(toSetup.name);
+            //Debug.Log("Ship " + toSetup.name);
         }
         SetupTimer();
     }
@@ -76,7 +76,7 @@ public abstract class AWeapon : MonoBehaviour, IRequiresShipSize
         foreach (SizeMod toSetup in GetComponentsInChildren<SizeMod>())
         {
             toSetup.SetupSlot(slotSize);
-            //Debug.Log(toSetup.name);
+            //Debug.Log("Slot " + toSetup.name);
         }
     }
 
@@ -132,7 +132,7 @@ public abstract class AWeapon : MonoBehaviour, IRequiresShipSize
     }
 
     public string GetName() { return weaponName; }
-    public string GetDescription() { Debug.Log(name); return description.GetDescription(); }
+    public string GetDescription() { return description.GetDescription(); }
     public string GetDamageString() { return damageString.GetDescription(); }
 
     public float GetCooldown() { return cooldownTime.ToFloat(); }
@@ -186,7 +186,7 @@ public abstract class AWeapon : MonoBehaviour, IRequiresShipSize
 
     private void LinkProjectile(Projectile projectile)
     {
-        projectile.transform.parent = ProjectileManager.instance.gameObject.transform;
+        ProjectileManager.instance.AddTo(projectile);
     }
 
     private void AttachProjectile(Projectile projectile)

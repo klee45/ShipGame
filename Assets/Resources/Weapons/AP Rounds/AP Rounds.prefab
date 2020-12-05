@@ -83,7 +83,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a806a9b14115ec49b63763d5a8fb6eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mod: 0
+  value: 0
 --- !u!114 &9120950719407392836
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -96,7 +96,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a806a9b14115ec49b63763d5a8fb6eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mod: 2
+  value: 3
 --- !u!114 &6885288697126872392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -109,6 +109,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dfe06fd4a34724ea40263ea526f474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  value: 0
   smallMod: 32
   mediumMod: 24
   largeMod: 16
@@ -125,6 +126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dfe06fd4a34724ea40263ea526f474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  value: 0
   smallMod: 160
   mediumMod: 400
   largeMod: 800
@@ -216,6 +218,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dfe06fd4a34724ea40263ea526f474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  value: 0
   smallMod: 5
   mediumMod: 10
   largeMod: 15
@@ -309,6 +312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e483f0e45eacaf74fb5376396f5bf1f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  value: 0
   modType: 0
   smallMod: {x: 1, y: 1}
   mediumMod: {x: 1.5, y: 1.5}
@@ -357,7 +361,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a806a9b14115ec49b63763d5a8fb6eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mod: 0
+  value: 0
 --- !u!1 &1961078222008127500
 GameObject:
   m_ObjectHideFlags: 0
@@ -416,6 +420,7 @@ MonoBehaviour:
   - {fileID: 5130893901464640440}
   - {fileID: 6558489945337350656}
   generalEffects: []
+  addColliderToPosition: 0
   colliderLength: 0
   delay: {fileID: 2324947259217702314}
   range: {fileID: 5749320580236487756}
@@ -523,6 +528,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e483f0e45eacaf74fb5376396f5bf1f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  value: 0
   modType: 0
   smallMod: {x: 5.5, y: 5.5}
   mediumMod: {x: 6, y: 6}
@@ -587,6 +593,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dfe06fd4a34724ea40263ea526f474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  value: 0
   smallMod: 5
   mediumMod: 10
   largeMod: 15
@@ -724,6 +731,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e483f0e45eacaf74fb5376396f5bf1f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  value: 0
   modType: 0
   smallMod: {x: 4, y: 4}
   mediumMod: {x: 6, y: 6}
