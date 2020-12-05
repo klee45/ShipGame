@@ -20,6 +20,10 @@ public abstract class HitAddEffectHelper<T, U> :
         {
             this.tags = TagHelper.empty;
         }
+        else
+        {
+            this.tags = tags;
+        }
     }
 
     public override EffectTag[] GetTags()

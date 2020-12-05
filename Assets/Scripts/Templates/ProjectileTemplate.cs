@@ -29,6 +29,7 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
     public void Setup()
     {
         CalculateTotalRange();
+        InitializeEffects();
     }
 
     public float GetDelay()
@@ -56,6 +57,18 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
         }
     }
     */
+
+    private void InitializeEffects()
+    {
+        foreach (ProjectileEffectTemplate effect in projectileEffects)
+        {
+            effect.Initialize();
+        }
+        foreach (EntityEffectTemplate effect in generalEffects)
+        {
+            effect.Initialize();
+        }
+    }
 
     private void CalculateTotalRange()
     {

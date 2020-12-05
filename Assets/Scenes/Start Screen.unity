@@ -493,6 +493,149 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1001 &374956862
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2024363329}
+    m_Modifications:
+    - target: {fileID: 4470785435401410582, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_Name
+      value: Heat Blast Deed (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410581, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: weaponSize
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b222f9f35d6cffd49be7e8648644c4ad, type: 3}
+--- !u!1001 &403801027
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2024363329}
+    m_Modifications:
+    - target: {fileID: 4470785435401410582, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_Name
+      value: Heat Blast Deed
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b222f9f35d6cffd49be7e8648644c4ad, type: 3}
 --- !u!114 &427811097 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1544412025746172168, guid: fa3a9da9067e68d4180f3f451f9df325,
@@ -2135,6 +2278,80 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &1663846468
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2024363329}
+    m_Modifications:
+    - target: {fileID: 4470785435401410582, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_Name
+      value: Heat Blast Deed (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410581, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: weaponSize
+      value: 2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b222f9f35d6cffd49be7e8648644c4ad, type: 3}
 --- !u!1001 &1695502923
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2368,6 +2585,86 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27caf2e239a35564c9b5bfadc641a0aa, type: 3}
+--- !u!4 &2024363329 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 3545125587947299988, guid: 3cfb2aa59b7b1804194bb040b554f6b6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1345063546}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &2028140043
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2024363329}
+    m_Modifications:
+    - target: {fileID: 4470785435401410582, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_Name
+      value: Heat Blast Deed (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410580, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4470785435401410581, guid: b222f9f35d6cffd49be7e8648644c4ad,
+        type: 3}
+      propertyPath: weaponSize
+      value: 3
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: b222f9f35d6cffd49be7e8648644c4ad, type: 3}
 --- !u!1001 &2072718587
 PrefabInstance:
   m_ObjectHideFlags: 0

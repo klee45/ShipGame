@@ -9,6 +9,12 @@ public class HitAddShipEffectTemplate : ProjectileEffectTemplate
     [SerializeField]
     private EffectTag[] tags;
 
+    public override void Initialize()
+    {
+        base.Initialize();
+        template.Initialize();
+    }
+
     protected override ProjectileEffect CreateEffect(GameObject obj)
     {
         var s = obj.AddComponent<HitAddShipEffect>();

@@ -33,7 +33,7 @@ public class BothShipAndSizeMod : SizeModNumber
     public override void SetupSlot(Size slotSize)
     {
         value = GetFromSize(slotSize, 1);
-        Debug.Log("Set slot for " + name + " to " + value);
+        //Debug.Log("Set slot for " + name + " to " + value);
     }
 
     private float GetFromSize(Size size, int index)

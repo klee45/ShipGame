@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4470785435401410580}
   - component: {fileID: 4470785435401410581}
   m_Layer: 0
-  m_Name: Energy Beam Deed
+  m_Name: Heat Blast Deed
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -47,16 +47,10 @@ MonoBehaviour:
   rarity: 0
   weaponSize: 0
   sizeRarityPairs:
-  - weaponSize: 0
-    rarity: 20
-    price: 200
   - weaponSize: 1
-    rarity: 15
-    price: 500
+    rarity: 50
+    price: 150
   - weaponSize: 2
-    rarity: 10
-    price: 1000
-  - weaponSize: 3
-    rarity: 5
-    price: 4000
-  weapon: {fileID: 5576739822732441998, guid: 0f7f29b8681723a46a2157378f129870, type: 3}
+    rarity: 50
+    price: 300
+  weapon: {fileID: 5750398627305694505, guid: 06e00640082adb14a8037833da242797, type: 3}

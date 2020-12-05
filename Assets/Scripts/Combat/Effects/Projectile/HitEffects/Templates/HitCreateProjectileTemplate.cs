@@ -9,6 +9,12 @@ public class HitCreateProjectileTemplate : ProjectileEffectTemplate
     [SerializeField]
     private bool makeNeutral = false;
 
+    public override void Initialize()
+    {
+        base.Initialize();
+        template.Setup();
+    }
+
     protected override ProjectileEffect CreateEffect(GameObject obj)
     {
         var hcp = obj.AddComponent<HitCreateProjectile>();
