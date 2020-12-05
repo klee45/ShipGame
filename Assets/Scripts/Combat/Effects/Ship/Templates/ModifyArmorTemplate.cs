@@ -5,16 +5,16 @@ using UnityEngine;
 public class ModifyArmorTemplate : ShipEffectTemplate
 {
     [SerializeField]
-    private int bonus;
+    private SizeModNumber bonus;
     [SerializeField]
-    private int max;
+    private SizeModNumber max;
     [SerializeField]
     private float duration;
 
     protected override ShipEffect CreateEffect(GameObject obj)
     {
         ModifyArmor modify = obj.AddComponent<ModifyArmor>();
-        modify.Setup(bonus, max, duration);
+        modify.Setup(bonus.ToInt(), max.ToInt(), duration);
         return modify;
     }
 }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SlotSizeMod : SizeMod
+public class SlotSizeMod : SizeModNumber
 {
     [SerializeField] private float smallMod = Constants.SizeMod.SMALL;
     [SerializeField] private float mediumMod = Constants.SizeMod.MEDIUM;

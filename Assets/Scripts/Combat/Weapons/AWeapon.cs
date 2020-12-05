@@ -12,9 +12,9 @@ public abstract class AWeapon : MonoBehaviour, IRequiresShipSize
     // ----- Shared with deed -----
     [Header("Weapon stats")]
     [SerializeField]
-    private SizeMod energyCost;
+    private SizeModNumber energyCost;
     [SerializeField]
-    private SizeMod cooldownTime;
+    private SizeModNumber cooldownTime;
     [SerializeField]
     private CombatType combatType = CombatType.Offense;
 
@@ -40,12 +40,12 @@ public abstract class AWeapon : MonoBehaviour, IRequiresShipSize
     private int minSuggestedShots = 1;
 
     [Header("Shop information")]
+    //[SerializeField]
+    //private SizeMod cost;
     [SerializeField]
-    private SizeMod cost;
+    private SizeModDescription damageString;
     [SerializeField]
-    private DescriptionSwitch damageString;
-    [SerializeField]
-    private DescriptionSwitch description;
+    private SizeModDescription description;
 
     protected RangeEstimator rangeEstimator;
     private bool ready = true;
@@ -77,10 +77,6 @@ public abstract class AWeapon : MonoBehaviour, IRequiresShipSize
         {
             toSetup.SetupSlot(slotSize);
             //Debug.Log(toSetup.name);
-        }
-        foreach (DescriptionSwitch descriptionMod in GetComponentsInChildren<DescriptionSwitch>())
-        {
-            descriptionMod.Setup(slotSize);
         }
     }
 
@@ -136,7 +132,7 @@ public abstract class AWeapon : MonoBehaviour, IRequiresShipSize
     }
 
     public string GetName() { return weaponName; }
-    public string GetDescription() { return description.GetDescription(); }
+    public string GetDescription() { Debug.Log(name); return description.GetDescription(); }
     public string GetDamageString() { return damageString.GetDescription(); }
 
     public float GetCooldown() { return cooldownTime.ToFloat(); }

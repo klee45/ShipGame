@@ -5,7 +5,7 @@ using UnityEngine;
 public class HitOnceTemplate : ProjectileEffectTemplate
 {
     [SerializeField]
-    private SizeMod damage;
+    private SizeModNumber damage;
 
     protected override ProjectileEffect CreateEffect(GameObject obj)
     {

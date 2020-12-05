@@ -4,6 +4,7 @@ using UnityEngine;
 
 public abstract class Deed<T, U> : Template<T, U>
 {
+    [Header("Current values")]
     [SerializeField]
     protected int price;
 

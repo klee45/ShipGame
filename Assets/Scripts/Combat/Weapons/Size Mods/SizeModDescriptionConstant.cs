@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DescriptionSwitchConstant : DescriptionSwitch
+public class SizeModDescriptionConstant : SizeModDescription
 {
     [SerializeField]
     [TextArea(4, 6)]
@@ -13,7 +13,11 @@ public class DescriptionSwitchConstant : DescriptionSwitch
         return str;
     }
 
-    public override void Setup(Size slotSize)
+    public override void SetupShip(Size shipSize)
+    {
+    }
+
+    public override void SetupSlot(Size slotSize)
     {
     }
 }

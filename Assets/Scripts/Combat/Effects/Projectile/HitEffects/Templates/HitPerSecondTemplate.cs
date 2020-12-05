@@ -6,7 +6,7 @@ using UnityEngine;
 public class HitPerSecondTemplate : ProjectileEffectTemplate
 {
     [SerializeField]
-    private SizeMod damage;
+    private SizeModNumber damage;
     [SerializeField]
     private float duration;
     [SerializeField]

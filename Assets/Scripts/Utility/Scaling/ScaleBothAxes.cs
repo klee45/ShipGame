@@ -5,7 +5,7 @@ using UnityEngine;
 public class ScaleBothAxes : ScaleInfo
 {
     [SerializeField]
-    private SizeMod scale;
+    private SizeModNumber scale;
 
     public override Vector3 Scale(Vector3 v)
     {

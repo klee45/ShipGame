@@ -5,14 +5,14 @@ using UnityEngine;
 public class HitBonusHullDamageTemplate : ProjectileEffectTemplate
 {
     [SerializeField]
-    private int bonusDamage;
+    private SizeModNumber bonusDamage;
     [SerializeField]
     private bool isHit = false;
 
     protected override ProjectileEffect CreateEffect(GameObject obj)
     {
         var p = obj.AddComponent<HitBonusHullDamage>();
-        p.Setup(bonusDamage, isHit);
+        p.Setup(bonusDamage.ToInt(), isHit);
         return p;
     }
 }

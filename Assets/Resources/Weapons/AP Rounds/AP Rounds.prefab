@@ -62,7 +62,6 @@ MonoBehaviour:
   secondaryTarget: 2
   maxSuggestedShots: 2
   minSuggestedShots: 3
-  cost: {fileID: -8889469544302365717}
   damageString: {fileID: 7216952347627798479}
   description: {fileID: -6649028630010309713}
   slotSize: 1

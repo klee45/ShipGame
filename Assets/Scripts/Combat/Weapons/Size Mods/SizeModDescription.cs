@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class DescriptionSwitch : MonoBehaviour
+public abstract class SizeModDescription : SizeMod
 {
-    public abstract void Setup(Size slotSize);
     public abstract string GetDescription();
 }

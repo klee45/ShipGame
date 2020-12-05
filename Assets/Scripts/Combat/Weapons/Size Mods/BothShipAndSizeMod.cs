@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BothShipAndSizeMod : SizeMod
+public class BothShipAndSizeMod : SizeModNumber
 {
     [SerializeField] BothModType modType = BothModType.multiplication;
 

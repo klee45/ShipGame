@@ -5,7 +5,7 @@ using UnityEngine;
 public class StatGroupFirstOrderScaled : AStatGroupFirstOrder
 {
     [SerializeField]
-    private SizeMod multiplier;
+    private SizeModNumber multiplier;
 
     protected override float GetMultiplier()
     {

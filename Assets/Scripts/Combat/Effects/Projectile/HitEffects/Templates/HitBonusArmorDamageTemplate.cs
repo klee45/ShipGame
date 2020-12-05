@@ -5,7 +5,7 @@ using UnityEngine;
 public class HitBonusArmorDamageTemplate : ProjectileEffectTemplate
 {
     [SerializeField]
-    private SizeMod bonusDamage;
+    private SizeModNumber bonusDamage;
     [SerializeField]
     private bool isHit = false;
 

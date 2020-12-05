@@ -4,6 +4,12 @@ using UnityEngine;
 
 public class WeaponDeed : Deed<AWeapon, Ship>
 {
+    [SerializeField]
+    private int rarity;
+
+    [SerializeField]
+    private Size weaponSize;
+
     [System.Serializable]
     public struct WeaponDeedInfo
     {
@@ -12,16 +18,11 @@ public class WeaponDeed : Deed<AWeapon, Ship>
         public int price;
     }
 
+    [Header("Deed possibilities")]
     [SerializeField]
     private WeaponDeedInfo[] sizeRarityPairs;
     [SerializeField]
     private AWeapon weapon;
-
-    [SerializeField]
-    private Size weaponSize;
-
-    [SerializeField]
-    private int rarity;
 
     private WeaponRarity rarityType;
 

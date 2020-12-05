@@ -12,9 +12,9 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
     [SerializeField]
     private float colliderLength;
     [SerializeField]
-    private SizeMod delay;
+    private SizeModNumber delay;
     [SerializeField]
-    private SizeMod range;
+    private SizeModNumber range;
     // [SerializeField]
     // private ProjectileLayerType layerType = ProjectileLayerType.AffectsEnemyShips;
     [SerializeField]
@@ -58,7 +58,6 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
     private void CalculateTotalRange()
     {
         remainingRange = range.ToFloat();
-        Debug.Log(remainingRange);
         foreach (ProjectileEffectTemplate effect in projectileEffects)
         {
             remainingRange -= effect.GetRangeMod();
