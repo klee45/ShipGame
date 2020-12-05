@@ -44,19 +44,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   price: 800
+  rarity: 0
+  weaponSize: 0
   sizeRarityPairs:
   - weaponSize: 0
-    rarity: 20
+    rarity: 20000
     price: 200
   - weaponSize: 1
-    rarity: 15
+    rarity: 15000
     price: 500
   - weaponSize: 2
-    rarity: 10
+    rarity: 10000
     price: 1000
   - weaponSize: 3
-    rarity: 5
+    rarity: 5000
     price: 4000
   weapon: {fileID: 5576739822732441998, guid: 0f7f29b8681723a46a2157378f129870, type: 3}
-  weaponSize: 0
-  rarity: 0

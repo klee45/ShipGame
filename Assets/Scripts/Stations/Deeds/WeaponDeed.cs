@@ -53,8 +53,7 @@ public class WeaponDeed : Deed<AWeapon, Ship>
             }
             pos++;
         }
-
-        rarityType = (WeaponRarity)pos;
+        rarityType = (WeaponRarity)Mathf.Min(pos, rarityRanges.Length - 1);
         Setup();
         /*
         foreach (SizeMod sizeMod in GetComponentsInChildren<SizeMod>())

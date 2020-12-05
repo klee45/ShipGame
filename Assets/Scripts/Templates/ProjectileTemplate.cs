@@ -94,7 +94,7 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
     public Projectile CreateAndSetupProjectile(GameObject obj, Ship owner)
     {
         Projectile projectile = Create(obj);
-        Debug.Log(scale.Scale(Vector3.one).ToString());
+        //Debug.Log(scale.Scale(Vector3.one).ToString());
         SetupColliders(projectile, owner);
         projectile.SetOwner(owner);
         foreach (ProjectileEffectTemplate effect in projectileEffects)

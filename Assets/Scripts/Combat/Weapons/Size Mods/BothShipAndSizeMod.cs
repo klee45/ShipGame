@@ -27,7 +27,7 @@ public class BothShipAndSizeMod : SizeModNumber
                 Debug.LogError("Both size modifier had an invalid type");
                 break;
         }
-        Debug.Log("Set ship for " + name + " to " + value);
+        //Debug.Log("Set ship for " + name + " to " + value);
     }
 
     public override void SetupSlot(Size slotSize)

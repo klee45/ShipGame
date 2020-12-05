@@ -43,7 +43,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a806a9b14115ec49b63763d5a8fb6eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mod: 0
+  value: 0
 --- !u!1 &3367737842996593135
 GameObject:
   m_ObjectHideFlags: 0
@@ -87,7 +87,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6a806a9b14115ec49b63763d5a8fb6eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mod: 0
+  value: 0
 --- !u!1 &5148600555912020433
 GameObject:
   m_ObjectHideFlags: 0
@@ -166,6 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dfe06fd4a34724ea40263ea526f474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  value: 0
   smallMod: 75
   mediumMod: 100
   largeMod: 125
@@ -182,6 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dfe06fd4a34724ea40263ea526f474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  value: 0
   smallMod: 7
   mediumMod: 9
   largeMod: 12
@@ -198,6 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dfe06fd4a34724ea40263ea526f474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  value: 0
   smallMod: 200
   mediumMod: 500
   largeMod: 1000
@@ -336,7 +339,7 @@ MonoBehaviour:
   - {fileID: 6535628349441673480}
   generalEffects: []
   addColliderToPosition: 1
-  colliderLength: 1
+  colliderLength: 1.2
   delay: {fileID: 6731760411249517272}
   range: {fileID: 973091820135678091}
   layerTypes: 00000000
@@ -369,6 +372,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e3dfe06fd4a34724ea40263ea526f474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  value: 0
   smallMod: 80
   mediumMod: 160
   largeMod: 300
@@ -442,7 +446,6 @@ GameObject:
   - component: {fileID: 5028997023183308405}
   - component: {fileID: 453721332632983813}
   - component: {fileID: 2701143957285557299}
-  - component: {fileID: 4359013564425063381}
   m_Layer: 11
   m_Name: Scale
   m_TagString: Untagged
@@ -477,7 +480,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   xScale: {fileID: 2701143957285557299}
-  yScale: {fileID: 4359013564425063381}
+  yScale: {fileID: 2701143957285557299}
 --- !u!114 &2701143957285557299
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -490,25 +493,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e483f0e45eacaf74fb5376396f5bf1f6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  value: 0
   modType: 0
-  smallMod: {x: 1, y: 1}
-  mediumMod: {x: 2, y: 2}
-  largeMod: {x: 3, y: 3}
-  hugeMod: {x: 4, y: 4}
---- !u!114 &4359013564425063381
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8820408862229867978}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e483f0e45eacaf74fb5376396f5bf1f6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  modType: 0
-  smallMod: {x: 2, y: 2}
-  mediumMod: {x: 4, y: 4}
-  largeMod: {x: 6, y: 6}
-  hugeMod: {x: 8, y: 8}
+  smallMod: {x: 2, y: 4}
+  mediumMod: {x: 5, y: 10}
+  largeMod: {x: 8, y: 16}
+  hugeMod: {x: 11, y: 22}
