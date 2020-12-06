@@ -672,6 +672,7 @@ public abstract class EffectDict : MonoBehaviour
                 {
                     if (tag == immune)
                     {
+                        Debug.Log(parent.name + " is immune to " + tag.ToString());
                         Destroy(effect);
                         return false;
                     }
