@@ -10,12 +10,13 @@ public abstract class HitAddEffectHelper<T, U> :
 {
     [SerializeField]
     protected T template;
-    [SerializeField]
-    private EffectTag[] tags;
+    //[SerializeField]
+    //private EffectTag[] tags;
 
-    public void Setup(T template, EffectTag[] tags)
+    public void Setup(T template)//, EffectTag[] tags)
     {
         this.template = template;
+        /*
         if (tags.Length == 0)
         {
             this.tags = TagHelper.empty;
@@ -24,11 +25,12 @@ public abstract class HitAddEffectHelper<T, U> :
         {
             this.tags = tags;
         }
+        */
     }
 
     public override EffectTag[] GetTags()
     {
-        return tags;
+        return TagHelper.empty;//tags;
     }
 
     public abstract void OnHit(Collider2D collision, Collider2D collidee);

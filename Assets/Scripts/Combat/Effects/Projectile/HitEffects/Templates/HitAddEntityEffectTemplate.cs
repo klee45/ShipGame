@@ -21,7 +21,7 @@ public class HitAddEntityEffectTemplate : ProjectileEffectTemplate
 
         EntityEffectTemplate templateClone = Instantiate(template);
         templateClone.transform.SetParent(obj.transform);
-        s.Setup(templateClone, tags);
+        s.Setup(templateClone);//, tags);
         return s;
     }
 }

@@ -20,7 +20,7 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
     // [SerializeField]
     // private ProjectileLayerType layerType = ProjectileLayerType.AffectsEnemyShips;
     [SerializeField]
-    private ProjectileLayerType2[] layerTypes;
+    private ProjectileLayerType[] layerTypes;
     [SerializeField]
     private EffectTag[] immuneTags;
 
@@ -126,62 +126,79 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
     private void SetupColliders(Projectile projectile, Ship ship)
     {
         //Debug.Log(team);
-        Collider2D collider = projectile.GetComponentInChildren<Collider2D>();
-        collider.isTrigger = true;
-        collider.gameObject.name = "Base collider";
-        collider.gameObject.layer = Layers.GetProjectileLayerFromTeam(ship.GetTeam());
-        HashSet<int> layers = GetLayers(ship.GetTeam(), out bool needsRigidbody);
+        Team team = ship.GetTeam();
+        Collider2D projectileBaseCollider = projectile.GetComponentInChildren<Collider2D>();
+        projectileBaseCollider.isTrigger = true;
+        projectileBaseCollider.gameObject.name = "Base collider";
+        projectileBaseCollider.gameObject.layer = Layers.GetProjectileLayerFromTeam(ship.GetTeam());
+
+        List<Collider2D> colliders = new List<Collider2D>();
+
+        bool needsRigidbody = false;
+        foreach (ProjectileLayerType layer in layerTypes)
+        {
+            switch (layer)
+            {
+                case ProjectileLayerType.AlliedProjectiles:
+                    needsRigidbody = true;
+                    int allyProjectileLayer = Layers.ShipToProjectileHitProjectile(Layers.GetShipLayerFromTeam(team));
+                    Collider2D projectileCollider = CreateColliderObject(allyProjectileLayer, projectileBaseCollider, projectile);
+                    colliders.Add(projectileCollider);
+                    Physics2D.IgnoreCollision(projectileBaseCollider, projectileCollider);
+                    break;
+                case ProjectileLayerType.AlliedShips:
+                    int allyShipLayer = Layers.ShipToProjectileHitShip(Layers.GetShipLayerFromTeam(team));
+                    colliders.Add(CreateColliderObject(allyShipLayer, projectileBaseCollider, projectile));
+                    break;
+                case ProjectileLayerType.EnemyProjectiles:
+                    needsRigidbody = true;
+                    foreach (int enemyProjectileLayer in Layers.GetProjectileHitProjectileLayerFromTeam(team))
+                    {
+                        colliders.Add(CreateColliderObject(enemyProjectileLayer, projectileBaseCollider, projectile));
+                    }
+                    break;
+                case ProjectileLayerType.EnemyShips:
+                    foreach (int enemyShipLayer in Layers.GetProjectileHitShipLayerFromTeam(team))
+                    {
+                        colliders.Add(CreateColliderObject(enemyShipLayer, projectileBaseCollider, projectile));
+                    }
+                    break;
+            }
+        }
+
+        // Attach colliders after to avoid cloing them!
+        foreach (Collider2D collider in colliders)
+        {
+            AttachColliderObject(collider, projectileBaseCollider);
+        }
+
         if (needsRigidbody)
         {
             Rigidbody2D body = projectile.gameObject.AddComponent<Rigidbody2D>();
             body.bodyType = RigidbodyType2D.Kinematic;
         }
-        List<GameObject> colliders = new List<GameObject>();
-        foreach (int layer in layers)
-        {
-            GameObject colliderObj = Instantiate(collider.gameObject);
-            colliderObj.name = LayerMask.LayerToName(layer);
-            colliderObj.layer = layer;
-            colliders.Add(colliderObj);
-        }
-        foreach (GameObject colliderObj in colliders)
-        {
-            colliderObj.transform.SetParent(collider.transform);
-            colliderObj.transform.localPosition = Vector3.zero;
-            colliderObj.transform.localScale = Vector3.one;
-            colliderObj.transform.localRotation = Quaternion.identity;
-            colliderObj.GetComponent<Collider2D>().isTrigger = true;
-            colliderObj.AddComponent<ProjectileCollider>();
-        }
-        //collider.gameObject.AddComponent<ProjectileCollider>();
     }
 
-    private HashSet<int> GetLayers(Team team, out bool needsRigidbody)
+    private Collider2D CreateColliderObject(int layer, Collider2D projectileBaseCollider, Projectile projectile)
     {
-        HashSet<int> set = new HashSet<int>();
-        needsRigidbody = false;
-        foreach (ProjectileLayerType2 layer in layerTypes)
-        {
-            switch(layer)
-            {
-                case ProjectileLayerType2.AlliedProjectiles:
-                    needsRigidbody = true;
-                    set.Add(Layers.ShipToProjectileHitProjectile(Layers.GetShipLayerFromTeam(team)));
-                    break;
-                case ProjectileLayerType2.AlliedShips:
-                    set.Add(Layers.ShipToProjectileHitShip(Layers.GetShipLayerFromTeam(team)));
-                    break;
-                case ProjectileLayerType2.EnemyProjectiles:
-                    needsRigidbody = true;
-                    set.UnionWith(Layers.GetProjectileHitProjectileLayerFromTeam(team));
-                    break;
-                case ProjectileLayerType2.EnemyShips:
-                    set.UnionWith(Layers.GetProjectileHitShipLayerFromTeam(team));
-                    break;
-            }
-        }
-        return set;
+        GameObject colliderObj = Instantiate(projectileBaseCollider.gameObject);
+        colliderObj.name = LayerMask.LayerToName(layer);
+        colliderObj.layer = layer;
+        Collider2D projectileCollider2D = colliderObj.GetComponent<Collider2D>();
+        projectileCollider2D.isTrigger = true;
+        ProjectileCollider projectileCollider = colliderObj.AddComponent<ProjectileCollider>();
+        projectileCollider.Setup(projectile);
+        return projectileCollider2D;
     }
+
+    private void AttachColliderObject(Collider2D collider, Collider2D projectileBaseCollider)
+    {
+        collider.transform.SetParent(projectileBaseCollider.transform);
+        collider.transform.localPosition = Vector3.zero;
+        collider.transform.localScale = Vector3.one;
+        collider.transform.localRotation = Quaternion.identity;
+    }
+
     /**
     private HashSet<int> GetLayers(Team team, out bool needsRigidbody)
     {
@@ -226,7 +243,7 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
     }
     **/
 
-    public enum ProjectileLayerType2
+    public enum ProjectileLayerType
     {
         EnemyShips,
         EnemyProjectiles,
@@ -234,6 +251,7 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
         AlliedProjectiles
     }
 
+    /*
     public enum ProjectileLayerType
     {
         Neutral,
@@ -244,5 +262,6 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
         AffectsAlliedProjectiles,
         AffectsAlliedAll
     }
+    */
 }
 

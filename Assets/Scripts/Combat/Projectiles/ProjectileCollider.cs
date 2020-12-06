@@ -6,9 +6,9 @@ public class ProjectileCollider : MonoBehaviour
 {
     private Projectile parent;
 
-    private void Awake()
+    public void Setup(Projectile parent)
     {
-        parent = GetComponentInParent<Projectile>();
+        this.parent = parent;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
