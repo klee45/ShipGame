@@ -104,7 +104,7 @@ GameObject:
   - component: {fileID: 3311357516033341994}
   - component: {fileID: 5186994164845783064}
   m_Layer: 11
-  m_Name: 'Pull in '
+  m_Name: Repel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -182,10 +182,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value: 0
   modType: 0
-  smallMod: {x: -3, y: -3}
-  mediumMod: {x: -6, y: -6}
-  largeMod: {x: -9, y: -9}
-  hugeMod: {x: -12, y: -12}
+  smallMod: {x: 3, y: 3}
+  mediumMod: {x: 6, y: 6}
+  largeMod: {x: 9, y: 9}
+  hugeMod: {x: 12, y: 12}
 --- !u!1 &1445289268490583457
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,7 +195,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3145856935792676902}
-  - component: {fileID: 5610300191003411382}
+  - component: {fileID: 5088490240058441311}
   m_Layer: 11
   m_Name: Energy
   m_TagString: Untagged
@@ -217,7 +217,7 @@ Transform:
   m_Father: {fileID: 8198191062916021483}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5610300191003411382
+--- !u!114 &5088490240058441311
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -226,10 +226,14 @@ MonoBehaviour:
   m_GameObject: {fileID: 1445289268490583457}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a806a9b14115ec49b63763d5a8fb6eb, type: 3}
+  m_Script: {fileID: 11500000, guid: e3dfe06fd4a34724ea40263ea526f474, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   value: 0
+  smallMod: 15
+  mediumMod: 20
+  largeMod: 25
+  hugeMod: 30
 --- !u!1 &1754844701906083116
 GameObject:
   m_ObjectHideFlags: 0
@@ -336,7 +340,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffe6aaf4156a95048aa80e7671dab6b9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  str: Pulls in enemy ships and ally projectiles
+  str: Repels enemy ships and projectiles
 --- !u!1 &2848823834449351977
 GameObject:
   m_ObjectHideFlags: 0
@@ -424,10 +428,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b58f96f5a8d72841b0f56476b2aaf71, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  small: 10
-  medium: 20
-  large: 50
-  huge: 100
+  small: 5
+  medium: 10
+  large: 25
+  huge: 50
 --- !u!1 &3337855053585836365
 GameObject:
   m_ObjectHideFlags: 0
@@ -553,7 +557,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: beb573b85636410448fa8c3b6bde2142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3189834120618545894, guid: 3b49d1ea4fad13b40ba610c479e82974, type: 3}
+  prefab: {fileID: 3189834120618545894, guid: 86f93eda47603e943a89028b2cc6f5db, type: 3}
   position: {x: 0, y: 0}
   rotation: 0
   scale: {fileID: 1158053563724804344}
@@ -568,7 +572,7 @@ MonoBehaviour:
   colliderLength: 1
   delay: {fileID: 4183339058948571725}
   range: {fileID: 4939689350889142684}
-  layerTypes: 0000000003000000
+  layerTypes: 0000000001000000
   immuneTags: 0b00000001000000
 --- !u!1 &7861705038509106188
 GameObject:
@@ -709,7 +713,7 @@ GameObject:
   - component: {fileID: 8534834729280476571}
   - component: {fileID: 5750398627305694505}
   m_Layer: 11
-  m_Name: Implosion
+  m_Name: Repulsor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -744,11 +748,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 47da4681b059b574e8cc77237916b35b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponName: Implosion
-  energyCost: {fileID: 5610300191003411382}
+  weaponName: Repulsor
+  energyCost: {fileID: 5088490240058441311}
   cooldownTime: {fileID: 394042770622194378}
   combatType: 0
-  icon: {fileID: -1397652024718141224, guid: 21f74367950545f45adbf9a552cee680, type: 3}
+  icon: {fileID: -7195366001301959386, guid: b0e3dba3873231b4b8789c353b2c61ac, type: 3}
   attachProjectile: 1
   preferedPosition: 2
   preferredTarget: 0
