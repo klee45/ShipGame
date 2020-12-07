@@ -546,8 +546,8 @@ MonoBehaviour:
   icon: {fileID: 21300000, guid: cf4d98f3553140742aa3d5169378d24b, type: 3}
   attachProjectile: 0
   preferedPosition: 0
-  preferredTarget: 0
-  secondaryTarget: 2
+  preferredTarget: 2
+  secondaryTarget: 0
   maxSuggestedShots: 1
   minSuggestedShots: 1
   damageString: {fileID: 4742422424776718176}
