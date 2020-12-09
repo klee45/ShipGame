@@ -502,9 +502,9 @@ MonoBehaviour:
   value: 0
   modType: 0
   smallMod: {x: 2, y: 2}
-  mediumMod: {x: 4, y: 4}
-  largeMod: {x: 6, y: 6}
-  hugeMod: {x: 8, y: 8}
+  mediumMod: {x: 4.5, y: 4.5}
+  largeMod: {x: 7, y: 7}
+  hugeMod: {x: 9.5, y: 9.5}
 --- !u!1 &8223843250817547260
 GameObject:
   m_ObjectHideFlags: 0
@@ -647,7 +647,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   priority: 0
   template: {fileID: 3132381220513367961}
-  tags: 02000000
 --- !u!114 &3132381220513367961
 MonoBehaviour:
   m_ObjectHideFlags: 0

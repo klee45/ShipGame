@@ -5,6 +5,7 @@ using UnityEngine;
 public class Arsenal : MonoBehaviour
 {
     private List<AWeapon> allWeapons;
+    private List<int> allWeaponsSlots;
     private WeaponDeedInfo?[] weaponDeeds;
     private Ship ship;
 
@@ -39,6 +40,7 @@ public class Arsenal : MonoBehaviour
         ship = GetComponentInParent<Ship>();
         weaponDeeds = new WeaponDeedInfo?[Constants.Weapons.MAX_NUM_WEAPONS];
         allWeapons = new List<AWeapon>();
+        allWeaponsSlots = new List<int>();
 
         int pos = 0;
         foreach (KeyValuePair<WeaponPosition, GameObject> pair in positionDict)
@@ -94,9 +96,12 @@ public class Arsenal : MonoBehaviour
         if (weaponDeeds[slot].HasValue)
         {
             WeaponDeed deed = weaponDeeds[slot].Value.deed;
-            weaponDeeds[slot] = null;
-            if (allWeapons.Remove(deed.GetWeapon()))
+            int pos = allWeapons.IndexOf(deed.GetWeapon());
+            if (pos >= 0 && pos < allWeapons.Count)
             {
+                weaponDeeds[slot] = null;
+                allWeapons.RemoveAt(pos);
+                allWeaponsSlots.RemoveAt(pos);
                 counts[(int)deed.GetSize()]--;
             }
             else
@@ -118,6 +123,7 @@ public class Arsenal : MonoBehaviour
             counts[size]++;
             weaponDeeds[slot] = new WeaponDeedInfo(deed, position, slot);
             allWeapons.Add(deed.GetWeapon());
+            allWeaponsSlots.Add(slot);
             return true;
         }
         else
@@ -219,6 +225,19 @@ public class Arsenal : MonoBehaviour
         catch (System.InvalidOperationException e)
         {
             Debug.LogWarning("Tried to get weapon at slot " + slot + " but couldn't find one\n" + e);
+            int pos = 0;
+            foreach(WeaponDeedInfo? deed in weaponDeeds)
+            {
+                if (deed.HasValue)
+                {
+                    Debug.Log(deed.Value.deed.GetWeapon() + " at " + deed.Value.slotPos + " | " + deed.Value.weaponPos);
+                    pos++;
+                }
+                else
+                {
+                    Debug.Log("No weapon at " + pos++);
+                }
+            }
             weapon = null;
             return false;
         }
@@ -247,6 +266,11 @@ public class Arsenal : MonoBehaviour
     public List<AWeapon> GetAllWeapons()
     {
         return allWeapons;
+    }
+
+    public List<int> GetAllWeaponsPairedSlots()
+    {
+        return allWeaponsSlots;
     }
 
     public WeaponDeedInfo?[] GetDeedInfos()

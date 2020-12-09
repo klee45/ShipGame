@@ -13,4 +13,14 @@ public class ScaleEachAxis : ScaleInfo
     {
         return new Vector3(v.x * xScale.ToFloat(), v.y * yScale.ToFloat(), v.z);
     }
+
+    public override Vector3 GetVector3()
+    {
+        return new Vector3(xScale.ToFloat(), yScale.ToFloat(), 1);
+    }
+
+    public override float GetY()
+    {
+        return yScale.ToFloat();
+    }
 }

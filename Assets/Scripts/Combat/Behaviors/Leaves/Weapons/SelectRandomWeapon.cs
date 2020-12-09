@@ -9,7 +9,10 @@ public class SelectRandomWeapon : BehaviorLeaf
     protected override NodeState UpdateStateHelper(BehaviorState state)
     {
         //Debug.Log("Touch selectweapon");
-        state.weaponInfo.weaponIndex = Random.Range(0, state.ship.GetArsenal().GetAllWeapons().Count);
+        Arsenal arsenal = state.ship.GetArsenal();
+        //List<AWeapon> weapons = arsenal.GetAllWeapons();
+        List<int> slots = arsenal.GetAllWeaponsPairedSlots();
+        state.weaponInfo.weaponIndex = slots.GetRandomElement();
         last = state.weaponInfo.weaponIndex;
         return NodeState.Success;
     }

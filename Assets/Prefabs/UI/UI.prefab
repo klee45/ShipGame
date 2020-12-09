@@ -2278,11 +2278,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7885249777640893673}
     m_Modifications:
-    - target: {fileID: 1483200533015480724, guid: c879ead7f87a6504195240c931b5e92b,
-        type: 3}
-      propertyPath: m_Name
-      value: Inventory
-      objectReference: {fileID: 0}
     - target: {fileID: 1483200533015480725, guid: c879ead7f87a6504195240c931b5e92b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2388,6 +2383,11 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 1483200533015480724, guid: c879ead7f87a6504195240c931b5e92b,
+        type: 3}
+      propertyPath: m_Name
+      value: Inventory
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c879ead7f87a6504195240c931b5e92b, type: 3}
 --- !u!224 &7253419049418219118 stripped
@@ -2421,11 +2421,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 7885249777640893673}
     m_Modifications:
-    - target: {fileID: 3692422542064853019, guid: a1b3ae7ac30a91041b54da485fc14570,
-        type: 3}
-      propertyPath: m_Name
-      value: Shop
-      objectReference: {fileID: 0}
     - target: {fileID: 3692422542064853020, guid: a1b3ae7ac30a91041b54da485fc14570,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2480,6 +2475,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3692422542064853019, guid: a1b3ae7ac30a91041b54da485fc14570,
+        type: 3}
+      propertyPath: m_Name
+      value: Shop
       objectReference: {fileID: 0}
     - target: {fileID: 332500939889910846, guid: a1b3ae7ac30a91041b54da485fc14570,
         type: 3}

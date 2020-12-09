@@ -499,10 +499,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   value: 0
-  smallMod: 1
-  mediumMod: 2.8
-  largeMod: 5.2
-  hugeMod: 8
+  smallMod: 3
+  mediumMod: 6
+  largeMod: 9
+  hugeMod: 12
 --- !u!1 &8223843250817547260
 GameObject:
   m_ObjectHideFlags: 0

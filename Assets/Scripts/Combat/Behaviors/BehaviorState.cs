@@ -48,7 +48,7 @@ public class BehaviorState : MonoBehaviour
     public class WeaponInfo
     {
         public bool fireWeapon = false;
-        public int weaponIndex = 0;
+        public int weaponIndex = -1;
         public int shotsRemaining = 0;
     }
 

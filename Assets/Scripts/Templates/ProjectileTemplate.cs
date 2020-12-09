@@ -72,7 +72,7 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
 
     private void CalculateTotalRange()
     {
-        remainingRange = range.ToFloat();
+        remainingRange = GetScaledRange();
         foreach (ProjectileEffectTemplate effect in projectileEffects)
         {
             remainingRange -= effect.GetRangeMod();
@@ -81,12 +81,22 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
         {
             remainingRange -= effect.GetRangeMod();
         }
-        remainingRange -= colliderLength * scale.Scale(Vector3.one).y;
+        remainingRange -= GetScaledColliderLength();
+    }
+
+    private float GetScaledRange()
+    {
+        return range.ToFloat() * scale.GetY();
+    }
+
+    private float GetScaledColliderLength()
+    {
+        return colliderLength * scale.GetY() / 2;
     }
 
     public float GetTotalRange()
     {
-        return range.ToFloat() + colliderLength;
+        return GetScaledRange() + GetScaledColliderLength();
     }
 
     public override Projectile Create(GameObject obj)

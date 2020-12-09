@@ -11,4 +11,14 @@ public class ScaleBothAxes : ScaleInfo
     {
         return v * scale.ToFloat();
     }
+
+    public override Vector3 GetVector3()
+    {
+        return Vector2.one * scale.ToFloat();
+    }
+
+    public override float GetY()
+    {
+        return scale.ToFloat();
+    }
 }

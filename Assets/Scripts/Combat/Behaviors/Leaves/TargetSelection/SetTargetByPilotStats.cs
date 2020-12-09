@@ -41,19 +41,67 @@ public class SetTargetByPilotStats : BehaviorLeaf
         float closeAllyScore = aggression - 1;
         float farAllyScore = aggression;
 
-        TargetPair[] pairs = new TargetPair[]
+        List<AWeapon> weapons = state.ship.GetArsenal().GetAllWeapons();
+        bool[] checks = new bool[] { false, false, false, false };
+
+        foreach (AWeapon weapon in weapons)
         {
-            new TargetPair(closeEnemyScore, TargetType.CloseEnemy),
-            new TargetPair(farEnemyScore, TargetType.FarEnemy),
-            new TargetPair(closeAllyScore, TargetType.CloseAlly),
-            new TargetPair(farAllyScore, TargetType.FarAlly)
-        };
+            if (weapon.IsReady())
+            {
+                checks[(int)weapon.GetPreferredTarget()] = true;
+                checks[(int)weapon.GetSecondaryTarget()] = true;
+            }
+        }
 
+        List<TargetPair> pairs = new List<TargetPair>();
+        if (checks[0])
+        {
+            pairs.Add(new TargetPair(closeEnemyScore, TargetType.CloseEnemy));
+        }
+        if (checks[1])
+        {
+            pairs.Add(new TargetPair(closeAllyScore, TargetType.CloseAlly));
+        }
+        if (checks[2])
+        {
+            pairs.Add(new TargetPair(farEnemyScore, TargetType.FarEnemy));
+        }
+        if (checks[3])
+        {
+            pairs.Add(new TargetPair(farAllyScore, TargetType.FarAlly));
+        }
+
+        /*
+        Debug.LogError("Weapons : " + weapons.Count);
+        foreach (AWeapon weapon in weapons)
+        {
+            Debug.LogError("Position: " + weapon.name + "\n" + weapon.GetPreferredTarget() + "\n" + weapon.GetSecondaryTarget());
+        }
+        Debug.LogError("Checks: " + string.Join(", ", checks));
+        Debug.LogError("Pairs: " + pairs.Count);
+        */
+
+        DetectionShip.DetectedMostImportant enemies;
+        DetectionShip.DetectedMostImportant allies;
+        if (checks[0] || checks[2])
+        {
+            enemies = detections.GetDetectedEnemies();
+        }
+        else
+        {
+            enemies = null;
+        }
+        if (checks[1] || checks[3])
+        {
+            allies = detections.GetDetectedAllies();
+        }
+        else
+        {
+            allies = null;
+        }
+         
         // Sort array by ascending order
-        pairs = pairs.OrderBy(pair => pair.GetValue()).ToArray();
-
-        DetectionShip.DetectedMostImportant allies = detections.GetDetectedAllies();
-        DetectionShip.DetectedMostImportant enemies = detections.GetDetectedEnemies();
+        pairs = pairs.OrderBy(pair => pair.GetValue()).ToList();
 
         float distSqr;
         foreach (TargetPair pair in pairs)

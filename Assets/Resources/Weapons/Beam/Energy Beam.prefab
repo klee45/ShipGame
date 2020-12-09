@@ -53,7 +53,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1312620840336318381}
-  - component: {fileID: 973091820135678091}
+  - component: {fileID: 6666595550207582097}
   m_Layer: 11
   m_Name: Range
   m_TagString: Untagged
@@ -75,7 +75,7 @@ Transform:
   m_Father: {fileID: 5647332662129288818}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &973091820135678091
+--- !u!114 &6666595550207582097
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -341,7 +341,7 @@ MonoBehaviour:
   addColliderToPosition: 1
   colliderLength: 1.2
   delay: {fileID: 6731760411249517272}
-  range: {fileID: 973091820135678091}
+  range: {fileID: 6666595550207582097}
   layerTypes: 00000000
   immuneTags: 
 --- !u!114 &6535628349441673480

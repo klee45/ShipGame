@@ -176,7 +176,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8151581592773392455}
-  - component: {fileID: 2988141890086252148}
+  - component: {fileID: 602725924216169505}
   m_Layer: 11
   m_Name: Range
   m_TagString: Untagged
@@ -198,7 +198,7 @@ Transform:
   m_Father: {fileID: 6898950360276033186}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2988141890086252148
+--- !u!114 &602725924216169505
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -207,15 +207,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2848823834449351977}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e483f0e45eacaf74fb5376396f5bf1f6, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a806a9b14115ec49b63763d5a8fb6eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 0
-  modType: 0
-  smallMod: {x: 5, y: 5}
-  mediumMod: {x: 8, y: 8}
-  largeMod: {x: 11, y: 11}
-  hugeMod: {x: 14, y: 14}
+  value: 2.5
 --- !u!1 &3088299005005744641
 GameObject:
   m_ObjectHideFlags: 0
@@ -398,7 +393,7 @@ MonoBehaviour:
   addColliderToPosition: 0
   colliderLength: 0.25
   delay: {fileID: 4394526844744997747}
-  range: {fileID: 2988141890086252148}
+  range: {fileID: 602725924216169505}
   layerTypes: 00000000
   immuneTags: 
 --- !u!114 &4394526844744997747
@@ -490,7 +485,7 @@ MonoBehaviour:
   addColliderToPosition: 0
   colliderLength: 0.25
   delay: {fileID: 2640564823951776487}
-  range: {fileID: 2988141890086252148}
+  range: {fileID: 602725924216169505}
   layerTypes: 00000000
   immuneTags: 
 --- !u!114 &2640564823951776487
@@ -582,7 +577,7 @@ MonoBehaviour:
   addColliderToPosition: 0
   colliderLength: 0.25
   delay: {fileID: 7790089171646471721}
-  range: {fileID: 2988141890086252148}
+  range: {fileID: 602725924216169505}
   layerTypes: 00000000
   immuneTags: 
 --- !u!114 &7790089171646471721
@@ -789,7 +784,7 @@ MonoBehaviour:
   addColliderToPosition: 0
   colliderLength: 0.25
   delay: {fileID: 6862290521532154669}
-  range: {fileID: 2988141890086252148}
+  range: {fileID: 602725924216169505}
   layerTypes: 00000000
   immuneTags: 
 --- !u!114 &6862290521532154669
@@ -881,7 +876,7 @@ MonoBehaviour:
   addColliderToPosition: 0
   colliderLength: 0.25
   delay: {fileID: 8180415475639891174}
-  range: {fileID: 2988141890086252148}
+  range: {fileID: 602725924216169505}
   layerTypes: 00000000
   immuneTags: 
 --- !u!114 &8180415475639891174
@@ -1056,9 +1051,9 @@ MonoBehaviour:
   value: 0
   modType: 0
   smallMod: {x: 1, y: 1}
-  mediumMod: {x: 2, y: 2}
-  largeMod: {x: 3, y: 3}
-  hugeMod: {x: 4, y: 4}
+  mediumMod: {x: 2.5, y: 2.5}
+  largeMod: {x: 4, y: 4}
+  hugeMod: {x: 5.5, y: 5.5}
 --- !u!1 &8534834729280476568
 GameObject:
   m_ObjectHideFlags: 0
@@ -1187,7 +1182,7 @@ MonoBehaviour:
   addColliderToPosition: 0
   colliderLength: 0.25
   delay: {fileID: 7283797776822079579}
-  range: {fileID: 2988141890086252148}
+  range: {fileID: 602725924216169505}
   layerTypes: 00000000
   immuneTags: 
 --- !u!114 &7283797776822079579

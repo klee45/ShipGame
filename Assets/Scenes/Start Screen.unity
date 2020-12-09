@@ -1176,80 +1176,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1062142086}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &1083227744
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1345063547}
-    m_Modifications:
-    - target: {fileID: 4470785435401410582, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_Name
-      value: Plasma Wave Deed (2)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410581, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: weaponSize
-      value: 2
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 75bd13bf68db6b9459d1a1ec6488b47f, type: 3}
 --- !u!1 &1100374152
 GameObject:
   m_ObjectHideFlags: 0
@@ -1459,80 +1385,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!1001 &1167682279
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1345063547}
-    m_Modifications:
-    - target: {fileID: 4470785435401410582, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_Name
-      value: Plasma Wave Deed (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410581, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: weaponSize
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 75bd13bf68db6b9459d1a1ec6488b47f, type: 3}
 --- !u!1 &1201325793
 GameObject:
   m_ObjectHideFlags: 0
@@ -1681,75 +1533,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 27caf2e239a35564c9b5bfadc641a0aa, type: 3}
---- !u!1001 &1216244855
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1345063547}
-    m_Modifications:
-    - target: {fileID: 4470785435401410582, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_Name
-      value: Plasma Wave Deed
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 75bd13bf68db6b9459d1a1ec6488b47f, type: 3}
 --- !u!1 &1284044609
 GameObject:
   m_ObjectHideFlags: 0
@@ -2174,12 +1957,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3cfb2aa59b7b1804194bb040b554f6b6, type: 3}
---- !u!4 &1345063547 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1611872733161560556, guid: 3cfb2aa59b7b1804194bb040b554f6b6,
-    type: 3}
-  m_PrefabInstance: {fileID: 1345063546}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1345063551 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3157410934068815961, guid: 3cfb2aa59b7b1804194bb040b554f6b6,
@@ -2358,80 +2135,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1555341627
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 1345063547}
-    m_Modifications:
-    - target: {fileID: 4470785435401410582, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_Name
-      value: Plasma Wave Deed (3)
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_RootOrder
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410580, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4470785435401410581, guid: 75bd13bf68db6b9459d1a1ec6488b47f,
-        type: 3}
-      propertyPath: weaponSize
-      value: 3
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 75bd13bf68db6b9459d1a1ec6488b47f, type: 3}
 --- !u!1001 &1695502923
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2596,6 +2299,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1856196916 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3914965648785819205, guid: 3cfb2aa59b7b1804194bb040b554f6b6,
+    type: 3}
+  m_PrefabInstance: {fileID: 1345063546}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1856196918
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1856196916}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: efc360b3f409c604b92c3b43bdfe7f35, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1939932353
 PrefabInstance:
   m_ObjectHideFlags: 0

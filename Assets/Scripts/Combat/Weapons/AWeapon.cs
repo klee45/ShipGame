@@ -80,6 +80,11 @@ public abstract class AWeapon : MonoBehaviour, IRequiresShipSize
         }
     }
 
+    public CombatType GetCombatType()
+    {
+        return combatType;
+    }
+
     /*
     public void Setup(
         Sprite icon, int energy, float cooldownTime,

@@ -149,7 +149,7 @@ MonoBehaviour:
   addColliderToPosition: 0
   colliderLength: 0.25
   delay: {fileID: 4183339058948571725}
-  range: {fileID: 354547453041738337}
+  range: {fileID: 6738001136592939985}
   layerTypes: 00000000
   immuneTags: 
 --- !u!1 &2306913598044336843
@@ -205,7 +205,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8151581592773392455}
-  - component: {fileID: 354547453041738337}
+  - component: {fileID: 6738001136592939985}
   m_Layer: 11
   m_Name: Range
   m_TagString: Untagged
@@ -227,7 +227,7 @@ Transform:
   m_Father: {fileID: 6898950360276033186}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &354547453041738337
+--- !u!114 &6738001136592939985
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -236,14 +236,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 2848823834449351977}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3dfe06fd4a34724ea40263ea526f474, type: 3}
+  m_Script: {fileID: 11500000, guid: 6a806a9b14115ec49b63763d5a8fb6eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  value: 0
-  smallMod: 10
-  mediumMod: 15
-  largeMod: 20
-  hugeMod: 25
+  value: 3
 --- !u!1 &3088299005005744641
 GameObject:
   m_ObjectHideFlags: 0

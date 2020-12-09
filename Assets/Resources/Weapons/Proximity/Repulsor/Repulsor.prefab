@@ -182,10 +182,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   value: 0
   modType: 0
-  smallMod: {x: 3, y: 3}
-  mediumMod: {x: 6, y: 6}
-  largeMod: {x: 9, y: 9}
-  hugeMod: {x: 12, y: 12}
+  smallMod: {x: 6, y: 6}
+  mediumMod: {x: 11, y: 11}
+  largeMod: {x: 16, y: 16}
+  hugeMod: {x: 21, y: 21}
 --- !u!1 &1445289268490583457
 GameObject:
   m_ObjectHideFlags: 0

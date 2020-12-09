@@ -26,7 +26,8 @@ public class TravelStayWeaponDist : Travel
         // Debug.Log(arsenal);
         // Debug.Log(arsenal.GetWeapon(state.weaponChoice));
         // Debug.Log(arsenal.GetWeapon(state.weaponChoice).GetRange());
-        if (state.ship.GetArsenal().TryGetWeaponAtSlot(state.weaponInfo.weaponIndex, out AWeapon weapon))
+        int slot = state.weaponInfo.weaponIndex;
+        if (slot >= 0 && state.ship.GetArsenal().TryGetWeaponAtSlot(slot, out AWeapon weapon))
         {
             float range = weapon.GetRange();
             float minRange = range * minPercent;
