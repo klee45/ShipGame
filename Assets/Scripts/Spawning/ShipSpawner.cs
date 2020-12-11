@@ -3,39 +3,87 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/**
+ * Place on a warp gate and it will spawn ships
+ **/
 public class ShipSpawner : MonoBehaviour
 {
+    [Header("Ship spawn information")]
     [SerializeField]
     private APilot pilot;
-    /*
     [SerializeField]
-    private DetectionShip detection;
-    */
-
+    private Team team;
     [SerializeField]
     private List<int> sizeWeights;
     [SerializeField]
-    private List<int> teamWeights;
+    private int maxWeaponSize;
 
-    private Ship[][] empire;
+    [Header("Spawn rates and max count")]
+    [SerializeField]
+    private float minSpawnDelay;
+    [SerializeField]
+    private float maxSpawnDelay;
+    [SerializeField]
+    private int maxSpawns;
+
+    private Timer spawnTimer;
+
+    private Ship[][] shipPrefabs;
     private List<WeaponDeed>[] deeds;
     private List<int>[] weaponWeights;
 
+    private bool active = false;
+
     private void Awake()
     {
-        sizeWeights.StackList();
-        teamWeights.StackList();
-
-        empire = Loader.LoadFromFolder<Ship>("Ships/Empire", "Small", "Medium", "Large");
-        deeds = LoadDeeds();
-
-        for (int i = 0; i < 100; i++)
+        if (GetShipFolderFromTeam(team, out string folder))
         {
-            CreateShip(
-                CivilizationType.Empire,
-                UnityEngine.Random.Range(-10f, 10f),
-                UnityEngine.Random.Range(-10f, 10f),
-                true);
+            spawnTimer = gameObject.AddComponent<Timer>();
+            SetTimer();
+            spawnTimer.OnComplete += () => SetTimer();
+            active = true;
+            sizeWeights.StackList();
+
+            shipPrefabs = Loader.LoadFromFolder<Ship>("Ships/" + folder, "Small", "Medium", "Large");
+            deeds = LoadDeeds();
+        }
+    }
+
+    private void Update()
+    {
+        if (active && spawnTimer.Tick(TimeController.StaticDeltaTime()))
+        {
+            GenerateShip();
+        }
+    }
+
+    private void GenerateShip()
+    {
+        int size = Math.WeightedRandom(sizeWeights);
+        Ship prefab = shipPrefabs[size].GetRandomElement();
+        CreateShip(prefab);
+    }
+
+    private void SetTimer()
+    {
+        spawnTimer.SetMaxTime(UnityEngine.Random.Range(minSpawnDelay, maxSpawnDelay));
+        spawnTimer.SetTime(0);
+    }
+
+    private bool GetShipFolderFromTeam(Team team, out string folder)
+    {
+        switch (team)
+        {
+            case Team.Empire:
+            case Team.Federation:
+            case Team.UpperEmpire:
+            case Team.Boss:
+                folder = team.ToString();
+                return true;
+            default:
+                Debug.LogWarning("Unsupported team for ship spawner (" + team.ToString() + ")");
+                folder = "";
+                return false;
         }
     }
 
@@ -83,7 +131,7 @@ public class ShipSpawner : MonoBehaviour
         return (Team)Math.WeightedRandom(teamWeights);
     }
 
-    public void CreateShip(CivilizationType civilization, float x, float y, bool fill=false)
+    public void CreateShip(Ship prefab, float x, float y, bool fill=false)
     {
         Size size = GetRandomSize();
         Team team = GetRandomTeam();
@@ -131,7 +179,7 @@ public class ShipSpawner : MonoBehaviour
         switch(civilization)
         {
             case CivilizationType.Empire:
-                return empire;
+                return shipPrefabs;
         }
         return null;
     }

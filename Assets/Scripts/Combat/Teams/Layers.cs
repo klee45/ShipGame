@@ -31,10 +31,10 @@ public static class Layers
     {
         switch (team)
         {
-            case Team.Allied: return SHIP_1;
-            case Team.Enemy1: return SHIP_2;
-            case Team.Enemy2: return SHIP_3;
-            case Team.Enemy3: return SHIP_4;
+            case Team.Empire: return SHIP_1;
+            case Team.Federation: return SHIP_2;
+            case Team.UpperEmpire: return SHIP_3;
+            case Team.Boss: return SHIP_4;
             default:
                 return -1;
         }
@@ -97,13 +97,13 @@ public static class Layers
     {
         switch(team)
         {
-            case Team.Allied:
+            case Team.Empire:
                 return Colors.ColorTeam1;
-            case Team.Enemy1:
+            case Team.Federation:
                 return Colors.ColorTeam2;
-            case Team.Enemy2:
+            case Team.UpperEmpire:
                 return Colors.ColorTeam3;
-            case Team.Enemy3:
+            case Team.Boss:
                 return Colors.ColorTeam4;
             case Team.Neutral:
                 return Colors.ColorTeamNeutral;
