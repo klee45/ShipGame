@@ -13,10 +13,18 @@ public class ShipSpawner : MonoBehaviour
     private APilot pilot;
     [SerializeField]
     private Team team;
+
     [SerializeField]
     private List<int> sizeWeights;
     [SerializeField]
     private int maxWeaponSize;
+    [SerializeField]
+    private float percentFillWeapons;
+
+    [SerializeField]
+    private int minRarity = -1;
+    [SerializeField]
+    private int maxRarity = -1;
 
     [Header("Spawn rates and max count")]
     [SerializeField]
@@ -32,10 +40,14 @@ public class ShipSpawner : MonoBehaviour
     private List<WeaponDeed>[] deeds;
     private List<int>[] weaponWeights;
 
+    private List<Ship> ships;
+
     private bool active = false;
 
     private void Awake()
     {
+        ships = new List<Ship>();
+
         if (GetShipFolderFromTeam(team, out string folder))
         {
             spawnTimer = gameObject.AddComponent<Timer>();
@@ -60,8 +72,29 @@ public class ShipSpawner : MonoBehaviour
     private void GenerateShip()
     {
         int size = Math.WeightedRandom(sizeWeights);
-        Ship prefab = shipPrefabs[size].GetRandomElement();
-        CreateShip(prefab);
+        try
+        {
+            Ship prefab = shipPrefabs[size].GetRandomElement();
+            Ship ship = CreateShip(prefab);
+            ships.Add(ship);
+            ship.OnEntityDestroy += (i) => RemoveShip(ship);
+            if (ships.Count >= maxSpawns)
+            {
+                active = false;
+            }
+        }
+        catch (IndexOutOfRangeException e)
+        {
+            Debug.LogError("Couldn't create ship from prefab with size " + size + "\nShip prefabs is of size " + shipPrefabs.Length);
+        }
+    }
+
+    public void RemoveShip(Ship ship)
+    {
+        if (ships.Count < maxSpawns)
+        {
+            active = true;
+        }
     }
 
     private void SetTimer()
@@ -121,26 +154,11 @@ public class ShipSpawner : MonoBehaviour
         return deed;
     }
 
-    private Size GetRandomSize()
+    public Ship CreateShip(Ship prefab)
     {
-        return (Size)Math.WeightedRandom(sizeWeights);
-    }
-
-    private Team GetRandomTeam()
-    {
-        return (Team)Math.WeightedRandom(teamWeights);
-    }
-
-    public void CreateShip(Ship prefab, float x, float y, bool fill=false)
-    {
-        Size size = GetRandomSize();
-        Team team = GetRandomTeam();
-        Ship[][] allShips = GetShips(civilization);
-        
-        Ship prefab = allShips[(int)size].GetRandomElement();
         Ship ship = Instantiate(prefab);
         ship.SetParent(gameObject);
-        ship.transform.position = new Vector2(x, y);
+        ship.transform.position = transform.position;
         ship.SetTeam(team);
         APilot shipPilot = Instantiate(pilot);
         ship.SetPilot(shipPilot);
@@ -148,30 +166,32 @@ public class ShipSpawner : MonoBehaviour
 
         Arsenal arsenal = ship.GetArsenal();
         int[] slots = arsenal.GetSlots();
-        for (int weaponSizeIndex = 0; weaponSizeIndex < slots.Length; weaponSizeIndex++)
+        int totalWeapons = 0;
+        for (int slot = 0; slot < slots.Length; slot++)
         {
-            if (deeds[weaponSizeIndex].Count <= 0)
+            Size size = (Size)slot;
+            int slotCount = slots[slot];
+            if (slotCount > 0)
             {
-                Debug.Log("Weapons of size " + (Size)weaponSizeIndex + " don't exist yet");
-            }
-            else
-            {
-                int count = slots[weaponSizeIndex];
-                if (!fill && count != 0)
+                if (DropTable.instance.GetDrops(size, minRarity, maxRarity, out List<int> weights, out List<DropTable.DropInfo> drops))
                 {
-                    count = UnityEngine.Random.Range(1, count);
-                }
-                for (int i = 0; i < count; i++)
-                {
-                    WeaponDeed deed = Instantiate<WeaponDeed>(GetRandomWeaponPrefab((Size)weaponSizeIndex));
-                    bool result = deed.Create(ship);
-                    if (!result)
+                    int numWeapons = Mathf.CeilToInt(slotCount / percentFillWeapons);
+
+                    for (int weaponNum = 0; weaponNum < Mathf.Max(1, numWeapons); weaponNum++)
                     {
-                        Destroy(deed.gameObject);
+                        DropTable.DropInfo info = drops[Math.WeightedRandom(weights)];
+                        WeaponDeed deed = Instantiate(info.deed);
+                        deed.Setup(info.info);
+                        ship.GetArsenal().TrySetWeapon(deed, deed.GetWeapon().GetPreferedPosition(), totalWeapons++);
+                        if (totalWeapons > 8)
+                        {
+                            return ship;
+                        }
                     }
                 }
             }
         }
+        return ship;
     }
 
     private Ship[][] GetShips(CivilizationType civilization)

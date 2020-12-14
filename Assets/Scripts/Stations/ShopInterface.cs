@@ -18,9 +18,7 @@ public class ShopInterface : Singleton<ShopInterface>, IWindow
     private int buttonHeight = 130;
 
     [SerializeField]
-    private int minItems = 10;
-    [SerializeField]
-    private int maxItems = 30;
+    private int colWidth = 5;
 
     [SerializeField]
     private GameObject visual;
@@ -52,27 +50,53 @@ public class ShopInterface : Singleton<ShopInterface>, IWindow
         return description;
     }
 
-    public void SetupShop()
+    public void SetupShop(int[] numWeapons, WeaponDeed[] specificDeeds, int minRarity, int maxRarity)
     {
         ClearPrevious();
-        int count = Random.Range(minItems, maxItems + 1);
-        int rowCount = Mathf.CeilToInt(count / 5f);
+        int numSpawn = numWeapons.Sum();
+        int specificSpawn = specificDeeds.Length;
+        int totalCount = numSpawn + specificSpawn;
+        int rowCount = Mathf.CeilToInt(totalCount / colWidth);
 
         //Debug.Log(count);
 
-        for (int row = 0; row < rowCount; row++)
+        int row = 0;
+        int col = 0;
+
+        int totalPos = 0;
+        for (int size = 0; size < numWeapons.Length; size++)
         {
-            for (int col = 0; col < Mathf.Min(5, count - row * 5); col++)
+            Size sizeType = (Size)size;
+            int pos;
+            for (pos = 0; pos < numWeapons[size]; pos++)
             {
-                SetupButton(row, col);
+                WeaponDeed deed = DropTable.instance.CreateRandomWeaponDeed(sizeType);
+                SetupButton(row, col, deed);
+                if (++col >= colWidth)
+                {
+                    col = 0;
+                    row++;
+                }
+            }
+            totalPos += pos;
+        }
+
+        foreach (WeaponDeed deed in specificDeeds)
+        {
+            SetupButton(row, col, deed);
+            if (++col >= colWidth)
+            {
+                col = 0;
+                row++;
             }
         }
+        
         var rectTransform = buttonContainer.GetComponent<RectTransform>();
         rectTransform.sizeDelta = new Vector2(rectTransform.sizeDelta.x, rowCount * buttonHeight);
         rectTransform.anchoredPosition = Vector2.zero;
     }
 
-    private void SetupButton(int row, int col)
+    private void SetupButton(int row, int col, WeaponDeed deed)
     {
         WeaponButtonShop buttonObj = Instantiate(buttonPrefab);
         var rectTransform = buttonObj.GetComponent<RectTransform>();
@@ -81,7 +105,6 @@ public class ShopInterface : Singleton<ShopInterface>, IWindow
         rectTransform.anchoredPosition = new Vector3(col * buttonWidth, -row * buttonHeight, 0);
         buttonObj.name = "Button (" + col + ", " + row + ")";
 
-        WeaponDeed deed = DropTable.instance.CreateRandomWeaponDeed();
         deed.transform.SetParent(deedContainer.transform);
         buttonObj.SetWeaponDeed(deed, DropTable.instance.GetBorder(deed.GetSize()));
 

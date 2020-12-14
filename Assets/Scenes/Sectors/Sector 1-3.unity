@@ -1399,5 +1399,58 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7725519569377517365, guid: 4fc5e83f876841945b8896732b4a4ad8,
+        type: 3}
+      propertyPath: numWeapons.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 7725519569377517365, guid: 4fc5e83f876841945b8896732b4a4ad8,
+        type: 3}
+      propertyPath: numWeapons.Array.data[0]
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7725519569377517365, guid: 4fc5e83f876841945b8896732b4a4ad8,
+        type: 3}
+      propertyPath: numWeapons.Array.data[1]
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 7725519569377517365, guid: 4fc5e83f876841945b8896732b4a4ad8,
+        type: 3}
+      propertyPath: numWeapons.Array.data[2]
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 7725519569377517365, guid: 4fc5e83f876841945b8896732b4a4ad8,
+        type: 3}
+      propertyPath: numWeapons.Array.data[3]
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4fc5e83f876841945b8896732b4a4ad8, type: 3}
+--- !u!1 &7725519567806415125 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7725519569377517364, guid: 4fc5e83f876841945b8896732b4a4ad8,
+    type: 3}
+  m_PrefabInstance: {fileID: 7725519567806415124}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &7725519567806415126
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7725519567806415125}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ed0b7ed9376c0046959b1ee12052cd6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  pilot: {fileID: 6759293993296967063, guid: 0c1bc9fed8396474ebd9dda04b0a8a33, type: 3}
+  team: 0
+  sizeWeights: 04000000030000000200000000000000
+  maxWeaponSize: 3
+  percentFillWeapons: 0.7
+  minRarity: -1
+  maxRarity: -1
+  minSpawnDelay: 5
+  maxSpawnDelay: 10
+  maxSpawns: 4

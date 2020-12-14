@@ -135,7 +135,7 @@ public class Arsenal : MonoBehaviour
 
     public bool TrySetWeapon(WeaponDeed deed, WeaponPosition position, int slotPosition)
     {
-        Debug.Log("Set weapon " + deed.name + " at " + position.ToString());
+        //Debug.Log("Set weapon " + deed.name + " at " + position.ToString());
         int size = (int)deed.GetSize();
         //Debug.Log("Size: " + (int)weapon.GetSize() + " - " + weapon.GetSize());
         //Debug.Log(counts.Length);

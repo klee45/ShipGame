@@ -21,7 +21,6 @@ public static class Math
         return System.Enum.GetValues(enumType).Length;
     }
 
-
     // --------- Effects
 
     public interface IStackableBonus
@@ -40,9 +39,9 @@ public static class Math
         return lst[Random.Range(0, lst.Length)];
     }
 
-    public static int WeightedRandom(List<int> weights)
+    public static int WeightedRandom(List<int> weights, int offset=0)
     {
-        int choice = Random.Range(0, weights.Last());
+        int choice = Random.Range(offset, weights.Last());
         for (int pos = 0; pos < weights.Count; pos++)
         {
             if (weights[pos] > choice)

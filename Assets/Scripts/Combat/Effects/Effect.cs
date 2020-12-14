@@ -9,7 +9,7 @@ public abstract class EffectTemplate<T> : Template<T, GameObject> where T : Effe
     [SerializeField]
     protected int priority = 0;
 
-    public virtual void Initialize() { Debug.Log("Initialize " + name); }
+    public virtual void Initialize() { } //Debug.Log("Initialize " + name); }
 
     public override sealed T Create(GameObject obj)
     {
