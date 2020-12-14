@@ -27,6 +27,7 @@ public class Wait : BehaviorLeaf
         var timeScale = state.ship.GetTimeScale();
         if (timer.Tick(TimeController.DeltaTime(timeScale)))
         {
+            //Debug.Log(state.ship.name + " waiting success");
             return NodeState.Success;
         }
         else

@@ -12,10 +12,12 @@ public abstract class ProjectileEffect : Effect
 
     protected Ship GetShip(Collider2D collision)
     {
+        /*
         Debug.LogWarning(collision.name);
         Debug.LogWarning(collision);
         Debug.LogWarning(collision.GetComponent<ShipCollider>());
         Debug.LogWarning(collision.GetComponent<ShipCollider>().GetShip());
+        */
         return collision.GetComponent<ShipCollider>().GetShip();
     }
 
