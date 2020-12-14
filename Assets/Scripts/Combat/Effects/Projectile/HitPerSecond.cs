@@ -80,7 +80,7 @@ public class HitPerSecond : ProjectileEffect,
 
     private void WakeUp(Collider2D collision)
     {
-        collision.GetComponent<Rigidbody2D>().WakeUp();
+        GetShip(collision).GetComponent<Rigidbody2D>().WakeUp();
     }
 
     public override string GetName()

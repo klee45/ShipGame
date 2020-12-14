@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class DetectionZone<T> : MonoBehaviour where T : Entity
+public abstract class DetectionZone<T, U> : MonoBehaviour where T : EntityCollider where U : Entity
 {
     private static Color DEBUG_COLOR_ON = new Color(0.5f, 0.5f, 0.5f, 0.1f);
     private static Color DEBUG_COLOR_OFF = new Color(1.0f, 1.0f, 1.0f, 0.1f);
@@ -20,7 +20,7 @@ public abstract class DetectionZone<T> : MonoBehaviour where T : Entity
     private bool scanning = false;
     // private TimerStatic timer;
 
-    public delegate void DetectionEvent(T entity);
+    public delegate void DetectionEvent(U entity);
     public DetectionEvent OnDetection;
     
     public void Initialize(float scale)//, float timeInBetween, float randomIncrease, float initialRandomIncrease)
@@ -130,6 +130,8 @@ public abstract class DetectionZone<T> : MonoBehaviour where T : Entity
     {
         T obj = collision.gameObject.GetComponent<T>();
         //Debug.Log(string.Format("Trigger stay {0}", obj));
-        OnDetection?.Invoke(obj);
+        DoInvoke(obj);
     }
+
+    protected abstract void DoInvoke(T obj);
 }

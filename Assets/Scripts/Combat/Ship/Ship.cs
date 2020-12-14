@@ -29,6 +29,7 @@ public class Ship : Entity
     private EnergySystem energySystem;
     private Arsenal arsenal;
     private ShipGraphics shipGraphics;
+    private ShipCollider collider;
 
     //private bool markedForDelete = false;
 
@@ -49,7 +50,8 @@ public class Ship : Entity
         energySystem = GetComponentInChildren<EnergySystem>();
         arsenal = GetComponentInChildren<Arsenal>();
         shipGraphics = GetComponentInChildren<ShipGraphics>();
-        gameObject.layer = Layers.GetShipLayerFromTeam(team);
+        collider = GetComponentInChildren<ShipCollider>();
+        collider.Setup(this, Layers.GetShipLayerFromTeam(team));
         //Debug.Log(gameObject.layer);
     }
 
@@ -82,6 +84,16 @@ public class Ship : Entity
         {
             s.AddTo(shipEffects);
         }
+    }
+
+    public void SetCollisionLayer()
+    {
+        collider.SetLayer(Layers.GetShipLayerFromTeam(team));
+    }
+
+    public ShipCollider GetCollider()
+    {
+        return collider;
     }
 
     /*

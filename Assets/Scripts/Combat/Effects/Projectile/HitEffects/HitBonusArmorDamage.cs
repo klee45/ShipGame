@@ -33,6 +33,6 @@ public class HitBonusArmorDamage : ProjectileEffect, ProjectileEffect.IOnHitEffe
 
     public void OnHit(Collider2D collision, Collider2D collidee)
     {
-        collision.GetComponent<Ship>().GetCombatStats().BonusArmorDamage(bonusDamage, isHit);
+        GetShip(collision).GetCombatStats().BonusArmorDamage(bonusDamage, isHit);
     }
 }

@@ -10,6 +10,21 @@ public abstract class ProjectileEffect : Effect
 {
     public abstract void AddTo(EffectDictProjectile dict);
 
+    protected Ship GetShip(Collider2D collision)
+    {
+        return collision.GetComponent<ShipCollider>().GetShip();
+    }
+
+    protected Projectile GetProjectile(Collider2D collision)
+    {
+        return collision.GetComponent<ProjectileCollider>().GetProjectile();
+    }
+
+    protected Entity GetEntity(Collider2D collision)
+    {
+        return collision.GetComponent<EntityCollider>().GetEntity();
+    }
+
     public interface IOnHitEffect : IEffect
     {
         void OnHit(Collider2D collision, Collider2D collidee);
@@ -32,6 +47,6 @@ public abstract class ProjectileEffect : Effect
 
     protected void DoDamage(Collider2D collision, int damage, Ship source)
     {
-        collision.gameObject.GetComponentInChildren<CombatStats>()?.TakeDamage(damage, source);
+        GetShip(collision).GetCombatStats().TakeDamage(damage, source);
     }
 }

@@ -25,7 +25,7 @@ public class WarpGate : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Debug.Log("Enter");
-        Ship ship = collision.GetComponent<Ship>();
+        Ship ship = collision.GetComponent<ShipCollider>().GetShip();
         ship.OnEntityDestroy += Remove;
         WarpEffect effect = ship.AddShipEffect<WarpEffect>();
         effect.Setup(targetSector, duration);
@@ -36,7 +36,7 @@ public class WarpGate : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         //Debug.Log("Exit");
-        Ship ship = collision.GetComponent<Ship>();
+        Ship ship = collision.GetComponent<ShipCollider>().GetShip();
         if (warping.TryGetValue(ship, out WarpEffect force))
         {
             ship.OnEntityDestroy -= Remove;

@@ -33,6 +33,6 @@ public class HitBonusHullDamage : ProjectileEffect, ProjectileEffect.IOnHitEffec
 
     public void OnHit(Collider2D collision, Collider2D collidee)
     {
-        collision.GetComponent<Ship>().GetCombatStats().BonusHullDamage(bonusDamage, isHit);
+        GetShip(collision).GetCombatStats().BonusHullDamage(bonusDamage, isHit);
     }
 }

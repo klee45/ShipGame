@@ -119,9 +119,12 @@ public abstract class Entity : MonoBehaviour
 
     protected virtual void Update()
     {
-        pilot.Tick(TimeController.DeltaTime(timeScale));
-        pilot?.MakeActions();
-        ApplyEffects();
+        if (pilot != null)
+        {
+            pilot.Tick(TimeController.DeltaTime(timeScale));
+            pilot?.MakeActions();
+            ApplyEffects();
+        }
         Move(movementStats.GetRotationValue(), movementStats.GetVelocityValue());
     }
 

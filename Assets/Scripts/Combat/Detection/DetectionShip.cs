@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class DetectionShip : Detection<Ship>
+public class DetectionShip : Detection<ShipCollider, Ship>
 {
     private DetectedMostImportant allies, neutral, enemies;
 
@@ -19,7 +19,7 @@ public class DetectionShip : Detection<Ship>
     public DetectedMostImportant GetDetectedNeutral() { return neutral; }
     public DetectedMostImportant GetDetectedEnemies() { return enemies; }
 
-    protected override DetectionZone<Ship> InitializeZone(GameObject zone)
+    protected override DetectionZone<ShipCollider, Ship> InitializeZone(GameObject zone)
     {
         return zone.AddComponent<DetectionZoneShip>();
     }

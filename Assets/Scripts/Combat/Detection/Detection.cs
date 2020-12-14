@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public abstract class Detection<T> : MonoBehaviour where T : Entity
+public abstract class Detection<T, U> : MonoBehaviour where T : EntityCollider where U : Entity
 {
     /*
     [SerializeField]
@@ -25,12 +25,12 @@ public abstract class Detection<T> : MonoBehaviour where T : Entity
     private bool log = false;
     */
 
-    private DetectionZone<T> zone;
-    protected List<T> detected;
+    private DetectionZone<T, U> zone;
+    protected List<U> detected;
 
     protected virtual void Awake()
     {
-        detected = new List<T>();
+        detected = new List<U>();
         zone = InitializeZone(zoneObject);
         scaleMod = 0;
         zone.Initialize(GetScaleValue());//, timeInBetween, randomIncrease, initialRandomIncrease);
@@ -77,9 +77,10 @@ public abstract class Detection<T> : MonoBehaviour where T : Entity
 
     private void Start()
     {
+        Ship ship = GetComponentInParent<Ship>();
         Physics2D.IgnoreCollision(
             zoneObject.GetComponent<Collider2D>(),
-            GetComponentInParent<Collider2D>());
+            ship.GetCollider().GetComponent<Collider2D>());
         zone.OnDetection += (s) =>
         {
             /*
@@ -92,7 +93,7 @@ public abstract class Detection<T> : MonoBehaviour where T : Entity
         };
     }
 
-    protected abstract DetectionZone<T> InitializeZone(GameObject zoneObject);
+    protected abstract DetectionZone<T, U> InitializeZone(GameObject zoneObject);
 
     public virtual bool Scan()
     {
@@ -135,23 +136,23 @@ public abstract class Detection<T> : MonoBehaviour where T : Entity
         return detected.Count;
     }
 
-    public bool GetRandomFromAll(ref T entity)
+    public bool GetRandomFromAll(ref U entity)
     {
         return GetRandomHelper(ref entity, null, (a, b) => true);
     }
 
-    public bool GetRandomWhitelist(ref T entity, params int[] whitelist)
+    public bool GetRandomWhitelist(ref U entity, params int[] whitelist)
     {
         return GetRandomHelper(ref entity, whitelist, (a, b) => a.Contains(b.gameObject.layer));
     }
 
-    public bool GetRandomBlacklist(ref T entity, params int[] blacklist)
+    public bool GetRandomBlacklist(ref U entity, params int[] blacklist)
     {
         return GetRandomHelper(ref entity, blacklist, (a, b) => !a.Contains(b.gameObject.layer));
     }
 
-    private delegate bool condition(int[] teams, T entity);
-    private bool GetRandomHelper(ref T entity, int[] teams, condition func)
+    private delegate bool condition(int[] teams, U entity);
+    private bool GetRandomHelper(ref U entity, int[] teams, condition func)
     {
         /*
         if (log)
@@ -160,8 +161,8 @@ public abstract class Detection<T> : MonoBehaviour where T : Entity
         }
         */
         PruneDestoyed();
-        var valid = new List<T>();
-        foreach (T entityDetected in detected)
+        var valid = new List<U>();
+        foreach (U entityDetected in detected)
         {
             if (func(teams, entityDetected))
             {
@@ -181,9 +182,9 @@ public abstract class Detection<T> : MonoBehaviour where T : Entity
         }
     }
 
-    protected delegate bool Comp<U>(U a, U b);
-    protected delegate void Setter<U>(T entity, ref T result, Comp<U> comparer);
-    protected bool GetHelper<U>(out T result, Setter<U> setter, Comp<U> comparer)
+    protected delegate bool Comp<V>(V a, V b);
+    protected delegate void Setter<V>(V entity, ref V result, Comp<V> comparer);
+    protected bool GetHelper(out U result, Setter<U> setter, Comp<U> comparer)
     {
         PruneDestoyed();
         int len = detected.Count;
@@ -192,7 +193,7 @@ public abstract class Detection<T> : MonoBehaviour where T : Entity
             result = detected.First();
             for (int i = 1; i < detected.Count; i++)
             {
-                T detectedEntity = detected[i];
+                U detectedEntity = detected[i];
                 setter(detectedEntity, ref result, comparer);
             }
             return true;

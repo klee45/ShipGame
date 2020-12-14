@@ -193,11 +193,10 @@ public class ProjectileTemplate : EntityTemplate<Projectile>
     {
         GameObject colliderObj = Instantiate(projectileBaseCollider.gameObject);
         colliderObj.name = LayerMask.LayerToName(layer);
-        colliderObj.layer = layer;
         Collider2D projectileCollider2D = colliderObj.GetComponent<Collider2D>();
         projectileCollider2D.isTrigger = true;
         ProjectileCollider projectileCollider = colliderObj.AddComponent<ProjectileCollider>();
-        projectileCollider.Setup(projectile);
+        projectileCollider.Setup(projectile, layer);
         return projectileCollider2D;
     }
 

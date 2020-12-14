@@ -31,7 +31,7 @@ public class FollowGameObject : MonoBehaviour
 
     private void ChangeSize()
     {
-        float scale = target.GetComponentInChildren<Canvas>().transform.localScale.x;
+        float scale = target.GetComponentInChildren<Scaler>().GetScale();
         GetComponent<Camera>().orthographicSize = CameraScale * Mathf.Sqrt(scale);
     }
 

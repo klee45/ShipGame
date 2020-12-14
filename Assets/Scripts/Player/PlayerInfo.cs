@@ -20,6 +20,7 @@ public class PlayerInfo : Singleton<PlayerInfo>
     {
         base.Awake();
         DontDestroyOnLoad(playerTeam);
+        Camera.main.GetComponent<FollowGameObject>().SetTarget(ship.gameObject);
     }
 
     private void Start()

@@ -36,7 +36,7 @@ public class HitAddBarrier : ProjectileEffect, ProjectileEffect.IOnHitEffect
     {
         //Debug.Log(collision);
         Physics2D.IgnoreCollision(collidee, collision);
-        Helper(collision.GetComponent<Ship>(), val, limit);
+        Helper(GetShip(collision), val, limit);
     }
 
     public static void Helper(Ship ship, int val, int limit)

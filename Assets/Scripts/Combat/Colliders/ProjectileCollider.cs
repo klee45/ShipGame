@@ -2,13 +2,24 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileCollider : MonoBehaviour
+public class ProjectileCollider : EntityCollider
 {
     private Projectile parent;
 
-    public void Setup(Projectile parent)
+    public void Setup(Projectile parent, int layer)
     {
         this.parent = parent;
+        SetLayer(layer);
+    }
+
+    public Projectile GetProjectile()
+    {
+        return parent;
+    }
+
+    public override Entity GetEntity()
+    {
+        return parent;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

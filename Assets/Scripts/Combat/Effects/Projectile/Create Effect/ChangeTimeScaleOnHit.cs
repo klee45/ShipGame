@@ -43,7 +43,7 @@ public class ChangeTimeScaleOnHit :
 
     public void OnHit(Collider2D collision, Collider2D collidee)
     {
-        Entity entity = collision.GetComponentInParent<Entity>();
+        Entity entity = GetEntity(collision);
         entity.OnEntityDestroy += Remove;
         TimeModEffect effect = entity.AddEntityEffect<TimeModEffect>((e) => e.Setup(bonus, max));
         affectedEntities.Add(entity, effect);
