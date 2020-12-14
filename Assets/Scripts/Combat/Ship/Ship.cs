@@ -65,7 +65,7 @@ public class Ship : Entity
 
         if (arsenal != null)
         {
-            arsenal.gameObject.layer = gameObject.layer;
+            arsenal.gameObject.layer = Layers.GetShipLayerFromTeam(team);
         }
 
         combatStats = GetComponentInChildren<CombatStats>();

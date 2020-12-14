@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 5329652954665204286}
   - component: {fileID: 3338911470654806590}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Energy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -54,7 +54,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2636278961106389345}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -84,7 +84,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3403453623567048214}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -114,7 +114,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5603627796231238490}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Back Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8870122375822875104}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -174,7 +174,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8536129559092167007}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Weapon Positions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,7 +214,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7170118092995309969}
   - component: {fileID: 118615045905642212}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Effects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -257,7 +257,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8393786339638652623}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -287,7 +287,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3616966382600274250}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Front Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -318,7 +318,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6502111009734231044}
   - component: {fileID: 6502111009734231051}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Rotation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -362,7 +362,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6502111010193731109}
   - component: {fileID: 6502111010193731110}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Velocity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -411,7 +411,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6502111010308740142}
   - component: {fileID: 6502111010308740143}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Movement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -459,7 +459,7 @@ GameObject:
   - component: {fileID: 6502111010508699195}
   - component: {fileID: 6502111010508699193}
   - component: {fileID: 6502111010508699194}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Arsenal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -530,7 +530,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6502111010933004821}
   - component: {fileID: 6502111010933004820}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -610,7 +610,7 @@ GameObject:
   - component: {fileID: 6502111010939845637}
   - component: {fileID: 6502111010939845636}
   - component: {fileID: 7039983828706762996}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -672,9 +672,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ed7cb5656d369f4e83d307f34fdca81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  renderers:
-  - {fileID: 6502111010933004820}
-  - {fileID: 6502111011357915679}
 --- !u!1 &6502111011011827754
 GameObject:
   m_ObjectHideFlags: 0
@@ -687,8 +684,8 @@ GameObject:
   - component: {fileID: 6502111011011827759}
   - component: {fileID: 6502111011011827752}
   - component: {fileID: 6502111011011827755}
-  m_Layer: 11
-  m_Name: Leviathan Class
+  m_Layer: 0
+  m_Name: Old Leviathan Class
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -795,7 +792,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6502111011048684997}
   - component: {fileID: 6502111011048684998}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Stats
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -845,7 +842,7 @@ GameObject:
   - component: {fileID: 6502111011357915673}
   - component: {fileID: 6502111011357915679}
   - component: {fileID: 6502111011357915672}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: SpriteColor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -936,7 +933,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6502111011510976454}
   - component: {fileID: 6502111011510976453}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: FixedRotation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -984,7 +981,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6502111011605656266}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Combat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1018,7 +1015,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6257046230987624021}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Front Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1048,7 +1045,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3622554682537215432}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Back Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1078,7 +1075,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1394958750389293794}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1110,6 +1107,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Detection
+      objectReference: {fileID: 0}
+    - target: {fileID: 5183834430712033069, guid: 6a64febb70c6d9e4caca3ac3c0bbef73,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7908237832702046114, guid: 6a64febb70c6d9e4caca3ac3c0bbef73,
         type: 3}
@@ -1181,6 +1183,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3918437280262131525, guid: 6a64febb70c6d9e4caca3ac3c0bbef73,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a64febb70c6d9e4caca3ac3c0bbef73, type: 3}
 --- !u!4 &2353379102015307723 stripped
@@ -1200,6 +1207,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Dummy Pilot
+      objectReference: {fileID: 0}
+    - target: {fileID: 250282504861654493, guid: 27caf2e239a35564c9b5bfadc641a0aa,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 250282504861654494, guid: 27caf2e239a35564c9b5bfadc641a0aa,
         type: 3}
@@ -1287,6 +1299,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Health Bar Circle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4862065564205642088, guid: 21e455797b35a3f41a03fff484058e87,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4862065564205642095, guid: 21e455797b35a3f41a03fff484058e87,
         type: 3}

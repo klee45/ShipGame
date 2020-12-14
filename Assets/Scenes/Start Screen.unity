@@ -1137,6 +1137,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Hellfire Class
       objectReference: {fileID: 0}
+    - target: {fileID: 5256324969164300302, guid: 0694a955365b41d44b5b9be6eced2494,
+        type: 3}
+      propertyPath: pilot
+      value: 
+      objectReference: {fileID: 515946557}
     - target: {fileID: 5256324969164300303, guid: 0694a955365b41d44b5b9be6eced2494,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1192,15 +1197,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5256324969164300302, guid: 0694a955365b41d44b5b9be6eced2494,
-        type: 3}
-      propertyPath: pilot
-      value: 
-      objectReference: {fileID: 515946557}
     - target: {fileID: 5256324969164300301, guid: 0694a955365b41d44b5b9be6eced2494,
         type: 3}
       propertyPath: m_Mass
-      value: 6.3146434
+      value: 28.305794
       objectReference: {fileID: 0}
     - target: {fileID: 5256324968257432933, guid: 0694a955365b41d44b5b9be6eced2494,
         type: 3}
@@ -1835,6 +1835,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1922892437}
   - component: {fileID: 1922892438}
+  - component: {fileID: 1922892439}
   m_Layer: 30
   m_Name: Warp Interaction
   m_TagString: Untagged
@@ -1872,6 +1873,18 @@ CircleCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Radius: 1
+--- !u!114 &1922892439
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1922892436}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0439ded9a1f02d948a1efa34858cf908, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1572317253597915226
 PrefabInstance:
   m_ObjectHideFlags: 0

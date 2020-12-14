@@ -13,6 +13,7 @@ public class DetectionShip : Detection<ShipCollider, Ship>
         allies = new DetectedMostImportant();
         neutral = new DetectedMostImportant();
         enemies = new DetectedMostImportant();
+
     }
 
     public DetectedMostImportant GetDetectedAllies()  { return allies; }

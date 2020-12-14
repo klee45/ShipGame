@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5890784583821523981}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Back Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -39,7 +39,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3841813961599006608}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Front Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -69,7 +69,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8133008910984325927}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -100,7 +100,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1340848081881172}
   - component: {fileID: 7070867835474447137}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Effects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -143,7 +143,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5888360678114408591}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Front Left
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -173,7 +173,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1727441756489275146}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Back
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,7 +205,7 @@ GameObject:
   - component: {fileID: 4159497119038607358}
   - component: {fileID: 4159497119038607356}
   - component: {fileID: 4159497119038607359}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Arsenal
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -276,7 +276,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4159497119240269291}
   - component: {fileID: 4159497119240269290}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Movement
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -323,7 +323,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4159497119806651841}
   - component: {fileID: 4159497119806651854}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Rotation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -367,7 +367,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4159497119898048480}
   - component: {fileID: 4159497119898048483}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Velocity
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -416,7 +416,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4159497120175097347}
   - component: {fileID: 4159497120175097344}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: FixedRotation
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -466,7 +466,7 @@ GameObject:
   - component: {fileID: 4159497120324027356}
   - component: {fileID: 4159497120324027354}
   - component: {fileID: 4159497120324027357}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: SpriteColor
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -556,7 +556,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4159497120637864719}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Combat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -591,7 +591,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4159497120652329984}
   - component: {fileID: 4159497120652329987}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Stats
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -642,8 +642,8 @@ GameObject:
   - component: {fileID: 4159497120682631658}
   - component: {fileID: 4159497120682631661}
   - component: {fileID: 6333617759074371661}
-  m_Layer: 11
-  m_Name: Gargoyle Class
+  m_Layer: 0
+  m_Name: Old Gargoyle Class
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -744,7 +744,7 @@ GameObject:
   - component: {fileID: 4159497120743802304}
   - component: {fileID: 4159497120743802305}
   - component: {fileID: 4940611759987986196}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -806,9 +806,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2ed7cb5656d369f4e83d307f34fdca81, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  renderers:
-  - {fileID: 4159497120771548113}
-  - {fileID: 4159497120324027354}
 --- !u!1 &4159497120771548115
 GameObject:
   m_ObjectHideFlags: 0
@@ -819,7 +816,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4159497120771548112}
   - component: {fileID: 4159497120771548113}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Sprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -897,7 +894,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1581836109932853402}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Weapon Positions
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -937,7 +934,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3058815010892825595}
   - component: {fileID: 5607985798211380219}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Energy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -981,7 +978,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5120683672636059812}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Front
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1011,7 +1008,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5530099413817665491}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1041,7 +1038,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3333146266930924191}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Back Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1071,7 +1068,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1773470861280600101}
-  m_Layer: 11
+  m_Layer: 0
   m_Name: Center
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1103,6 +1100,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Detection
+      objectReference: {fileID: 0}
+    - target: {fileID: 5183834430712033069, guid: 6a64febb70c6d9e4caca3ac3c0bbef73,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7908237832702046114, guid: 6a64febb70c6d9e4caca3ac3c0bbef73,
         type: 3}
@@ -1174,6 +1176,11 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 3918437280262131525, guid: 6a64febb70c6d9e4caca3ac3c0bbef73,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6a64febb70c6d9e4caca3ac3c0bbef73, type: 3}
 --- !u!4 &4840598597940233742 stripped
@@ -1193,6 +1200,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Health Bar Circle
+      objectReference: {fileID: 0}
+    - target: {fileID: 4862065564205642088, guid: 21e455797b35a3f41a03fff484058e87,
+        type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4862065564205642095, guid: 21e455797b35a3f41a03fff484058e87,
         type: 3}

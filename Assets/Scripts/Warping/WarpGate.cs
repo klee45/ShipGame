@@ -25,7 +25,7 @@ public class WarpGate : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //Debug.Log("Enter");
-        Ship ship = collision.GetComponent<ShipCollider>().GetShip();
+        Ship ship = collision.GetComponent<WarpInteraction>().GetShip();
         ship.OnEntityDestroy += Remove;
         WarpEffect effect = ship.AddShipEffect<WarpEffect>();
         effect.Setup(targetSector, duration);

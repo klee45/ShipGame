@@ -26,6 +26,7 @@ public class PlayerInfo : Singleton<PlayerInfo>
     private void Start()
     {
         InventoryInterface.instance.GetEquipmentUI().SetShip(ship);
+        UIManager.instance.SetShip(ship);
     }
 
     public void SetLocation(GalaxyMapVertex vertex)

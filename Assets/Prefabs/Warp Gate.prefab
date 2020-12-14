@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 138739213573551866}
   - component: {fileID: 138739213573551869}
   - component: {fileID: 138739213573551871}
-  m_Layer: 8
+  m_Layer: 30
   m_Name: Warp Gate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 603520930122633467}
   - component: {fileID: 240973524045799229}
   - component: {fileID: 4357199761151869861}
-  m_Layer: 5
+  m_Layer: 30
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -205,7 +205,7 @@ GameObject:
   - component: {fileID: 339231591920148022}
   - component: {fileID: 3198696058275482682}
   - component: {fileID: 3774414273588321628}
-  m_Layer: 5
+  m_Layer: 30
   m_Name: Canvas
   m_TagString: Untagged
   m_Icon: {fileID: 0}
