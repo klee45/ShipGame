@@ -11,6 +11,13 @@ public class GalaxyInfo : Singleton<GalaxyInfo>, IWindow
     private GalaxyEdgeDict edgeDict;
     private List<GalaxyMapVertex> sectors;
 
+    [SerializeField]
+    private float radius;
+    [SerializeField]
+    private float percentInner;
+
+    private static Vector2 direction = new Vector2(1, 1).normalized;
+
     private GalaxyMapVertex highlighted;
 
     protected override void Awake()
@@ -19,7 +26,23 @@ public class GalaxyInfo : Singleton<GalaxyInfo>, IWindow
         edgeDict = GetComponentInChildren<GalaxyEdgeDict>();
         sectors = GetComponentsInChildren<GalaxyMapVertex>().ToList();
         canvas = GetComponent<Canvas>();
+        RectTransform rect = GetComponent<RectTransform>();
         Hide();
+    }
+
+    public float GetRadius()
+    {
+        return radius;
+    }
+
+    public float GetPercentInner()
+    {
+        return percentInner;
+    }
+
+    public Vector2 GetDirectionVector()
+    {
+        return direction;
     }
 
     public bool IsShown()

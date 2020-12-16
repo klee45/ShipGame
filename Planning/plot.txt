@@ -1,9 +1,10 @@
 Cast -------------------------
 	Crew ---------------------
 		Man (pilot - P1) and
-		Woman (gunner - G2) who run a small privateer ship
-		Revolutionary (engineer - E3) from Upper Empire - manages finances
-		Someone (shields - S4)
+		Woman (gunner - P2) who run a small privateer ship
+		Criminal accountant (engines - P3) from Upper Empire - manages finances
+			- Exile from Avalon due to petty crime. Survived exile and made it to Empire
+		Someone (shields - P4)
 
 	Enemies ------------------
 		Small scale enemy commander - in lower empire territory
@@ -58,7 +59,7 @@ Setting ----------------------
 
 		End:
 			Capture pivotal station from the Federation
-			E3 is discovered during after the battle when returning to base
+			P3 is discovered during after the battle when returning to base
 			
 		Notes:
 			Working for government as a privateer
@@ -74,12 +75,13 @@ Setting ----------------------
 				Filled with wealth and luxury due to the significantly higher quality resources
 					Contains the true habitable zone : https://en.wikipedia.org/wiki/Galactic_habitable_zone
 			Introduces more cast members
-				During / after a battle they meet a revolutionary from the Upper Empire who survived exile and needs to make it back
+				During / after a battle they meet a criminal (told them he's a revolutionary) from Avalon who survived exile and needs to make it back
+				Promise riches and a new life if they can make it back to Avalon
 				The trio now need a better ship and a full crew more than ever
 				Plan to travel into the high empire by entering a government defended special warp gate
 
 		End:
-			Team of P1-4 defeat a solo gateway guard to make their way into the Upper Empire
+			Team of P1-3 defeat a solo gateway guard to make their way into the Upper Empire
 
 		Notes:
 			Revolutionary was exiled after being found out, but was able to escape the death of exile with smuggled supplies and fuel
@@ -89,7 +91,10 @@ Setting ----------------------
 
 	Third act ----------------
 		Purpose:
-			Introduce the Upper Empire territory
+			Introduce the Avalon territory
+				Trio have fun exploring Avalon city centers
+				
+
 				Still has some areas of crime and rogue ships
 				Government is hoarding energy crystals, and recently the rates have gone up significantly
 					Revolution has been brewing and they plan to bring down the wall to foster attacks from the outside
