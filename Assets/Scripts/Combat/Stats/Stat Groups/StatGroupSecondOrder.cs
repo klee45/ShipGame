@@ -19,7 +19,7 @@ public class StatGroupSecondOrder : StatGroup
 
     private StatGroupSecondOrderKernel kernel;
 
-    void Start()
+    void Awake()
     {
         kernel = new StatGroupSecondOrderKernel(initialValue, acceleration, deceleration, max, min, dampening);
     }
@@ -32,11 +32,17 @@ public class StatGroupSecondOrder : StatGroup
         this.max = max;
         this.min = min;
         this.dampening = dampening;
+        Awake();
     }
 
     public override void Tick(float scale, float deltaTime)
     {
         kernel.Tick(scale, deltaTime);
+    }
+
+    public override void ForcePercent(float percent)
+    {
+        kernel.ForcePercent(percent);
     }
 
     public override float GetValue()
@@ -104,6 +110,11 @@ public class StatGroupSecondOrderKernel
                 this.currentValue = 0;
             }
         }
+    }
+
+    public void ForcePercent(float percent)
+    {
+        currentValue = maxStat.GetValue() * percent;
     }
 
     public float GetValue()

@@ -51,6 +51,7 @@ public class Ship : Entity
         arsenal = GetComponentInChildren<Arsenal>();
         shipGraphics = GetComponentInChildren<ShipGraphics>();
         collider = GetComponentInChildren<ShipCollider>();
+        Debug.Log(name + ": " + collider);
         collider.Setup(this, Layers.GetShipLayerFromTeam(team));
         //Debug.Log(gameObject.layer);
     }

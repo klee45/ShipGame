@@ -9,7 +9,7 @@ public class StatGroupFirstOrder : StatGroup
     private ResettingFloat stat;
     private float currentValue;
 
-    private void Start()
+    private void Awake()
     {
         this.stat = new ResettingFloat(baseValue);
     }
@@ -17,6 +17,12 @@ public class StatGroupFirstOrder : StatGroup
     public void Setup(float multiplier)
     {
         this.baseValue = multiplier;
+        Awake();
+    }
+
+    public override void ForcePercent(float percent)
+    {
+        currentValue = stat.GetValue() * percent;
     }
 
     public override float GetValue()

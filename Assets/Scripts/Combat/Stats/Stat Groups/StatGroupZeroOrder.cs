@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class StatGroupZeroOrder : StatGroup
 {
+    public override void ForcePercent(float percent)
+    {
+    }
+
     public override float GetValue()
     {
         return 0;

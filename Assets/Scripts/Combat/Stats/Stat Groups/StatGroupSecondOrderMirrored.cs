@@ -9,7 +9,7 @@ public class StatGroupSecondOrderMirrored : StatGroup
 
     private StatGroupSecondOrderKernel kernel;
 
-    void Start()
+    void Awake()
     {
         kernel = new StatGroupSecondOrderKernel(initial, acceleration, -acceleration, max, -max, dampening);
     }
@@ -20,11 +20,17 @@ public class StatGroupSecondOrderMirrored : StatGroup
         this.acceleration = acceleration;
         this.max = max;
         this.dampening = dampening;
+        Awake();
     }
 
     public override void Tick(float scale, float deltaTime)
     {
         kernel.Tick(scale, deltaTime);
+    }
+
+    public override void ForcePercent(float percent)
+    {
+        kernel.ForcePercent(percent);
     }
 
     public override float GetValue()

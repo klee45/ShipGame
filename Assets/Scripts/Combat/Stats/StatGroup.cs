@@ -10,6 +10,7 @@ public abstract class StatGroupTemplate : Template<StatGroup, GameObject>
 
 public abstract class StatGroup : MonoBehaviour
 {
+    public abstract void ForcePercent(float percent);
     public abstract void Tick(float scale, float deltaTime);
     public abstract float GetValue();
 

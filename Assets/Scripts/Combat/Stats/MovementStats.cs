@@ -13,6 +13,12 @@ public class MovementStats : MonoBehaviour
     public float GetRotationValue() { return rotation.GetValue() * Mathf.Rad2Deg; }
     public float GetVelocityValue() { return velocity.GetValue(); }
 
+    public void ForcePercentValues(float percentVelocity, float percentRotation)
+    {
+        velocity.ForcePercent(percentVelocity);
+        rotation.ForcePercent(percentRotation);
+    }
+
     public void Setup(StatGroup velocity, StatGroup rotation)
     {
         this.velocity = velocity;
