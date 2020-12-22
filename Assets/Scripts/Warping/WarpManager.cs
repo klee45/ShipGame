@@ -94,7 +94,7 @@ public class WarpManager : Singleton<WarpManager>
         this.currentSector = sector;
         CreateWarpGates(sector);
         Debug.Log("Setting up map specifics");
-        sector.SetupMap();
+        sector.InitializeMap();
         UIManager.instance.RedrawShipUI();
         PlayerInfo.instance.SetLocation(sector);
         GalaxyInfo.instance.HighlightLocation(sector);
@@ -154,6 +154,8 @@ public class WarpManager : Singleton<WarpManager>
         HashSet<GalaxyMapVertex> connectedSectors = new HashSet<GalaxyMapVertex>();
         List<GalaxyMapVertex> connected = GalaxyInfo.instance.GetGalaxyEdgeDict().GetEdges()[sector];
 
+        GameObject warpGateContainer = new GameObject("Warp gates");
+
         foreach (GalaxyMapVertex vertex in connected)
         {
             if (connectedSectors.Add(vertex))
@@ -173,6 +175,7 @@ public class WarpManager : Singleton<WarpManager>
         }
 
         Debug.Log("Making " + connectedSectors.Count + " warp gates");
+        List<WarpGate> warpGates = new List<WarpGate>();
         foreach (GalaxyMapVertex connectedSector in connectedSectors)
         {
             Debug.Log("Making connection to " + connectedSector.GetSectorName());
@@ -183,8 +186,17 @@ public class WarpManager : Singleton<WarpManager>
 
             Vector2 targetPos = unitDiff * radius * Constants.Scenes.WARP_GATE_DISTANCE_FROM_BOUNDRY + boundryPos;
             Debug.Log("Creating warp gate");
-            CreateWarpGate(targetPos, angle, sector, connectedSector);
+            WarpGate gate = CreateWarpGate(targetPos, angle, sector, connectedSector);
+            warpGates.Add(gate);
+            gate.transform.SetParent(warpGateContainer.transform);
         }
+        sector.AddWarpGateSpawning(warpGates, out HashSet<Team> teamsToLoad);
+        SetupSpawnLoader(teamsToLoad);
+    }
+
+    private void SetupSpawnLoader(HashSet<Team> teamsToLoad)
+    {
+        SpawnLoader.instance.LoadTeams(teamsToLoad);
     }
 
     private Vector3 GetUnitDiff(GalaxyMapVertex start, GalaxyMapVertex end)
@@ -192,7 +204,7 @@ public class WarpManager : Singleton<WarpManager>
         return (end.GetSpacePosition() - start.GetSpacePosition()).normalized;
     }
 
-    private void CreateWarpGate(Vector3 targetPos, float angle, GalaxyMapVertex sector, GalaxyMapVertex connectedSector)
+    private WarpGate CreateWarpGate(Vector3 targetPos, float angle, GalaxyMapVertex sector, GalaxyMapVertex connectedSector)
     {
         GameObject warpGateObj = Instantiate(warpgatePrefab);
         warpGateObj.transform.localPosition = targetPos;
@@ -206,9 +218,8 @@ public class WarpManager : Singleton<WarpManager>
         textObj.text = separate[0] + "\n" + separate[1];
         Debug.Log(warpGateObj);
         Debug.Log("Finished creating warp gate");
+        return warpGate;
     }
-
-
 
     /*
     private IEnumerator Warp(GalaxyMapVertex startSector, GalaxyMapVertex endSector, float minTime)

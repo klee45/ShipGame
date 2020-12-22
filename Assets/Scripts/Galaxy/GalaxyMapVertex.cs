@@ -17,23 +17,7 @@ public abstract class GalaxyMapVertex : MonoBehaviour
     private float spaceScale;
 
     [SerializeField]
-    private EmpireStrengths strengths;
-
-    [System.Serializable]
-    private struct EmpireStrengths
-    {
-        public float empire;
-        public float federation;
-        public float avalon;
-
-        public EmpireStrengths(float galaxyRadius, Vector2 pos, Vector2 direction, float percentInner, string name)
-        {
-            avalon = 1 - Mathf.Min(1, pos.magnitude / (galaxyRadius * percentInner));
-            Debug.Log(name + "\n" + pos + "\n" + Vector2.Dot(pos, direction));
-            federation = (1 - avalon) * (1 + (Vector2.Dot(pos, direction) / galaxyRadius)) / 2f;
-            empire = 1 - federation - avalon;
-        }
-    }
+    private VertexDivision division;
 
     protected virtual void Awake()
     {
@@ -43,12 +27,6 @@ public abstract class GalaxyMapVertex : MonoBehaviour
         sceneName = SetSceneName();
         spacePosition = SetSpacePosition();
         spaceScale = SetSpaceScale();
-    }
-
-    private void Start()
-    {
-        GalaxyInfo info = GalaxyInfo.instance;
-        strengths = new EmpireStrengths(info.GetRadius(), spacePosition, info.GetDirectionVector(), info.GetPercentInner(), name);
     }
 
     protected abstract string SetupName(string sectorID);
@@ -68,7 +46,17 @@ public abstract class GalaxyMapVertex : MonoBehaviour
         return spaceScale;
     }
 
-    public virtual void SetupMap() { }
+    public void SetupMap(VertexDivision division)
+    {
+        this.division = division;
+    }
+
+    public void AddWarpGateSpawning(List<WarpGate> warpGates, out HashSet<Team> teamsToLoad)
+    {
+        division.AddWarpGateSpawning(warpGates, this, out teamsToLoad);
+    }
+
+    public virtual void InitializeMap() { }
 
     private void OnValidate()
     {

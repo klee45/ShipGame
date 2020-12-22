@@ -7,6 +7,20 @@ public static class Math
 {
     // --------- List
 
+    public static void Normalize(this List<float> lst)
+    {
+        float total = lst.Sum();
+        if (total <= 0)
+        {
+            Debug.LogWarning("List to normalize has a zero or negative sum");
+            return;
+        }
+        for (int i = 0; i < lst.Count; i++)
+        {
+            lst[i] /= total;
+        }
+    }
+
     public static void StackList(this List<int> lst)
     {
         for (int i = 1; i < lst.Count; i++)
@@ -161,6 +175,11 @@ public static class Math
     public static float ToRadian(this float f)
     {
         return f * Mathf.PI / 180f;
+    }
+
+    public static float Mod(this float f, float mod)
+    {
+        return f - mod * Mathf.Floor(f / mod);
     }
     
     public static int Sum(this IEnumerable<int> lst)

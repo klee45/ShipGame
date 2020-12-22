@@ -13,8 +13,6 @@ public class GalaxyInfo : Singleton<GalaxyInfo>, IWindow
 
     [SerializeField]
     private float radius;
-    [SerializeField]
-    private float percentInner;
 
     private static Vector2 direction = new Vector2(1, 1).normalized;
 
@@ -33,11 +31,6 @@ public class GalaxyInfo : Singleton<GalaxyInfo>, IWindow
     public float GetRadius()
     {
         return radius;
-    }
-
-    public float GetPercentInner()
-    {
-        return percentInner;
     }
 
     public Vector2 GetDirectionVector()

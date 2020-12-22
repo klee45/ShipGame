@@ -9,9 +9,24 @@ public static class Vectors
         return new Vector2(v.x, v.y);
     }
 
+    /// <summary>
+    /// Returns angle in radians
+    /// </summary>
+    /// <param name="a"></param>
+    /// <returns></returns>
     public static float ToAngle(this Vector2 a)
     {
         return Mathf.Atan2(a.y, a.x);
+    }
+
+    public static Vector2 PerpendicularClockwise(this Vector2 v)
+    {
+        return new Vector2(v.y, -v.x);
+    }
+
+    public static Vector2 PerpendicularCounterClockwise(this Vector2 v)
+    {
+        return new Vector2(-v.y, v.x);
     }
 
     public static float AngleBetween(this Vector2 a, Vector2 b)

@@ -39,7 +39,7 @@ public class GalaxyMapSubsector : GalaxyMapVertex
         return subsectorScene;
     }
 
-    public override void SetupMap()
+    public override void InitializeMap()
     {
         foreach(SectorComponent component in components)
         {

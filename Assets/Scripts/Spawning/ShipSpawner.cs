@@ -10,8 +10,6 @@ public class ShipSpawner : MonoBehaviour
 {
     [Header("Ship spawn information")]
     [SerializeField]
-    private APilot pilot;
-    [SerializeField]
     private Team team;
 
     [SerializeField]
@@ -35,30 +33,61 @@ public class ShipSpawner : MonoBehaviour
     private int maxSpawns;
 
     private Timer spawnTimer;
-
-    private Ship[][] shipPrefabs;
-    private List<WeaponDeed>[] deeds;
-    private List<int>[] weaponWeights;
-
     private List<Ship> ships;
 
     private bool active = false;
 
-    private void Awake()
+    public void Setup(Team team, float strength)
     {
+        this.team = team;
+
         ships = new List<Ship>();
+        spawnTimer = gameObject.AddComponent<Timer>();
+        spawnTimer.OnComplete += () => SetTimer();
+        active = true;
 
-        if (GetShipFolderFromTeam(team, out string folder))
+        SetupStats(strength);
+        SetTimer();
+    }
+
+    private void SetupStats(float strength)
+    {
+        // Small and medium ships are less likely the higher the strength
+        // The inverse is the opposite for large and huge ships
+        /**
+        https://www.wolframalpha.com/input/?i=floor%2815+*+%281-x%29%29+%2B+2+%2B+0.3%2C+floor%284+*+%281-x%29%29+%2B+8+%2B+0.2%2C+floor%286*x%29+%2B+1+%2B+0.1%2C+floor%283.5*x%29+%2B+1+for+x+%3D+%7B0%2C+1%7D
+        **/
+        sizeWeights = new List<int>
         {
-            spawnTimer = gameObject.AddComponent<Timer>();
-            SetTimer();
-            spawnTimer.OnComplete += () => SetTimer();
-            active = true;
-            sizeWeights.StackList();
+            Mathf.FloorToInt(15 * (1 - strength)) + 1,
+            Mathf.FloorToInt(6 * (1 - strength)) + 3,
+            Mathf.FloorToInt(8 * strength) + 1,
+            Mathf.FloorToInt(5f * strength) + 1
+        };
+        sizeWeights.StackList();
 
-            shipPrefabs = Loader.LoadFromFolder<Ship>("Ships/" + folder, "Small", "Medium", "Large");
-            deeds = LoadDeeds();
-        }
+        // Max weapon size is medium for the first 1/3 strength
+        // then large for 2/3 and huge for 3/3
+        /**
+        https://www.wolframalpha.com/input/?i=plot+floor%283+*+%28x%29%29+%2B+2+for+x+%3D+%7B0%2C+1%7D
+        **/
+        maxWeaponSize = Mathf.FloorToInt(3 * strength) + 2;
+
+        // Average spawn time range is [16, 8]
+        float averageSpawnTime = 8 * (1 - strength) + 8;
+        // Min spawn times range is [15, 7]
+        minSpawnDelay = averageSpawnTime - strength - 1;
+        // Max spawn times range is [20, 10]
+        maxSpawnDelay = averageSpawnTime + (1 - strength) * 2 + 2;
+
+        // spawns range from [3, 7] (per warpgate!)
+        maxSpawns = 3 + Mathf.FloorToInt(strength * 4);
+
+        // Percentage of weapons from [0.5, 1] (Full weapons at 0.8 strength)
+        /**
+        https://www.wolframalpha.com/input/?i=plot+min%281%2C+0.5+%2B+x+*+%285+%2F+8%29%29+for+x+%3D+%7B0%2C+1%7D
+        **/
+        percentFillWeapons = Mathf.Min(1f, 0.5f + strength * (5 / 8));
     }
 
     private void Update()
@@ -72,25 +101,36 @@ public class ShipSpawner : MonoBehaviour
     private void GenerateShip()
     {
         int size = Math.WeightedRandom(sizeWeights);
-        try
+
+        if (SpawnLoader.instance.GetShipPrefabs(team, out Ship[][] shipPrefabs))
         {
-            Ship prefab = shipPrefabs[size].GetRandomElement();
-            Ship ship = CreateShip(prefab);
-            ships.Add(ship);
-            ship.OnEntityDestroy += (i) => RemoveShip(ship);
-            if (ships.Count >= maxSpawns)
+            try
             {
-                active = false;
+                Ship prefab = shipPrefabs[size].GetRandomElement();
+                Ship ship = CreateShip(prefab);
+                ships.Add(ship);
+                ship.transform.localEulerAngles = new Vector3(0, 0, 180);
+                ship.OnEntityDestroy += (i) => RemoveShip(ship);
+                ship.GetMovementStats().ForcePercentValues(0.5f, 0);
+                if (ships.Count >= maxSpawns)
+                {
+                    active = false;
+                }
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                Debug.LogError("Couldn't create ship from prefab with size " + size + "\nShip prefabs is of size " + shipPrefabs.Length + "\n" + e);
             }
         }
-        catch (IndexOutOfRangeException e)
+        else
         {
-            Debug.LogError("Couldn't create ship from prefab with size " + size + "\nShip prefabs is of size " + shipPrefabs.Length);
+            Debug.LogWarning("Could not get loaded ships prefabs for team " + team);
         }
     }
 
     public void RemoveShip(Ship ship)
     {
+        ships.Remove(ship);
         if (ships.Count < maxSpawns)
         {
             active = true;
@@ -102,65 +142,14 @@ public class ShipSpawner : MonoBehaviour
         spawnTimer.SetMaxTime(UnityEngine.Random.Range(minSpawnDelay, maxSpawnDelay));
         spawnTimer.SetTime(0);
     }
-
-    private bool GetShipFolderFromTeam(Team team, out string folder)
-    {
-        switch (team)
-        {
-            case Team.Empire:
-            case Team.Federation:
-            case Team.UpperEmpire:
-            case Team.Boss:
-                folder = team.ToString();
-                return true;
-            default:
-                Debug.LogWarning("Unsupported team for ship spawner (" + team.ToString() + ")");
-                folder = "";
-                return false;
-        }
-    }
-
-    private List<WeaponDeed>[] LoadDeeds()
-    {
-        int numSizes = Enum.GetValues(typeof(Size)).Length;
-        List<WeaponDeed>[] deeds = new List<WeaponDeed>[numSizes];
-        weaponWeights = new List<int>[numSizes];
-        for (int i = 0; i < numSizes; i++)
-        {
-            deeds[i] = new List<WeaponDeed>();
-            weaponWeights[i] = new List<int>();
-        }
-
-        WeaponDeed[] weaponDeeds = Resources.LoadAll<WeaponDeed>("Weapons");
-        foreach(WeaponDeed deed in weaponDeeds)
-        {
-            int pos = (int)deed.GetSize();
-            deeds[pos].Add(deed);
-            weaponWeights[pos].Add(1);
-        }
-        foreach (List<int> lst in weaponWeights)
-        {
-            lst.StackList();
-        }
-        return deeds;
-    }
-
-    public WeaponDeed GetRandomWeaponPrefab(Size size)
-    {
-        int pos = (int)size;
-        List<WeaponDeed> sized = deeds[pos];
-        List<int> weights = weaponWeights[pos];
-        WeaponDeed deed = sized[Math.WeightedRandom(weights)];
-        return deed;
-    }
-
+    
     public Ship CreateShip(Ship prefab)
     {
         Ship ship = Instantiate(prefab);
         ship.SetParent(gameObject);
         ship.transform.position = transform.position;
         ship.SetTeam(team);
-        APilot shipPilot = Instantiate(pilot);
+        APilot shipPilot = Instantiate(SpawnLoader.instance.GetAIPIlot());
         ship.SetPilot(shipPilot);
         shipPilot.transform.SetParent(ship.transform);
 
@@ -193,7 +182,8 @@ public class ShipSpawner : MonoBehaviour
         }
         return ship;
     }
-
+    
+    /*
     private Ship[][] GetShips(CivilizationType civilization)
     {
         switch(civilization)
@@ -203,4 +193,5 @@ public class ShipSpawner : MonoBehaviour
         }
         return null;
     }
-}
+    */
+    }

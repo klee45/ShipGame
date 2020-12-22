@@ -57,10 +57,6 @@ MonoBehaviour:
   sectorID: 1-1
   sectorName: Sector 1-1
   spacePosition: {x: 0, y: 0, z: 0}
-  strengths:
-    empire: 0
-    federation: 0
-    avalon: 0
 --- !u!222 &8019733760651353923
 CanvasRenderer:
   m_ObjectHideFlags: 0

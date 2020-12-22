@@ -45,6 +45,11 @@ public class WarpGate : MonoBehaviour
         }
     }
 
+    public GalaxyMapVertex GetSector()
+    {
+        return targetSector;
+    }
+
     private void Remove(Entity e)
     {
         warping.Remove(e);

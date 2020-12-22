@@ -54,10 +54,6 @@ MonoBehaviour:
   sectorID: 
   sectorName: 'Subsector '
   spacePosition: {x: 0, y: 0, z: 0}
-  strengths:
-    empire: 0
-    federation: 0
-    avalon: 0
   components: []
 --- !u!222 &8305568256830981819
 CanvasRenderer:
