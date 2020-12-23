@@ -87,11 +87,12 @@ public class Ship : Entity
         }
     }
 
-    public void SetCollisionLayer()
+    public void SetTeam(Team team)
     {
+        this.team = team;
         collider.SetLayer(Layers.GetShipLayerFromTeam(team));
     }
-
+    
     public ShipCollider GetCollider()
     {
         return collider;

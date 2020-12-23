@@ -96,12 +96,6 @@ public abstract class Entity : MonoBehaviour
         return team;
     }
 
-    public void SetTeam(Team team)
-    {
-        this.team = team;
-        this.gameObject.layer = Layers.GetShipLayerFromTeam(team);
-    }
-
     public delegate void EffectSetup<T>(T effect);
     public abstract T AddEntityEffect<T>(EffectSetup<T> setup) where T : EntityEffect;
     public abstract EffectDict GetGeneralEffectDict();
