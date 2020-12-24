@@ -28,7 +28,7 @@ public class WeaponDeed : Deed<AWeapon, Ship>
 
     private static int[] rarityRanges = new int[] { 10, 25, 45, 70, 100 };
 
-    public void Setup()
+    public void SetupFromExisting()
     {
         if (weapon.gameObject.IsPrefab())
         {
@@ -54,7 +54,7 @@ public class WeaponDeed : Deed<AWeapon, Ship>
             pos++;
         }
         rarityType = (WeaponRarity)Mathf.Min(pos, rarityRanges.Length - 1);
-        Setup();
+        SetupFromExisting();
         /*
         foreach (SizeMod sizeMod in GetComponentsInChildren<SizeMod>())
         {

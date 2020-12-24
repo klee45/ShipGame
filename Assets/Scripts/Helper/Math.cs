@@ -53,7 +53,7 @@ public static class Math
         return lst[Random.Range(0, lst.Length)];
     }
 
-    public static int WeightedRandom(List<int> weights, int offset=0)
+    public static int WeightedRandom(this List<int> weights, int offset=0)
     {
         int choice = Random.Range(offset, weights.Last());
         for (int pos = 0; pos < weights.Count; pos++)

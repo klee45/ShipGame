@@ -144,7 +144,7 @@ public class Arsenal : MonoBehaviour
         {
             if (counts[size] < slots[size])
             {
-                deed.Setup();
+                deed.SetupFromExisting();
                 PutWeaponInSlot(deed, slotPosition, size, position);
                 if (!positionDict.TryGetValue(position, out GameObject positionObj))
                 {
@@ -175,7 +175,7 @@ public class Arsenal : MonoBehaviour
 
     public int[] GetSlots()
     {
-        return slots;
+        return (int[])slots.Clone();
     }
 
     public int[] GetSlotCounts()

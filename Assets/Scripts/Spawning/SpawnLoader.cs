@@ -126,7 +126,7 @@ public class SpawnLoader : Singleton<SpawnLoader>
     {
         if (GetShipFolderFromTeam(team, out string folder))
         {
-            shipPrefabs[team] = Loader.LoadFromFolder<Ship>("Ships/" + folder, "Small", "Medium", "Large");
+            shipPrefabs[team] = Loader.LoadFromFolder<Ship>("Ships/" + folder, "Small", "Medium", "Large", "Huge");
             deeds = LoadDeeds();
         }
         teamsLoaded[(int)team] = true;
